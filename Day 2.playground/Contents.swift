@@ -27,23 +27,13 @@ part1
 
 // part 2
 func part2() -> Int {
-    let multiples = input.map { row -> Int in
-        var multiple: Int?
-        for item1 in row {
-            for item2 in row {
-                if item1 == item2 { continue }
-                let larger = max(item1, item2)
-                let smaller = min(item1, item2)
-                if larger % smaller == 0 {
-                    multiple = larger / smaller
-                }
-                if multiple != nil { break }
-            }
-            if multiple != nil { break }
-        }
-        return multiple!
-    }
-    return multiples.reduce(0, +)
+    return input.map { row in
+        row.map { item in
+            let divisions = row.map { Double($0) / Double(item) }
+            let multiples = divisions.filter { ceil($0) == $0 && $0 != 1 }
+            return multiples.first.map { Int($0) } ?? 0
+        }.reduce(0, +)
+    }.reduce(0, +)
 }
 
 let answer2 = part2()
