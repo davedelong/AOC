@@ -8,11 +8,6 @@
 
 import Foundation
 
-
-let rawDay16Input = try! String(contentsOf: URL(fileURLWithPath: "/Users/dave/Desktop/test/test/input.txt"))
-let day16Input = rawDay16Input.trimmingCharacters(in: .whitespacesAndNewlines)
-let commands = day16Input.components(separatedBy: ",")
-
 class Day16: Day {
 
     let start = Array("abcdefghijklmnop").map { String($0) }

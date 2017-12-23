@@ -51,7 +51,7 @@ class Day21: Day {
 
     func apply(times: Int) -> Matrix<Bit> {
         var current = initial
-        for i in 0 ..< times {
+        for _ in 0 ..< times {
             // first, subdivide current
             let subdivided = current.subdivide()
             

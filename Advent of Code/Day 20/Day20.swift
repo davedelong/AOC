@@ -49,7 +49,7 @@ class Day20: Day {
     func part1() {
         let allParticles = particles()
         var overallClosest = -1
-        for i in 0 ..< 1_000 {
+        for _ in 0 ..< 1_000 {
             var closest = 0
             var distance = Int.max
             for p in allParticles {
@@ -67,11 +67,10 @@ class Day20: Day {
     }
 
     func part2() {
-        //var remaining = particles
         var remaining = particles()
         var collided = Set<Particle>()
         
-        for i in 0 ..< 1_000 {
+        for _ in 0 ..< 1_000 {
             var nonCollided = Set<Particle>()
             
             for p in remaining {
