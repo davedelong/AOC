@@ -14,16 +14,20 @@ durationFormatter.format = "0.00"
 extension Day {
     fileprivate func execute() -> TimeInterval {
         print("============ \(type(of: self)) ============")
-        let start = Date()
-        self.run()
-        let duration = Date().timeIntervalSince(start)
+        
+        let duration = autoreleasepool { () -> TimeInterval in
+            let start = Date()
+            self.run()
+            return Date().timeIntervalSince(start)
+        }
+        
         print("time: \(durationFormatter.string(from: duration as NSNumber) ?? "0.0")s")
         print("\n")
         return duration
     }
 }
 
-let focusOnDay: Int? = 23
+let focusOnDay: Int? = 24
 
 let days: Array<Day> = [
     Day1(),
