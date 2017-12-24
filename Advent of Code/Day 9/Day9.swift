@@ -11,7 +11,7 @@ import Foundation
 class Day9: Day {
     required init() { }
 
-    func run() {
+    func run() -> (String, String) {
         let input = Day9.trimmedInput()
         var pt1 = 0
         var pt2 = 0
@@ -36,7 +36,6 @@ class Day9: Day {
             }
         }
 
-        print(pt1)
-        print(pt2)
+        return ("\(pt1)", "\(pt2)")
     }
 }

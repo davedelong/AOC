@@ -40,12 +40,12 @@ class Day12: Day {
         nodesByName = nodes
     }
 
-    func part1() {
+    func part1() -> String {
         let zero = nodesByName["0"]!
-        print("zero: \(nodes(connectedTo: zero).count)")
+        return "\(nodes(connectedTo: zero).count)"
     }
 
-    func part2() {
+    func part2() -> String {
         var allNodes = Set(nodesByName.values)
         var subGraphCount = 1
         while allNodes.isEmpty == false {
@@ -55,7 +55,7 @@ class Day12: Day {
             let connectionsToThisNode = nodes(connectedTo: anyNode)
             allNodes.subtract(connectionsToThisNode)
         }
-        print(subGraphCount)
+        return "\(subGraphCount)"
     }
 
 }

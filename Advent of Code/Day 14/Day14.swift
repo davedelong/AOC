@@ -38,7 +38,7 @@ class Day14: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    func part1() {
+    func part1() -> String {
         for i in 0 ..< 128 {
             let input = "\(day14Input)-\(i)"
             let hash = knotHash(input)
@@ -55,10 +55,10 @@ class Day14: Day {
         for r in disk {
             used += r.reduce(0, { $0 + ($1 ? 1 : 0)})
         }
-        print(used)
+        return "\(used)"
     }
         
-    func part2() {
+    func part2() -> String {
         var unvisited = Array<Position>()
         for r in 0 ..< 128 {
             for c in 0 ..< 128 {
@@ -93,7 +93,7 @@ class Day14: Day {
             }
         }
 
-        print(regions.count)
+        return "\(regions.count)"
     }
 
 }

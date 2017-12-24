@@ -168,17 +168,17 @@ class Day18: Day {
     
     required init() { }
 
-    func part1() {
+    func part1() -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)
         var received = 0
         while received <= 0 {
             let res = p1.step()
             received = res.received ?? 0
         }
-        print(received)
+        return "\(received)"
     }
 
-    func part2() {
+    func part2() -> String {
         let p1 = Program(id: 1, instructions: instructions)
         let p2 = Program(id: 0, instructions: instructions)
 
@@ -199,7 +199,7 @@ class Day18: Day {
             }
         } while !(p1Res.isWaiting && p2Res.isWaiting)
 
-        print(p1SendCount)
+        return "\(p1SendCount)"
     }
 
 }

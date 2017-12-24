@@ -14,7 +14,7 @@ class Day17: Day {
     
     required init() { }
 
-    func part1() {
+    func part1() -> String {
         var buffer = [0]
 
         var position = 0
@@ -23,10 +23,10 @@ class Day17: Day {
             buffer.insert(i, at: position)
         }
 
-        print(buffer[position + 1])
+        return "\(buffer[position + 1])"
     }
 
-    func part2() {
+    func part2() -> String {
         var position = 0
         var latest = 0
 
@@ -35,6 +35,6 @@ class Day17: Day {
             if position == 1 { latest = i }
         }
 
-        print(latest)
+        return "\(latest)"
     }
 }

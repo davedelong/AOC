@@ -14,7 +14,7 @@ class Day3: Day {
     
     required init() { }
     
-    func part1() {
+    func part1() -> String {
         let squareRootOfInput = sqrt(Double(input))
         let roundedUp = Int(ceil(squareRootOfInput))
         let root = (roundedUp % 2 == 0) ? roundedUp + 1 : roundedUp
@@ -30,12 +30,12 @@ class Day3: Day {
         let distanceFromMiddleToCenter = layer
         
         let totalDistance = distanceToMiddle + distanceFromMiddleToCenter
-        print(totalDistance)
+        return "\(totalDistance)"
     }
     
-    func part2() {
+    func part2() -> String {
         // TODO: this...
-        print(279138)
+        return "279138 <-- FAKED"
     }
     
 }

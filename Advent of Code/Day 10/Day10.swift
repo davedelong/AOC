@@ -39,17 +39,17 @@ class Day10: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    func part1() {
+    func part1() -> String {
         let part1Input = input.components(separatedBy: ",").map { Int($0)! }
         let part1Result = twist(input: Array(0..<256), lengths: part1Input)
-        print(part1Result[0] * part1Result[1])
+        return "\(part1Result[0] * part1Result[1])"
     }
 
-    func part2() {
+    func part2() -> String {
         let part2Input = input.unicodeScalars.map { Int($0.value) }
         let p2Lengths = part2Input + [17, 31, 73, 47, 23]
         let result = twist(input: Array(0..<256), lengths: p2Lengths, iterations: 64)
-        print(hash(result))
+        return hash(result)
     }
 
 }

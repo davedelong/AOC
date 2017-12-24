@@ -36,7 +36,7 @@ class Day6: Day {
     
     required init() { }
     
-    func part1() {
+    func part1() -> String {
         var current = Seen(input)
         var seen = Set<Seen>()
         
@@ -45,10 +45,10 @@ class Day6: Day {
             current = current.redistribute()
         } while seen.contains(current) == false
         
-        print(seen.count)
+        return "\(seen.count)"
     }
     
-    func part2() {
+    func part2() -> String {
         var current = Seen(input)
         var seen = Dictionary<Seen, Int>()
         
@@ -57,7 +57,7 @@ class Day6: Day {
             current = current.redistribute()
         } while seen[current] == nil
         
-        print(seen.count - seen[current]!)
+        return "\(seen.count - seen[current]!)"
     }
     
 }

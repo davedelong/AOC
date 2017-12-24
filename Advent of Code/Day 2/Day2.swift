@@ -16,12 +16,12 @@ class Day2: Day {
         input = Day2.inputLines().map { $0.components(separatedBy: .whitespaces).flatMap { Int($0) } }
     }
     
-    func part1() {
+    func part1() -> String {
         let answer = input.map { $0.max()! - $0.min()! }.reduce(0, +)
-        print(answer)
+        return "\(answer)"
     }
     
-    func part2() {
+    func part2() -> String {
         let answer = input.map { row in
             row.map { item in
                 let divisions = row.map { Double($0) / Double(item) }
@@ -29,7 +29,7 @@ class Day2: Day {
                 return multiples.first.map { Int($0) } ?? 0
                 }.reduce(0, +)
             }.reduce(0, +)
-        print(answer)
+        return "\(answer)"
     }
     
 }

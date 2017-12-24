@@ -86,15 +86,15 @@ class Day7: Day {
         return nil
     }
 
-    func run() {
+    func run() -> (String, String) {
         let root = makeTree()!
 
-        print(root.name)
         root.computeWeights()
         let imbalanced = root.imbalancedChild()!
         let siblingWeights = Set(imbalanced.parent!.children.map { $0.computedWeight })
         let delta = siblingWeights.max()! - siblingWeights.min()!
-        print(imbalanced.weight - delta)
+        
+        return (root.name, "\(imbalanced.weight - delta)")
     }
 
 }

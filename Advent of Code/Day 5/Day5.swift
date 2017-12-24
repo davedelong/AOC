@@ -16,7 +16,7 @@ class Day5: Day {
         data = Day5.inputLines().map { Int($0)! }
     }
     
-    func part1() {
+    func part1() -> String {
         var input = data
         var stepCount = 0
         var index = 0
@@ -26,10 +26,10 @@ class Day5: Day {
             index += offset
             stepCount += 1
         }
-        print(stepCount)
+        return "\(stepCount)"
     }
     
-    func part2() {
+    func part2() -> String {
         var input = data
         var stepCount = 0
         var index = 0
@@ -41,6 +41,6 @@ class Day5: Day {
             index += offset
             stepCount += 1
         }
-        print(stepCount)
+        return "\(stepCount)"
     }
 }

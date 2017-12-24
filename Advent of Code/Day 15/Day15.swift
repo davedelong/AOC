@@ -20,15 +20,16 @@ class Day15: Day {
     let p1a = sequence(first: 883, next: { ($0 * 16807) % 2147483647 })
     let p1b = sequence(first: 879, next: { ($0 * 48271) % 2147483647 })
 
-    func part1() {
-        print("part 1: \(match(a: p1a, b: p1b, iterations: 40_000_000))")
+    func part1() -> String {
+        let answer = match(a: p1a, b: p1b, iterations: 40_000_000)
+        return "\(answer)"
     }
 
-    func part2() {
+    func part2() -> String {
         let p2a = p1a.lazy.filter { $0 % 4 == 0 }.makeIterator()
         let p2b = p1b.lazy.filter { $0 % 8 == 0 }.makeIterator()
-
-        print("part 2: \(match(a: p2a, b: p2b, iterations: 5_000_000))")
+        let answer = match(a: p2a, b: p2b, iterations: 5_000_000)
+        return "\(answer)"
     }
     
 }

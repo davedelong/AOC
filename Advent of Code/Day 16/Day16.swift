@@ -33,12 +33,12 @@ class Day16: Day {
         return list
     }
     
-    func part1() {
+    func part1() -> String {
         let p1 = twist(start)
-        print("Part 1: \(p1.joined())")
+        return p1.joined()
     }
 
-    func part2() {
+    func part2() -> String {
         var results = Array<String>()
 
         var list = start
@@ -49,7 +49,7 @@ class Day16: Day {
             results.append(s)
         }
         let offset = 1_000_000_000 % results.count
-        print("Part 2: \(results[offset - 1])")
+        return "\(results[offset - 1])"
     }
 
 }

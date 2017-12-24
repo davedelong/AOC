@@ -55,7 +55,7 @@ class Day24: Day {
         return nextPorts.map { chain + [$0] }
     }
     
-    func run() {
+    func run() -> (String, String) {
         
         var unimprovableChains = Array<Chain>()
         var improvableChains = extend(chain: [])
@@ -79,14 +79,13 @@ class Day24: Day {
         let chainsAndScores = unimprovableChains.map { ($0, $0.reduce(0, {$0 + $1.score}))}
         let max = chainsAndScores.max(by: { $0.1 < $1.1 })!
         
-        print(max.1)
-        
         let longest = chainsAndScores.max(by: {
             if $0.0.count < $1.0.count { return true }
             if $0.0.count == $1.0.count { return $0.1 < $1.1 }
             return false
         })!
-        print(longest.1)
+        
+        return ("\(max.1)", "\(longest.1)")
     }
     
 }

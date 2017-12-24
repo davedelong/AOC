@@ -46,7 +46,7 @@ class Day20: Day {
         return rawParticles.enumerated().map { Particle(id: $0, line: $1) }
     }
     
-    func part1() {
+    func part1() -> String {
         let allParticles = particles()
         var overallClosest = -1
         for _ in 0 ..< 1_000 {
@@ -63,10 +63,10 @@ class Day20: Day {
                 overallClosest = closest
             }
         }
-        print(overallClosest)
+        return "\(overallClosest)"
     }
 
-    func part2() {
+    func part2() -> String {
         var remaining = particles()
         var collided = Set<Particle>()
         
@@ -86,7 +86,7 @@ class Day20: Day {
             remaining = Array(nonCollided)
         }
 
-        print(remaining.count)
+        return "\(remaining.count)"
     }
 
 }

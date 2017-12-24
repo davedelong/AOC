@@ -10,10 +10,10 @@ import Foundation
 
 protocol Day {
     init()
-    func run()
+    func run() -> (String, String)
     
-    func part1()
-    func part2()
+    func part1() -> String
+    func part2() -> String
     
 }
 
@@ -40,11 +40,10 @@ extension Day {
         return inputLines(trimming: trimming, callingFrom).map { Array($0) }
     }
     
-    func run() {
-        part1()
-        part2()
+    func run() -> (String, String) {
+        return (part1(), part2())
     }
-    func part1() { print("part 1: implement me!") }
-    func part2() { print("part 2: implement me!") }
+    func part1() -> String { return "implement me!" }
+    func part2() -> String { return "implement me!" }
     
 }

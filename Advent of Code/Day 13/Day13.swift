@@ -34,18 +34,18 @@ class Day13: Day {
         return (collisions, score)
     }
     
-    func part1() {
-        print("score: \(score(for: 0).1)")
+    func part1() -> String {
+        return "\(score(for: 0).1)"
     }
 
-    func part2() {
+    func part2() -> String {
         for delay in 1 ..< Int.max {
             let s = score(for: delay)
             if s.0 == 0 {
-                print("delay: \(delay)")
-                break
+                return "\(delay)"
             }
         }
+        fatalError("UNREACHABLE")
     }
 
 }

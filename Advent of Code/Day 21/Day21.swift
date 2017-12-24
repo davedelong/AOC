@@ -67,15 +67,15 @@ class Day21: Day {
         return current
     }
     
-    func part1() {
+    func part1() -> String {
         let part1 = apply(times: 5)
         let pixelsOn1 = part1.count(where: { $0 == .on })
-        print("part 1: \(pixelsOn1)")
+        return "\(pixelsOn1)"
     }
 
-    func part2() {
+    func part2() -> String {
         let part2 = apply(times: 18)
         let pixelsOn2 = part2.count(where: { $0 == .on })
-        print("part 2: \(pixelsOn2)")
+        return "\(pixelsOn2)"
     }
 }

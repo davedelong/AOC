@@ -49,7 +49,7 @@ class Day19: Day {
         return heading
     }
     
-    func run() {
+    func run() -> (String, String) {
         let startX = grid[0].index(of: "|")!
 
         var position = Position(x: startX, y: 0)
@@ -67,8 +67,7 @@ class Day19: Day {
             position = position.move(heading)
         }
 
-        print(seen.reduce("") { $0 + String($1) })
-        print(steps)
+        return ("\(seen.reduce("") { $0 + String($1) })", "\(steps)")
     }
 
 }

@@ -56,7 +56,7 @@ class Day11: Day {
         directions = Day11.trimmedInput().components(separatedBy: ",").map { Direction(rawValue: $0)! }
     }
 
-    func run() {
+    func run() -> (String, String) {
         var finalDirections = Dictionary<Direction, Int>()
         var latestDistance = 0
         var furthestAway = 0
@@ -68,8 +68,7 @@ class Day11: Day {
             furthestAway = max(furthestAway, latestDistance)
         }
 
-        print("final distance: \(latestDistance)")
-        print("furthest distance: \(furthestAway)")
+        return ("\(latestDistance)", "\(furthestAway)")
     }
 
 }

@@ -27,7 +27,7 @@ class Day8: Day {
         }
     }
 
-    func run() {
+    func run() -> (String, String) {
         let lines = Day8.inputLines()
         var registers = Registers()
         var intermediateMax = Int.min
@@ -43,8 +43,7 @@ class Day8: Day {
             intermediateMax = max(intermediateMax, registers[bits[0]] ?? 0)
         }
 
-        print("final max: \(registers.values.max()!)")
-        print("inter max: \(intermediateMax)")
+        return ("\(registers.values.max()!)", "\(intermediateMax)")
     }
 
 }

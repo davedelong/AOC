@@ -71,14 +71,14 @@ class Day22: Day {
         return infections
     }
     
-    func part1() {
+    func part1() -> String {
         let inf = countInfections(iterations: 10_000, infector: { $0.flip() }, mover: {
             $0 == .infected ? $1.turnRight() : $1.turnLeft()
         })
-        print(inf)
+        return "\(inf)"
     }
 
-    func part2() {
+    func part2() -> String {
         let inf = countInfections(iterations: 10_000_000, infector: { $0.rotate() }, mover: {
             switch $0 {
                 case .clean: return $1.turnLeft()
@@ -87,6 +87,6 @@ class Day22: Day {
                 case .flagged: return $1.turnAround()
             }
         })
-        print(inf)
+        return "\(inf)"
     }
 }

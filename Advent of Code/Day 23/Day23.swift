@@ -98,14 +98,14 @@ class Day23: Day {
     
     required init() { }
     
-    func part1() {
+    func part1() -> String {
         let instructions = Day23.inputLines().map { Instruction($0) }
         let p = Program(instructions: instructions)
         while p.step() == .ok { }
-        print(p.mulCount)
+        return "\(p.mulCount)"
     }
     
-    func part2() {
+    func part2() -> String {
         func isComposite(_ i: Int) -> Bool {
             for d in 2 ... Int(sqrt(Double(i))) {
                 if i % d == 0 { return true }
@@ -114,7 +114,7 @@ class Day23: Day {
         }
         
         let count = stride(from: 109900, through: 126900, by: 17).filter(isComposite).count
-        print(count)
+        return "\(count)"
     }
     
 }
