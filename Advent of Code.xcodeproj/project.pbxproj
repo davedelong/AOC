@@ -13,6 +13,7 @@
 		55E683771FEDA62100A313B7 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E683761FEDA62100A313B7 /* Day.swift */; };
 		55E6837A1FEDA68700A313B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E683791FEDA68700A313B7 /* main.swift */; };
 		55E6837E1FEDA8A700A313B7 /* Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6837D1FEDA8A700A313B7 /* Day23.swift */; };
+		55EEE2CD1FF0C182006DE909 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EEE2CC1FF0C182006DE909 /* Regex.swift */; };
 		55FFBFA01FEDAB0C007C3742 /* Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FFBF9F1FEDAB0C007C3742 /* Day24.swift */; };
 		55FFBFA21FEDAB14007C3742 /* Day25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FFBFA11FEDAB14007C3742 /* Day25.swift */; };
 		55FFBFA51FEDD154007C3742 /* Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6836C1FEB772300A313B7 /* Day21.swift */; };
@@ -77,6 +78,7 @@
 		55E6837B1FEDA6DD00A313B7 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		55E6837D1FEDA8A700A313B7 /* Day23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day23.swift; sourceTree = "<group>"; };
 		55E6837F1FEDA8AF00A313B7 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		55EEE2CC1FF0C182006DE909 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		55FFBF9F1FEDAB0C007C3742 /* Day24.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day24.swift; sourceTree = "<group>"; };
 		55FFBFA11FEDAB14007C3742 /* Day25.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day25.swift; sourceTree = "<group>"; };
 		55FFBFA31FEDAB1C007C3742 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				55E6836E1FEB7E3100A313B7 /* Matrix.swift */,
 				55E683741FEDA24D00A313B7 /* Position.swift */,
 				55FFBFA91FEDD4AF007C3742 /* Vector.swift */,
+				55EEE2CC1FF0C182006DE909 /* Regex.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				55E6836F1FEB7E3100A313B7 /* Matrix.swift in Sources */,
 				55FFBFA71FEDD3C1007C3742 /* Day20.swift in Sources */,
 				55FFBFBD1FEE0837007C3742 /* Day8.swift in Sources */,
+				55EEE2CD1FF0C182006DE909 /* Regex.swift in Sources */,
 				55FFBFB01FEDFB42007C3742 /* Day16.swift in Sources */,
 				55E683771FEDA62100A313B7 /* Day.swift in Sources */,
 				55E683751FEDA24D00A313B7 /* Position.swift in Sources */,

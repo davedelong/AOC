@@ -30,7 +30,7 @@ extension Day {
     }
 }
 
-let focusOnDay: Int? = 25
+let focusOnDay: Int? = nil//25
 
 let days: Array<Day> = [
     Day1(),
