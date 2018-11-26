@@ -6,8 +6,6 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
 public struct Regex {
     
     private let pattern: NSRegularExpression?

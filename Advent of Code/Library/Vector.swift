@@ -6,8 +6,6 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
 struct Vector: Equatable {
     
     static func +(lhs: Vector, rhs: Vector) -> Vector {

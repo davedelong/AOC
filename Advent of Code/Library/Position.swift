@@ -6,8 +6,6 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
 enum Heading {
     case north, south, west, east
     func turnLeft() -> Heading {

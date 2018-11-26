@@ -6,7 +6,9 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
+protocol Year {
+    var days: Array<Day> { get }
+}
 
 protocol Day {
     init()
@@ -14,7 +16,6 @@ protocol Day {
     
     func part1() -> String
     func part2() -> String
-    
 }
 
 extension Day {

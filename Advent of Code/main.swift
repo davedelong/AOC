@@ -6,7 +6,8 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
+@_exported import Foundation
+@_exported import GameplayKit
 
 let durationFormatter = NumberFormatter()
 durationFormatter.format = "0.00"
@@ -32,33 +33,9 @@ extension Day {
 
 let focusOnDay: Int? = nil//25
 
-let days: Array<Day> = [
-    Day1(),
-    Day2(),
-    Day3(),
-    Day4(),
-    Day5(),
-    Day6(),
-    Day7(),
-    Day8(),
-    Day9(),
-    Day10(),
-    Day11(),
-    Day12(),
-    Day13(),
-    Day14(),
-    Day15(),
-    Day16(),
-    Day17(),
-    Day18(),
-    Day19(),
-    Day20(),
-    Day21(),
-    Day22(),
-    Day23(),
-    Day24(),
-    Day25()
-]
+let thisYear = Year2017()
+
+let days = thisYear.days
 
 if let focus = focusOnDay {
     let index = focus - 1
