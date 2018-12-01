@@ -10,14 +10,26 @@ extension Year2018 {
 
     class Day1: Day {
         
+        let input = Day1.inputIntegers()
+        
         required init() { }
         
         func part1() -> String {
-            return #function
+            let sum = input.reduce(0, +)
+            return "\(sum)"
         }
         
         func part2() -> String {
-            return #function
+            var frequency = 0
+            var seen = Set([frequency])
+            var index = 0
+            while true {
+                frequency += input[index]
+                if seen.contains(frequency) { return "\(frequency)" }
+                index = (index + 1) % input.count
+                seen.insert(frequency)
+            }
+            fatalError("unreachable")
         }
         
     }

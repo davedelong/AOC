@@ -16,24 +16,23 @@ extension Day {
     fileprivate func execute() -> TimeInterval {
         print("============ \(type(of: self)) ============")
         
-        let (duration, results) = autoreleasepool { () -> (TimeInterval, (String, String)) in
+        let (duration, part1, part2) = autoreleasepool { () -> (TimeInterval, String, String) in
             let start = Date()
             let results = self.run()
-            return (Date().timeIntervalSince(start), results)
+            return (Date().timeIntervalSince(start), results.0, results.1)
         }
         
-        
-        print("part 1: \(results.0)")
-        print("part 2: \(results.1)")
+        print("part 1: \(part1)")
+        print("part 2: \(part2)")
         print("time: \(durationFormatter.string(from: duration as NSNumber) ?? "0.0")s")
         print("\n")
         return duration
     }
 }
 
-let focusOnDay: Int? = nil//25
+let focusOnDay: Int? = 1
 
-let thisYear = Year2017()
+let thisYear = Year2018()
 
 let days = thisYear.days
 

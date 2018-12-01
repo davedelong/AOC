@@ -37,6 +37,10 @@ extension Day {
         return i.components(separatedBy: .newlines)
     }
     
+    static func inputIntegers(trimming: Bool = true, radix: Int = 10, _ callingFrom: StaticString = #file) -> Array<Int> {
+        return inputLines(trimming: trimming, callingFrom).compactMap { Int($0, radix: radix) }
+    }
+    
     static func inputCharacters(trimming: Bool = true, _ callingFrom: StaticString = #file) -> Array<Array<Character>> {
         return inputLines(trimming: trimming, callingFrom).map { Array($0) }
     }
