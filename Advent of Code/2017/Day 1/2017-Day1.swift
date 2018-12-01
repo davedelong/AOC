@@ -10,14 +10,10 @@ extension Year2017 {
 
 class Day1: Day {
     
-    let input: Array<UInt>
+    init() { super.init() }
     
-    required init() {
-        input = Day1.trimmedInput().map { UInt(String($0))! }
-    }
-    
-    func checksum(_ ints: Array<UInt>, offset: Int) -> String {
-        let consecutivelyEqual = ints.enumerated().map { (index, element) -> UInt in
+    func checksum(_ ints: Array<Int>, offset: Int) -> String {
+        let consecutivelyEqual = ints.enumerated().map { (index, element) -> Int in
             let pair = ints[(index + offset) % ints.count]
             return element == pair ? element : 0
         }
@@ -26,12 +22,12 @@ class Day1: Day {
         return "\(sum)"
     }
     
-    func part1() -> String {
-        return checksum(input, offset: 1)
+    override func part1() -> String {
+        return checksum(rawInputIntegers, offset: 1)
     }
     
-    func part2() -> String {
-        return checksum(input, offset: input.count / 2)
+    override func part2() -> String {
+        return checksum(rawInputIntegers, offset: rawInputIntegers.count / 2)
     }
     
 }

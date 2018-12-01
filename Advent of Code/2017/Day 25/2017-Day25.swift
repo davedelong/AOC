@@ -27,11 +27,13 @@ class Day25: Day {
         case F
     }
     
-    let startingState: String
-    let iterations: Int
+    var startingState: String = ""
+    var iterations: Int = 0
     var states = Dictionary<String, TuringState>()
     
-    required init() {
+    init() {
+        
+        super.init()
         
         let begin = Regex(pattern: "Begin in state ([A-Z])\\.")
         let steps = Regex(pattern: "Perform a diagnostic checksum after (\\d+) steps\\.")
@@ -41,7 +43,6 @@ class Day25: Day {
         let move = Regex(pattern: "\\s*- Move one slot to the (left|right)\\.")
         let state = Regex(pattern: "\\s*- Continue with state ([A-Z])\\.")
         
-        let trimmedInput = Day25.trimmedInput()
         var sections = trimmedInput.components(separatedBy: "\n\n")
         
         let metaInfo = sections.removeFirst()
@@ -69,7 +70,7 @@ class Day25: Day {
         
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var state = State.A
@@ -148,7 +149,7 @@ class Day25: Day {
         return "\(checksum)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var current = startingState

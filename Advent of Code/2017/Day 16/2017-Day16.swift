@@ -11,9 +11,11 @@ extension Year2017 {
 class Day16: Day {
 
     let start = Array("abcdefghijklmnop").map { String($0) }
-    let commands = Day16.trimmedInput().components(separatedBy: ",")
+    lazy var commands: Array<String> = {
+        return trimmedInput.components(separatedBy: ",")
+    }()
     
-    required init() { }
+    init() { super.init() }
 
     func twist(_ input: Array<String>) -> Array<String> {
         var list = input
@@ -33,12 +35,12 @@ class Day16: Day {
         return list
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         let p1 = twist(start)
         return p1.joined()
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         var results = Array<String>()
 
         var list = start

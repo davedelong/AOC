@@ -33,10 +33,11 @@ class Day24: Day {
         func has(input: Int) -> Bool { return a == input || b == input }
     }
     
-    let ports: Set<Port>
+    var ports: Set<Port> = []
     
-    required init() {
-        ports = Set(Day24.inputLines().enumerated().map { Port(id: $0.offset, string: $0.element) })
+    init() {
+        super.init()
+        ports = Set(trimmedInputLines.enumerated().map { Port(id: $0.offset, string: $0.element) })
     }
     
     func nextItem(in chain: Chain) -> Int {
@@ -56,7 +57,7 @@ class Day24: Day {
         return nextPorts.map { chain + [$0] }
     }
     
-    func run() -> (String, String) {
+    override func run() -> (String, String) {
         
         var unimprovableChains = Array<Chain>()
         var improvableChains = extend(chain: [])

@@ -10,18 +10,19 @@ extension Year2017 {
 
 class Day2: Day {
     
-    let input: Array<Array<Int>>
+    var input = Array<Array<Int>>()
     
-    required init() {
-        input = Day2.inputLines().map { $0.components(separatedBy: .whitespaces).compactMap { Int($0) } }
+    init() {
+        super.init()
+        input = trimmedInputLines.map { $0.components(separatedBy: .whitespaces).compactMap { Int($0) } }
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         let answer = input.map { $0.max()! - $0.min()! }.reduce(0, +)
         return "\(answer)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         let answer = input.map { row in
             row.map { item in
                 let divisions = row.map { Double($0) / Double(item) }

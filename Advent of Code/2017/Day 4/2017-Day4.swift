@@ -10,16 +10,18 @@ extension Year2017 {
 
 class Day4: Day {
     
-    required init() { }
+    init() { super.init() }
     
-    let input = Day4.inputLines().map { $0.components(separatedBy: .whitespaces) }.filter { !$0.isEmpty }
+    lazy var input: Array<Array<String>> = {
+        return trimmedInputLines.map { $0.components(separatedBy: .whitespaces) }.filter { !$0.isEmpty }
+    }()
     
-    func part1() -> String {
+    override func part1() -> String {
         let answer = input.filter { $0.count == Set($0).count }.count
         return "\(answer)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         
         func isValid(_ phrase: Array<String>) -> Bool {
             let countedSets = phrase.map({ $0.map { String($0) } }).map { NSCountedSet(array: $0) }

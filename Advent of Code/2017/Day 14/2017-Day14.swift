@@ -13,8 +13,7 @@ class Day14: Day {
     let day14Input = "jxqlasbh"
     var disk = Array<Array<Bool>>()
     
-    required init() {
-    }
+    init() { super.init() }
 
     func knotHash(_ lengthsInput: String) -> String {
         var list = Array(0..<256)
@@ -38,7 +37,7 @@ class Day14: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    func part1() -> String {
+    override func part1() -> String {
         for i in 0 ..< 128 {
             let input = "\(day14Input)-\(i)"
             let hash = knotHash(input)
@@ -58,7 +57,7 @@ class Day14: Day {
         return "\(used)"
     }
         
-    func part2() -> String {
+    override func part2() -> String {
         var unvisited = Array<Position>()
         for r in 0 ..< 128 {
             for c in 0 ..< 128 {

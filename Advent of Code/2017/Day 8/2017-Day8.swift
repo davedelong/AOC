@@ -12,7 +12,7 @@ class Day8: Day {
 
     typealias Registers = Dictionary<String, Int>
     
-    required init() { }
+    init() { super.init() }
 
     func match(_ registers: Registers, _ register: String, _ op: String, _ value: String) -> Bool {
         let current = registers[register] ?? 0
@@ -27,8 +27,8 @@ class Day8: Day {
         }
     }
 
-    func run() -> (String, String) {
-        let lines = Day8.inputLines()
+    override func run() -> (String, String) {
+        let lines = trimmedInputLines
         var registers = Registers()
         var intermediateMax = Int.min
 

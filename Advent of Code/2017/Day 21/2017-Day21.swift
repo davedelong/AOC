@@ -24,8 +24,9 @@ class Day21: Day {
         [.on,  .on,  .on]
     ])
 
-    required init() {
-        let rawRules = Day21.inputLines()
+    init() {
+        super.init() 
+        let rawRules = trimmedInputLines
         for rawRule in rawRules {
             let pieces = rawRule.components(separatedBy: " => ")
             let rawCause = pieces[0].split(separator: "/")
@@ -67,13 +68,13 @@ class Day21: Day {
         return current
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         let part1 = apply(times: 5)
         let pixelsOn1 = part1.count(where: { $0 == .on })
         return "\(pixelsOn1)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         let part2 = apply(times: 18)
         let pixelsOn2 = part2.count(where: { $0 == .on })
         return "\(pixelsOn2)"

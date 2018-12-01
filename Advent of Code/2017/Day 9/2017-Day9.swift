@@ -9,10 +9,11 @@
 extension Year2017 {
 
 class Day9: Day {
-    required init() { }
+    
+    init() { super.init() }
 
-    func run() -> (String, String) {
-        let input = Day9.trimmedInput()
+    override func run() -> (String, String) {
+        let input = trimmedInput
         var pt1 = 0
         var pt2 = 0
 

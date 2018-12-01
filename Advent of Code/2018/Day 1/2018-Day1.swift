@@ -10,23 +10,21 @@ extension Year2018 {
 
     class Day1: Day {
         
-        let input = Day1.inputIntegers()
+        init() { super.init() }
         
-        required init() { }
-        
-        func part1() -> String {
-            let sum = input.reduce(0, +)
+        override func part1() -> String {
+            let sum = trimmedInputLineIntegers.reduce(0, +)
             return "\(sum)"
         }
         
-        func part2() -> String {
+        override func part2() -> String {
             var frequency = 0
             var seen = Set([frequency])
             var index = 0
             while true {
-                frequency += input[index]
+                frequency += trimmedInputLineIntegers[index]
                 if seen.contains(frequency) { return "\(frequency)" }
-                index = (index + 1) % input.count
+                index = (index + 1) % trimmedInputLineIntegers.count
                 seen.insert(frequency)
             }
             fatalError("unreachable")

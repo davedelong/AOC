@@ -12,9 +12,9 @@ class Day3: Day {
     
     let input = 277678
     
-    required init() { }
+    init() { super.init() }
     
-    func part1() -> String {
+    override func part1() -> String {
         let squareRootOfInput = sqrt(Double(input))
         let roundedUp = Int(ceil(squareRootOfInput))
         let root = (roundedUp % 2 == 0) ? roundedUp + 1 : roundedUp
@@ -33,7 +33,7 @@ class Day3: Day {
         return "\(totalDistance)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         // TODO: this...
         return "279138 <-- FAKED"
     }

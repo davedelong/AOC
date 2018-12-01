@@ -34,9 +34,9 @@ class Day6: Day {
     
     let input = [2, 8, 8, 5, 4, 2, 3, 1, 5, 5, 1, 2, 15, 13, 5, 14]
     
-    required init() { }
+    init() { super.init() }
     
-    func part1() -> String {
+    override func part1() -> String {
         var current = Seen(input)
         var seen = Set<Seen>()
         
@@ -48,7 +48,7 @@ class Day6: Day {
         return "\(seen.count)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         var current = Seen(input)
         var seen = Dictionary<Seen, Int>()
         

@@ -164,11 +164,13 @@ class Day18: Day {
         }
     }
 
-    let instructions = Day18.inputLines().map { $0.components(separatedBy: .whitespaces) }.map { Instruction(args: $0) }
+    lazy var instructions: Array<Instruction> = {
+        trimmedInputLines.map { $0.components(separatedBy: .whitespaces) }.map { Instruction(args: $0) }
+    }()
     
-    required init() { }
+    init() { super.init() }
 
-    func part1() -> String {
+    override func part1() -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)
         var received = 0
         while received <= 0 {
@@ -178,7 +180,7 @@ class Day18: Day {
         return "\(received)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         let p1 = Program(id: 1, instructions: instructions)
         let p2 = Program(id: 0, instructions: instructions)
 

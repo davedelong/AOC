@@ -24,10 +24,12 @@ class Day12: Day {
         return processed
     }
     
-    let nodesByName: Dictionary<String, GKGraphNode>
+    var nodesByName: Dictionary<String, GKGraphNode>
     
-    required init() {
-        let connections = Day12.inputLines().map { line -> (String, [String]) in
+    init() {
+        nodesByName = Dictionary()
+        super.init()
+        let connections = trimmedInputLines.map { line -> (String, [String]) in
             let pieces = line.components(separatedBy: " <-> ")
             return (pieces[0], pieces[1].components(separatedBy: ", "))
         }
@@ -41,14 +43,14 @@ class Day12: Day {
         nodesByName = nodes
     }
 
-    func part1() -> String {
+    override func part1() -> String {
         let zero = nodesByName["0"]!
         return "\(nodes(connectedTo: zero).count)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         var allNodes = Set(nodesByName.values)
-        var subGraphCount = 1
+        var subGraphCount = 0
         while allNodes.isEmpty == false {
             subGraphCount += 1
             

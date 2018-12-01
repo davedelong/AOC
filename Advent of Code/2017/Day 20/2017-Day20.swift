@@ -39,14 +39,14 @@ class Day20: Day {
         }
     }
     
-    required init() { }
+    init() { super.init() }
     
     func particles() -> Array<Particle> {
-        let rawParticles = Day20.inputLines()
+        let rawParticles = trimmedInputLines
         return rawParticles.enumerated().map { Particle(id: $0, line: $1) }
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         let allParticles = particles()
         var overallClosest = -1
         for _ in 0 ..< 1_000 {
@@ -66,7 +66,7 @@ class Day20: Day {
         return "\(overallClosest)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         var remaining = particles()
         var collided = Set<Particle>()
         

@@ -10,14 +10,10 @@ extension Year2017 {
 
 class Day5: Day {
     
-    let data: Array<Int>
+    init() { super.init() }
     
-    required init() {
-        data = Day5.inputLines().map { Int($0)! }
-    }
-    
-    func part1() -> String {
-        var input = data
+    override func part1() -> String {
+        var input = trimmedInputLineIntegers
         var stepCount = 0
         var index = 0
         while index < input.count {
@@ -29,8 +25,8 @@ class Day5: Day {
         return "\(stepCount)"
     }
     
-    func part2() -> String {
-        var input = data
+    override func part2() -> String {
+        var input = trimmedInputLineIntegers
         var stepCount = 0
         var index = 0
         while index < input.count {

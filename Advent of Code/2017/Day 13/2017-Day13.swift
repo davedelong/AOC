@@ -12,8 +12,9 @@ class Day13: Day {
 
     var firewall = Dictionary<Int, Int>()
     
-    required init() {
-        for line in Day13.inputLines() {
+    init() {
+        super.init()
+        for line in trimmedInputLines {
             let p = line.components(separatedBy: ": ")
             firewall[Int(p[0])!] = Int(p[1])!
         }
@@ -34,11 +35,11 @@ class Day13: Day {
         return (collisions, score)
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         return "\(score(for: 0).1)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         for delay in 1 ..< Int.max {
             let s = score(for: delay)
             if s.0 == 0 {

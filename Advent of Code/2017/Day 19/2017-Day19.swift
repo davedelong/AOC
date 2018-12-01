@@ -9,19 +9,18 @@
 extension Year2017 {
 
 class Day19: Day {
-    let grid: Array<Array<Character>> = Day19.inputCharacters(trimming: false)
     
-    required init() { }
+    init() { super.init() }
     
     func isValid(_ pos: Position) -> Bool {
-        guard pos.y >= 0 && pos.y < grid.count else { return false }
-        let row = grid[pos.y]
+        guard pos.y >= 0 && pos.y < rawInputLineCharacters.count else { return false }
+        let row = rawInputLineCharacters[pos.y]
         return pos.x >= 0 && pos.x < row.count
     }
     
     func character(at pos: Position) -> Character? {
         guard isValid(pos) else { return nil }
-        return grid[pos.y][pos.x]
+        return rawInputLineCharacters[pos.y][pos.x]
     }
     
     func isPathy(_ pos: Position) -> Bool {
@@ -49,8 +48,8 @@ class Day19: Day {
         return heading
     }
     
-    func run() -> (String, String) {
-        let startX = grid[0].index(of: "|")!
+    override func run() -> (String, String) {
+        let startX = rawInputLineCharacters[0].index(of: "|")!
 
         var position = Position(x: startX, y: 0)
         var heading = Heading.south

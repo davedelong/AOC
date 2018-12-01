@@ -50,13 +50,14 @@ class Day11: Day {
         return final
     }
     
-    let directions: Array<Direction>
+    var directions = Array<Direction>()
     
-    required init() {
-        directions = Day11.trimmedInput().components(separatedBy: ",").map { Direction(rawValue: $0)! }
+    init() {
+        super.init()
+        directions = trimmedInput.components(separatedBy: ",").map { Direction(rawValue: $0)! }
     }
 
-    func run() -> (String, String) {
+    override func run() -> (String, String) {
         var finalDirections = Dictionary<Direction, Int>()
         var latestDistance = 0
         var furthestAway = 0

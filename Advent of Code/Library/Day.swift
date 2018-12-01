@@ -10,45 +10,75 @@ protocol Year {
     var days: Array<Day> { get }
 }
 
-protocol Day {
-    init()
-    func run() -> (String, String)
+class Day {
+    private let file: StaticString
     
-    func part1() -> String
-    func part2() -> String
-}
-
-extension Day {
+    /// RAW
     
-    static func rawInput(_ callingFrom: StaticString = #file) -> String {
-        var components = ("\(callingFrom)" as NSString).pathComponents
+    lazy var rawInput: String = {
+        var components = ("\(file)" as NSString).pathComponents
         _ = components.removeLast()
         components.append("input.txt")
         let path = NSString.path(withComponents: components)
         return try! String(contentsOf: URL(fileURLWithPath: path))
-    }
+    }()
     
-    static func trimmedInput(_ callingFrom: StaticString = #file) -> String {
-        return rawInput(callingFrom).trimmingCharacters(in: .whitespacesAndNewlines)
-    }
+    lazy var rawInputCharacters: Array<Character> = {
+        return Array(rawInput)
+    }()
     
-    static func inputLines(trimming: Bool = true, _ callingFrom: StaticString = #file) -> Array<String> {
-        let i = trimming ? trimmedInput(callingFrom) : rawInput(callingFrom)
-        return i.components(separatedBy: .newlines)
-    }
+    lazy var rawInputIntegers: Array<Int> = {
+        return rawInputCharacters.compactMap { Int("\($0)") }
+    }()
     
-    static func inputIntegers(trimming: Bool = true, radix: Int = 10, _ callingFrom: StaticString = #file) -> Array<Int> {
-        return inputLines(trimming: trimming, callingFrom).compactMap { Int($0, radix: radix) }
-    }
+    lazy var rawInputLines: Array<String> = {
+        return rawInput.components(separatedBy: .newlines)
+    }()
     
-    static func inputCharacters(trimming: Bool = true, _ callingFrom: StaticString = #file) -> Array<Array<Character>> {
-        return inputLines(trimming: trimming, callingFrom).map { Array($0) }
+    lazy var rawInputLineCharacters: Array<Array<Character>> = {
+        return rawInputLines.map { Array($0) }
+    }()
+    
+    lazy var rawInputLineIntegers: Array<Int> = {
+        return rawInputLines.compactMap { Int($0) }
+    }()
+    
+    /// TRIMMED
+    
+    lazy var trimmedInput: String = {
+        return rawInput.trimmingCharacters(in: .whitespacesAndNewlines)
+    }()
+    
+    lazy var trimmedInputCharacters: Array<Character> = {
+        return Array(trimmedInput)
+    }()
+    
+    lazy var trimmedInputIntegers: Array<Int> = {
+        return trimmedInputCharacters.compactMap { Int("\($0)") }
+    }()
+    
+    lazy var trimmedInputLines: Array<String> = {
+        return trimmedInput.components(separatedBy: .newlines)
+    }()
+    
+    lazy var trimmedInputLineCharacters: Array<Array<Character>> = {
+        return trimmedInputLines.map { Array($0) }
+    }()
+    
+    lazy var trimmedInputLineIntegers: Array<Int> = {
+        return trimmedInputLines.compactMap { Int($0) }
+    }()
+    
+    ///
+    
+    init(file: StaticString = #file) {
+        self.file = file
     }
     
     func run() -> (String, String) {
         return (part1(), part2())
     }
-    func part1() -> String { return "implement me!" }
-    func part2() -> String { return "implement me!" }
     
+    func part1() -> String { fatalError("Implement \(#function)") }
+    func part2() -> String { fatalError("Implement \(#function)") }
 }

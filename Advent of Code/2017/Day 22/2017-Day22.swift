@@ -29,11 +29,11 @@ class Day22: Day {
 
     var grid = Dictionary<Position, State>()
     
-    required init() { }
+    init() { super.init() }
     
     func resetGrid() {
         grid.removeAll()
-        let rawGrid = Day22.inputLines()
+        let rawGrid = trimmedInputLines
         
         for (y, line) in rawGrid.enumerated() {
             for (x, char) in line.enumerated() {
@@ -71,14 +71,14 @@ class Day22: Day {
         return infections
     }
     
-    func part1() -> String {
+    override func part1() -> String {
         let inf = countInfections(iterations: 10_000, infector: { $0.flip() }, mover: {
             $0 == .infected ? $1.turnRight() : $1.turnLeft()
         })
         return "\(inf)"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         let inf = countInfections(iterations: 10_000_000, infector: { $0.rotate() }, mover: {
             switch $0 {
                 case .clean: return $1.turnLeft()

@@ -12,9 +12,9 @@ class Day17: Day {
 
     let input = 314
     
-    required init() { }
+    init() { super.init() }
 
-    func part1() -> String {
+    override func part1() -> String {
         var buffer = [0]
 
         var position = 0
@@ -26,7 +26,7 @@ class Day17: Day {
         return "\(buffer[position + 1])"
     }
 
-    func part2() -> String {
+    override func part2() -> String {
         var position = 0
         var latest = 0
 

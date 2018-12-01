@@ -10,13 +10,13 @@ extension Year2018 {
 
     class Day21: Day {
         
-        required init() { }
+        init() { super.init() }
         
-        func part1() -> String {
+        override func part1() -> String {
             return #function
         }
         
-        func part2() -> String {
+        override func part2() -> String {
             return #function
         }
         

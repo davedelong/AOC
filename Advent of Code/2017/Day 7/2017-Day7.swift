@@ -47,10 +47,10 @@ class Day7: Day {
         }
     }
 
-    required init() { }
+    init() { super.init() }
 
     func makeTree() -> Node? {
-        let lines = Day7.inputLines()
+        let lines = trimmedInputLines
         
         let regex = try! NSRegularExpression(pattern: "^([^ ]+) \\((\\d+)\\)( -> (.+))?$", options: [])
         
@@ -87,7 +87,7 @@ class Day7: Day {
         return nil
     }
 
-    func run() -> (String, String) {
+    override func run() -> (String, String) {
         let root = makeTree()!
 
         root.computeWeights()

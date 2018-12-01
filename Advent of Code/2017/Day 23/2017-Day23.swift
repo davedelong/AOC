@@ -96,16 +96,16 @@ class Day23: Day {
         }
     }
     
-    required init() { }
+    init() { super.init() }
     
-    func part1() -> String {
-        let instructions = Day23.inputLines().map { Instruction($0) }
+    override func part1() -> String {
+        let instructions = trimmedInputLines.map { Instruction($0) }
         let p = Program(instructions: instructions)
         while p.step() == .ok { }
         return "\(p.mulCount)"
     }
     
-    func part2() -> String {
+    override func part2() -> String {
         func isComposite(_ i: Int) -> Bool {
             for d in 2 ... Int(sqrt(Double(i))) {
                 if i % d == 0 { return true }
