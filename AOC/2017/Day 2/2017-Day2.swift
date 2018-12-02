@@ -17,18 +17,18 @@ public class Day2: Day {
     public init() { super.init(inputSource: .file(#file)) }
     
     override public func part1() -> String {
-        let answer = integers.map { $0.max()! - $0.min()! }.reduce(0, +)
+        let answer = integers.map { $0.max()! - $0.min()! }.sum()
         return "\(answer)"
     }
     
     override public func part2() -> String {
-        let answer = integers.map { row in
+        let answer = integers.map { row -> Int in
             row.map { item in
                 let divisions = row.map { Double($0) / Double(item) }
                 let multiples = divisions.filter { ceil($0) == $0 && $0 != 1 }
                 return multiples.first.map { Int($0) } ?? 0
-                }.reduce(0, +)
-            }.reduce(0, +)
+            }.sum()
+        }.sum()
         return "\(answer)"
     }
     

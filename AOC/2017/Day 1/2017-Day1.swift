@@ -18,7 +18,7 @@ public class Day1: Day {
             return element == pair ? element : 0
         }
         
-        let sum = consecutivelyEqual.reduce(0, +)
+        let sum = consecutivelyEqual.sum()
         return "\(sum)"
     }
     

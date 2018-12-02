@@ -70,6 +70,7 @@
 		55CB0E8221B3594F0070701E /* AOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB0E3021B358E80070701E /* AOC.framework */; };
 		55CB0E8421B35C210070701E /* Test2017.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8321B35C210070701E /* Test2017.swift */; };
 		55CB0E8621B35C2B0070701E /* Test2018.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8521B35C2B0070701E /* Test2018.swift */; };
+		55CB0E8821B371770070701E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8721B371770070701E /* Collection.swift */; };
 		55E6837A1FEDA68700A313B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E683791FEDA68700A313B7 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +166,7 @@
 		55CB0E3F21B358E90070701E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CB0E8321B35C210070701E /* Test2017.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2017.swift; sourceTree = "<group>"; };
 		55CB0E8521B35C2B0070701E /* Test2018.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2018.swift; sourceTree = "<group>"; };
+		55CB0E8721B371770070701E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		55D63B7B1FD7B2EB009DE915 /* Advent of Code */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Advent of Code"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D63B7E1FD7B2EB009DE915 /* 2017-Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day7.swift"; sourceTree = "<group>"; };
 		55E6833F1FE4DFB600A313B7 /* 2017-Day16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day16.swift"; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				55E683741FEDA24D00A313B7 /* Position.swift */,
 				55FFBFA91FEDD4AF007C3742 /* Vector.swift */,
 				55EEE2CC1FF0C182006DE909 /* Regex.swift */,
+				55CB0E8721B371770070701E /* Collection.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				55CB0E7421B359370070701E /* 2017-Day13.swift in Sources */,
 				55CB0E7C21B359370070701E /* 2017-Day21.swift in Sources */,
 				55CB0E7921B359370070701E /* 2017-Day18.swift in Sources */,
+				55CB0E8821B371770070701E /* Collection.swift in Sources */,
 				55CB0E6921B359370070701E /* 2017-Day2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

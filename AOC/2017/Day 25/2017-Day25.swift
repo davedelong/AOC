@@ -144,7 +144,7 @@ public class Day25: Day {
             
         }
         
-        let checksum = tape.values.reduce(0, +)
+        let checksum = tape.values.sum()
         
         return "\(checksum)"
     }
@@ -162,7 +162,7 @@ public class Day25: Day {
             current = actions.2
         }
         
-        let checksum = tape.values.reduce(0, +)
+        let checksum = tape.values.sum()
         return "\(checksum)"
     }
     

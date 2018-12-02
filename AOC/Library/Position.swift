@@ -6,7 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-public enum Heading {
+public enum Heading: CaseIterable {
     case north, south, west, east
     public func turnLeft() -> Heading {
         switch self {
@@ -40,6 +40,15 @@ public enum Heading {
         if times == 3 { return turnLeft() }
         return self
     }
+    
+    public func turn(counterClockwise: Int) -> Heading {
+        var times = counterClockwise % 4
+        while times < 0 { times += 4 }
+        if times == 1 { return turnLeft() }
+        if times == 2 { return turnAround() }
+        if times == 3 { return turnRight() }
+        return self
+    }
 }
 
 public struct Position: Hashable {
@@ -50,11 +59,29 @@ public struct Position: Hashable {
     
     public func move(_ heading: Heading) -> Position {
         switch heading {
-        case .north: return Position(x: x, y: y-1)
-        case .south: return Position(x: x, y: y+1)
-        case .east: return Position(x: x+1, y: y)
-        case .west: return Position(x: x-1, y: y)
+            case .north: return Position(x: x, y: y-1)
+            case .south: return Position(x: x, y: y+1)
+            case .east: return Position(x: x+1, y: y)
+            case .west: return Position(x: x-1, y: y)
         }
+    }
+    
+    public func surroundingPositions(includingDiagonals: Bool = false) -> Array<Position> {
+        var surround = [
+            Position(x: x, y: y-1),
+            Position(x: x, y: y+1),
+            Position(x: x+1, y: y),
+            Position(x: x-1, y: y),
+        ]
+        if includingDiagonals == true {
+            surround.append(contentsOf: [
+                Position(x: x-1, y: y-1),
+                Position(x: x+1, y: y-1),
+                Position(x: x-1, y: y+1),
+                Position(x: x+1, y: y+1),
+            ])
+        }
+        return surround
     }
     
     public func neighbors() -> Array<Position> {

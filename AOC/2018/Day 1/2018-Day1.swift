@@ -13,7 +13,7 @@ extension Year2018 {
         public init() { super.init(inputSource: .file(#file)) }
         
         override public func part1() -> String {
-            let sum = input.trimmed.lines.integers.reduce(0, +)
+            let sum = input.trimmed.lines.integers.sum()
             return "\(sum)"
         }
         

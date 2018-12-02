@@ -34,8 +34,35 @@ public class Day3: Day {
     }
     
     override public func part2() -> String {
-        // TODO: this...
-        return "279138 <-- FAKED"
+        let target = input.integer!
+        
+        var grid = [
+            Position(x: 0, y: 0): 1
+        ]
+        
+        func valuesAround(_ position: Position) -> Array<Int> {
+            let around = position.surroundingPositions(includingDiagonals: true)
+            return around.map { grid[$0] ?? 0 }
+        }
+        
+        var mostRecentSum = 0
+        var current = Position(x: 0, y: 0)
+        var currentHeading = Heading.east
+        
+        
+        while mostRecentSum < target {
+            current = current.move(currentHeading)
+            mostRecentSum = valuesAround(current).sum()
+            grid[current] = mostRecentSum
+            
+            let ccwHeading = currentHeading.turn(counterClockwise: 1)
+            let ccwPosition = current.move(ccwHeading)
+            if grid[ccwPosition] == nil {
+                currentHeading = ccwHeading
+            }
+        }
+        
+        return "\(mostRecentSum)"
     }
     
 }

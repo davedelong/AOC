@@ -65,7 +65,7 @@ public class Day11: Day {
         for d in directions {
             finalDirections[d, default: 0] += 1
             finalDirections = reduce(finalDirections)
-            latestDistance = finalDirections.values.reduce(0, +)
+            latestDistance = finalDirections.values.sum()
             furthestAway = max(furthestAway, latestDistance)
         }
 

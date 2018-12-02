@@ -62,7 +62,7 @@ public final class Word: StringInput {
 
 extension Collection where Element: StringInput {
     public var raw: Array<String> { return map { $0.raw } }
-    public var integers: Array<Int> { return compactMap { $0.integer } }
+    public var integers: Array<Int> { return map { $0.integer! } }
     public var characters: Array<Array<Character>> { return map { $0.characters } }
     
     public var trimmed: Array<Element> { return map { $0.trimmed } }
@@ -76,5 +76,5 @@ extension Collection where Element: Collection, Element.Element: StringInput {
 }
 
 extension Collection where Element == Character {
-    public var integers: Array<Int> { return compactMap { Int("\($0)") } }
+    public var integers: Array<Int> { return map { Int("\($0)")! } }
 }
