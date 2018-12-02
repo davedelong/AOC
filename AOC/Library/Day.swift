@@ -20,21 +20,25 @@ public class Day {
         case file(StaticString)
     }
     
-    public let input: Input
+    private let source: InputSource
     
-    public init(inputSource: InputSource = .none) {
-        switch inputSource {
+    public lazy var input: Input = {
+        switch source {
             case .none:
-                input = Input("")
+                return Input("")
             case .raw(let s):
-                input = Input(s)
+                return Input(s)
             case .file(let f):
                 var components = ("\(f)" as NSString).pathComponents
                 _ = components.removeLast()
                 components.append("input.txt")
                 let path = NSString.path(withComponents: components)
-                input = Input(file: path)
+                return Input(file: path)
         }
+    }()
+    
+    public init(inputSource: InputSource = .none) {
+        self.source = inputSource
     }
     
     public func run() -> (String, String) {
