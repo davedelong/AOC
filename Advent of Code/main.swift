@@ -8,6 +8,7 @@
 
 @_exported import Foundation
 @_exported import GameplayKit
+import AOC
 
 let durationFormatter = NumberFormatter()
 durationFormatter.format = "0.00"
@@ -30,9 +31,9 @@ extension Day {
     }
 }
 
-let focusOnDay: Int? = 1
+let focusOnDay: Int? = nil
 
-let thisYear = Year2018()
+let thisYear = Year2017()
 
 let days = thisYear.days
 
