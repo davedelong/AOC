@@ -56,25 +56,11 @@ extension Year2018 {
             
             let overlaps = counts.values.count(where: { $0 >= 2 })
             
-            
-            var claimID = ""
-            
-            for claim in claims {
-                var isAlone = true
-                for p in claim.rect.positions() {
-                    if counts[p] != 1 {
-                        isAlone = false
-                        break
-                    }
-                }
-                if isAlone == true {
-                    claimID = claim.id
-                    break
-                }
+            let loneClaim = claims.first { claim -> Bool in
+                claim.rect.positions().allSatisfy { counts[$0] == 1 }
             }
             
-            
-            return ("\(overlaps)", claimID)
+            return ("\(overlaps)", loneClaim!.id)
         }
         
     }
