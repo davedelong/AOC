@@ -71,11 +71,20 @@
 		55CB0E8421B35C210070701E /* Test2017.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8321B35C210070701E /* Test2017.swift */; };
 		55CB0E8621B35C2B0070701E /* Test2018.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8521B35C2B0070701E /* Test2018.swift */; };
 		55CB0E8821B371770070701E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8721B371770070701E /* Collection.swift */; };
+		55CB0E9021B3BC490070701E /* CountedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E8F21B3BC490070701E /* CountedSet.swift */; };
+		55CB0E9221B3BE9A0070701E /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0E9121B3BE9A0070701E /* Dictionary.swift */; };
 		55E6837A1FEDA68700A313B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E683791FEDA68700A313B7 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		55CB0E3A21B358E90070701E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55D63B731FD7B2EA009DE915 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55CB0E2F21B358E80070701E;
+			remoteInfo = AOC;
+		};
+		55CB0E8921B39F700070701E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55D63B731FD7B2EA009DE915 /* Project object */;
 			proxyType = 1;
@@ -167,6 +176,9 @@
 		55CB0E8321B35C210070701E /* Test2017.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2017.swift; sourceTree = "<group>"; };
 		55CB0E8521B35C2B0070701E /* Test2018.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2018.swift; sourceTree = "<group>"; };
 		55CB0E8721B371770070701E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		55CB0E8B21B39FAA0070701E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		55CB0E8F21B3BC490070701E /* CountedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountedSet.swift; sourceTree = "<group>"; };
+		55CB0E9121B3BE9A0070701E /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		55D63B7B1FD7B2EB009DE915 /* Advent of Code */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Advent of Code"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D63B7E1FD7B2EB009DE915 /* 2017-Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day7.swift"; sourceTree = "<group>"; };
 		55E6833F1FE4DFB600A313B7 /* 2017-Day16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day16.swift"; sourceTree = "<group>"; };
@@ -554,6 +566,7 @@
 		55CB0E8121B3594F0070701E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55CB0E8B21B39FAA0070701E /* AppKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,6 +628,8 @@
 				55FFBFA91FEDD4AF007C3742 /* Vector.swift */,
 				55EEE2CC1FF0C182006DE909 /* Regex.swift */,
 				55CB0E8721B371770070701E /* Collection.swift */,
+				55CB0E9121B3BE9A0070701E /* Dictionary.swift */,
+				55CB0E8F21B3BC490070701E /* CountedSet.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -881,6 +896,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55CB0E8A21B39F700070701E /* PBXTargetDependency */,
 			);
 			name = "Advent of Code";
 			productName = test;
@@ -966,6 +982,7 @@
 				55CB0E5521B359370070701E /* 2018-Day8.swift in Sources */,
 				55CB0E5821B359370070701E /* 2018-Day11.swift in Sources */,
 				55CB0E7221B359370070701E /* 2017-Day11.swift in Sources */,
+				55CB0E9021B3BC490070701E /* CountedSet.swift in Sources */,
 				55CB0E7E21B359370070701E /* 2017-Day23.swift in Sources */,
 				55CB0E6621B359370070701E /* 2018-Day25.swift in Sources */,
 				55CB0E6021B359370070701E /* 2018-Day19.swift in Sources */,
@@ -1007,6 +1024,7 @@
 				55CB0E6A21B359370070701E /* 2017-Day3.swift in Sources */,
 				55CB0E7F21B359370070701E /* 2017-Day24.swift in Sources */,
 				55CB0E7021B359370070701E /* 2017-Day9.swift in Sources */,
+				55CB0E9221B3BE9A0070701E /* Dictionary.swift in Sources */,
 				55CB0E7421B359370070701E /* 2017-Day13.swift in Sources */,
 				55CB0E7C21B359370070701E /* 2017-Day21.swift in Sources */,
 				55CB0E7921B359370070701E /* 2017-Day18.swift in Sources */,
@@ -1039,6 +1057,11 @@
 			isa = PBXTargetDependency;
 			target = 55CB0E2F21B358E80070701E /* AOC */;
 			targetProxy = 55CB0E3A21B358E90070701E /* PBXContainerItemProxy */;
+		};
+		55CB0E8A21B39F700070701E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55CB0E2F21B358E80070701E /* AOC */;
+			targetProxy = 55CB0E8921B39F700070701E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1246,6 +1269,7 @@
 		55D63B831FD7B2EB009DE915 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 654LUM7646;
@@ -1259,6 +1283,7 @@
 		55D63B841FD7B2EB009DE915 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 654LUM7646;

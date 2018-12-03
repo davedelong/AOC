@@ -6,7 +6,7 @@
 //  Copyright © 2018 Dave DeLong. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for AOC.
 FOUNDATION_EXPORT double AOCVersionNumber;

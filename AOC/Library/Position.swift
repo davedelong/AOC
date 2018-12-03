@@ -32,18 +32,16 @@ public enum Heading: CaseIterable {
         case .west: return .east
         }
     }
-    public func turn(clockwise: Int) -> Heading {
-        var times = clockwise % 4
-        while times < 0 { times += 4 }
+    public func turn(clockwise: UInt) -> Heading {
+        let times = clockwise % 4
         if times == 1 { return turnRight() }
         if times == 2 { return turnAround() }
         if times == 3 { return turnLeft() }
         return self
     }
     
-    public func turn(counterClockwise: Int) -> Heading {
-        var times = counterClockwise % 4
-        while times < 0 { times += 4 }
+    public func turn(counterClockwise: UInt) -> Heading {
+        let times = counterClockwise % 4
         if times == 1 { return turnLeft() }
         if times == 2 { return turnAround() }
         if times == 3 { return turnRight() }
