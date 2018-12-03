@@ -45,14 +45,8 @@ extension Year2018 {
         public init() { super.init(inputSource: .file(#file)) }
         
         public override func run() -> (String, String) {
-            
-            var counts = Dictionary<Position, Int>()
-            for claim in claims {
-                let positions = claim.rect.positions()
-                for p in positions {
-                    counts[p] = counts[p, default: 0] + 1
-                }
-            }
+            let usedPositions = claims.flatMap { $0.rect.positions() }
+            let counts = CountedSet(counting: usedPositions)
             
             let overlaps = counts.values.count(where: { $0 >= 2 })
             
