@@ -23,6 +23,16 @@ public extension Collection {
         return (first, second)
     }
     
+    public func count(where predicate: (Element) -> Bool) -> Int {
+        var c = 0
+        for item in self {
+            if predicate(item) {
+                c += 1
+            }
+        }
+        return c
+    }
+    
 }
 
 public extension Collection where Element: Numeric {

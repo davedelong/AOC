@@ -31,8 +31,8 @@ class Test2018: XCTestCase {
         let d = Year2018.Day3()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "107663")
+        XCTAssertEqual(p2, "1166")
     }
     
     func testDay4() {
