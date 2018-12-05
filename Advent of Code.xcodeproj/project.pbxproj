@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55B4C32821B7939F00F5902F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B4C32721B7939F00F5902F /* Character.swift */; };
 		55CB0E3921B358E90070701E /* AOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB0E3021B358E80070701E /* AOC.framework */; };
 		55CB0E4021B358E90070701E /* AOC.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0E3221B358E80070701E /* AOC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CB0E4721B359370070701E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E683761FEDA62100A313B7 /* Day.swift */; };
@@ -111,6 +112,7 @@
 		5560671D1FDBA4EF0063F207 /* 2017-Day9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day9.swift"; sourceTree = "<group>"; };
 		556067401FDCF5260063F207 /* 2017-Day10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day10.swift"; sourceTree = "<group>"; };
 		556067541FDE456E0063F207 /* 2017-Day11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day11.swift"; sourceTree = "<group>"; };
+		55B4C32721B7939F00F5902F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		55BC91B21FDF967B008816C2 /* 2017-Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day12.swift"; sourceTree = "<group>"; };
 		55BC91B41FE178EA008816C2 /* 2017-Day13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day13.swift"; sourceTree = "<group>"; };
 		55BC91B61FE23AD1008816C2 /* 2017-Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day14.swift"; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				55CB0E8721B371770070701E /* Collection.swift */,
 				55CB0E9121B3BE9A0070701E /* Dictionary.swift */,
 				55CB0E8F21B3BC490070701E /* CountedSet.swift */,
+				55B4C32721B7939F00F5902F /* Character.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB0E4821B359370070701E /* Input.swift in Sources */,
+				55B4C32821B7939F00F5902F /* Character.swift in Sources */,
 				55CB0E6B21B359370070701E /* 2017-Day4.swift in Sources */,
 				55CB0E5921B359370070701E /* 2018-Day12.swift in Sources */,
 				55CB0E7521B359370070701E /* 2017-Day14.swift in Sources */,

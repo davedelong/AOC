@@ -12,12 +12,34 @@ extension Year2018 {
         
         public init() { super.init(inputSource: .file(#file)) }
         
+        private func reduce(_ chars: Array<Character>, skipping: Set<Character> = []) -> Array<Character> {
+            let uppers = Array(String(chars).uppercased())
+            
+            var final = Array<Character>()
+            var upperFinal = Array<Character>()
+            for i in 0 ..< chars.count {
+                if skipping.contains(chars[i]) { continue }
+                if upperFinal.last == uppers[i], final.last != chars[i] {
+                    final.removeLast()
+                    upperFinal.removeLast()
+                } else {
+                    final.append(chars[i])
+                    upperFinal.append(uppers[i])
+                }
+            }
+            return final
+        }
+        
         override public func part1() -> String {
-            return #function
+            let characters = reduce(input.trimmed.characters)
+            return "\(characters.count)"
         }
         
         override public func part2() -> String {
-            return #function
+            let source = input.trimmed.characters
+            let lengths = Character.alphabet.map { reduce(source, skipping: [$0, $0.uppercased]).count }
+            let shortest = lengths.min()!
+            return "\(shortest)"
         }
         
     }
