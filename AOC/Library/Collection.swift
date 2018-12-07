@@ -33,6 +33,35 @@ public extension Collection {
         return c
     }
     
+    public func groupedBy<T: Hashable>(_ keyer: (Element) -> T?) -> Dictionary<T, Array<Element>> {
+        var d = Dictionary<T, Array<Element>>()
+        for item in self {
+            if let key = keyer(item) {
+                var items = d.removeValue(forKey: key) ?? []
+                items.append(item)
+                d[key] = items
+            }
+        }
+        return d
+    }
+    
+    public func keyedBy<T: Hashable>(_ keyer: (Element) -> T?) -> Dictionary<T, Element> {
+        var d = Dictionary<T, Element>()
+        for item in self {
+            if let key = keyer(item) {
+                d[key] = item
+            }
+        }
+        return d
+    }
+    
+    public func any(satisfy: (Element) -> Bool) -> Bool {
+        for item in self {
+            if satisfy(item) == true { return true }
+        }
+        return false
+    }
+    
 }
 
 public extension Collection where Element: Numeric {
@@ -51,6 +80,14 @@ public extension Collection where Element: Hashable {
     
     public func countElements() -> CountedSet<Element> {
         return CountedSet(counting: self)
+    }
+    
+    public func mappingTo<T>(_ value: (Element) -> T) -> Dictionary<Element, T> {
+        var final = Dictionary<Element, T>()
+        for item in self {
+            final[item] = value(item)
+        }
+        return final
     }
     
 }

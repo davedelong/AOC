@@ -55,16 +55,16 @@ class Test2018: XCTestCase {
         let d = Year2018.Day6()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "3660")
+        XCTAssertEqual(p2, "35928")
     }
     
     func testDay7() {
         let d = Year2018.Day7()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "ADEFKLBVJQWUXCNGORTMYSIHPZ")
+        XCTAssertEqual(p2, "1120")
     }
     
     func testDay8() {

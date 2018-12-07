@@ -55,6 +55,38 @@ public struct Position: Hashable {
     public let x: Int
     public let y: Int
     
+    public static func all(in xRange: ClosedRange<Int>, _ yRange: ClosedRange<Int>) -> Array<Position> {
+        return xRange.flatMap { x -> Array<Position> in
+            return yRange.map { Position(x: x, y: $0) }
+        }
+    }
+    
+    public static func extremes<C: Collection>(of positions: C) -> (Position, Position) where C.Element == Position {
+        var minX = Int.max
+        var maxX = Int.min
+        
+        var minY = Int.max
+        var maxY = Int.min
+        
+        for p in positions {
+            minX = min(minX, p.x)
+            minY = min(minY, p.y)
+            maxX = max(maxX, p.x)
+            maxY = max(maxY, p.y)
+        }
+        
+        return (Position(x: minX, y: minY), Position(x: maxX, y: maxY))
+    }
+    
+    public static func edges(of xRange: ClosedRange<Int>, _ yRange: ClosedRange<Int>) -> Set<Position> {
+        return Set(
+                xRange.map { Position(x: $0, y: yRange.lowerBound) } +
+                xRange.map { Position(x: $0, y: yRange.upperBound) } +
+                yRange.map { Position(x: xRange.lowerBound, y: $0) } +
+                yRange.map { Position(x: xRange.upperBound, y: $0) }
+        )
+    }
+    
     public func move(_ heading: Heading) -> Position {
         switch heading {
             case .north: return Position(x: x, y: y-1)
@@ -89,6 +121,18 @@ public struct Position: Hashable {
             move(.south),
             move(.west)
         ]
+    }
+    
+    public func hamiltonianDistance(to other: Position) -> Int {
+        return abs(x - other.x) + abs(y - other.y)
+    }
+    
+    public func closestPosition<C: Collection>(in points: C) -> Position? where C.Element == Position {
+        let pointsGroupedByDistance = points.groupedBy { $0.hamiltonianDistance(to: self) }
+        guard let shortestDistance = pointsGroupedByDistance.keys.min() else { return nil }
+        guard let closestPoints = pointsGroupedByDistance[shortestDistance] else { return nil }
+        guard closestPoints.count == 1 else { return nil }
+        return closestPoints[0]
     }
 }
 

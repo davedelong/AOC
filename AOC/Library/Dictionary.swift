@@ -27,3 +27,26 @@ public func Bucketize<C1: Collection, C2: Collection>(_ elements: C1, in keys: (
     
     return b
 }
+
+public extension Dictionary {
+    
+    @discardableResult
+    public mutating func removeValues<C: Collection>(forKeys keysToRemove: C) -> Dictionary<Key, Value> where C.Element == Key {
+        var final = Dictionary<Key, Value>()
+        for key in keysToRemove {
+            if let value = removeValue(forKey: key) {
+                final[key] = value
+            }
+        }
+        return final
+    }
+    
+    public mutating func removeKeys(where predicate: (Key) -> Bool) {
+        for key in keys {
+            if predicate(key) == true {
+                removeValue(forKey: key)
+            }
+        }
+    }
+    
+}
