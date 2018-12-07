@@ -64,11 +64,10 @@ extension Year2018 {
             var remaining = operations()
             var final = ""
             while remaining.isEmpty == false {
-                let next = remaining.filter { $0.deps.isEmpty }
-                let first = next.sorted { $0.name < $1.name }.first!
-                final += first.name
-                for op in remaining { op.deps.remove(first.name) }
-                remaining.removeAll { $0 === first }
+                let next = remaining.filter { $0.deps.isEmpty }.first!
+                final += next.name
+                for op in remaining { op.deps.remove(next.name) }
+                remaining.removeAll { $0 === next }
             }
             
             return final
