@@ -85,6 +85,34 @@ public extension Collection where Element: Numeric {
     
 }
 
+public extension Collection where Element: Equatable {
+    
+    public func consecutivelyEqualSubsequences() -> Array<SubSequence> {
+        guard isEmpty == false else { return [] }
+        
+        var rangeStart = startIndex
+        var rangeItem = self[startIndex]
+        var index = self.index(after: startIndex)
+        
+        var subSequences = Array<SubSequence>()
+        while index < endIndex {
+            let item = self[index]
+            
+            if item != rangeItem {
+                subSequences.append(self[rangeStart..<index])
+                rangeStart = index
+                rangeItem = item
+            }
+            
+            index = self.index(after: index)
+        }
+        subSequences.append(self[rangeStart..<endIndex])
+        
+        return subSequences
+    }
+    
+}
+
 public extension Collection where Element: Hashable {
     
     public func countElements() -> CountedSet<Element> {

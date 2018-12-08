@@ -204,7 +204,6 @@
 		553C80B521BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		553C80B621BC2DFA0052735B /* 2015-Day19.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day19.swift"; sourceTree = "<group>"; };
 		553C80B821BC2DFA0052735B /* 2015-Day10.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day10.swift"; sourceTree = "<group>"; };
-		553C80B921BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		553C80BB21BC2DFA0052735B /* 2015-Day17.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day17.swift"; sourceTree = "<group>"; };
 		553C80BC21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		553C80BE21BC2DFA0052735B /* 2015-Day16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day16.swift"; sourceTree = "<group>"; };
@@ -620,7 +619,6 @@
 			isa = PBXGroup;
 			children = (
 				553C80B821BC2DFA0052735B /* 2015-Day10.swift */,
-				553C80B921BC2DFA0052735B /* input.txt */,
 			);
 			path = "Day 10";
 			sourceTree = "<group>";
