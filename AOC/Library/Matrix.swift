@@ -46,6 +46,13 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         hashValue = Matrix.hash(data)
     }
     
+    public init(rows: Int, columns: Int, value: T) {
+        data = (0..<rows).map { r -> Array<T> in
+            return Array(repeating: value, count: columns)
+        }
+        hashValue = Matrix.hash(data)
+    }
+    
     public init(recombining: Matrix<Matrix<T>>) {
         data = []
         for r in 0 ..< recombining.rowCount {

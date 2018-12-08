@@ -10,11 +10,6 @@ extension Year2017 {
 
 public class Day21: Day {
 
-    enum Bit {
-        case on
-        case off
-    }
-
     typealias RuleSet = Dictionary<Matrix<Bit>, Matrix<Bit>>
     var rules = RuleSet()
     

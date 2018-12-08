@@ -6,6 +6,16 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
+public enum Bit {
+    case on
+    case off
+    
+    public func toggle() -> Bit {
+        if self == .on { return .off }
+        return .on
+    }
+}
+
 public struct Vector: Equatable {
     
     public static func +(lhs: Vector, rhs: Vector) -> Vector {
