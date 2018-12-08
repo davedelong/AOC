@@ -91,3 +91,24 @@ public extension Collection where Element: Hashable {
     }
     
 }
+
+public extension RandomAccessCollection {
+    
+    public func at(_ index: Index) -> Element? {
+        if index < startIndex || index >= endIndex { return nil }
+        return self[index]
+    }
+    
+}
+
+public extension Array {
+    
+    public init(count: Int, elementProducer: () -> Element) {
+        self.init()
+        self.reserveCapacity(count)
+        for _ in 0 ..< count {
+            self.append(elementProducer())
+        }
+    }
+    
+}
