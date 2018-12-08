@@ -7,6 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		553C807921BC2D960052735B /* Test2015.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C807821BC2D960052735B /* Test2015.swift */; };
+		553C807B21BC2DA10052735B /* Test2016.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C807A21BC2DA10052735B /* Test2016.swift */; };
+		553C811621BC2DFB0052735B /* 2015.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C807D21BC2DFA0052735B /* 2015.swift */; };
+		553C811821BC2DFB0052735B /* 2015-Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808021BC2DFA0052735B /* 2015-Day2.swift */; };
+		553C811A21BC2DFB0052735B /* 2015-Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808321BC2DFA0052735B /* 2015-Day5.swift */; };
+		553C811C21BC2DFB0052735B /* 2015-Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808621BC2DFA0052735B /* 2015-Day4.swift */; };
+		553C811E21BC2DFB0052735B /* 2015-Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808921BC2DFA0052735B /* 2015-Day3.swift */; };
+		553C812021BC2DFB0052735B /* 2015-Day25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808C21BC2DFA0052735B /* 2015-Day25.swift */; };
+		553C812221BC2DFB0052735B /* 2015-Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C808F21BC2DFA0052735B /* 2015-Day22.swift */; };
+		553C812321BC2DFB0052735B /* 2015-Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C809121BC2DFA0052735B /* 2015-Day14.swift */; };
+		553C812521BC2DFB0052735B /* 2015-Day13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C809421BC2DFA0052735B /* 2015-Day13.swift */; };
+		553C812721BC2DFB0052735B /* 2015-Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C809721BC2DFA0052735B /* 2015-Day12.swift */; };
+		553C812921BC2DFB0052735B /* 2015-Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C809A21BC2DFA0052735B /* 2015-Day15.swift */; };
+		553C812B21BC2DFB0052735B /* 2015-Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C809D21BC2DFA0052735B /* 2015-Day23.swift */; };
+		553C812E21BC2DFB0052735B /* 2015-Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80A121BC2DFA0052735B /* 2015-Day24.swift */; };
+		553C812F21BC2DFB0052735B /* 2015-Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80A321BC2DFA0052735B /* 2015-Day8.swift */; };
+		553C813221BC2DFB0052735B /* 2015-Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80A721BC2DFA0052735B /* 2015-Day6.swift */; };
+		553C813421BC2DFB0052735B /* 2015-Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80AA21BC2DFA0052735B /* 2015-Day1.swift */; };
+		553C813621BC2DFB0052735B /* 2015-Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80AD21BC2DFA0052735B /* 2015-Day7.swift */; };
+		553C813721BC2DFB0052735B /* 2015-Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80AF21BC2DFA0052735B /* 2015-Day9.swift */; };
+		553C813A21BC2DFB0052735B /* 2015-Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80B321BC2DFA0052735B /* 2015-Day21.swift */; };
+		553C813C21BC2DFB0052735B /* 2015-Day19.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80B621BC2DFA0052735B /* 2015-Day19.swift */; };
+		553C813D21BC2DFB0052735B /* 2015-Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80B821BC2DFA0052735B /* 2015-Day10.swift */; };
+		553C813F21BC2DFB0052735B /* 2015-Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80BB21BC2DFA0052735B /* 2015-Day17.swift */; };
+		553C814121BC2DFB0052735B /* 2015-Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80BE21BC2DFA0052735B /* 2015-Day16.swift */; };
+		553C814321BC2DFB0052735B /* 2015-Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80C121BC2DFA0052735B /* 2015-Day11.swift */; };
+		553C814621BC2DFB0052735B /* 2015-Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80C521BC2DFA0052735B /* 2015-Day18.swift */; };
+		553C814821BC2DFB0052735B /* 2015-Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80C821BC2DFA0052735B /* 2015-Day20.swift */; };
+		553C814921BC2DFB0052735B /* 2016.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80CA21BC2DFB0052735B /* 2016.swift */; };
+		553C814B21BC2DFB0052735B /* 2016-Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80CD21BC2DFB0052735B /* 2016-Day2.swift */; };
+		553C814D21BC2DFB0052735B /* 2016-Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80D021BC2DFB0052735B /* 2016-Day5.swift */; };
+		553C814F21BC2DFB0052735B /* 2016-Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80D321BC2DFB0052735B /* 2016-Day4.swift */; };
+		553C815121BC2DFB0052735B /* 2016-Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80D621BC2DFB0052735B /* 2016-Day3.swift */; };
+		553C815321BC2DFB0052735B /* 2016-Day25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80D921BC2DFB0052735B /* 2016-Day25.swift */; };
+		553C815521BC2DFB0052735B /* 2016-Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80DC21BC2DFB0052735B /* 2016-Day22.swift */; };
+		553C815621BC2DFB0052735B /* 2016-Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80DE21BC2DFB0052735B /* 2016-Day14.swift */; };
+		553C815821BC2DFB0052735B /* 2016-Day13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80E121BC2DFB0052735B /* 2016-Day13.swift */; };
+		553C815A21BC2DFB0052735B /* 2016-Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80E421BC2DFB0052735B /* 2016-Day12.swift */; };
+		553C815C21BC2DFB0052735B /* 2016-Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80E721BC2DFB0052735B /* 2016-Day15.swift */; };
+		553C815E21BC2DFB0052735B /* 2016-Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80EA21BC2DFB0052735B /* 2016-Day23.swift */; };
+		553C816121BC2DFB0052735B /* 2016-Day24.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80EE21BC2DFB0052735B /* 2016-Day24.swift */; };
+		553C816221BC2DFB0052735B /* 2016-Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80F021BC2DFB0052735B /* 2016-Day8.swift */; };
+		553C816521BC2DFB0052735B /* 2016-Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80F421BC2DFB0052735B /* 2016-Day6.swift */; };
+		553C816721BC2DFB0052735B /* 2016-Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80F721BC2DFB0052735B /* 2016-Day1.swift */; };
+		553C816921BC2DFB0052735B /* 2016-Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80FA21BC2DFB0052735B /* 2016-Day7.swift */; };
+		553C816A21BC2DFB0052735B /* 2016-Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C80FC21BC2DFB0052735B /* 2016-Day9.swift */; };
+		553C816D21BC2DFB0052735B /* 2016-Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810021BC2DFB0052735B /* 2016-Day21.swift */; };
+		553C816F21BC2DFB0052735B /* 2016-Day19.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810321BC2DFB0052735B /* 2016-Day19.swift */; };
+		553C817021BC2DFB0052735B /* 2016-Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810521BC2DFB0052735B /* 2016-Day10.swift */; };
+		553C817221BC2DFB0052735B /* 2016-Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810821BC2DFB0052735B /* 2016-Day17.swift */; };
+		553C817421BC2DFB0052735B /* 2016-Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810B21BC2DFB0052735B /* 2016-Day16.swift */; };
+		553C817621BC2DFB0052735B /* 2016-Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C810E21BC2DFB0052735B /* 2016-Day11.swift */; };
+		553C817921BC2DFB0052735B /* 2016-Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C811221BC2DFB0052735B /* 2016-Day18.swift */; };
+		553C817B21BC2DFB0052735B /* 2016-Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C811521BC2DFB0052735B /* 2016-Day20.swift */; };
 		55B4C32821B7939F00F5902F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B4C32721B7939F00F5902F /* Character.swift */; };
 		55CB0E3921B358E90070701E /* AOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB0E3021B358E80070701E /* AOC.framework */; };
 		55CB0E4021B358E90070701E /* AOC.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0E3221B358E80070701E /* AOC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,6 +161,110 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		553C807821BC2D960052735B /* Test2015.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2015.swift; sourceTree = "<group>"; };
+		553C807A21BC2DA10052735B /* Test2016.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2016.swift; sourceTree = "<group>"; };
+		553C807D21BC2DFA0052735B /* 2015.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2015.swift; sourceTree = "<group>"; };
+		553C807F21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808021BC2DFA0052735B /* 2015-Day2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day2.swift"; sourceTree = "<group>"; };
+		553C808221BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808321BC2DFA0052735B /* 2015-Day5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day5.swift"; sourceTree = "<group>"; };
+		553C808521BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808621BC2DFA0052735B /* 2015-Day4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day4.swift"; sourceTree = "<group>"; };
+		553C808821BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808921BC2DFA0052735B /* 2015-Day3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day3.swift"; sourceTree = "<group>"; };
+		553C808B21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808C21BC2DFA0052735B /* 2015-Day25.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day25.swift"; sourceTree = "<group>"; };
+		553C808E21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C808F21BC2DFA0052735B /* 2015-Day22.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day22.swift"; sourceTree = "<group>"; };
+		553C809121BC2DFA0052735B /* 2015-Day14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day14.swift"; sourceTree = "<group>"; };
+		553C809221BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C809421BC2DFA0052735B /* 2015-Day13.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day13.swift"; sourceTree = "<group>"; };
+		553C809521BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C809721BC2DFA0052735B /* 2015-Day12.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day12.swift"; sourceTree = "<group>"; };
+		553C809821BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C809A21BC2DFA0052735B /* 2015-Day15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day15.swift"; sourceTree = "<group>"; };
+		553C809B21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C809D21BC2DFA0052735B /* 2015-Day23.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day23.swift"; sourceTree = "<group>"; };
+		553C809E21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80A021BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80A121BC2DFA0052735B /* 2015-Day24.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day24.swift"; sourceTree = "<group>"; };
+		553C80A321BC2DFA0052735B /* 2015-Day8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day8.swift"; sourceTree = "<group>"; };
+		553C80A421BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80A621BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80A721BC2DFA0052735B /* 2015-Day6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day6.swift"; sourceTree = "<group>"; };
+		553C80A921BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80AA21BC2DFA0052735B /* 2015-Day1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day1.swift"; sourceTree = "<group>"; };
+		553C80AC21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80AD21BC2DFA0052735B /* 2015-Day7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day7.swift"; sourceTree = "<group>"; };
+		553C80AF21BC2DFA0052735B /* 2015-Day9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day9.swift"; sourceTree = "<group>"; };
+		553C80B021BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80B221BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80B321BC2DFA0052735B /* 2015-Day21.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day21.swift"; sourceTree = "<group>"; };
+		553C80B521BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80B621BC2DFA0052735B /* 2015-Day19.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day19.swift"; sourceTree = "<group>"; };
+		553C80B821BC2DFA0052735B /* 2015-Day10.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day10.swift"; sourceTree = "<group>"; };
+		553C80B921BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80BB21BC2DFA0052735B /* 2015-Day17.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day17.swift"; sourceTree = "<group>"; };
+		553C80BC21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80BE21BC2DFA0052735B /* 2015-Day16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day16.swift"; sourceTree = "<group>"; };
+		553C80BF21BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80C121BC2DFA0052735B /* 2015-Day11.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day11.swift"; sourceTree = "<group>"; };
+		553C80C221BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80C421BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80C521BC2DFA0052735B /* 2015-Day18.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day18.swift"; sourceTree = "<group>"; };
+		553C80C721BC2DFA0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80C821BC2DFA0052735B /* 2015-Day20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2015-Day20.swift"; sourceTree = "<group>"; };
+		553C80CA21BC2DFB0052735B /* 2016.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2016.swift; sourceTree = "<group>"; };
+		553C80CC21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80CD21BC2DFB0052735B /* 2016-Day2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day2.swift"; sourceTree = "<group>"; };
+		553C80CF21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80D021BC2DFB0052735B /* 2016-Day5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day5.swift"; sourceTree = "<group>"; };
+		553C80D221BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80D321BC2DFB0052735B /* 2016-Day4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day4.swift"; sourceTree = "<group>"; };
+		553C80D521BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80D621BC2DFB0052735B /* 2016-Day3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day3.swift"; sourceTree = "<group>"; };
+		553C80D821BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80D921BC2DFB0052735B /* 2016-Day25.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day25.swift"; sourceTree = "<group>"; };
+		553C80DB21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80DC21BC2DFB0052735B /* 2016-Day22.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day22.swift"; sourceTree = "<group>"; };
+		553C80DE21BC2DFB0052735B /* 2016-Day14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day14.swift"; sourceTree = "<group>"; };
+		553C80DF21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80E121BC2DFB0052735B /* 2016-Day13.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day13.swift"; sourceTree = "<group>"; };
+		553C80E221BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80E421BC2DFB0052735B /* 2016-Day12.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day12.swift"; sourceTree = "<group>"; };
+		553C80E521BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80E721BC2DFB0052735B /* 2016-Day15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day15.swift"; sourceTree = "<group>"; };
+		553C80E821BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80EA21BC2DFB0052735B /* 2016-Day23.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day23.swift"; sourceTree = "<group>"; };
+		553C80EB21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80ED21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80EE21BC2DFB0052735B /* 2016-Day24.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day24.swift"; sourceTree = "<group>"; };
+		553C80F021BC2DFB0052735B /* 2016-Day8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day8.swift"; sourceTree = "<group>"; };
+		553C80F121BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80F321BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80F421BC2DFB0052735B /* 2016-Day6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day6.swift"; sourceTree = "<group>"; };
+		553C80F621BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80F721BC2DFB0052735B /* 2016-Day1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day1.swift"; sourceTree = "<group>"; };
+		553C80F921BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80FA21BC2DFB0052735B /* 2016-Day7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day7.swift"; sourceTree = "<group>"; };
+		553C80FC21BC2DFB0052735B /* 2016-Day9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day9.swift"; sourceTree = "<group>"; };
+		553C80FD21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C80FF21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C810021BC2DFB0052735B /* 2016-Day21.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day21.swift"; sourceTree = "<group>"; };
+		553C810221BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C810321BC2DFB0052735B /* 2016-Day19.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day19.swift"; sourceTree = "<group>"; };
+		553C810521BC2DFB0052735B /* 2016-Day10.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day10.swift"; sourceTree = "<group>"; };
+		553C810621BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C810821BC2DFB0052735B /* 2016-Day17.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day17.swift"; sourceTree = "<group>"; };
+		553C810921BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C810B21BC2DFB0052735B /* 2016-Day16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day16.swift"; sourceTree = "<group>"; };
+		553C810C21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C810E21BC2DFB0052735B /* 2016-Day11.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day11.swift"; sourceTree = "<group>"; };
+		553C810F21BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C811121BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C811221BC2DFB0052735B /* 2016-Day18.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day18.swift"; sourceTree = "<group>"; };
+		553C811421BC2DFB0052735B /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		553C811521BC2DFB0052735B /* 2016-Day20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "2016-Day20.swift"; sourceTree = "<group>"; };
 		556067071FDA541E0063F207 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		556067091FDA543A0063F207 /* 2017-Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day8.swift"; sourceTree = "<group>"; };
 		5560671D1FDBA4EF0063F207 /* 2017-Day9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2017-Day9.swift"; sourceTree = "<group>"; };
@@ -252,6 +410,522 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		553C807C21BC2DFA0052735B /* 2015 */ = {
+			isa = PBXGroup;
+			children = (
+				553C807D21BC2DFA0052735B /* 2015.swift */,
+				553C80A821BC2DFA0052735B /* Day 1 */,
+				553C807E21BC2DFA0052735B /* Day 2 */,
+				553C808721BC2DFA0052735B /* Day 3 */,
+				553C808421BC2DFA0052735B /* Day 4 */,
+				553C808121BC2DFA0052735B /* Day 5 */,
+				553C80A521BC2DFA0052735B /* Day 6 */,
+				553C80AB21BC2DFA0052735B /* Day 7 */,
+				553C80A221BC2DFA0052735B /* Day 8 */,
+				553C80AE21BC2DFA0052735B /* Day 9 */,
+				553C80B721BC2DFA0052735B /* Day 10 */,
+				553C80C021BC2DFA0052735B /* Day 11 */,
+				553C809621BC2DFA0052735B /* Day 12 */,
+				553C809321BC2DFA0052735B /* Day 13 */,
+				553C809021BC2DFA0052735B /* Day 14 */,
+				553C809921BC2DFA0052735B /* Day 15 */,
+				553C80BD21BC2DFA0052735B /* Day 16 */,
+				553C80BA21BC2DFA0052735B /* Day 17 */,
+				553C80C321BC2DFA0052735B /* Day 18 */,
+				553C80B421BC2DFA0052735B /* Day 19 */,
+				553C80C621BC2DFA0052735B /* Day 20 */,
+				553C80B121BC2DFA0052735B /* Day 21 */,
+				553C808D21BC2DFA0052735B /* Day 22 */,
+				553C809C21BC2DFA0052735B /* Day 23 */,
+				553C809F21BC2DFA0052735B /* Day 24 */,
+				553C808A21BC2DFA0052735B /* Day 25 */,
+			);
+			path = 2015;
+			sourceTree = "<group>";
+		};
+		553C807E21BC2DFA0052735B /* Day 2 */ = {
+			isa = PBXGroup;
+			children = (
+				553C807F21BC2DFA0052735B /* input.txt */,
+				553C808021BC2DFA0052735B /* 2015-Day2.swift */,
+			);
+			path = "Day 2";
+			sourceTree = "<group>";
+		};
+		553C808121BC2DFA0052735B /* Day 5 */ = {
+			isa = PBXGroup;
+			children = (
+				553C808221BC2DFA0052735B /* input.txt */,
+				553C808321BC2DFA0052735B /* 2015-Day5.swift */,
+			);
+			path = "Day 5";
+			sourceTree = "<group>";
+		};
+		553C808421BC2DFA0052735B /* Day 4 */ = {
+			isa = PBXGroup;
+			children = (
+				553C808521BC2DFA0052735B /* input.txt */,
+				553C808621BC2DFA0052735B /* 2015-Day4.swift */,
+			);
+			path = "Day 4";
+			sourceTree = "<group>";
+		};
+		553C808721BC2DFA0052735B /* Day 3 */ = {
+			isa = PBXGroup;
+			children = (
+				553C808821BC2DFA0052735B /* input.txt */,
+				553C808921BC2DFA0052735B /* 2015-Day3.swift */,
+			);
+			path = "Day 3";
+			sourceTree = "<group>";
+		};
+		553C808A21BC2DFA0052735B /* Day 25 */ = {
+			isa = PBXGroup;
+			children = (
+				553C808B21BC2DFA0052735B /* input.txt */,
+				553C808C21BC2DFA0052735B /* 2015-Day25.swift */,
+			);
+			path = "Day 25";
+			sourceTree = "<group>";
+		};
+		553C808D21BC2DFA0052735B /* Day 22 */ = {
+			isa = PBXGroup;
+			children = (
+				553C808E21BC2DFA0052735B /* input.txt */,
+				553C808F21BC2DFA0052735B /* 2015-Day22.swift */,
+			);
+			path = "Day 22";
+			sourceTree = "<group>";
+		};
+		553C809021BC2DFA0052735B /* Day 14 */ = {
+			isa = PBXGroup;
+			children = (
+				553C809121BC2DFA0052735B /* 2015-Day14.swift */,
+				553C809221BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 14";
+			sourceTree = "<group>";
+		};
+		553C809321BC2DFA0052735B /* Day 13 */ = {
+			isa = PBXGroup;
+			children = (
+				553C809421BC2DFA0052735B /* 2015-Day13.swift */,
+				553C809521BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 13";
+			sourceTree = "<group>";
+		};
+		553C809621BC2DFA0052735B /* Day 12 */ = {
+			isa = PBXGroup;
+			children = (
+				553C809721BC2DFA0052735B /* 2015-Day12.swift */,
+				553C809821BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 12";
+			sourceTree = "<group>";
+		};
+		553C809921BC2DFA0052735B /* Day 15 */ = {
+			isa = PBXGroup;
+			children = (
+				553C809A21BC2DFA0052735B /* 2015-Day15.swift */,
+				553C809B21BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 15";
+			sourceTree = "<group>";
+		};
+		553C809C21BC2DFA0052735B /* Day 23 */ = {
+			isa = PBXGroup;
+			children = (
+				553C809D21BC2DFA0052735B /* 2015-Day23.swift */,
+				553C809E21BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 23";
+			sourceTree = "<group>";
+		};
+		553C809F21BC2DFA0052735B /* Day 24 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80A021BC2DFA0052735B /* input.txt */,
+				553C80A121BC2DFA0052735B /* 2015-Day24.swift */,
+			);
+			path = "Day 24";
+			sourceTree = "<group>";
+		};
+		553C80A221BC2DFA0052735B /* Day 8 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80A321BC2DFA0052735B /* 2015-Day8.swift */,
+				553C80A421BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 8";
+			sourceTree = "<group>";
+		};
+		553C80A521BC2DFA0052735B /* Day 6 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80A621BC2DFA0052735B /* input.txt */,
+				553C80A721BC2DFA0052735B /* 2015-Day6.swift */,
+			);
+			path = "Day 6";
+			sourceTree = "<group>";
+		};
+		553C80A821BC2DFA0052735B /* Day 1 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80A921BC2DFA0052735B /* input.txt */,
+				553C80AA21BC2DFA0052735B /* 2015-Day1.swift */,
+			);
+			path = "Day 1";
+			sourceTree = "<group>";
+		};
+		553C80AB21BC2DFA0052735B /* Day 7 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80AC21BC2DFA0052735B /* input.txt */,
+				553C80AD21BC2DFA0052735B /* 2015-Day7.swift */,
+			);
+			path = "Day 7";
+			sourceTree = "<group>";
+		};
+		553C80AE21BC2DFA0052735B /* Day 9 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80AF21BC2DFA0052735B /* 2015-Day9.swift */,
+				553C80B021BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 9";
+			sourceTree = "<group>";
+		};
+		553C80B121BC2DFA0052735B /* Day 21 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80B221BC2DFA0052735B /* input.txt */,
+				553C80B321BC2DFA0052735B /* 2015-Day21.swift */,
+			);
+			path = "Day 21";
+			sourceTree = "<group>";
+		};
+		553C80B421BC2DFA0052735B /* Day 19 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80B521BC2DFA0052735B /* input.txt */,
+				553C80B621BC2DFA0052735B /* 2015-Day19.swift */,
+			);
+			path = "Day 19";
+			sourceTree = "<group>";
+		};
+		553C80B721BC2DFA0052735B /* Day 10 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80B821BC2DFA0052735B /* 2015-Day10.swift */,
+				553C80B921BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 10";
+			sourceTree = "<group>";
+		};
+		553C80BA21BC2DFA0052735B /* Day 17 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80BB21BC2DFA0052735B /* 2015-Day17.swift */,
+				553C80BC21BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 17";
+			sourceTree = "<group>";
+		};
+		553C80BD21BC2DFA0052735B /* Day 16 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80BE21BC2DFA0052735B /* 2015-Day16.swift */,
+				553C80BF21BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 16";
+			sourceTree = "<group>";
+		};
+		553C80C021BC2DFA0052735B /* Day 11 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80C121BC2DFA0052735B /* 2015-Day11.swift */,
+				553C80C221BC2DFA0052735B /* input.txt */,
+			);
+			path = "Day 11";
+			sourceTree = "<group>";
+		};
+		553C80C321BC2DFA0052735B /* Day 18 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80C421BC2DFA0052735B /* input.txt */,
+				553C80C521BC2DFA0052735B /* 2015-Day18.swift */,
+			);
+			path = "Day 18";
+			sourceTree = "<group>";
+		};
+		553C80C621BC2DFA0052735B /* Day 20 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80C721BC2DFA0052735B /* input.txt */,
+				553C80C821BC2DFA0052735B /* 2015-Day20.swift */,
+			);
+			path = "Day 20";
+			sourceTree = "<group>";
+		};
+		553C80C921BC2DFB0052735B /* 2016 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80CA21BC2DFB0052735B /* 2016.swift */,
+				553C80F521BC2DFB0052735B /* Day 1 */,
+				553C80CB21BC2DFB0052735B /* Day 2 */,
+				553C80D421BC2DFB0052735B /* Day 3 */,
+				553C80D121BC2DFB0052735B /* Day 4 */,
+				553C80CE21BC2DFB0052735B /* Day 5 */,
+				553C80F221BC2DFB0052735B /* Day 6 */,
+				553C80F821BC2DFB0052735B /* Day 7 */,
+				553C80EF21BC2DFB0052735B /* Day 8 */,
+				553C80FB21BC2DFB0052735B /* Day 9 */,
+				553C810421BC2DFB0052735B /* Day 10 */,
+				553C810D21BC2DFB0052735B /* Day 11 */,
+				553C80E321BC2DFB0052735B /* Day 12 */,
+				553C80E021BC2DFB0052735B /* Day 13 */,
+				553C80DD21BC2DFB0052735B /* Day 14 */,
+				553C80E621BC2DFB0052735B /* Day 15 */,
+				553C810A21BC2DFB0052735B /* Day 16 */,
+				553C810721BC2DFB0052735B /* Day 17 */,
+				553C811021BC2DFB0052735B /* Day 18 */,
+				553C810121BC2DFB0052735B /* Day 19 */,
+				553C811321BC2DFB0052735B /* Day 20 */,
+				553C80FE21BC2DFB0052735B /* Day 21 */,
+				553C80DA21BC2DFB0052735B /* Day 22 */,
+				553C80E921BC2DFB0052735B /* Day 23 */,
+				553C80EC21BC2DFB0052735B /* Day 24 */,
+				553C80D721BC2DFB0052735B /* Day 25 */,
+			);
+			path = 2016;
+			sourceTree = "<group>";
+		};
+		553C80CB21BC2DFB0052735B /* Day 2 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80CC21BC2DFB0052735B /* input.txt */,
+				553C80CD21BC2DFB0052735B /* 2016-Day2.swift */,
+			);
+			path = "Day 2";
+			sourceTree = "<group>";
+		};
+		553C80CE21BC2DFB0052735B /* Day 5 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80CF21BC2DFB0052735B /* input.txt */,
+				553C80D021BC2DFB0052735B /* 2016-Day5.swift */,
+			);
+			path = "Day 5";
+			sourceTree = "<group>";
+		};
+		553C80D121BC2DFB0052735B /* Day 4 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80D221BC2DFB0052735B /* input.txt */,
+				553C80D321BC2DFB0052735B /* 2016-Day4.swift */,
+			);
+			path = "Day 4";
+			sourceTree = "<group>";
+		};
+		553C80D421BC2DFB0052735B /* Day 3 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80D521BC2DFB0052735B /* input.txt */,
+				553C80D621BC2DFB0052735B /* 2016-Day3.swift */,
+			);
+			path = "Day 3";
+			sourceTree = "<group>";
+		};
+		553C80D721BC2DFB0052735B /* Day 25 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80D821BC2DFB0052735B /* input.txt */,
+				553C80D921BC2DFB0052735B /* 2016-Day25.swift */,
+			);
+			path = "Day 25";
+			sourceTree = "<group>";
+		};
+		553C80DA21BC2DFB0052735B /* Day 22 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80DB21BC2DFB0052735B /* input.txt */,
+				553C80DC21BC2DFB0052735B /* 2016-Day22.swift */,
+			);
+			path = "Day 22";
+			sourceTree = "<group>";
+		};
+		553C80DD21BC2DFB0052735B /* Day 14 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80DE21BC2DFB0052735B /* 2016-Day14.swift */,
+				553C80DF21BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 14";
+			sourceTree = "<group>";
+		};
+		553C80E021BC2DFB0052735B /* Day 13 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80E121BC2DFB0052735B /* 2016-Day13.swift */,
+				553C80E221BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 13";
+			sourceTree = "<group>";
+		};
+		553C80E321BC2DFB0052735B /* Day 12 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80E421BC2DFB0052735B /* 2016-Day12.swift */,
+				553C80E521BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 12";
+			sourceTree = "<group>";
+		};
+		553C80E621BC2DFB0052735B /* Day 15 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80E721BC2DFB0052735B /* 2016-Day15.swift */,
+				553C80E821BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 15";
+			sourceTree = "<group>";
+		};
+		553C80E921BC2DFB0052735B /* Day 23 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80EA21BC2DFB0052735B /* 2016-Day23.swift */,
+				553C80EB21BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 23";
+			sourceTree = "<group>";
+		};
+		553C80EC21BC2DFB0052735B /* Day 24 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80ED21BC2DFB0052735B /* input.txt */,
+				553C80EE21BC2DFB0052735B /* 2016-Day24.swift */,
+			);
+			path = "Day 24";
+			sourceTree = "<group>";
+		};
+		553C80EF21BC2DFB0052735B /* Day 8 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80F021BC2DFB0052735B /* 2016-Day8.swift */,
+				553C80F121BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 8";
+			sourceTree = "<group>";
+		};
+		553C80F221BC2DFB0052735B /* Day 6 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80F321BC2DFB0052735B /* input.txt */,
+				553C80F421BC2DFB0052735B /* 2016-Day6.swift */,
+			);
+			path = "Day 6";
+			sourceTree = "<group>";
+		};
+		553C80F521BC2DFB0052735B /* Day 1 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80F621BC2DFB0052735B /* input.txt */,
+				553C80F721BC2DFB0052735B /* 2016-Day1.swift */,
+			);
+			path = "Day 1";
+			sourceTree = "<group>";
+		};
+		553C80F821BC2DFB0052735B /* Day 7 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80F921BC2DFB0052735B /* input.txt */,
+				553C80FA21BC2DFB0052735B /* 2016-Day7.swift */,
+			);
+			path = "Day 7";
+			sourceTree = "<group>";
+		};
+		553C80FB21BC2DFB0052735B /* Day 9 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80FC21BC2DFB0052735B /* 2016-Day9.swift */,
+				553C80FD21BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 9";
+			sourceTree = "<group>";
+		};
+		553C80FE21BC2DFB0052735B /* Day 21 */ = {
+			isa = PBXGroup;
+			children = (
+				553C80FF21BC2DFB0052735B /* input.txt */,
+				553C810021BC2DFB0052735B /* 2016-Day21.swift */,
+			);
+			path = "Day 21";
+			sourceTree = "<group>";
+		};
+		553C810121BC2DFB0052735B /* Day 19 */ = {
+			isa = PBXGroup;
+			children = (
+				553C810221BC2DFB0052735B /* input.txt */,
+				553C810321BC2DFB0052735B /* 2016-Day19.swift */,
+			);
+			path = "Day 19";
+			sourceTree = "<group>";
+		};
+		553C810421BC2DFB0052735B /* Day 10 */ = {
+			isa = PBXGroup;
+			children = (
+				553C810521BC2DFB0052735B /* 2016-Day10.swift */,
+				553C810621BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 10";
+			sourceTree = "<group>";
+		};
+		553C810721BC2DFB0052735B /* Day 17 */ = {
+			isa = PBXGroup;
+			children = (
+				553C810821BC2DFB0052735B /* 2016-Day17.swift */,
+				553C810921BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 17";
+			sourceTree = "<group>";
+		};
+		553C810A21BC2DFB0052735B /* Day 16 */ = {
+			isa = PBXGroup;
+			children = (
+				553C810B21BC2DFB0052735B /* 2016-Day16.swift */,
+				553C810C21BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 16";
+			sourceTree = "<group>";
+		};
+		553C810D21BC2DFB0052735B /* Day 11 */ = {
+			isa = PBXGroup;
+			children = (
+				553C810E21BC2DFB0052735B /* 2016-Day11.swift */,
+				553C810F21BC2DFB0052735B /* input.txt */,
+			);
+			path = "Day 11";
+			sourceTree = "<group>";
+		};
+		553C811021BC2DFB0052735B /* Day 18 */ = {
+			isa = PBXGroup;
+			children = (
+				553C811121BC2DFB0052735B /* input.txt */,
+				553C811221BC2DFB0052735B /* 2016-Day18.swift */,
+			);
+			path = "Day 18";
+			sourceTree = "<group>";
+		};
+		553C811321BC2DFB0052735B /* Day 20 */ = {
+			isa = PBXGroup;
+			children = (
+				553C811421BC2DFB0052735B /* input.txt */,
+				553C811521BC2DFB0052735B /* 2016-Day20.swift */,
+			);
+			path = "Day 20";
+			sourceTree = "<group>";
+		};
 		55CB0DA021ABB0530070701E /* 2017 */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +1224,8 @@
 				55E683801FEDA93000A313B7 /* Library */,
 				55CB0DA321ABB71E0070701E /* 2018 */,
 				55CB0DA021ABB0530070701E /* 2017 */,
+				553C80C921BC2DFB0052735B /* 2016 */,
+				553C807C21BC2DFA0052735B /* 2015 */,
 				55CB0E3321B358E80070701E /* Info.plist */,
 			);
 			path = AOC;
@@ -558,6 +1234,8 @@
 		55CB0E3C21B358E90070701E /* AOCTests */ = {
 			isa = PBXGroup;
 			children = (
+				553C807821BC2D960052735B /* Test2015.swift */,
+				553C807A21BC2DA10052735B /* Test2016.swift */,
 				55CB0E8321B35C210070701E /* Test2017.swift */,
 				55CB0E8521B35C2B0070701E /* Test2018.swift */,
 				55CB0E3F21B358E90070701E /* Info.plist */,
@@ -972,65 +1650,117 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553C815321BC2DFB0052735B /* 2016-Day25.swift in Sources */,
 				55CB0E4821B359370070701E /* Input.swift in Sources */,
 				55B4C32821B7939F00F5902F /* Character.swift in Sources */,
+				553C813A21BC2DFB0052735B /* 2015-Day21.swift in Sources */,
+				553C814821BC2DFB0052735B /* 2015-Day20.swift in Sources */,
 				55CB0E6B21B359370070701E /* 2017-Day4.swift in Sources */,
+				553C815621BC2DFB0052735B /* 2016-Day14.swift in Sources */,
+				553C816A21BC2DFB0052735B /* 2016-Day9.swift in Sources */,
 				55CB0E5921B359370070701E /* 2018-Day12.swift in Sources */,
 				55CB0E7521B359370070701E /* 2017-Day14.swift in Sources */,
+				553C812E21BC2DFB0052735B /* 2015-Day24.swift in Sources */,
 				55CB0E6121B359370070701E /* 2018-Day20.swift in Sources */,
 				55CB0E4E21B359370070701E /* 2018-Day1.swift in Sources */,
+				553C814621BC2DFB0052735B /* 2015-Day18.swift in Sources */,
 				55CB0E5B21B359370070701E /* 2018-Day14.swift in Sources */,
+				553C811E21BC2DFB0052735B /* 2015-Day3.swift in Sources */,
 				55CB0E7B21B359370070701E /* 2017-Day20.swift in Sources */,
 				55CB0E6E21B359370070701E /* 2017-Day7.swift in Sources */,
+				553C813621BC2DFB0052735B /* 2015-Day7.swift in Sources */,
+				553C817621BC2DFB0052735B /* 2016-Day11.swift in Sources */,
+				553C815821BC2DFB0052735B /* 2016-Day13.swift in Sources */,
 				55CB0E5D21B359370070701E /* 2018-Day16.swift in Sources */,
+				553C812721BC2DFB0052735B /* 2015-Day12.swift in Sources */,
 				55CB0E5521B359370070701E /* 2018-Day8.swift in Sources */,
+				553C815121BC2DFB0052735B /* 2016-Day3.swift in Sources */,
+				553C817421BC2DFB0052735B /* 2016-Day16.swift in Sources */,
 				55CB0E5821B359370070701E /* 2018-Day11.swift in Sources */,
 				55CB0E7221B359370070701E /* 2017-Day11.swift in Sources */,
 				55CB0E9021B3BC490070701E /* CountedSet.swift in Sources */,
+				553C816921BC2DFB0052735B /* 2016-Day7.swift in Sources */,
 				55CB0E7E21B359370070701E /* 2017-Day23.swift in Sources */,
+				553C813221BC2DFB0052735B /* 2015-Day6.swift in Sources */,
 				55CB0E6621B359370070701E /* 2018-Day25.swift in Sources */,
+				553C813C21BC2DFB0052735B /* 2015-Day19.swift in Sources */,
 				55CB0E6021B359370070701E /* 2018-Day19.swift in Sources */,
 				55CB0E6821B359370070701E /* 2017-Day1.swift in Sources */,
 				55CB0E5121B359370070701E /* 2018-Day4.swift in Sources */,
+				553C811A21BC2DFB0052735B /* 2015-Day5.swift in Sources */,
 				55CB0E5321B359370070701E /* 2018-Day6.swift in Sources */,
 				55CB0E5E21B359370070701E /* 2018-Day17.swift in Sources */,
+				553C812321BC2DFB0052735B /* 2015-Day14.swift in Sources */,
+				553C812B21BC2DFB0052735B /* 2015-Day23.swift in Sources */,
+				553C813421BC2DFB0052735B /* 2015-Day1.swift in Sources */,
+				553C815C21BC2DFB0052735B /* 2016-Day15.swift in Sources */,
 				55CB0E6321B359370070701E /* 2018-Day22.swift in Sources */,
+				553C814121BC2DFB0052735B /* 2015-Day16.swift in Sources */,
 				55CB0E4F21B359370070701E /* 2018-Day2.swift in Sources */,
+				553C817B21BC2DFB0052735B /* 2016-Day20.swift in Sources */,
+				553C812221BC2DFB0052735B /* 2015-Day22.swift in Sources */,
 				55CB0E5421B359370070701E /* 2018-Day7.swift in Sources */,
 				55CB0E5A21B359370070701E /* 2018-Day13.swift in Sources */,
 				55CB0E7621B359370070701E /* 2017-Day15.swift in Sources */,
+				553C817221BC2DFB0052735B /* 2016-Day17.swift in Sources */,
 				55CB0E4721B359370070701E /* Day.swift in Sources */,
 				55CB0E4B21B359370070701E /* Vector.swift in Sources */,
+				553C817921BC2DFB0052735B /* 2016-Day18.swift in Sources */,
+				553C814F21BC2DFB0052735B /* 2016-Day4.swift in Sources */,
+				553C813D21BC2DFB0052735B /* 2015-Day10.swift in Sources */,
 				55CB0E7321B359370070701E /* 2017-Day12.swift in Sources */,
 				55CB0E5621B359370070701E /* 2018-Day9.swift in Sources */,
 				55CB0E4A21B359370070701E /* Position.swift in Sources */,
 				55CB0E7121B359370070701E /* 2017-Day10.swift in Sources */,
 				55CB0E6421B359370070701E /* 2018-Day23.swift in Sources */,
 				55CB0E5721B359370070701E /* 2018-Day10.swift in Sources */,
+				553C816D21BC2DFB0052735B /* 2016-Day21.swift in Sources */,
 				55CB0E4921B359370070701E /* Matrix.swift in Sources */,
+				553C814921BC2DFB0052735B /* 2016.swift in Sources */,
 				55CB0E7821B359370070701E /* 2017-Day17.swift in Sources */,
+				553C816521BC2DFB0052735B /* 2016-Day6.swift in Sources */,
 				55CB0E6C21B359370070701E /* 2017-Day5.swift in Sources */,
 				55CB0E5C21B359370070701E /* 2018-Day15.swift in Sources */,
 				55CB0E7721B359370070701E /* 2017-Day16.swift in Sources */,
 				55CB0E4C21B359370070701E /* Regex.swift in Sources */,
+				553C811621BC2DFB0052735B /* 2015.swift in Sources */,
+				553C814D21BC2DFB0052735B /* 2016-Day5.swift in Sources */,
 				55CB0E8021B359370070701E /* 2017-Day25.swift in Sources */,
 				55CB0E6721B359370070701E /* 2017.swift in Sources */,
+				553C813F21BC2DFB0052735B /* 2015-Day17.swift in Sources */,
 				55CB0E5221B359370070701E /* 2018-Day5.swift in Sources */,
+				553C811C21BC2DFB0052735B /* 2015-Day4.swift in Sources */,
+				553C816F21BC2DFB0052735B /* 2016-Day19.swift in Sources */,
+				553C812021BC2DFB0052735B /* 2015-Day25.swift in Sources */,
+				553C813721BC2DFB0052735B /* 2015-Day9.swift in Sources */,
+				553C815A21BC2DFB0052735B /* 2016-Day12.swift in Sources */,
+				553C812521BC2DFB0052735B /* 2015-Day13.swift in Sources */,
 				55CB0E6221B359370070701E /* 2018-Day21.swift in Sources */,
+				553C812F21BC2DFB0052735B /* 2015-Day8.swift in Sources */,
 				55CB0E4D21B359370070701E /* 2018.swift in Sources */,
 				55CB0E6D21B359370070701E /* 2017-Day6.swift in Sources */,
 				55CB0E7D21B359370070701E /* 2017-Day22.swift in Sources */,
+				553C816721BC2DFB0052735B /* 2016-Day1.swift in Sources */,
 				55CB0E5021B359370070701E /* 2018-Day3.swift in Sources */,
+				553C811821BC2DFB0052735B /* 2015-Day2.swift in Sources */,
+				553C814B21BC2DFB0052735B /* 2016-Day2.swift in Sources */,
+				553C816121BC2DFB0052735B /* 2016-Day24.swift in Sources */,
 				55CB0E5F21B359370070701E /* 2018-Day18.swift in Sources */,
 				55CB0E6521B359370070701E /* 2018-Day24.swift in Sources */,
 				55CB0E6F21B359370070701E /* 2017-Day8.swift in Sources */,
+				553C812921BC2DFB0052735B /* 2015-Day15.swift in Sources */,
 				55CB0E7A21B359370070701E /* 2017-Day19.swift in Sources */,
+				553C817021BC2DFB0052735B /* 2016-Day10.swift in Sources */,
 				55CB0E6A21B359370070701E /* 2017-Day3.swift in Sources */,
+				553C815521BC2DFB0052735B /* 2016-Day22.swift in Sources */,
+				553C815E21BC2DFB0052735B /* 2016-Day23.swift in Sources */,
 				55CB0E7F21B359370070701E /* 2017-Day24.swift in Sources */,
 				55CB0E7021B359370070701E /* 2017-Day9.swift in Sources */,
 				55CB0E9221B3BE9A0070701E /* Dictionary.swift in Sources */,
 				55CB0E7421B359370070701E /* 2017-Day13.swift in Sources */,
+				553C814321BC2DFB0052735B /* 2015-Day11.swift in Sources */,
 				55CB0E7C21B359370070701E /* 2017-Day21.swift in Sources */,
+				553C816221BC2DFB0052735B /* 2016-Day8.swift in Sources */,
 				55CB0E7921B359370070701E /* 2017-Day18.swift in Sources */,
 				55CB0E8821B371770070701E /* Collection.swift in Sources */,
 				55CB0E6921B359370070701E /* 2017-Day2.swift in Sources */,
@@ -1042,6 +1772,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB0E8621B35C2B0070701E /* Test2018.swift in Sources */,
+				553C807921BC2D960052735B /* Test2015.swift in Sources */,
+				553C807B21BC2DA10052735B /* Test2016.swift in Sources */,
 				55CB0E8421B35C210070701E /* Test2017.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,7 +21,7 @@ public protocol StringInput {
 
 public final class Input: StringInput {
     public convenience init(file: String) { self.init(try! String(contentsOfFile: file)) }
-    public init(_ raw: String) { self.raw = raw }
+    public init(_ raw: String) { self.raw = raw.trimmingCharacters(in: .newlines) }
     
     public let raw: String
     public lazy var integer: Int? = { Int(raw) }()
