@@ -20,7 +20,7 @@ extension Year2018 {
             
             var value: Int {
                 if children.isEmpty { return metadata.sum() }
-                return metadata.compactMap { children.at($0 - 1)?.value ?? 0 }.sum()
+                return metadata.map { children.at($0 - 1)?.value ?? 0 }.sum()
             }
         }
         
