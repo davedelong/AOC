@@ -71,6 +71,16 @@ public extension Collection {
         return p
     }
     
+    public func triples() -> Array<(Element, Element, Element)> {
+        let a = self
+        let b = self.dropFirst()
+        let ab = zip(a, b)
+        
+        let c = self.dropFirst(2)
+        let abc = zip(ab, c)
+        return abc.map { ($0.0, $0.1, $1) }
+    }
+    
 }
 
 public extension Collection where Element: Numeric {
