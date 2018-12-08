@@ -13,11 +13,22 @@ extension Year2015 {
         public init() { super.init(inputSource: .file(#file)) }
         
         override public func part1() -> String {
-            return #function
+            var floor = 0
+            for char in input.characters {
+                if char == "(" { floor += 1 }
+                if char == ")" { floor -= 1 }
+            }
+            return "\(floor)"
         }
         
         override public func part2() -> String {
-            return #function
+            var floor = 0
+            for (position, char) in input.characters.enumerated() {
+                if char == "(" { floor += 1 }
+                if char == ")" { floor -= 1 }
+                if floor == -1 { return "\(position + 1)" }
+            }
+            fatalError("unreachable")
         }
         
     }

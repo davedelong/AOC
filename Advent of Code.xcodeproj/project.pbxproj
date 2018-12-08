@@ -446,8 +446,8 @@
 		553C807E21BC2DFA0052735B /* Day 2 */ = {
 			isa = PBXGroup;
 			children = (
-				553C807F21BC2DFA0052735B /* input.txt */,
 				553C808021BC2DFA0052735B /* 2015-Day2.swift */,
+				553C807F21BC2DFA0052735B /* input.txt */,
 			);
 			path = "Day 2";
 			sourceTree = "<group>";
@@ -572,8 +572,8 @@
 		553C80A821BC2DFA0052735B /* Day 1 */ = {
 			isa = PBXGroup;
 			children = (
-				553C80A921BC2DFA0052735B /* input.txt */,
 				553C80AA21BC2DFA0052735B /* 2015-Day1.swift */,
+				553C80A921BC2DFA0052735B /* input.txt */,
 			);
 			path = "Day 1";
 			sourceTree = "<group>";
