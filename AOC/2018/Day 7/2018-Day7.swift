@@ -43,7 +43,7 @@ extension Year2018 {
             
             var operations = Dictionary<String, Op>()
             
-            for line in input.trimmed.lines.raw {
+            for line in input.lines.raw {
                 let match = r.match(line)!
                 let dName = match[1]!
                 let oName = match[2]!

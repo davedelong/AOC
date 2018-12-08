@@ -24,7 +24,7 @@ extension Year2018 {
             
             var currentGuard = 0
             var fallsAsleep: Int?
-            for line in input.trimmed.lines.raw {
+            for line in input.lines.raw {
                 let match = regex.match(line)!
                 let minute = Int(match[1]!)!
                 

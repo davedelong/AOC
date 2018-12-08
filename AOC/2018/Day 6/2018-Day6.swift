@@ -25,7 +25,7 @@ extension Year2018 {
         }
         
         lazy var positions: Dictionary<String, Position> = {
-            let lines = input.trimmed.lines.raw
+            let lines = input.lines.raw
             var positions = Dictionary<String, Position>()
             for (index, line) in lines.enumerated() {
                 let pieces = line.components(separatedBy: ", ")

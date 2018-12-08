@@ -50,7 +50,7 @@ public class Day7: Day {
     public init() { super.init(inputSource: .file(#file)) }
 
     func makeTree() -> Node? {
-        let lines = input.trimmed.lines.raw
+        let lines = input.lines.raw
         
         let regex = try! NSRegularExpression(pattern: "^([^ ]+) \\((\\d+)\\)( -> (.+))?$", options: [])
         

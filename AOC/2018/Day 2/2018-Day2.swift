@@ -13,7 +13,7 @@ extension Year2018 {
         public init() { super.init(inputSource: .file(#file)) }
         
         override public func part1() -> String {
-            let rawLines = input.trimmed.lines.raw
+            let rawLines = input.lines.raw
             
             // this groups the lines by the number of repeated characters
             // so b[1] contains all the lines that have a character that does not repeat
@@ -25,7 +25,7 @@ extension Year2018 {
         }
 
         override public func part2() -> String {
-            let linesOfCharacters = input.trimmed.lines.characters // Array<Array<Character>>
+            let linesOfCharacters = input.lines.characters // Array<Array<Character>>
             
             for (index, line) in linesOfCharacters.enumerated() {
                 let next = linesOfCharacters.index(after: index)

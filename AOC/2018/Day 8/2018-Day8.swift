@@ -36,7 +36,7 @@ extension Year2018 {
         }
         
         override public func run() -> (String, String) {
-            var integers = input.trimmed.words.integers.makeIterator()
+            var integers = input.words.integers.makeIterator()
             let tree = parse(&integers)
             return ("\(tree.metadataSum)", "\(tree.value)")
         }

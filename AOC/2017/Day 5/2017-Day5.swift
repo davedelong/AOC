@@ -13,7 +13,7 @@ public class Day5: Day {
     public init() { super.init(inputSource: .file(#file)) }
     
     override public func part1() -> String {
-        var integers = input.trimmed.lines.integers
+        var integers = input.lines.integers
         var stepCount = 0
         var index = 0
         while index < integers.count {
@@ -26,7 +26,7 @@ public class Day5: Day {
     }
     
     override public func part2() -> String {
-        var integers = input.trimmed.lines.integers
+        var integers = input.lines.integers
         var stepCount = 0
         var index = 0
         while index < integers.count {

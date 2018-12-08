@@ -12,7 +12,7 @@ public class Day16: Day {
 
     let start = Array("abcdefghijklmnop").map { String($0) }
     lazy var commands: Array<String> = {
-        return input.trimmed.raw.components(separatedBy: ",")
+        return input.raw.components(separatedBy: ",")
     }()
     
     public init() { super.init(inputSource: .file(#file)) }

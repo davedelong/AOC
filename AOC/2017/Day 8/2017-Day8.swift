@@ -28,7 +28,7 @@ public class Day8: Day {
     }
 
     override public func run() -> (String, String) {
-        let lines = input.trimmed.lines.raw
+        let lines = input.lines.raw
         var registers = Registers()
         var intermediateMax = Int.min
 

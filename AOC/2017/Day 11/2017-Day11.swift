@@ -54,7 +54,7 @@ public class Day11: Day {
     
     public init() {
         super.init(inputSource: .file(#file))
-        directions = input.trimmed.raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
+        directions = input.raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
     }
 
     override public func run() -> (String, String) {

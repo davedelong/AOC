@@ -95,7 +95,7 @@ public class Day23: Day {
     public init() { super.init(inputSource: .file(#file)) }
     
     override public func part1() -> String {
-        let instructions = input.trimmed.rawLineWords.map { Instruction($0) }
+        let instructions = input.rawLineWords.map { Instruction($0) }
         let p = Program(instructions: instructions)
         while p.step() == .ok { }
         return "\(p.mulCount)"

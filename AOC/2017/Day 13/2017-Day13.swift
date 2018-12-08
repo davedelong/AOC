@@ -14,7 +14,7 @@ public class Day13: Day {
     
     public init() {
         super.init(inputSource: .file(#file))
-        for line in input.trimmed.lines.raw {
+        for line in input.lines.raw {
             let p = line.components(separatedBy: ": ")
             firewall[Int(p[0])!] = Int(p[1])!
         }

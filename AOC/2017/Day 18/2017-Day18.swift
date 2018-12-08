@@ -165,7 +165,7 @@ public class Day18: Day {
     }
 
     lazy var instructions: Array<Instruction> = {
-        input.trimmed.rawLineWords.map { Instruction(args: $0) }
+        input.rawLineWords.map { Instruction(args: $0) }
     }()
     
     public init() { super.init(inputSource: .file(#file)) }

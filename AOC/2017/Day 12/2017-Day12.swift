@@ -29,7 +29,7 @@ public class Day12: Day {
     public init() {
         nodesByName = Dictionary()
         super.init(inputSource: .file(#file))
-        let connections = input.trimmed.lines.raw.map { line -> (String, [String]) in
+        let connections = input.lines.raw.map { line -> (String, [String]) in
             let pieces = line.components(separatedBy: " <-> ")
             return (pieces[0], pieces[1].components(separatedBy: ", "))
         }

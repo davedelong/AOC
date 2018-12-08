@@ -11,7 +11,7 @@ extension Year2017 {
 public class Day2: Day {
     
     lazy var integers: Array<Array<Int>> = {
-        return input.trimmed.lines.words.integers
+        return input.lines.words.integers
     }()
     
     public init() { super.init(inputSource: .file(#file)) }

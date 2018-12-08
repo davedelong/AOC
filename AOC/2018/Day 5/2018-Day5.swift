@@ -31,12 +31,12 @@ extension Year2018 {
         }
         
         override public func part1() -> String {
-            let characters = reduce(input.trimmed.characters)
+            let characters = reduce(input.characters)
             return "\(characters.count)"
         }
         
         override public func part2() -> String {
-            let source = input.trimmed.characters
+            let source = input.characters
             let lengths = Character.alphabet.map { reduce(source, skipping: [$0, $0.uppercased]).count }
             let shortest = lengths.min()!
             return "\(shortest)"

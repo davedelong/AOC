@@ -37,7 +37,7 @@ public class Day24: Day {
     
     public init() {
         super.init(inputSource: .file(#file))
-        ports = Set(input.trimmed.lines.raw.enumerated().map { Port(id: $0.offset, string: $0.element) })
+        ports = Set(input.lines.raw.enumerated().map { Port(id: $0.offset, string: $0.element) })
     }
     
     func nextItem(in chain: Chain) -> Int {

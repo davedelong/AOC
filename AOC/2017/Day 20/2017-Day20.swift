@@ -42,7 +42,7 @@ public class Day20: Day {
     public init() { super.init(inputSource: .file(#file)) }
     
     func particles() -> Array<Particle> {
-        let rawParticles = input.trimmed.lines.raw
+        let rawParticles = input.lines.raw
         return rawParticles.enumerated().map { Particle(id: $0, line: $1) }
     }
     

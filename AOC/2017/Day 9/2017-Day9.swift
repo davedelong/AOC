@@ -13,7 +13,7 @@ public class Day9: Day {
     public init() { super.init(inputSource: .file(#file)) }
 
     override public func run() -> (String, String) {
-        let source = input.trimmed.raw
+        let source = input.raw
         var pt1 = 0
         var pt2 = 0
 

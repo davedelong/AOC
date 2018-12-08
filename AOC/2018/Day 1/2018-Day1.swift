@@ -13,12 +13,12 @@ extension Year2018 {
         public init() { super.init(inputSource: .file(#file)) }
         
         override public func part1() -> String {
-            let sum = input.trimmed.lines.integers.sum()
+            let sum = input.lines.integers.sum()
             return "\(sum)"
         }
         
         override public func part2() -> String {
-            let integers = input.trimmed.lines.integers
+            let integers = input.lines.integers
             
             var frequency = 0
             var seen = Set([frequency])

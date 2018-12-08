@@ -13,7 +13,7 @@ public class Day4: Day {
     public init() { super.init(inputSource: .file(#file)) }
     
     override public func part1() -> String {
-        let answer = input.trimmed.rawLineWords.filter { $0.count == Set($0).count }.count
+        let answer = input.rawLineWords.filter { $0.count == Set($0).count }.count
         return "\(answer)"
     }
     
@@ -24,7 +24,7 @@ public class Day4: Day {
             return countedSets.count == Set(countedSets).count
         }
         
-        let answer = input.trimmed.rawLineWords.filter(isValid).count
+        let answer = input.rawLineWords.filter(isValid).count
         return "\(answer)"
     }
     

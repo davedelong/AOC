@@ -23,11 +23,11 @@ public class Day1: Day {
     }
     
     override public func part1() -> String {
-        return checksum(input.trimmed.characters.integers, offset: 1)
+        return checksum(input.characters.integers, offset: 1)
     }
     
     override public func part2() -> String {
-        let integers = input.trimmed.characters.integers
+        let integers = input.characters.integers
         return checksum(integers, offset: integers.count / 2)
     }
     

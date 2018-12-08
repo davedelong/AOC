@@ -43,7 +43,7 @@ public class Day25: Day {
         let move = Regex(pattern: "\\s*- Move one slot to the (left|right)\\.")
         let state = Regex(pattern: "\\s*- Continue with state ([A-Z])\\.")
         
-        var sections = input.trimmed.raw.components(separatedBy: "\n\n")
+        var sections = input.raw.components(separatedBy: "\n\n")
         
         let metaInfo = sections.removeFirst()
         let metaLines = metaInfo.components(separatedBy: .newlines)

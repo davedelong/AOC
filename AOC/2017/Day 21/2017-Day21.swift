@@ -26,7 +26,7 @@ public class Day21: Day {
 
     public init() {
         super.init(inputSource: .file(#file)) 
-        let rawRules = input.trimmed.lines.raw
+        let rawRules = input.lines.raw
         for rawRule in rawRules {
             let pieces = rawRule.components(separatedBy: " => ")
             let rawCause = pieces[0].split(separator: "/")
