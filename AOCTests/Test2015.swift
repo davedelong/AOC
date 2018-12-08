@@ -39,7 +39,7 @@ class Test2015: XCTestCase {
         let d = Year2015.Day4()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
+        XCTAssertEqual(p1, "117946")
         XCTAssertEqual(p2, "")
     }
     

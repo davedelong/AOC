@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CommonCrypto/CommonCrypto.h>
+
 //! Project version number for AOC.
 FOUNDATION_EXPORT double AOCVersionNumber;
 
