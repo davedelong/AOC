@@ -12,12 +12,48 @@ extension Year2015 {
         
         public init() { super.init(inputSource: .file(#file)) }
         
+        lazy var headings: Array<Heading> = {
+            return input.characters.compactMap { char -> Heading? in
+                switch char {
+                    case "^": return .north
+                    case "<": return .west
+                    case ">": return .east
+                    case "v": return .south
+                    default: return nil
+                }
+            }
+        }()
+        
         override public func part1() -> String {
-            return #function
+            var presentCount = CountedSet<Position>()
+            
+            var current = Position(x: 0, y: 0)
+            for heading in headings {
+                presentCount[current, default: 0] += 1
+                current = current.move(heading)
+            }
+            return "\(presentCount.count)"
         }
         
         override public func part2() -> String {
-            return #function
+            var presentCount = [
+                Position(x: 0, y: 0): 2
+            ]
+            
+            var santaPositions = [
+                Position(x: 0, y: 0),
+                Position(x: 0, y: 0)
+            ]
+            
+            var currentSanta = 0
+            for heading in headings {
+                let position = santaPositions[currentSanta].move(heading)
+                presentCount[position, default: 0] += 1
+                santaPositions[currentSanta] = position
+                currentSanta = (currentSanta + 1) % santaPositions.count
+            }
+            
+            return "\(presentCount.count)"
         }
         
     }
