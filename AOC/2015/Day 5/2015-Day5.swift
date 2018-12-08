@@ -13,11 +13,40 @@ extension Year2015 {
         public init() { super.init(inputSource: .file(#file)) }
         
         override public func part1() -> String {
-            return #function
+            let vowels: Set<Character> = Set("aeiou")
+            let illegals: Array<(Character, Character)> = [
+                ("a", "b"), ("c", "d"), ("p", "q"), ("x", "y")
+            ]
+            
+            let niceCount = input.lines.characters.count { line -> Bool in
+                var vowelCount = 0
+                var hasDoubled = false
+                var previous: Character?
+                
+                for char in line {
+                    if vowels.contains(char) { vowelCount += 1 }
+                    if char == previous { hasDoubled = true }
+                    
+                    for i in illegals {
+                        if previous == i.0 && char == i.1 { return false }
+                    }
+                    previous = char
+                }
+                if vowelCount < 3 { return false }
+                if hasDoubled == false { return false }
+                
+                return true
+            }
+            return "\(niceCount)"
         }
         
         override public func part2() -> String {
-            return #function
+            let rule1 = Regex(pattern: "(..).*\\1") // a pair of characters repeated in the string
+            let rule2 = Regex(pattern: "(.).\\1") // a character repeated w/ a single character in between
+            let niceCount = input.lines.raw.count { line -> Bool in
+                return rule1.matches(line) && rule2.matches(line)
+            }
+            return "\(niceCount)"
         }
         
     }

@@ -62,6 +62,15 @@ public extension Collection {
         return false
     }
     
+    public func pairs() -> Array<Pair<Element>> {
+        var p = Array<Pair<Element>>()
+        var i = makeIterator()
+        while let a = i.next(), let b = i.next() {
+            p.append(Pair(a, b))
+        }
+        return p
+    }
+    
 }
 
 public extension Collection where Element: Numeric {
