@@ -20,4 +20,19 @@ public extension Character {
         return "\(self)".lowercased().first!
     }
     
+    public var isDigit: Bool {
+        switch self {
+            case "0"..."9": return true
+            default: return false
+        }
+    }
+    
+    public var isHexDigit: Bool {
+        switch self {
+            case "a"..."f": return true
+            case "A"..."F": return true
+            default: return isDigit
+        }
+    }
+    
 }
