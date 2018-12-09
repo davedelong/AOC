@@ -23,4 +23,14 @@ public extension Dictionary where Value == Int {
         return self[item, default: 0]
     }
     
+    public mutating func remove(item: Key) {
+        if let value = self[item] {
+            if value > 1 {
+                self[item] = value - 1
+            } else {
+                self.removeValue(forKey: item)
+            }
+        }
+    }
+    
 }

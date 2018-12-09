@@ -15,10 +15,11 @@ extension Year2015 {
         
         override public func part1() -> String {
             var int = 1
+            var buffer = Data(count: Int(CC_MD5_DIGEST_LENGTH))
             while true {
                 let s = "\(input.raw)\(int)"
-                let d = s.md5()
-                if d[0] == 0 && d[1] == 0 && d[2] < 16 { return "\(int)" }
+                s.writeMD5(&buffer)
+                if buffer[0] == 0 && buffer[1] == 0 && buffer[2] < 16 { return "\(int)" }
                 int += 1
             }
             fatalError("unreachable")
@@ -28,10 +29,11 @@ extension Year2015 {
             // we don't need to test 1-117946, because that happened in part 1
             // and anything that would've resulted in 6 zeroes would've satisfied part 1
             var int = 117947
+            var buffer = Data(count: Int(CC_MD5_DIGEST_LENGTH))
             while true {
                 let s = "\(input.raw)\(int)"
-                let d = s.md5()
-                if d[0] == 0 && d[1] == 0 && d[2] == 0 { return "\(int)" }
+                s.writeMD5(&buffer)
+                if buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0 { return "\(int)" }
                 int += 1
             }
             fatalError("unreachable")
