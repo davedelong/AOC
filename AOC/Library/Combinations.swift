@@ -54,17 +54,18 @@ public struct CombinationIterator<T>: IteratorProtocol {
     private let source: Array<T>
     private var pick: Array<Bool>
     private var done = false
+    private let choose: Int?
     
-    public init<C: Collection>(_ values: C) where C.Element == T {
+    public init<C: Collection>(_ values: C, choose k: Int? = nil) where C.Element == T {
         source = Array(values)
         pick = Array(repeating: false, count: source.count)
+        choose = k
+        for i in 0 ..< (k ?? 0) {
+            pick[i] = true
+        }
     }
     
-    public mutating func next() -> Array<T>? {
-        guard done == false else { return nil }
-        
-        let elements = zip(pick, source).compactMap { $0.0 ? nil : $0.1 }
-        
+    private mutating func incrementPick() -> Bool {
         var column = 0
         var carry = true
         while carry == true && column < pick.count {
@@ -73,7 +74,18 @@ public struct CombinationIterator<T>: IteratorProtocol {
             column += 1
         }
         // if we got to the end and still have to carry, we're done
-        done = carry
+        return carry
+    }
+    
+    public mutating func next() -> Array<T>? {
+        guard done == false else { return nil }
+        let elements = zip(pick, source).compactMap { $0.0 ? $0.1 : nil }
+        done = incrementPick()
+        if let k = choose {
+            while done == false && pick.count(where: { $0 }) != k {
+                done = incrementPick()
+            }
+        }
         
         return elements
     }

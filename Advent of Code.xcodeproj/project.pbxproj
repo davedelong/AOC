@@ -654,8 +654,8 @@
 		553C80C321BC2DFA0052735B /* Day 18 */ = {
 			isa = PBXGroup;
 			children = (
-				553C80C421BC2DFA0052735B /* input.txt */,
 				553C80C521BC2DFA0052735B /* 2015-Day18.swift */,
+				553C80C421BC2DFA0052735B /* input.txt */,
 			);
 			path = "Day 18";
 			sourceTree = "<group>";
