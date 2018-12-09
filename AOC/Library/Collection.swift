@@ -93,6 +93,14 @@ public extension Collection where Element: Numeric {
         return s
     }
     
+    public func product() -> Element {
+        var s = Element.init(exactly: 1)!
+        for item in self {
+            s *= item
+        }
+        return s
+    }
+    
 }
 
 public extension Collection where Element: Equatable {
