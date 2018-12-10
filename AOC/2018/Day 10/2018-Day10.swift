@@ -14,7 +14,6 @@ extension Year2018 {
         
         struct Letter {
             let character: Character
-            let width: Int
             let relativePositions: Array<(Int, Int)>
             func positions(at offset: Int) -> Set<Position> {
                 return Set(relativePositions.map { (x, y) in
@@ -33,31 +32,111 @@ extension Year2018 {
         }()
         
         let letters: Array<Letter> = [
-            Letter(character: "F", width: 6, relativePositions: [
+            Letter(character: "A", relativePositions: [
+                (2, 0), (3, 0),
+                (1, 1), (4, 1),
+                (0, 2), (5, 2), (0, 3), (5, 3), (0, 4), (5, 4),
+                (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5),
+                (0, 6), (5, 6), (0, 7), (5, 7), (0, 8), (5, 8), (0, 9), (5, 9)
+            ]),
+            Letter(character: "B", relativePositions: [
+                (0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
+                (0, 1), (5, 1), (0, 2), (5, 2), (0, 3), (5, 3),
+                (0, 4), (1, 4), (2, 4), (3, 4), (4, 4),
+                (0, 5), (5, 5), (0, 6), (5, 6), (0, 7), (5, 7), (0, 8), (5, 8),
+                (0, 9), (1, 9), (2, 9), (3, 9), (4, 9)
+            ]),
+            Letter(character: "C", relativePositions: [
+                (1, 0), (2, 0), (3, 0), (4, 0),
+                (0, 1), (5, 1),
+                (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7),
+                (0, 8), (5, 8),
+                (1, 9), (2, 9), (3, 9), (4, 9)
+            ]),
+            // don't have "D"
+            Letter(character: "E", relativePositions: [
+                (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0),
+                (0, 1), (0, 2), (0, 3),
+                (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4),
+                (0, 5), (0, 6), (0, 7), (0, 8),
+                (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9)
+            ]),
+            Letter(character: "F", relativePositions: [
                 (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0),
                 (0, 1), (0, 2), (0, 3),
                 (0, 4), (1, 4), (2, 4), (3, 4), (4, 4),
                 (0, 5), (0, 6), (0, 7), (0, 8), (0, 9)
             ]),
-            Letter(character: "K", width: 6, relativePositions: [
+            Letter(character: "G", relativePositions: [
+                (1, 0), (2, 0), (3, 0), (4, 0),
+                (0, 1), (5, 1),
+                (0, 2), (0, 3), (0, 4),
+                (0, 5), (3, 5), (4, 5), (5, 5),
+                (0, 6), (5, 6), (0, 7), (5, 7),
+                (0, 8), (4, 8), (5, 8),
+                (1, 9), (2, 9), (3, 9), (5, 9)
+            ]),
+            Letter(character: "H", relativePositions: [
+                (0, 0), (5, 0), (0, 1), (5, 1), (0, 2), (5, 2), (0, 3), (5, 3),
+                (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4),
+                (0, 5), (5, 5), (0, 6), (5, 6), (0, 7), (5, 7), (0, 8), (5, 8), (0, 9), (5, 9)
+            ]),
+            // missing "I"
+            Letter(character: "J", relativePositions: [
+                (3, 0), (4, 0), (5, 0),
+                (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6),
+                (0, 7), (4, 7), (0, 8), (4, 8),
+                (1, 9), (2, 9), (3, 9)
+            ]),
+            Letter(character: "K", relativePositions: [
                 (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0,9),
                 (5, 0), (4, 1), (3, 2), (2, 3), (1, 4),
                 (1, 5), (2, 6), (3, 7), (4, 8), (5, 9)
             ]),
-            Letter(character: "L", width: 6, relativePositions: [
+            Letter(character: "L", relativePositions: [
                 (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9),
                 (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9)
             ]),
-            Letter(character: "P", width: 6, relativePositions: [
+            // missing "M"
+            Letter(character: "N", relativePositions: [
+                (0, 0), (5, 0),
+                (0, 1), (1, 1), (5, 1),
+                (0, 2), (1, 2), (5, 2),
+                (0, 3), (2, 3), (5, 3),
+                (0, 4), (2, 4), (5, 4),
+                (0, 5), (3, 5), (5, 5),
+                (0, 6), (3, 6), (5, 6),
+                (0, 7), (4, 7), (5, 7),
+                (0, 8), (4, 8), (5, 8),
+                (0, 9), (5, 9)
+            ]),
+            // missing "O"
+            Letter(character: "P", relativePositions: [
                 (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9),
                 (1, 0), (2, 0), (3, 0), (4, 0), (5, 1), (5, 2), (5, 3),
                 (1, 4), (2, 4), (3, 4), (4, 4)
             ]),
-            Letter(character: "X", width: 6, relativePositions: [
+            // missing "Q"
+            Letter(character: "R", relativePositions: [
+                (0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
+                (0, 1), (5, 1), (0, 2), (5, 2), (0, 3), (5, 3),
+                (0, 4), (1, 4), (2, 4), (3, 4), (4, 4),
+                (0, 5), (3, 5), (0, 6), (4, 6),
+                (0, 7), (4, 7), (0, 8), (5, 8), (0, 9), (5, 9)
+            ]),
+            // missing "S", "T", "U", "V", "W"
+            Letter(character: "X", relativePositions: [
                 (0, 0), (0, 1), (1, 2), (1, 3), (2, 4),
                 (5, 0), (5, 1), (4, 2), (4, 3), (3, 4),
                 (2, 5), (1, 6), (1, 7), (0, 8), (0, 9),
                 (3, 5), (4, 6), (4, 7), (5, 8), (5, 9)
+            ]),
+            // missing "Y"
+            Letter(character: "Z", relativePositions: [
+                (0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0),
+                (5, 1), (5, 2), (4, 3), (3, 4),
+                (2, 5), (1, 6), (0, 7), (0, 8),
+                (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9)
             ])
         ]
         
@@ -99,13 +178,6 @@ extension Year2018 {
             var finalPositions = Set(d.map { $0.0 })
             let (positionOffset, _) = Position.extremes(of: finalPositions)
             finalPositions = Set(finalPositions.map { Position(x: $0.x - positionOffset.x, y: $0.y - positionOffset.y) })
-//            print(positions: finalPositions)
-//
-//            for letter in letters {
-//                Swift.print("\(letter.character)-----------------")
-//                print(positions: letter.positions(at: 0))
-//            }
-            
             let (_, maxX) = finalPositions.map { $0.x }.extremes()
             
             var word = ""
@@ -115,7 +187,8 @@ extension Year2018 {
                     let letterPositions = letter.positions(at: offset)
                     if letterPositions.isSubset(of: finalPositions) {
                         word.append(letter.character)
-                        offset += letter.width + 1
+                        offset += 7 // letters are 6 characters wide, followed by 2 spaces
+                        // the second space is accounted for below
                         break
                     }
                 }
