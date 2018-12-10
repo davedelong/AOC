@@ -31,6 +31,10 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     public var colCount: Int { return data.first?.count ?? 0 }
     public let hashValue: Int
     
+    public func copy() -> Matrix<T> {
+        return Matrix(data)
+    }
+    
     public func row(_ r: Int) -> Array<T> {
         return data[r]
     }
