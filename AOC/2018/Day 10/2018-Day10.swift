@@ -157,7 +157,7 @@ extension Year2018 {
                     lastY = gridPoint.y
                 }
                 if positions.contains(gridPoint) {
-                    row.append("#")
+                    row.append("\u{2588}")
                 } else {
                     row.append(" ")
                 }
@@ -194,6 +194,8 @@ extension Year2018 {
                 }
                 offset += 1
             }
+            
+            print(positions: finalPositions)
             
             return (word, "\(iterationCount)")
         }
