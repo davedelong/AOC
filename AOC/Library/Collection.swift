@@ -121,6 +121,22 @@ public extension Collection where Element: Numeric {
     
 }
 
+public extension Collection where Element: Comparable {
+    
+    public func extremes() -> (Element, Element) {
+        var minElement = self[startIndex]
+        var maxElement = self[startIndex]
+        
+        for element in dropFirst() {
+            minElement = Swift.min(minElement, element)
+            maxElement = Swift.max(maxElement, element)
+        }
+        
+        return (minElement, maxElement)
+    }
+    
+}
+
 public extension Collection where Element: Equatable {
     
     public func consecutivelyEqualSubsequences() -> Array<SubSequence> {

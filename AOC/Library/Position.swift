@@ -56,8 +56,8 @@ public struct Position: Hashable {
     public let y: Int
     
     public static func all(in xRange: ClosedRange<Int>, _ yRange: ClosedRange<Int>) -> Array<Position> {
-        return xRange.flatMap { x -> Array<Position> in
-            return yRange.map { Position(x: x, y: $0) }
+        return yRange.flatMap { y -> Array<Position> in
+            return xRange.map { Position(x: $0, y: y) }
         }
     }
     
