@@ -81,6 +81,24 @@ public extension Collection {
         return abc.map { ($0.0, $0.1, $1) }
     }
     
+    public func partition(where matches: (Element) -> Bool) -> Array<SubSequence> {
+        var final = Array<SubSequence>()
+        var rangeStart = startIndex
+        var current = index(after: startIndex)
+        while current < endIndex {
+            let element = self[current]
+            if matches(element) {
+                final.append(self[rangeStart ..< current])
+                rangeStart = current
+            }
+            current = index(after: current)
+        }
+        if rangeStart < endIndex {
+            final.append(self[rangeStart..<endIndex])
+        }
+        return final
+    }
+    
 }
 
 public extension Collection where Element: Numeric {

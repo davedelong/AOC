@@ -35,4 +35,8 @@ public extension Character {
         }
     }
     
+    public var isUppercase: Bool {
+        return uppercased == self
+    }
+    
 }
