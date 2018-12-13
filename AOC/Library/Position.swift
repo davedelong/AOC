@@ -51,7 +51,7 @@ public enum Heading: CaseIterable {
 
 public struct Position: Hashable {
     public static func ==(lhs: Position, rhs: Position) -> Bool { return lhs.x == rhs.x && lhs.y == rhs.y }
-    public var hashValue: Int { return x * 1000 + y}
+
     public let x: Int
     public let y: Int
     
