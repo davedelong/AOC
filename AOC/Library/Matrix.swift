@@ -25,7 +25,7 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         return rowsEqual.reduce(true) { $0 && $1 }
     }
     
-    private var data: Array<Array<T>>
+    internal private(set) var data: Array<Array<T>>
     
     public var rowCount: Int { return data.count }
     public var colCount: Int { return data.first?.count ?? 0 }
@@ -96,6 +96,20 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         }
         
         return Matrix(newData)
+    }
+    
+    public subscript(_ row: Int, _ col: Int) -> T {
+        get { return data[row][col] }
+        set { data[row][col] = newValue }
+    }
+    
+    public subscript(_ coordinate: Position) -> T {
+        get { return data[coordinate.row][coordinate.col] }
+        set { data[coordinate.row][coordinate.col] = newValue }
+    }
+    
+    public func has(_ coordinate: Position) -> Bool {
+        return coordinate.row >= 0 && coordinate.row < rowCount && coordinate.col >= 0 && coordinate.col < colCount
     }
     
     public func get(_ row: Int, col: Int) -> T {
