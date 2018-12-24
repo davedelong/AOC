@@ -13,7 +13,7 @@ public protocol Year {
     var days: Array<Day> { get }
 }
 
-public class Day {
+open class Day {
     public enum InputSource {
         case none
         case raw(String)

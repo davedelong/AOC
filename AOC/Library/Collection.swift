@@ -99,6 +99,10 @@ public extension Collection {
         return final
     }
     
+    public func consecutivePairs() -> Array<(Element, Element)> {
+        return Array(zip(self, dropFirst()))
+    }
+    
 }
 
 public extension Collection where Element: Numeric {
@@ -133,6 +137,11 @@ public extension Collection where Element: Comparable {
         }
         
         return (minElement, maxElement)
+    }
+    
+    public func range() -> ClosedRange<Element> {
+        let (min, max) = extremes()
+        return min...max
     }
     
 }
@@ -197,6 +206,18 @@ public extension Array {
         self.reserveCapacity(count)
         for _ in 0 ..< count {
             self.append(elementProducer())
+        }
+    }
+    
+}
+
+public extension MutableCollection {
+    
+    public mutating func mapInPlace(_ mapper: (Element) -> Element) {
+        var index = startIndex
+        while index != endIndex {
+            self[index] = mapper(self[index])
+            index = self.index(after: index)
         }
     }
     
