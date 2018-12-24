@@ -176,23 +176,28 @@ extension Year2018 {
             }
             
             var finalPositions = Set(d.map { $0.0 })
-            let (positionOffset, _) = Position.extremes(of: finalPositions)
+            let (positionOffset, positionSize) = Position.extremes(of: finalPositions)
+            
+            // shift everything to be anchored at (0,0)
             finalPositions = Set(finalPositions.map { Position(x: $0.x - positionOffset.x, y: $0.y - positionOffset.y) })
-            let (_, maxX) = finalPositions.map { $0.x }.extremes()
+            let boundingWidth = positionSize.x - positionOffset.x
             
             var word = ""
-            var offset = 0
-            while offset < maxX {
+            
+            var foundLetter = true
+            while foundLetter == true {
+                foundLetter = false // reset for this loop
+                
+                let horizontalOffsetOfNextLetter = word.count * 8
+                guard horizontalOffsetOfNextLetter < boundingWidth else { continue }
                 for letter in letters {
-                    let letterPositions = letter.positions(at: offset)
+                    let letterPositions = letter.positions(at: horizontalOffsetOfNextLetter)
                     if letterPositions.isSubset(of: finalPositions) {
                         word.append(letter.character)
-                        offset += 7 // letters are 6 characters wide, followed by 2 spaces
-                        // the second space is accounted for below
+                        foundLetter = true
                         break
                     }
                 }
-                offset += 1
             }
             
             print(positions: finalPositions)

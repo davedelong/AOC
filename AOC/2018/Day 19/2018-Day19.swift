@@ -148,8 +148,8 @@ extension Year2018 {
             
             // every time a number divides evenly in to our target number, we add it to our final answer
             // this means we're finding the sum of every divisor of our target number
+             */
         }
-        */
         
         /*
       00   addi 2 16 2        pc = pc + 16

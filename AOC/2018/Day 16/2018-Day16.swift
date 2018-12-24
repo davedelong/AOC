@@ -25,84 +25,52 @@ extension Year2018 {
                               gtir, gtri, gtrr,
                               eqir, eqri, eqrr]
             static let addr = Opcode(name: "addr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] + regs[inst[B]]
-                return new
+                regs[inst[C]] = regs[inst[A]] + regs[inst[B]]
             }
             static let addi = Opcode(name: "addi") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] + inst[B]
-                return new
+                regs[inst[C]] = regs[inst[A]] + inst[B]
             }
             static let mulr = Opcode(name: "mulr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] * regs[inst[B]]
-                return new
+                regs[inst[C]] = regs[inst[A]] * regs[inst[B]]
             }
             static let muli = Opcode(name: "muli") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] * inst[B]
-                return new
+                regs[inst[C]] = regs[inst[A]] * inst[B]
             }
             static let banr = Opcode(name: "banr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] & regs[inst[B]]
-                return new
+                regs[inst[C]] = regs[inst[A]] & regs[inst[B]]
             }
             static let bani = Opcode(name: "bani") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] & inst[B]
-                return new
+                regs[inst[C]] = regs[inst[A]] & inst[B]
             }
             static let borr = Opcode(name: "borr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] | regs[inst[B]]
-                return new
+                regs[inst[C]] = regs[inst[A]] | regs[inst[B]]
             }
             static let bori = Opcode(name: "bori") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] | inst[B]
-                return new
+                regs[inst[C]] = regs[inst[A]] | inst[B]
             }
             static let setr = Opcode(name: "setr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]]
-                return new
+                regs[inst[C]] = regs[inst[A]]
             }
             static let seti = Opcode(name: "seti") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = inst[A]
-                return new
+                regs[inst[C]] = inst[A]
             }
             static let gtir = Opcode(name: "gtir") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = inst[A] > regs[inst[B]] ? 1 : 0
-                return new
+                regs[inst[C]] = inst[A] > regs[inst[B]] ? 1 : 0
             }
             static let gtri = Opcode(name: "gtri") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] > inst[B] ? 1 : 0
-                return new
+                regs[inst[C]] = regs[inst[A]] > inst[B] ? 1 : 0
             }
             static let gtrr = Opcode(name: "gtrr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] > regs[inst[B]] ? 1 : 0
-                return new
+                regs[inst[C]] = regs[inst[A]] > regs[inst[B]] ? 1 : 0
             }
             static let eqir = Opcode(name: "eqir") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = inst[A] == regs[inst[B]] ? 1 : 0
-                return new
+                regs[inst[C]] = inst[A] == regs[inst[B]] ? 1 : 0
             }
             static let eqri = Opcode(name: "eqri") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] == inst[B] ? 1 : 0
-                return new
+                regs[inst[C]] = regs[inst[A]] == inst[B] ? 1 : 0
             }
             static let eqrr = Opcode(name: "eqrr") { (regs, inst) in
-                var new = regs
-                new[inst[C]] = regs[inst[A]] == regs[inst[B]] ? 1 : 0
-                return new
+                regs[inst[C]] = regs[inst[A]] == regs[inst[B]] ? 1 : 0
             }
             
             static func ==(lhs: Opcode, rhs: Opcode) -> Bool {
@@ -110,11 +78,12 @@ extension Year2018 {
             }
             
             let name: String
-            let execute: (Registers, Array<Int>) -> Registers
+            let execute: (inout Registers, Array<Int>) -> Void
             var hashValue: Int { return name.hashValue }
             
             func matches(_ change: Change) -> Bool {
-                let produced = execute(change.before, change.instructions)
+                var produced = change.before
+                execute(&produced, change.instructions)
                 return produced == change.after
             }
         }
@@ -190,7 +159,7 @@ extension Year2018 {
             for instruction in instructions.lines {
                 let raw = instruction.words.integers
                 let code = definitiveLookup[raw[0]]!
-                registers = code.execute(registers, raw)
+                code.execute(&registers, raw)
             }
             
             return "\(registers[0])"
