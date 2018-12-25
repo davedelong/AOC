@@ -95,8 +95,8 @@ class Test2018: XCTestCase {
         let d = Year2018.Day11()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "243,64")
+        XCTAssertEqual(p2, "90,101,15")
     }
     
     func testDay12() {
@@ -111,8 +111,8 @@ class Test2018: XCTestCase {
         let d = Year2018.Day13()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "124,130")
+        XCTAssertEqual(p2, "143,123")
     }
     
     func testDay14() {
@@ -127,8 +127,8 @@ class Test2018: XCTestCase {
         let d = Year2018.Day15()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "195774")
+        XCTAssertEqual(p2, "37272")
     }
     
     func testDay16() {
@@ -159,16 +159,16 @@ class Test2018: XCTestCase {
         let d = Year2018.Day19()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "1836")
+        XCTAssertEqual(p2, "12690000")
     }
     
     func testDay20() {
         let d = Year2018.Day20()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "3958")
+        XCTAssertEqual(p2, "8566")
     }
     
     func testDay21() {
@@ -183,16 +183,16 @@ class Test2018: XCTestCase {
         let d = Year2018.Day22()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "11843")
+        XCTAssertEqual(p2, "1078")
     }
     
     func testDay23() {
         let d = Year2018.Day23()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "297")
+        XCTAssertEqual(p2, "126233088")
     }
     
     func testDay24() {
