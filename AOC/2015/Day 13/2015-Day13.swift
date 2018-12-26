@@ -21,7 +21,7 @@ extension Year2015 {
                 let m = r.match(l)!
                 let person1 = m[1]!
                 let multiplier = m[2] == "gain" ? 1 : -1
-                let points = Int(m[3]!)!
+                let points = m.int(3)!
                 let person2 = m[4]!
                 
                 return (person1, person2, points * multiplier)

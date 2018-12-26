@@ -36,12 +36,12 @@ extension Year2018 {
                 let p2 = m[3]!
                 
                 if p1 == "x" && p2 == "y" {
-                    let x = Int(m[2]!)!
-                    let yRange = Int(m[4]!)!...Int(m[5]!)!
+                    let x = m.int(2)!
+                    let yRange = m.int(4)!...m.int(5)!
                     positions.formUnion(yRange.map { Position(x: x, y: $0) })
                 } else if p1 == "y" && p2 == "x" {
-                    let y = Int(m[2]!)!
-                    let xRange = Int(m[4]!)!...Int(m[5]!)!
+                    let y = m.int(2)!
+                    let xRange = m.int(4)!...m.int(5)!
                     positions.formUnion(xRange.map { Position(x: $0, y: y) })
                 }
             }

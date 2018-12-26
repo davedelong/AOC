@@ -98,7 +98,7 @@ extension Year2018 {
             return input.lines.raw.compactMap { line -> Instruction? in
                 guard let m = r.match(line) else { return nil }
                 guard let code = codes[m[1]!] else { return nil }
-                return Instruction(opcode: code, arguments: [Int(m[2]!)!, Int(m[3]!)!, Int(m[4]!)!])
+                return Instruction(opcode: code, arguments: [m.int(2)!, m.int(3)!, m.int(4)!])
             }
         }()
         

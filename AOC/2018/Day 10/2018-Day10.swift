@@ -27,7 +27,7 @@ extension Year2018 {
             let r = Regex(pattern: "position=<\\s*(-?\\d+),\\s*(-?\\d+)> velocity=<\\s*(-?\\d+),\\s*(-?\\d+)>")
             return input.lines.raw.map { l -> (Position, Position) in
                 let m = r.match(l)!
-                return (Position(x: Int(m[1]!)!, y: Int(m[2]!)!), Position(x: Int(m[3]!)!, y: Int(m[4]!)!))
+                return (Position(x: m.int(1)!, y: m.int(2)!), Position(x: m.int(3)!, y: m.int(4)!))
             }
         }()
         

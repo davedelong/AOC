@@ -31,7 +31,7 @@ extension Year2015 {
             var g = Dictionary<Edge, Int>()
             for line in input.lines.raw {
                 let m = r.match(line)!
-                g[Pair(m[1]!, m[2]!)] = Int(m[3]!)!
+                g[Pair(m[1]!, m[2]!)] = m.int(3)!
             }
             return g
         }()

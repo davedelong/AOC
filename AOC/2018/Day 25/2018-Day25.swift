@@ -10,40 +10,22 @@ extension Year2018 {
 
     public class Day25: Day {
         
-        struct Point: Hashable {
-            let x: Int
-            let y: Int
-            let z: Int
-            let t: Int
-            
-            func distance(to other: Point) -> Int {
-                let xD = abs(x - other.x)
-                let yD = abs(y - other.y)
-                let zD = abs(z - other.z)
-                let tD = abs(t - other.t)
-                return xD + yD + zD + tD
-            }
-        }
-        
-        typealias Constellation = Set<Point>
+        typealias Constellation = Set<Point4>
         
         public init() { super.init(inputSource: .file(#file)) }
         
-        lazy var points: Set<Point> = {
-            return Set(input.lines.raw.map { line -> Point in
-                let ints = line.components(separatedBy: ",").map { Int($0)! }
-                return Point(x: ints[0], y: ints[1], z: ints[2], t: ints[3])
-            })
+        lazy var points: Set<Point4> = {
+            return Set(input.lines.raw.map { Point4($0) })
         }()
         
-        private func constellation(including point: Point, all: Set<Point>) -> Constellation {
+        private func constellation(including point: Point4, all remaining: inout Set<Point4>) -> Constellation {
             var constellation = Set([point])
             var consider = [point]
-            var remaining = all
+            
             remaining.remove(point)
             
             while let point = consider.popLast() {
-                let nearby = remaining.filter { $0.distance(to: point) <= 3 }
+                let nearby = remaining.filter { $0.manhattanDistance(to: point) <= 3 }
                 remaining.subtract(nearby)
                 consider.append(contentsOf: nearby)
                 constellation.formUnion(nearby)
@@ -56,9 +38,8 @@ extension Year2018 {
             
             var constellations = Array<Constellation>()
             while let next = all.randomElement() {
-                let c = constellation(including: next, all: all)
+                let c = constellation(including: next, all: &all)
                 constellations.append(c)
-                all.subtract(c)
             }
             
             return "\(constellations.count)"

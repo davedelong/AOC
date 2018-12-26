@@ -6,6 +6,16 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
+public enum Bit {
+    case on
+    case off
+    
+    public func toggle() -> Bit {
+        if self == .on { return .off }
+        return .on
+    }
+}
+
 public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     private static func hash(_ data: Array<Array<T>>) -> Int {
         let values = data.flatMap { $0 }.map { $0.hashValue & 1 }

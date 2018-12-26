@@ -37,7 +37,7 @@ extension Year2015 {
                         p1Action = { return $0.toggle() }
                         p2Action = { $0 + 2 }
                 }
-                return Command(rowRange: Int(m[2]!)!...Int(m[4]!)!, columnRange: Int(m[3]!)!...Int(m[5]!)!, p1Action: p1Action, p2Action: p2Action)
+                return Command(rowRange: m.int(2)!...m.int(4)!, columnRange: m.int(3)!...m.int(5)!, p1Action: p1Action, p2Action: p2Action)
             }
         }()
         

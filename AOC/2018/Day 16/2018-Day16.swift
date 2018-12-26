@@ -101,9 +101,9 @@ extension Year2018 {
             let pieces = input.raw.components(separatedBy: "\n\n")
             let matches = r.matches(in: input.raw)
             return matches.map { m -> Change in
-                return Change(before: [Int(m[1]!)!, Int(m[2]!)!, Int(m[3]!)!, Int(m[4]!)!],
-                              instructions: [ Int(m[5]!)!, Int(m[6]!)!, Int(m[7]!)!, Int(m[8]!)! ],
-                              after: [Int(m[9]!)!, Int(m[10]!)!, Int(m[11]!)!, Int(m[12]!)!])
+                return Change(before: [m.int(1)!, m.int(2)!, m.int(3)!, m.int(4)!],
+                              instructions: [ m.int(5)!, m.int(6)!, m.int(7)!, m.int(8)!],
+                              after: [m.int(9)!, m.int(10)!, m.int(11)!, m.int(12)!])
             }
         }()
         

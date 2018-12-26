@@ -115,11 +115,11 @@ extension Year2018 {
                     }
                 }
                 
-                let units = Int(m[1]!)!
-                let hp = Int(m[2]!)!
-                let dmg = Int(m[5]!)!
+                let units = m.int(1)!
+                let hp = m.int(2)!
+                let dmg = m.int(5)!
                 let attack = Group.Attack(rawValue: m[6]!)!
-                let initiative = Int(m[7]!)!
+                let initiative = m.int(7)!
                 
                 let group = Group(order: currentOrder, kind: currentKind, units: units, hitPoints: hp, immunities: immune, weaknesses: weak, attackDamage: dmg, attack: attack, initiative: initiative)
                 groups.append(group)

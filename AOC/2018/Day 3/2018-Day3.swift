@@ -20,10 +20,10 @@ extension Year2018 {
             let claims = input.lines.raw.map { line -> Claim in
                 let match = claimRegex.match(line)!
                 
-                let x = Int(match[2]!)!
-                let y = Int(match[3]!)!
-                let width = Int(match[4]!)!
-                let height = Int(match[5]!)!
+                let x = match.int(2)!
+                let y = match.int(3)!
+                let width = match.int(4)!
+                let height = match.int(5)!
                 let positions = (x ..< (x+width)).flatMap { x -> Array<Position> in
                     return (y ..< (y+height)).map { Position(x: x, y: $0) }
                 }

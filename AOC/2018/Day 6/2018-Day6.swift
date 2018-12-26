@@ -64,7 +64,7 @@ extension Year2018 {
             let gridPoints = Position.all(in: min.x...max.x, min.y...max.y)
             
             let area = gridPoints.map { p -> Int in
-                return positions.map { $0.hamiltonianDistance(to: p) }.sum()
+                return positions.map { $0.manhattanDistance(to: p) }.sum()
             }.filter { $0 < 10000 }.count
             
             return "\(area)"

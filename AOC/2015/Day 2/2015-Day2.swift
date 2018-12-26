@@ -38,7 +38,7 @@ extension Year2015 {
             var boxes = Array<Box>()
             for line in lines {
                 let m = regex.match(line)!
-                boxes.append(Box(length: Int(m[1]!)!, width: Int(m[2]!)!, height: Int(m[3]!)!))
+                boxes.append(Box(length: m.int(1)!, width: m.int(2)!, height: m.int(3)!))
             }
             return boxes
         }()

@@ -46,6 +46,11 @@ public final class Line: StringInput {
     public lazy var trimmed: Line = { Line(raw.trimmingCharacters(in: .whitespacesAndNewlines)) }()
     public var lines: Array<Line> { return [self] }
     public lazy var words: Array<Word> = { return raw.components(separatedBy: .whitespaces).filter { $0.isEmpty == false }.map { Word($0) } }()
+    
+    public lazy var integers: Array<Int> = {
+        let matches = Regex.integers.matches(in: raw)
+        return matches.compactMap { $0.int(1) }
+    }()
 }
 
 public final class Word: StringInput {

@@ -26,11 +26,11 @@ extension Year2018 {
             var fallsAsleep: Int?
             for line in input.lines.raw {
                 let match = regex.match(line)!
-                let minute = Int(match[1]!)!
+                let minute = match.int(1)!
                 
                 let event = match[2]!
                 if event.hasPrefix("Guard") {
-                    currentGuard = Int(match[3]!)!
+                    currentGuard = match.int(3)!
                     fallsAsleep = nil
                     
                 } else if event.hasPrefix("falls") {

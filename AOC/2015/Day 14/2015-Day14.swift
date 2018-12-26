@@ -29,7 +29,7 @@ extension Year2015 {
             let r = Regex(pattern: "(.+?) can fly (\\d+) km/s for (\\d+) seconds, but then must rest for (\\d+) seconds\\.")
             let tuples = input.lines.raw.map { l -> (String, Reindeer) in
                 let m = r.match(l)!
-                return (m[1]!, Reindeer(velocity: Int(m[2]!)!, travelTime: Int(m[3]!)!, restTime: Int(m[4]!)!))
+                return (m[1]!, Reindeer(velocity: m.int(2)!, travelTime: m.int(3)!, restTime: m.int(4)!))
             }
             return Dictionary(uniqueKeysWithValues: tuples)
         }()

@@ -18,10 +18,10 @@ extension Year2015 {
             return input.lines.raw.map { l -> Dictionary<String, Int> in
                 let m = r.match(l)!
                 var info = Dictionary<String, Int>()
-                info["sue"] = Int(m[1]!)!
+                info["sue"] = m.int(1)!
                 
                 for m in attrs.matches(in: m[2]!) {
-                    info[m[1]!] = Int(m[2]!)!
+                    info[m[1]!] = m.int(2)!
                 }
                 
                 return info

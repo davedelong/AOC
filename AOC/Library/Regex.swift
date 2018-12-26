@@ -8,6 +8,8 @@
 
 public struct Regex {
     
+    public static let integers = Regex(pattern: "(-?\\d+)")
+    
     private let pattern: NSRegularExpression?
     
     public init(pattern: String, options: NSRegularExpression.Options = []) {
@@ -71,6 +73,11 @@ public struct RegexMatch {
     
     public subscript(index: Int) -> String? {
         return matches[index]
+    }
+    
+    public func int(_ index: Int) -> Int? {
+        guard let string = self[index] else { return nil }
+        return Int(string)
     }
 }
 
