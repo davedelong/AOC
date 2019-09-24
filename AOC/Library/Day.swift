@@ -25,7 +25,7 @@ open class Day {
     public lazy var input: Input = {
         switch source {
             case .none:
-                return Input("")
+                fatalError("Cannot access input when none was provided")
             case .raw(let s):
                 return Input(s)
             case .file(let f):
@@ -41,10 +41,7 @@ open class Day {
         self.source = inputSource
     }
     
-    public func run() -> (String, String) {
-        return (part1(), part2())
-    }
-    
+    public func run() -> (String, String) { return (part1(), part2()) }
     public func part1() -> String { fatalError("Implement \(#function)") }
     public func part2() -> String { fatalError("Implement \(#function)") }
 }

@@ -10,7 +10,10 @@ extension Year2018 {
 
     public class Day22: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputSource: .raw("""
+depth: 4080
+target: 14,785
+""")) }
         
         override public func part1() -> String {
             return #function

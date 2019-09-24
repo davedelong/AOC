@@ -10,7 +10,7 @@ public enum Bit {
     case on
     case off
     
-    public func toggle() -> Bit {
+    public func toggled() -> Bit {
         if self == .on { return .off }
         return .on
     }

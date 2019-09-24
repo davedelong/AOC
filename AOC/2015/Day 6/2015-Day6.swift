@@ -34,7 +34,7 @@ extension Year2015 {
                         p1Action = { _ in return .off }
                         p2Action = { max($0 - 1, 0) }
                     default:
-                        p1Action = { return $0.toggle() }
+                        p1Action = { return $0.toggled() }
                         p2Action = { $0 + 2 }
                 }
                 return Command(rowRange: m.int(2)!...m.int(4)!, columnRange: m.int(3)!...m.int(5)!, p1Action: p1Action, p2Action: p2Action)
