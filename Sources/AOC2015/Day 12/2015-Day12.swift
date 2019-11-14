@@ -10,8 +10,6 @@ import Foundation
 
 class Day12: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var json: Any = {
         let d = Data(input.raw.utf8)
         return try! JSONSerialization.jsonObject(with: d, options: [])

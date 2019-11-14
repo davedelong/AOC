@@ -77,8 +77,6 @@ Defense +3   80     0       3
         let armor: Int
     }
     
-    @objc init() { super.init(inputSource: .none) }
-    
     struct InventoryIterator: IteratorProtocol {
         
         private var weaponIndex = 0

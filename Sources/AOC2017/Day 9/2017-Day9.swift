@@ -7,8 +7,6 @@
 //
 
 class Day9: Day {
-    
-    @objc init() { super.init(inputFile: #file) }
 
     override func run() -> (String, String) {
         let source = input.raw

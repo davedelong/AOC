@@ -8,8 +8,6 @@
 
 class Day10: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     struct Letter {
         let character: Character
         let relativePositions: Array<(Int, Int)>

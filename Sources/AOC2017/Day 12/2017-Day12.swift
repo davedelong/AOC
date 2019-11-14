@@ -22,9 +22,9 @@ class Day12: Day {
     
     var nodesByName: Dictionary<String, GKGraphNode>
     
-    @objc init() {
+    @objc override init() {
         nodesByName = Dictionary()
-        super.init(inputSource: .file(#file))
+        super.init()
         let connections = input.lines.raw.map { line -> (String, [String]) in
             let pieces = line.components(separatedBy: " <-> ")
             return (pieces[0], pieces[1].components(separatedBy: ", "))

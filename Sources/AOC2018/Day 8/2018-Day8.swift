@@ -22,8 +22,6 @@ class Day8: Day {
         }
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     private func parse<I: IteratorProtocol>(_ integers: inout I) -> Node where I.Element == Int {
         let childCount = integers.next()!
         let metadataCount = integers.next()!

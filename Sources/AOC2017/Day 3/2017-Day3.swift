@@ -8,7 +8,7 @@
 
 class Day3: Day {
     
-    @objc init() { super.init(inputSource: .raw("277678")) }
+    @objc override init() { super.init(rawInput: "277678") }
     
     override func part1() -> String {
         let integer = input.integer!

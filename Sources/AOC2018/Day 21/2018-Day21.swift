@@ -100,8 +100,6 @@ class Day21: Day {
         }
     }()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     private func testInstructions(_ r0: Int) -> Int {
         var registers = [r0, 0, 0, 0, 0, 0]
         var pc = 0

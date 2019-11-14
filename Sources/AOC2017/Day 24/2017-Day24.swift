@@ -32,8 +32,8 @@ class Day24: Day {
     
     var ports: Set<Port> = []
     
-    @objc init() {
-        super.init(inputSource: .file(#file))
+    @objc override init() {
+        super.init()
         ports = Set(input.lines.raw.enumerated().map { Port(id: $0.offset, string: $0.element) })
     }
     

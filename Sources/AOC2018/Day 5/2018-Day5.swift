@@ -8,8 +8,6 @@
 
 class Day5: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     private func reduce(_ chars: Array<Character>, skipping: Set<Character> = []) -> Array<Character> {
         let uppers = Array(String(chars).uppercased())
         

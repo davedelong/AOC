@@ -10,8 +10,6 @@ class Day25: Day {
     
     typealias Constellation = Set<Point4>
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var points: Set<Point4> = {
         return Set(input.lines.raw.map { Point4($0) })
     }()

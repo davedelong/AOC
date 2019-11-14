@@ -11,7 +11,7 @@ class Day14: Day {
     let day14Input = "jxqlasbh"
     var disk = Array<Array<Bool>>()
     
-    @objc init() { super.init() }
+    @objc override init() { super.init() }
 
     func knotHash(_ lengthsInput: String) -> String {
         var list = Array(0..<256)

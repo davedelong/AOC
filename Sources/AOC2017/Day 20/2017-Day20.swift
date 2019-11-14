@@ -37,8 +37,6 @@ class Day20: Day {
         }
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     func particles() -> Array<Particle> {
         let rawParticles = input.lines.raw
         return rawParticles.enumerated().map { Particle(id: $0, line: $1) }

@@ -17,9 +17,8 @@ fileprivate class Op {
 
 class Day7: Day {
     
-    @objc init() {
-//            super.init(inputSource: .raw(
-//                """
+    @objc override init() {
+//            super.init(rawInput: """
 //Step C must be finished before step A can begin.
 //Step C must be finished before step F can begin.
 //Step A must be finished before step B can begin.
@@ -31,7 +30,7 @@ class Day7: Day {
 //                ))
         
         
-        super.init(inputSource: .file(#file))
+        super.init()
         
     }
     

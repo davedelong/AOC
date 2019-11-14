@@ -6,43 +6,55 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
+fileprivate let yearRegex = Regex(pattern: #"/AOC(\d+)/"#)
+fileprivate let dayRegex = Regex(pattern: #".+?Day (\d+).+?\.txt$"#)
+fileprivate let classNameRegex = Regex(pattern: #"AOC(\d+).Day(\d+)"#)
+
 open class Day: NSObject {
-    public enum InputSource {
-        case none
-        case raw(String)
-        case file(StaticString)
-    }
     
-    private let source: InputSource
-    
-    public private(set) lazy var input: Input = {
-        switch source {
-            case .none:
-                fatalError("Cannot access input when none was provided")
-            case .raw(let s):
-                return Input(s)
-            case .file(let f):
-                var components = ("\(f)" as NSString).pathComponents
-                _ = components.removeLast()
-                components.append("input.txt")
-                let path = NSString.path(withComponents: components)
-                return Input(file: path)
+    private static let inputFiles: Dictionary<Pair<Int>, String> = {
+        let root = URL(fileURLWithPath: "\(#file)").deletingLastPathComponent().deletingLastPathComponent()
+        let enumerator = FileManager.default.enumerator(at: root, includingPropertiesForKeys: nil)
+        
+        var files = Dictionary<Pair<Int>, String>()
+        
+        while let next = enumerator?.nextObject() as? URL {
+            guard let year = yearRegex.match(next.path)?.int(1) else { continue }
+            guard let day = dayRegex.match(next.path)?.int(1) else { continue }
+            
+            files[Pair(year, day)] = next.path
+            print("Found \(year)-\(day) -> \(next.path)")
         }
+        
+        return files
     }()
     
+    public let input: Input
     
-    
-    public init(inputSource: InputSource = .none) {
-        self.source = inputSource
+    public init(rawInput: String) {
+        self.input = Input(rawInput)
         super.init()
     }
     
-    public init(inputFile: StaticString) {
-        self.source = .file(inputFile)
+    public override init() {
+        let name = String(cString: class_getName(type(of: self)))
+        let match = name.match(classNameRegex)
+        let year = match.int(1)!
+        let day = match.int(2)!
+        
+        if let onDiskInputFile = Day.inputFiles[Pair(year, day)] {
+            self.input = Input(file: onDiskInputFile)
+        } else {
+            self.input = Input("")
+        }
         super.init()
     }
     
-    open func run() -> (String, String) { return (part1(), part2()) }
+    open func run() -> (String, String) {
+        return autoreleasepool {
+            (part1(), part2())
+        }
+    }
     open func part1() -> String { fatalError("Implement \(#function)") }
     open func part2() -> String { fatalError("Implement \(#function)") }
 }

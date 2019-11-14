@@ -8,10 +8,10 @@
 
 class Day11: Day {
     
-    @objc init() { super.init(inputSource: .raw("5468")) }
+    @objc override init() { super.init(rawInput: "5468") }
     
     override func run() -> (String, String) {
-        return approach2()
+        return approach1()
     }
     
     private func approach2() -> (String, String) {

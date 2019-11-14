@@ -13,8 +13,6 @@ class Day7: Day {
     typealias Registers = Dictionary<String, UInt16>
     typealias Command = (Registers) -> Registers
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var commands: Array<Command> = {
         let r = Regex(pattern: #"(NOT (.+?)|(\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)"#)
         return input.lines.raw.map { l -> Command in

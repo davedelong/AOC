@@ -27,8 +27,6 @@ class Day22: Day {
 
     var grid = Dictionary<Position, State>()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     func resetGrid() {
         grid.removeAll()
         let rawGrid = input.lines.raw

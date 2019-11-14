@@ -8,10 +8,10 @@
 
 class Day22: Day {
     
-    @objc init() { super.init(inputSource: .raw("""
+    @objc override init() { super.init(rawInput:"""
 depth: 4080
 target: 14,785
-""")) }
+""") }
     
     override func part1() -> String {
         return #function

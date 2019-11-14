@@ -17,8 +17,8 @@ class Day21: Day {
         [.on,  .on,  .on]
     ])
 
-    @objc init() {
-        super.init(inputSource: .file(#file)) 
+    @objc override init() {
+        super.init()
         let rawRules = input.lines.raw
         for rawRule in rawRules {
             let pieces = rawRule.components(separatedBy: " => ")

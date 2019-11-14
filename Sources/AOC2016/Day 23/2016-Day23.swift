@@ -7,8 +7,6 @@
 //
 
 class Day23: Day {
-        
-	@objc init() { super.init(inputFile: #file) }
 	
 	override func part1() -> String {
 		return #function

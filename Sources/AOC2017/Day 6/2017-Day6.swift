@@ -29,9 +29,7 @@ class Day6: Day {
         }
     }
     
-    @objc init() {
-        super.init(inputSource: .raw("2 8 8 5 4 2 3 1 5 5 1 2 15 13 5 14"))
-    }
+    @objc override init() { super.init(rawInput: "2 8 8 5 4 2 3 1 5 5 1 2 15 13 5 14") }
     
     override func part1() -> String {
         var current = Seen(input.words.integers)

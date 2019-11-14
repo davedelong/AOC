@@ -10,8 +10,8 @@ class Day13: Day {
 
     var firewall = Dictionary<Int, Int>()
     
-    @objc init() {
-        super.init(inputSource: .file(#file))
+    @objc override init() {
+        super.init()
         for line in input.lines.raw {
             let p = line.components(separatedBy: ": ")
             firewall[Int(p[0])!] = Int(p[1])!

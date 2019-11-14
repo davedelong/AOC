@@ -8,8 +8,8 @@
 
 class Day9: Day {
     
-    @objc init() {
-//            super.init(inputSource: .raw(
+    @objc override init() {
+//            super.init(rawInput: .raw(
 //            """
 //London to Dublin = 464
 //London to Belfast = 518
@@ -17,7 +17,7 @@ class Day9: Day {
 //"""
 //            ))
         
-        super.init(inputSource: .file(#file))
+        super.init()
     }
     
     typealias Edge = Pair<String>

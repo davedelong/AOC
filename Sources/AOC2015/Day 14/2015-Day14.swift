@@ -21,8 +21,6 @@ class Day14: Day {
         let restTime: Int
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var reindeer: Dictionary<String, Reindeer> = {
         let r = Regex(pattern: #"(.+?) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds\."#)
         let tuples = input.lines.raw.map { l -> (String, Reindeer) in

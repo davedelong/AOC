@@ -8,8 +8,6 @@
 
 class Day4: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         let answer = input.rawLineWords.filter { $0.count == Set($0).count }.count
         return "\(answer)"

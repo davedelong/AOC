@@ -8,8 +8,6 @@
 
 class Day1: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         var floor = 0
         for char in input.characters {

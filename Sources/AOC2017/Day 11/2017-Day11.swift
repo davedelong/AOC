@@ -50,8 +50,8 @@ class Day11: Day {
     
     var directions = Array<Direction>()
     
-    @objc init() {
-        super.init(inputSource: .file(#file))
+    @objc override init() {
+        super.init()
         directions = input.raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
     }
 

@@ -8,8 +8,6 @@
 
 class Day9: Day {
     
-    @objc init() { super.init(inputSource: .none) }
-    
     private func computeHighestScore(players: Int, lastMarbleScore: Int) -> Int {
         var scores = Array(repeating: 0, count: players)
         var currentPlayer = 0

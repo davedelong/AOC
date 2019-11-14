@@ -8,8 +8,6 @@
 
 class Day3: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var headings: Array<Heading> = {
         return input.characters.compactMap { char -> Heading? in
             switch char {

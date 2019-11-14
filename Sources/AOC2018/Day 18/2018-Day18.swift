@@ -8,8 +8,6 @@
 
 class Day18: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     typealias Grid = Dictionary<Position, AcreContents>
     
     enum AcreContents: Character {

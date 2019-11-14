@@ -8,8 +8,6 @@
 
 class Day1: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     func checksum(_ ints: Array<Int>, offset: Int) -> String {
         let consecutivelyEqual = ints.enumerated().map { (index, element) -> Int in
             let pair = ints[(index + offset) % ints.count]

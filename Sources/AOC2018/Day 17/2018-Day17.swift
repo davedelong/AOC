@@ -8,10 +8,9 @@
 
 class Day17: Day {
     
-    @objc init() {
+    @objc override init() {
         
-//            super.init(inputSource: .raw(
-//                """
+//            super.init(rawInput: """
 //x=495, y=2..7
 //y=7, x=495..501
 //x=501, y=3..7
@@ -22,7 +21,7 @@ class Day17: Day {
 //y=13, x=498..504
 //"""))
         
-        super.init(inputSource: .file(#file))
+        super.init()
     }
     
     lazy var clayPositions: Set<Position> = {

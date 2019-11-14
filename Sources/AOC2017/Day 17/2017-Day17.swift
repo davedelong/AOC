@@ -10,7 +10,7 @@ class Day17: Day {
 
     let integer = 314
     
-    @objc init() { super.init() }
+    @objc override init() { super.init() }
 
     override func part1() -> String {
         var buffer = [0]

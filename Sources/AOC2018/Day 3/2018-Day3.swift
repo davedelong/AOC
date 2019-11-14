@@ -30,8 +30,6 @@ class Day3: Day {
         return claims
     }()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func run() -> (String, String) {
         let counts = CountedSet(counting: claims.flatMap { $0.positions })
         let part1 = counts.values.count(where: { $0 >= 2 })

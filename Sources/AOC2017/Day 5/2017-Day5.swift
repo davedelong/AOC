@@ -8,8 +8,6 @@
 
 class Day5: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         var integers = input.lines.integers
         var stepCount = 0

@@ -8,8 +8,6 @@
 
 class Day4: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var shifts: Dictionary<Int, Array<Int>> = {
         // in the returned dictionary:
         // - the key is the guard id

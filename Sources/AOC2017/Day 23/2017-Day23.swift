@@ -90,8 +90,6 @@ class Day23: Day {
         }
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         let instructions = input.rawLineWords.map { Instruction($0) }
         let p = Program(instructions: instructions)

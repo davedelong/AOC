@@ -27,8 +27,6 @@ class Day2: Day {
         }
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     lazy var boxes: Array<Box> = {
         let regex = Regex(pattern: #"(\d+)x(\d+)x(\d+)"#)
         let lines = input.lines.raw

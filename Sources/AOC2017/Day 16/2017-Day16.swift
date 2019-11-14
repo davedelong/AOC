@@ -12,8 +12,6 @@ class Day16: Day {
     lazy var commands: Array<String> = {
         return input.raw.components(separatedBy: ",")
     }()
-    
-    @objc init() { super.init(inputFile: #file) }
 
     func twist(_ input: Array<String>) -> Array<String> {
         var list = input

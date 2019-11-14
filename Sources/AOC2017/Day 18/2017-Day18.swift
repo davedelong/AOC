@@ -165,8 +165,6 @@ class Day18: Day {
     lazy var instructions: Array<Instruction> = {
         input.rawLineWords.map { Instruction(args: $0) }
     }()
-    
-    @objc init() { super.init(inputFile: #file) }
 
     override func part1() -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)

@@ -8,9 +8,8 @@
 
 class Day6: Day {
     
-    @objc init() {
-//            super.init(inputSource: .raw(
-//                """
+    @objc override init() {
+//            super.init(rawInput: """
 //1, 1
 //1, 6
 //8, 3
@@ -19,7 +18,7 @@ class Day6: Day {
 //8, 9
 //"""))
         
-        super.init(inputSource: .file(#file))
+        super.init()
     }
     
     lazy var positions: Dictionary<String, Position> = {

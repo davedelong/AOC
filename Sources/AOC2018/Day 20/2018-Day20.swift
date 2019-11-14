@@ -25,8 +25,6 @@ class Day20: Day {
         let next: Array<Node>
     }
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         return #function
     }

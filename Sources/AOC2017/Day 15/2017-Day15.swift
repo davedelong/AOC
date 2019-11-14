@@ -8,7 +8,7 @@
 
 class Day15: Day {
 
-    @objc init() { super.init() }
+    @objc override init() { super.init() }
     
     func match<S1: IteratorProtocol, S2: IteratorProtocol>(a: S1, b: S2, iterations: Int) -> Int where S1.Element == Int, S2.Element == Int {
         var a1 = a; var b1 = b

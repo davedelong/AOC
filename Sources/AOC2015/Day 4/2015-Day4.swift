@@ -10,7 +10,7 @@ import CommonCrypto
 
 class Day4: Day {
     
-    @objc init() { super.init(inputSource: .raw("ckczppom")) }
+    @objc override init() { super.init(rawInput: "ckczppom") }
     
     override func part1() -> String {
         var int = 1

@@ -103,8 +103,6 @@ class Day19: Day {
         }
     }()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         var registers = [0, 0, 0, 0, 0, 0]
         var pc = 0

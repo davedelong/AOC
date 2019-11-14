@@ -12,8 +12,6 @@ class Day2: Day {
         return input.lines.words.integers
     }()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         let answer = integers.map { $0.max()! - $0.min()! }.sum()
         return "\(answer)"

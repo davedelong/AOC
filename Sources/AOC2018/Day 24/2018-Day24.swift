@@ -10,8 +10,6 @@ import Foundation
 
 class Day24: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     let wantsLogging = false
     
     enum Stalemate: Error {

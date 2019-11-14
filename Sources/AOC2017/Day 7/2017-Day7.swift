@@ -43,8 +43,6 @@ class Day7: Day {
         }
     }
 
-    @objc init() { super.init(inputFile: #file) }
-
     func makeTree() -> Node? {
         let lines = input.lines.raw
         

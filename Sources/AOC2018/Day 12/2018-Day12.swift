@@ -19,9 +19,8 @@ func get(_ index: Int) -> Element? {
 
 class Day12: Day {
     
-    @objc init() {
-//            super.init(inputSource: .raw(
-//                """
+    @objc override init() {
+//            super.init(rawInput: """
 //...## => #
 //..#.. => #
 //.#... => #
@@ -39,7 +38,7 @@ class Day12: Day {
 //"""))
 //
         
-        super.init(inputSource: .file(#file))
+        super.init()
     }
     
     lazy var fAndR: Dictionary<String, Character> = {

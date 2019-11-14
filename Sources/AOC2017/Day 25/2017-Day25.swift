@@ -29,9 +29,8 @@ class Day25: Day {
     var iterations: Int = 0
     var states = Dictionary<String, TuringState>()
     
-    @objc init() {
-        
-        super.init(inputSource: .file(#file))
+    @objc override init() {
+        super.init()
         
         let begin = Regex(pattern: #"Begin in state ([A-Z])\."#)
         let steps = Regex(pattern: #"Perform a diagnostic checksum after (\d+) steps\."#)

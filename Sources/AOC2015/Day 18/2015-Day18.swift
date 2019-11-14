@@ -8,8 +8,6 @@
 
 class Day18: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     private func around(_ r: Int, _ c: Int, inside: (Int, Int)) -> Array<(Int, Int)> {
         let around = [
             (r-1, c-1),

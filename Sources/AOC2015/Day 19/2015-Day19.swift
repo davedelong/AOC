@@ -19,8 +19,6 @@ class Day19: Day {
         return rules
     }()
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func part1() -> String {
         var seen = Set<String>()
         

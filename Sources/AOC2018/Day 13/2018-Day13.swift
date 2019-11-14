@@ -8,9 +8,8 @@
 
 class Day13: Day {
     
-    @objc init() {
-//            super.init(inputSource: .raw(
-//                """
+    @objc override init() {
+//            super.init(rawInput: """
 ///->-\\
 //|   |  /----\\
 //| /-+--+-\\  |
@@ -18,7 +17,7 @@ class Day13: Day {
 //\\-+-/  \\-+--/
 //\\------/
 //"""))
-        super.init(inputSource: .file(#file))
+        super.init()
     }
     
     override func run() -> (String, String) {

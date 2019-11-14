@@ -8,8 +8,6 @@
 
 class Day17: Day {
     
-    @objc init() { super.init(inputFile: #file) }
-    
     override func run() -> (String, String) {
         let containers = input.lines.integers
         
