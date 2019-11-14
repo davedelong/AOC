@@ -6,22 +6,16 @@
 //  Copyright © 2015 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
-extension Year2015 {
-
-    public class Day24: Day {
-        
-        public init() { super.init(inputFile: #file) }
-        
-        override public func part1() -> String {
-            return #function
-        }
-        
-        override public func part2() -> String {
-            return #function
-        }
-        
+class Day24: Day {
+    
+    init() { super.init(inputFile: #file) }
+    
+    override func part1() -> String {
+        return #function
+    }
+    
+    override func part2() -> String {
+        return #function
     }
 
 }

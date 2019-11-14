@@ -6,29 +6,25 @@
 //  Copyright © 2015 Dave DeLong. All rights reserved.
 //
 
-extension Year2015 {
-
-    public class Day10: Day {
+class Day10: Day {
+    
+    init() { super.init(inputSource: .raw("1321131112")) }
+    
+    override func run() -> (String, String) {
+        var p1 = ""
         
-        public init() { super.init(inputSource: .raw("1321131112")) }
+        var data = input.characters
         
-        override public func run() -> (String, String) {
-            var p1 = ""
-            
-            var data = input.characters
-            
-            for i in 1 ... 50 {
-                let subSequences = data.consecutivelyEqualSubsequences()
-                data = subSequences.flatMap { s -> Array<Character> in
-                    return Array("\(s.count)\(s.first!)")
-                }
-                
-                if i == 40 { p1 = "\(data.count)" }
+        for i in 1 ... 50 {
+            let subSequences = data.consecutivelyEqualSubsequences()
+            data = subSequences.flatMap { s -> Array<Character> in
+                return Array("\(s.count)\(s.first!)")
             }
-            let p2 = "\(data.count)"
-            return (p1, p2)
+            
+            if i == 40 { p1 = "\(data.count)" }
         }
-        
+        let p2 = "\(data.count)"
+        return (p1, p2)
     }
-
+    
 }
