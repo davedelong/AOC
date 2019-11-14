@@ -8,7 +8,7 @@
 
 public struct Regex {
     
-    public static let integers = Regex(pattern: "(-?\\d+)")
+    public static let integers = Regex(pattern: #"(-?\d+)"#)
     
     private let pattern: NSRegularExpression?
     
@@ -87,4 +87,17 @@ public func ~= (left: Regex, right: String) -> Bool {
 
 public func ~= (left: Regex, right: String) -> RegexMatch? {
     return left.match(right)
+}
+
+public extension String {
+    
+    func match(_ pattern: String) -> RegexMatch {
+        let regex = Regex(pattern: pattern)
+        return regex.match(self)!
+    }
+    
+    func match(_ regex: Regex) -> RegexMatch {
+        return regex.match(self)!
+    }
+    
 }

@@ -95,7 +95,7 @@ class Day16: Day {
     @objc init() { super.init(inputFile: #file) }
     
     lazy var changes: Array<Change> = {
-        let r = Regex(pattern: "Before:\\s+\\[(\\d+), (\\d+), (\\d+), (\\d+)\\]\\n(\\d+) (\\d+) (\\d+) (\\d+)\\nAfter:\\s+\\[(\\d+), (\\d+), (\\d+), (\\d+)\\]")
+        let r = Regex(pattern: #"Before:\s+\[(\d+), (\d+), (\d+), (\d+)\]\n(\d+) (\d+) (\d+) (\d+)\nAfter:\s+\[(\d+), (\d+), (\d+), (\d+)\]"#)
         let pieces = input.raw.components(separatedBy: "\n\n")
         let matches = r.matches(in: input.raw)
         return matches.map { m -> Change in

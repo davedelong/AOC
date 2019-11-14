@@ -7,7 +7,7 @@
 //
 
 public typealias Position = Point2
-public typealias Vector = Point3
+public typealias XY = Point2
 
 public extension Point2 {
     

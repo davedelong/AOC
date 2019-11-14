@@ -22,9 +22,9 @@ class Day10: Day {
     
     lazy var data: Array<(Position, Position)> = {
         // position=<-41981,  21153> velocity=< 4, -2>
-        let r = Regex(pattern: "position=<\\s*(-?\\d+),\\s*(-?\\d+)> velocity=<\\s*(-?\\d+),\\s*(-?\\d+)>")
+        let r = Regex(pattern: #"position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>"#)
         return input.lines.raw.map { l -> (Position, Position) in
-            let m = r.match(l)!
+            let m = l.match(r)
             return (Position(x: m.int(1)!, y: m.int(2)!), Position(x: m.int(3)!, y: m.int(4)!))
         }
     }()

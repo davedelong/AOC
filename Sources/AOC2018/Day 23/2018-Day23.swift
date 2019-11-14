@@ -32,9 +32,9 @@ class Day23: Day {
     @objc init() { super.init(inputFile: #file) }
     
     lazy var bots: Array<Nanobot> = {
-        let r = Regex(pattern: "pos=<(-?\\d+),(-?\\d+),(-?\\d+)>, r=(\\d+)")
+        let r = Regex(pattern: #"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)"#)
         return input.lines.raw.map { line -> Nanobot in
-            let m = r.match(line)!
+            let m = line.match(r)
             return Nanobot(x: m.int(1)!, y: m.int(2)!, z: m.int(3)!, r: m.int(4)!)
         }
     }()

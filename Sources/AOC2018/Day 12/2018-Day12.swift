@@ -43,9 +43,9 @@ class Day12: Day {
     }
     
     lazy var fAndR: Dictionary<String, Character> = {
-        let r = Regex(pattern: "([\\.#]{5}) => ([\\.#])")
+        let r = Regex(pattern: #"([\.#]{5}) => ([\.#])"#)
         let pieces = input.lines.raw.map { l -> (String, Character) in
-            let m = r.match(l)!
+            let m = l.match(r)
             return (m[1]!, m[2]!.first!)
         }
         return Dictionary(uniqueKeysWithValues: pieces)

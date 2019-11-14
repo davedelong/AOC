@@ -13,9 +13,9 @@ class Day20: Day {
             return lhs.position.x == rhs.position.x && lhs.position.y == rhs.position.y && lhs.position.z == rhs.position.z
         }
         let id: Int
-        var position: Vector
-        var velocity: Vector
-        let acceleration: Vector
+        var position: Vector3
+        var velocity: Vector3
+        let acceleration: Vector3
         
         var distance: Int { return abs(position.x) + abs(position.y) + abs(position.z) }
         func hash(into hasher: inout Hasher) { hasher.combine(distance) }
@@ -23,9 +23,9 @@ class Day20: Day {
         init(id: Int, line: String) {
             let pieces = line.components(separatedBy: ", ").map { String($0.dropFirst(3).dropLast()) }
             self.id = id
-            position = Vector(pieces[0])
-            velocity = Vector(pieces[1])
-            acceleration = Vector(pieces[2])
+            position = Vector3(pieces[0])
+            velocity = Vector3(pieces[1])
+            acceleration = Vector3(pieces[2])
         }
         
         @discardableResult

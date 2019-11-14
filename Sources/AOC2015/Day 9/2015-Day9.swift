@@ -24,11 +24,11 @@ class Day9: Day {
     typealias Path = (Array<String>, Int)
     
     lazy var graph: Dictionary<Edge, Int> = {
-        let r = Regex(pattern: "(.+?) to (.+?) = (\\d+)")
+        let r = Regex(pattern: #"(.+?) to (.+?) = (\d+)"#)
         
         var g = Dictionary<Edge, Int>()
         for line in input.lines.raw {
-            let m = r.match(line)!
+            let m = line.match(r)
             g[Pair(m[1]!, m[2]!)] = m.int(3)!
         }
         return g

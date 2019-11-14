@@ -33,33 +33,33 @@ class Day25: Day {
         
         super.init(inputSource: .file(#file))
         
-        let begin = Regex(pattern: "Begin in state ([A-Z])\\.")
-        let steps = Regex(pattern: "Perform a diagnostic checksum after (\\d+) steps\\.")
+        let begin = Regex(pattern: #"Begin in state ([A-Z])\."#)
+        let steps = Regex(pattern: #"Perform a diagnostic checksum after (\d+) steps\."#)
         
-        let name = Regex(pattern: "\\s*In state ([A-Z])\\:")
-        let write = Regex(pattern: "\\s*- Write the value (\\d)\\.")
-        let move = Regex(pattern: "\\s*- Move one slot to the (left|right)\\.")
-        let state = Regex(pattern: "\\s*- Continue with state ([A-Z])\\.")
+        let name = Regex(pattern: #"\s*In state ([A-Z])\:"#)
+        let write = Regex(pattern: #"\s*- Write the value (\d)\."#)
+        let move = Regex(pattern: #"\s*- Move one slot to the (left|right)\."#)
+        let state = Regex(pattern: #"\s*- Continue with state ([A-Z])\."#)
         
         var sections = input.raw.components(separatedBy: "\n\n")
         
         let metaInfo = sections.removeFirst()
         let metaLines = metaInfo.components(separatedBy: .newlines)
         
-        startingState = begin.match(metaLines[0])![1]!
-        iterations = Int(steps.match(metaLines[1])![1]!)!
+        startingState = metaLines[0].match(begin)[1]!
+        iterations = metaLines[1].match(steps).int(1)!
         
         sections.forEach { section in
             let lines = section.components(separatedBy: .newlines)
             
-            let n = name.match(lines[0])![1]!
-            let zeroWrite = Int(write.match(lines[2])![1]!)!
-            let zeroMove = (move.match(lines[3])![1]! == "left") ? -1 : 1
-            let zeroState = state.match(lines[4])![1]!
+            let n = lines[0].match(name)[1]!
+            let zeroWrite = lines[2].match(write).int(1)!
+            let zeroMove = (lines[3].match(move)[1] == "left") ? -1 : 1
+            let zeroState = lines[4].match(state)[1]!
             
-            let oneWrite = Int(write.match(lines[6])![1]!)!
-            let oneMove = (move.match(lines[7])![1]! == "left") ? -1 : 1
-            let oneState = state.match(lines[8])![1]!
+            let oneWrite = lines[6].match(write).int(1)!
+            let oneMove = (lines[7].match(move)[1] == "left") ? -1 : 1
+            let oneState = lines[8].match(state)[1]!
             
             let s = TuringState(ifOne: (oneWrite, oneMove, oneState), ifZero: (zeroWrite, zeroMove, zeroState))
             states[n] = s

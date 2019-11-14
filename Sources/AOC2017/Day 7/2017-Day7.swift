@@ -48,7 +48,7 @@ class Day7: Day {
     func makeTree() -> Node? {
         let lines = input.lines.raw
         
-        let regex = try! NSRegularExpression(pattern: "^([^ ]+) \\((\\d+)\\)( -> (.+))?$", options: [])
+        let regex = try! NSRegularExpression(pattern: #"^([^ ]+) \((\d+)\)( -> (.+))?$"#, options: [])
         
         var nodesByName = Dictionary<String, Node>()
         for line in lines {

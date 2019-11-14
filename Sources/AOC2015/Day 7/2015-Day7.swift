@@ -16,9 +16,9 @@ class Day7: Day {
     @objc init() { super.init(inputFile: #file) }
     
     lazy var commands: Array<Command> = {
-        let r = Regex(pattern: "(NOT (.+?)|(\\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)")
+        let r = Regex(pattern: #"(NOT (.+?)|(\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)"#)
         return input.lines.raw.map { l -> Command in
-            let m = r.match(l)!
+            let m = l.match(r)
             let dst = m[8]!
             
             if let notRegister = m[2] {

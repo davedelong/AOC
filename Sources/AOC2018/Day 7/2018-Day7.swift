@@ -37,12 +37,12 @@ class Day7: Day {
     
     private func operations() -> Array<Op> {
         
-        let r = Regex(pattern: "Step ([A-Z]) must be finished before step ([A-Z]) can begin\\.")
+        let r = Regex(pattern: #"Step ([A-Z]) must be finished before step ([A-Z]) can begin\."#)
         
         var operations = Dictionary<String, Op>()
         
         for line in input.lines.raw {
-            let match = r.match(line)!
+            let match = line.match(r)
             let dName = match[1]!
             let oName = match[2]!
             

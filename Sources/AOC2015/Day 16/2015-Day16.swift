@@ -11,10 +11,10 @@ class Day16: Day {
     @objc init() { super.init(inputFile: #file) }
     
     lazy var sues: Array<Dictionary<String, Int>> = {
-        let r = Regex(pattern: "Sue (\\d+): (.+)")
-        let attrs = Regex(pattern: "([a-z]+): (\\d+)")
+        let r = Regex(pattern: #"Sue (\d+): (.+)"#)
+        let attrs = Regex(pattern: #"([a-z]+): (\d+)"#)
         return input.lines.raw.map { l -> Dictionary<String, Int> in
-            let m = r.match(l)!
+            let m = l.match(r)
             var info = Dictionary<String, Int>()
             info["sue"] = m.int(1)!
             

@@ -11,7 +11,7 @@ class Day11: Day {
     @objc init() { super.init(inputSource: .raw("hepxcrrq")) }
     
     private let illegals = Set("iol")
-    private let pairs = Regex(pattern: "(.)\\1.*(.)\\2")
+    private let pairs = Regex(pattern: #"(.)\1.*(.)\2"#)
     
     private func isValid(_ password: String) -> Bool {
         if password.any(satisfy: { illegals.contains($0) }) { return false }
