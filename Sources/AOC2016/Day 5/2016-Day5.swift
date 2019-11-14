@@ -10,7 +10,7 @@ extension Year2016 {
 
     public class Day5: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         override public func part1() -> String {
             return #function

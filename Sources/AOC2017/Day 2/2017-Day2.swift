@@ -14,7 +14,7 @@ public class Day2: Day {
         return input.lines.words.integers
     }()
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     override public func part1() -> String {
         let answer = integers.map { $0.max()! - $0.min()! }.sum()

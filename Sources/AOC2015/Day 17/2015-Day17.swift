@@ -10,7 +10,7 @@ extension Year2015 {
 
     public class Day17: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         override public func run() -> (String, String) {
             let containers = input.lines.integers

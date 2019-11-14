@@ -10,7 +10,7 @@ extension Year2017 {
 
 public class Day4: Day {
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     override public func part1() -> String {
         let answer = input.rawLineWords.filter { $0.count == Set($0).count }.count

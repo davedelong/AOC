@@ -168,7 +168,7 @@ public class Day18: Day {
         input.rawLineWords.map { Instruction(args: $0) }
     }()
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
 
     override public func part1() -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)

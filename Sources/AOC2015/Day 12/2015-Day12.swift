@@ -12,7 +12,7 @@ extension Year2015 {
 
     public class Day12: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var json: Any = {
             let d = Data(input.raw.utf8)

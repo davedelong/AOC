@@ -92,7 +92,7 @@ public class Day23: Day {
         }
     }
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     override public func part1() -> String {
         let instructions = input.rawLineWords.map { Instruction($0) }

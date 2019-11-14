@@ -10,7 +10,7 @@ extension Year2018 {
 
     public class Day18: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         typealias Grid = Dictionary<Position, AcreContents>
         

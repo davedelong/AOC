@@ -10,7 +10,7 @@ extension Year2015 {
 
     public class Day16: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var sues: Array<Dictionary<String, Int>> = {
             let r = Regex(pattern: "Sue (\\d+): (.+)")

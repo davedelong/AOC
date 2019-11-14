@@ -23,7 +23,7 @@ extension Year2015 {
             let restTime: Int
         }
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var reindeer: Dictionary<String, Reindeer> = {
             let r = Regex(pattern: "(.+?) can fly (\\d+) km/s for (\\d+) seconds, but then must rest for (\\d+) seconds\\.")

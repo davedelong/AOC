@@ -10,7 +10,7 @@ extension Year2017 {
 
 public class Day1: Day {
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     func checksum(_ ints: Array<Int>, offset: Int) -> String {
         let consecutivelyEqual = ints.enumerated().map { (index, element) -> Int in

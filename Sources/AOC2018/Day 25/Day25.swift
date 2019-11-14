@@ -12,7 +12,7 @@ extension Year2018 {
         
         typealias Constellation = Set<Point4>
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var points: Set<Point4> = {
             return Set(input.lines.raw.map { Point4($0) })

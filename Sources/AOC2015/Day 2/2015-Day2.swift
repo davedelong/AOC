@@ -29,7 +29,7 @@ extension Year2015 {
             }
         }
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var boxes: Array<Box> = {
             let regex = Regex(pattern: "(\\d+)x(\\d+)x(\\d+)")

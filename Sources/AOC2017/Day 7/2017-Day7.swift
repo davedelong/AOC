@@ -47,7 +47,7 @@ public class Day7: Day {
         }
     }
 
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
 
     func makeTree() -> Node? {
         let lines = input.lines.raw

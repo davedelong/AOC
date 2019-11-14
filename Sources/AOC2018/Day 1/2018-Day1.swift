@@ -10,7 +10,7 @@ extension Year2018 {
 
     public class Day1: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         override public func part1() -> String {
             let sum = input.lines.integers.sum()

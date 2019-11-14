@@ -10,7 +10,7 @@ extension Year2018 {
 
     public class Day10: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         struct Letter {
             let character: Character

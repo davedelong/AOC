@@ -10,7 +10,7 @@ extension Year2018 {
 
     public class Day4: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var shifts: Dictionary<Int, Array<Int>> = {
             // in the returned dictionary:

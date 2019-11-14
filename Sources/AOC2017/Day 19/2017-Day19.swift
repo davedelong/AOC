@@ -14,7 +14,7 @@ public class Day19: Day {
         return input.lines.characters
     }()
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     func isValid(_ pos: Position) -> Bool {
         guard pos.y >= 0 && pos.y < grid.count else { return false }

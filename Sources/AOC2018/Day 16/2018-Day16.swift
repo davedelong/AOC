@@ -94,7 +94,7 @@ extension Year2018 {
             let after: Registers
         }
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var changes: Array<Change> = {
             let r = Regex(pattern: "Before:\\s+\\[(\\d+), (\\d+), (\\d+), (\\d+)\\]\\n(\\d+) (\\d+) (\\d+) (\\d+)\\nAfter:\\s+\\[(\\d+), (\\d+), (\\d+), (\\d+)\\]")

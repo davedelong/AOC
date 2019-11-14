@@ -31,7 +31,7 @@ extension Year2018 {
             }
         }
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var bots: Array<Nanobot> = {
             let r = Regex(pattern: "pos=<(-?\\d+),(-?\\d+),(-?\\d+)>, r=(\\d+)")

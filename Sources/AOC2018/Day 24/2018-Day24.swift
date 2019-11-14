@@ -12,7 +12,7 @@ extension Year2018 {
 
     public class Day24: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         let wantsLogging = false
         

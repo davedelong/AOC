@@ -15,7 +15,7 @@ public class Day16: Day {
         return input.raw.components(separatedBy: ",")
     }()
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
 
     func twist(_ input: Array<String>) -> Array<String> {
         var list = input

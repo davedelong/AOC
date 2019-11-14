@@ -10,7 +10,7 @@ extension Year2015 {
 
     public class Day13: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         typealias Path = Array<String>
         typealias Rule = (String, String, Int)

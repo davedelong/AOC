@@ -32,7 +32,7 @@ extension Year2015 {
         
         typealias Turns = Array<Turn>
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         private func determinePossibleTurns(from turns: Turns) -> Array<Turns> {
             

@@ -8,7 +8,7 @@
 
 class Day6: Day {
     
-    init() { super.init(inputSource: .file(#file)) }
+    init() { super.init(inputFile: #file) }
     
     override func part1() -> String {
         return #function

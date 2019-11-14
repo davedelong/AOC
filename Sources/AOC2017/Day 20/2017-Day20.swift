@@ -39,7 +39,7 @@ public class Day20: Day {
         }
     }
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     func particles() -> Array<Particle> {
         let rawParticles = input.lines.raw

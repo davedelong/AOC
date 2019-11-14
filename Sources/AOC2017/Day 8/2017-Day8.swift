@@ -12,7 +12,7 @@ public class Day8: Day {
 
     typealias Registers = Dictionary<String, Int>
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
 
     func match(_ registers: Registers, _ register: String, _ op: String, _ value: String) -> Bool {
         let current = registers[register] ?? 0

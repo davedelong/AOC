@@ -17,7 +17,7 @@ extension Year2015 {
             let p2Action: (Int) -> Int
         }
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var commands: Array<Command> = {
             let r = Regex(pattern: "(toggle|turn on|turn off) (\\d+),(\\d+) through (\\d+),(\\d+)")

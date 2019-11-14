@@ -29,7 +29,7 @@ public class Day22: Day {
 
     var grid = Dictionary<Position, State>()
     
-    public init() { super.init(inputSource: .file(#file)) }
+    public init() { super.init(inputFile: #file) }
     
     func resetGrid() {
         grid.removeAll()

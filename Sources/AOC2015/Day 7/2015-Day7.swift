@@ -15,7 +15,7 @@ extension Year2015 {
         typealias Registers = Dictionary<String, UInt16>
         typealias Command = (Registers) -> Registers
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var commands: Array<Command> = {
             let r = Regex(pattern: "(NOT (.+?)|(\\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)")

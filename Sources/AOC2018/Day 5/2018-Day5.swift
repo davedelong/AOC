@@ -10,7 +10,7 @@ extension Year2018 {
 
     public class Day5: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         private func reduce(_ chars: Array<Character>, skipping: Set<Character> = []) -> Array<Character> {
             let uppers = Array(String(chars).uppercased())

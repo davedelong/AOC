@@ -102,7 +102,7 @@ extension Year2018 {
             }
         }()
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         private func testInstructions(_ r0: Int) -> Int {
             var registers = [r0, 0, 0, 0, 0, 0]

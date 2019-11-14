@@ -10,7 +10,7 @@ extension Year2015 {
 
     public class Day3: Day {
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         lazy var headings: Array<Heading> = {
             return input.characters.compactMap { char -> Heading? in

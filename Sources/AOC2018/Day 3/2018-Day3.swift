@@ -32,7 +32,7 @@ extension Year2018 {
             return claims
         }()
         
-        public init() { super.init(inputSource: .file(#file)) }
+        public init() { super.init(inputFile: #file) }
         
         public override func run() -> (String, String) {
             let counts = CountedSet(counting: claims.flatMap { $0.positions })

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-open class Day {
+open class Day: NSObject {
     public enum InputSource {
         case none
         case raw(String)
@@ -15,7 +15,7 @@ open class Day {
     
     private let source: InputSource
     
-    public lazy var input: Input = {
+    public private(set) lazy var input: Input = {
         switch source {
             case .none:
                 fatalError("Cannot access input when none was provided")
@@ -32,6 +32,12 @@ open class Day {
     
     public init(inputSource: InputSource = .none) {
         self.source = inputSource
+        super.init()
+    }
+    
+    public init(inputFile: StaticString) {
+        self.source = .file(inputFile)
+        super.init()
     }
     
     open func run() -> (String, String) { return (part1(), part2()) }
