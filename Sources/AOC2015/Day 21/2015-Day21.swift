@@ -77,7 +77,7 @@ Defense +3   80     0       3
         let armor: Int
     }
     
-    init() { super.init(inputSource: .none) }
+    @objc init() { super.init(inputSource: .none) }
     
     struct InventoryIterator: IteratorProtocol {
         

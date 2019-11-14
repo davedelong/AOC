@@ -6,14 +6,12 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day14: Day {
+class Day14: Day {
 
     let day14Input = "jxqlasbh"
     var disk = Array<Array<Bool>>()
     
-    public init() { super.init() }
+    @objc init() { super.init() }
 
     func knotHash(_ lengthsInput: String) -> String {
         var list = Array(0..<256)
@@ -37,7 +35,7 @@ public class Day14: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    override public func part1() -> String {
+    override func part1() -> String {
         for i in 0 ..< 128 {
             let input = "\(day14Input)-\(i)"
             let hash = knotHash(input)
@@ -57,7 +55,7 @@ public class Day14: Day {
         return "\(used)"
     }
         
-    override public func part2() -> String {
+    override func part2() -> String {
         var unvisited = Array<Position>()
         for r in 0 ..< 128 {
             for c in 0 ..< 128 {
@@ -94,7 +92,5 @@ public class Day14: Day {
 
         return "\(regions.count)"
     }
-
-}
 
 }

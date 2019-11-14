@@ -6,11 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
-extension Year2017 {
-
-public class Day24: Day {
+class Day24: Day {
     
     typealias Chain = Array<Port>
     
@@ -36,7 +32,7 @@ public class Day24: Day {
     
     var ports: Set<Port> = []
     
-    public init() {
+    @objc init() {
         super.init(inputSource: .file(#file))
         ports = Set(input.lines.raw.enumerated().map { Port(id: $0.offset, string: $0.element) })
     }
@@ -58,7 +54,7 @@ public class Day24: Day {
         return nextPorts.map { chain + [$0] }
     }
     
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         
         var unimprovableChains = Array<Chain>()
         var improvableChains = extend(chain: [])
@@ -91,6 +87,4 @@ public class Day24: Day {
         return ("\(max.1)", "\(longest.1)")
     }
     
-}
-
 }

@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2018 {
-
-    public class Day2: Day {
+class Day2: Day {
         
-        public init() { super.init(inputFile: #file) }
+        @objc init() { super.init(inputFile: #file) }
         
-        override public func part1() -> String {
+        override func part1() -> String {
             let rawLines = input.lines.raw
             
             // this groups the lines by the number of repeated characters
@@ -24,7 +22,7 @@ extension Year2018 {
             return "\(c)"
         }
 
-        override public func part2() -> String {
+        override func part2() -> String {
             let linesOfCharacters = input.lines.characters // Array<Array<Character>>
             
             for (index, line) in linesOfCharacters.enumerated() {
@@ -43,5 +41,3 @@ extension Year2018 {
         }
         
     }
-
-}

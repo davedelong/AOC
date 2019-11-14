@@ -15,7 +15,7 @@ class Day6: Day {
         let p2Action: (Int) -> Int
     }
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     lazy var commands: Array<Command> = {
         let r = Regex(pattern: "(toggle|turn on|turn off) (\\d+),(\\d+) through (\\d+),(\\d+)")

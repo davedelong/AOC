@@ -6,11 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
-extension Year2017 {
-
-public class Day7: Day {
+class Day7: Day {
 
     class Node: Hashable {
         static func ==(lhs: Node, rhs: Node) -> Bool { return lhs.name == rhs.name }
@@ -47,7 +43,7 @@ public class Day7: Day {
         }
     }
 
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
 
     func makeTree() -> Node? {
         let lines = input.lines.raw
@@ -87,7 +83,7 @@ public class Day7: Day {
         return nil
     }
 
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         let root = makeTree()!
 
         root.computeWeights()
@@ -97,7 +93,5 @@ public class Day7: Day {
         
         return (root.name, "\(imbalanced.weight - delta)")
     }
-
-}
 
 }

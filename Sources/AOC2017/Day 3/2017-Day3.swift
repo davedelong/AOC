@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day3: Day {
+class Day3: Day {
     
-    public init() { super.init(inputSource: .raw("277678")) }
+    @objc init() { super.init(inputSource: .raw("277678")) }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let integer = input.integer!
         
         let squareRootOfInput = sqrt(Double(integer))
@@ -33,7 +31,7 @@ public class Day3: Day {
         return "\(totalDistance)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         let target = input.integer!
         
         var grid = [
@@ -65,6 +63,4 @@ public class Day3: Day {
         return "\(mostRecentSum)"
     }
     
-}
-
 }

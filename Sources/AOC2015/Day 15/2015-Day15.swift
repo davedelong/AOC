@@ -60,7 +60,7 @@ Chocolate: capacity 0, durability 0, flavor -2, texture 2, calories 8
         }
     }
     
-    init() { super.init(inputSource: .none) }
+    @objc init() { super.init(inputSource: .none) }
     
     let ingredients = [
         Ingredient(name: "Sugar", capacity: 3, durability: 0, flavor: 0, texture: -3, calories: 2),

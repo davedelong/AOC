@@ -8,7 +8,7 @@
 
 class Day9: Day {
     
-    init() {
+    @objc init() {
 //            super.init(inputSource: .raw(
 //            """
 //London to Dublin = 464

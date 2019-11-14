@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day20: Day {
+class Day20: Day {
     
     class Particle: Hashable {
         static func ==(lhs: Particle, rhs: Particle) -> Bool {
@@ -39,14 +37,14 @@ public class Day20: Day {
         }
     }
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     func particles() -> Array<Particle> {
         let rawParticles = input.lines.raw
         return rawParticles.enumerated().map { Particle(id: $0, line: $1) }
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let allParticles = particles()
         var overallClosest = -1
         for _ in 0 ..< 1_000 {
@@ -66,7 +64,7 @@ public class Day20: Day {
         return "\(overallClosest)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         var remaining = particles()
         var collided = Set<Particle>()
         
@@ -88,7 +86,5 @@ public class Day20: Day {
 
         return "\(remaining.count)"
     }
-
-}
 
 }

@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day13: Day {
+class Day13: Day {
 
     var firewall = Dictionary<Int, Int>()
     
-    public init() {
+    @objc init() {
         super.init(inputSource: .file(#file))
         for line in input.lines.raw {
             let p = line.components(separatedBy: ": ")
@@ -35,11 +33,11 @@ public class Day13: Day {
         return (collisions, score)
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         return "\(score(for: 0).1)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         for delay in 1 ..< Int.max {
             let s = score(for: delay)
             if s.0 == 0 {
@@ -48,7 +46,5 @@ public class Day13: Day {
         }
         fatalError("UNREACHABLE")
     }
-
-}
 
 }

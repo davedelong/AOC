@@ -6,16 +6,14 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day16: Day {
+class Day16: Day {
 
     let start = Array("abcdefghijklmnop").map { String($0) }
     lazy var commands: Array<String> = {
         return input.raw.components(separatedBy: ",")
     }()
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
 
     func twist(_ input: Array<String>) -> Array<String> {
         var list = input
@@ -35,12 +33,12 @@ public class Day16: Day {
         return list
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let p1 = twist(start)
         return p1.joined()
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         var results = Array<String>()
 
         var list = start
@@ -53,7 +51,5 @@ public class Day16: Day {
         let offset = 1_000_000_000 % results.count
         return "\(results[offset - 1])"
     }
-
-}
 
 }

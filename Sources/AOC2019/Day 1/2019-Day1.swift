@@ -8,9 +8,10 @@
 
 class Day1: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     override func part1() -> String {
+        print("2019-day1")
         return #function
     }
     

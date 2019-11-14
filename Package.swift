@@ -9,6 +9,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .executable(name: "advent", targets: ["advent"]),
+        .library(name: "AOC", targets: ["AOC"]),
         .library(name: "AOCCore", targets: ["AOCCore"]),
         .library(name: "AOC2019", targets: ["AOC2019"]),
         .library(name: "AOC2018", targets: ["AOC2018"]),
@@ -23,7 +24,9 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "advent", dependencies: ["AOC2019"]),
+        .target(name: "advent", dependencies: ["AOC"]),
+        
+        .target(name: "AOC", dependencies: ["AOCCore", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
         
         .target(name: "AOC2019", dependencies: ["AOCCore"]),
         .target(name: "AOC2018", dependencies: ["AOCCore"]),
@@ -33,6 +36,6 @@ let package = Package(
         
         .target(name: "AOCCore", dependencies: []),
         
-        .testTarget(name: "AOCTests", dependencies: ["AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
+        .testTarget(name: "AOCTests", dependencies: ["AOC"]),
     ]
 )

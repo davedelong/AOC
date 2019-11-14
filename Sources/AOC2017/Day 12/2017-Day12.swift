@@ -6,11 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-import Foundation
-
-extension Year2017 {
-
-public class Day12: Day {
+class Day12: Day {
 
     func nodes(connectedTo node: GKGraphNode) -> Set<GKGraphNode> {
         var processed = Set<GKGraphNode>()
@@ -26,7 +22,7 @@ public class Day12: Day {
     
     var nodesByName: Dictionary<String, GKGraphNode>
     
-    public init() {
+    @objc init() {
         nodesByName = Dictionary()
         super.init(inputSource: .file(#file))
         let connections = input.lines.raw.map { line -> (String, [String]) in
@@ -43,12 +39,12 @@ public class Day12: Day {
         nodesByName = nodes
     }
 
-    override public func part1() -> String {
+    override func part1() -> String {
         let zero = nodesByName["0"]!
         return "\(nodes(connectedTo: zero).count)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         var allNodes = Set(nodesByName.values)
         var subGraphCount = 0
         while allNodes.isEmpty == false {
@@ -60,7 +56,5 @@ public class Day12: Day {
         }
         return "\(subGraphCount)"
     }
-
-}
 
 }

@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day9: Day {
+class Day9: Day {
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
 
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         let source = input.raw
         var pt1 = 0
         var pt2 = 0
@@ -39,6 +37,4 @@ public class Day9: Day {
 
         return ("\(pt1)", "\(pt2)")
     }
-}
-
 }

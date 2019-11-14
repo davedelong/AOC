@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day22: Day {
+class Day22: Day {
 
     enum State {
         case clean, weakened, infected, flagged
@@ -29,7 +27,7 @@ public class Day22: Day {
 
     var grid = Dictionary<Position, State>()
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     func resetGrid() {
         grid.removeAll()
@@ -71,14 +69,14 @@ public class Day22: Day {
         return infections
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let inf = countInfections(iterations: 10_000, infector: { $0.flip() }, mover: {
             $0 == .infected ? $1.turnRight() : $1.turnLeft()
         })
         return "\(inf)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         let inf = countInfections(iterations: 10_000_000, infector: { $0.rotate() }, mover: {
             switch $0 {
                 case .clean: return $1.turnLeft()
@@ -89,6 +87,4 @@ public class Day22: Day {
         })
         return "\(inf)"
     }
-}
-
 }

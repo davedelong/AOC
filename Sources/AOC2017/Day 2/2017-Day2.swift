@@ -6,22 +6,20 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day2: Day {
+class Day2: Day {
     
     lazy var integers: Array<Array<Int>> = {
         return input.lines.words.integers
     }()
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let answer = integers.map { $0.max()! - $0.min()! }.sum()
         return "\(answer)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         let answer = integers.map { row -> Int in
             row.map { item in
                 let divisions = row.map { Double($0) / Double(item) }
@@ -32,6 +30,4 @@ public class Day2: Day {
         return "\(answer)"
     }
     
-}
-
 }

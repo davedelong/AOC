@@ -8,20 +8,16 @@
 
 import Foundation
 
-extension Year2016 {
-
-    public class Day7: Day {
+class Day7: Day {
         
-        public init() { super.init(inputFile: #file) }
-        
-        override public func part1() -> String {
-            return #function
-        }
-        
-        override public func part2() -> String {
-            return #function
-        }
-        
-    }
+	@objc init() { super.init(inputFile: #file) }
+	
+	override func part1() -> String {
+		return #function
+	}
+	
+	override func part2() -> String {
+		return #function
+	}
 
 }

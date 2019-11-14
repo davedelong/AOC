@@ -8,7 +8,7 @@
 
 class Day3: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     lazy var headings: Array<Heading> = {
         return input.characters.compactMap { char -> Heading? in

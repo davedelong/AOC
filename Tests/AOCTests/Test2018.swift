@@ -7,12 +7,12 @@
 //
 
 import XCTest
-import AOC2018
+@testable import AOC2018
 
 class Test2018: XCTestCase {
     
     func testDay1() {
-        let d = Year2018.Day1()
+        let d = Day1()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "580")
@@ -20,7 +20,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay2() {
-        let d = Year2018.Day2()
+        let d = Day2()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "7688")
@@ -28,7 +28,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay3() {
-        let d = Year2018.Day3()
+        let d = Day3()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "107663")
@@ -36,7 +36,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay4() {
-        let d = Year2018.Day4()
+        let d = Day4()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "84834")
@@ -44,7 +44,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay5() {
-        let d = Year2018.Day5()
+        let d = Day5()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "10384")
@@ -52,7 +52,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay6() {
-        let d = Year2018.Day6()
+        let d = Day6()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "3660")
@@ -60,7 +60,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay7() {
-        let d = Year2018.Day7()
+        let d = Day7()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "ADEFKLBVJQWUXCNGORTMYSIHPZ")
@@ -68,7 +68,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay8() {
-        let d = Year2018.Day8()
+        let d = Day8()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "49426")
@@ -76,7 +76,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay9() {
-        let d = Year2018.Day9()
+        let d = Day9()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "390093")
@@ -84,7 +84,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay10() {
-        let d = Year2018.Day10()
+        let d = Day10()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "XPFXXXKL")
@@ -92,7 +92,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay11() {
-        let d = Year2018.Day11()
+        let d = Day11()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "243,64")
@@ -100,7 +100,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay12() {
-        let d = Year2018.Day12()
+        let d = Day12()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "")
@@ -108,7 +108,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay13() {
-        let d = Year2018.Day13()
+        let d = Day13()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "124,130")
@@ -116,7 +116,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay14() {
-        let d = Year2018.Day14()
+        let d = Day14()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "3410710325")
@@ -124,7 +124,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay15() {
-        let d = Year2018.Day15()
+        let d = Day15()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "195774")
@@ -132,7 +132,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay16() {
-        let d = Year2018.Day16()
+        let d = Day16()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "517")
@@ -140,7 +140,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay17() {
-        let d = Year2018.Day17()
+        let d = Day17()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "29802")
@@ -148,7 +148,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay18() {
-        let d = Year2018.Day18()
+        let d = Day18()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "594712")
@@ -156,7 +156,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay19() {
-        let d = Year2018.Day19()
+        let d = Day19()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "1836")
@@ -164,7 +164,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay20() {
-        let d = Year2018.Day20()
+        let d = Day20()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "3958")
@@ -172,7 +172,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay21() {
-        let d = Year2018.Day21()
+        let d = Day21()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "16134795")
@@ -180,7 +180,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay22() {
-        let d = Year2018.Day22()
+        let d = Day22()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "11843")
@@ -188,7 +188,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay23() {
-        let d = Year2018.Day23()
+        let d = Day23()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "297")
@@ -196,7 +196,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay24() {
-        let d = Year2018.Day24()
+        let d = Day24()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "10723")
@@ -204,7 +204,7 @@ class Test2018: XCTestCase {
     }
     
     func testDay25() {
-        let d = Year2018.Day25()
+        let d = Day25()
         let (p1, p2) = d.run()
         
         XCTAssertEqual(p1, "359")

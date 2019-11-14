@@ -6,18 +6,16 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day4: Day {
+class Day4: Day {
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let answer = input.rawLineWords.filter { $0.count == Set($0).count }.count
         return "\(answer)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         
         func isValid(_ phrase: Array<String>) -> Bool {
             let countedSets = phrase.map({ $0.map { String($0) } }).map { NSCountedSet(array: $0) }
@@ -28,6 +26,4 @@ public class Day4: Day {
         return "\(answer)"
     }
     
-}
-
 }

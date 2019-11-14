@@ -6,15 +6,13 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day19: Day {
+class Day19: Day {
     
     lazy var grid: Array<Array<Character>> = {
         return input.lines.characters
     }()
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     func isValid(_ pos: Position) -> Bool {
         guard pos.y >= 0 && pos.y < grid.count else { return false }
@@ -52,7 +50,7 @@ public class Day19: Day {
         return heading
     }
     
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         let startX = grid[0].firstIndex(of: "|")!
 
         var position = Position(x: startX, y: 0)
@@ -72,7 +70,5 @@ public class Day19: Day {
 
         return ("\(seen.reduce("") { $0 + String($1) })", "\(steps)")
     }
-
-}
 
 }

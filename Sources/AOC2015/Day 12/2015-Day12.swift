@@ -10,7 +10,7 @@ import Foundation
 
 class Day12: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     lazy var json: Any = {
         let d = Data(input.raw.utf8)

@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day6: Day {
+class Day6: Day {
     
     struct Seen: Hashable {
         static func ==(lhs: Seen, rhs: Seen) -> Bool { return lhs.array == rhs.array }
@@ -31,11 +29,11 @@ public class Day6: Day {
         }
     }
     
-    public init() {
+    @objc init() {
         super.init(inputSource: .raw("2 8 8 5 4 2 3 1 5 5 1 2 15 13 5 14"))
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         var current = Seen(input.words.integers)
         var seen = Set<Seen>()
         
@@ -47,7 +45,7 @@ public class Day6: Day {
         return "\(seen.count)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         var current = Seen(input.words.integers)
         var seen = Dictionary<Seen, Int>()
         
@@ -59,6 +57,4 @@ public class Day6: Day {
         return "\(seen.count - seen[current]!)"
     }
     
-}
-
 }

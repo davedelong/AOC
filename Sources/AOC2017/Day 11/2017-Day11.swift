@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day11: Day {
+class Day11: Day {
 
     enum Direction: String {
         static let reducers: Array<(Direction, Direction, Direction?)> = [
@@ -52,12 +50,12 @@ public class Day11: Day {
     
     var directions = Array<Direction>()
     
-    public init() {
+    @objc init() {
         super.init(inputSource: .file(#file))
         directions = input.raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
     }
 
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         var finalDirections = Dictionary<Direction, Int>()
         var latestDistance = 0
         var furthestAway = 0
@@ -71,7 +69,5 @@ public class Day11: Day {
 
         return ("\(latestDistance)", "\(furthestAway)")
     }
-
-}
 
 }

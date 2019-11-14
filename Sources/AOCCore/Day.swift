@@ -30,6 +30,8 @@ open class Day: NSObject {
         }
     }()
     
+    
+    
     public init(inputSource: InputSource = .none) {
         self.source = inputSource
         super.init()

@@ -8,7 +8,7 @@
 
 class Day18: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     private func around(_ r: Int, _ c: Int, inside: (Int, Int)) -> Array<(Int, Int)> {
         let around = [

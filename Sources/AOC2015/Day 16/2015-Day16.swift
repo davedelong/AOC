@@ -8,7 +8,7 @@
 
 class Day16: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     lazy var sues: Array<Dictionary<String, Int>> = {
         let r = Regex(pattern: "Sue (\\d+): (.+)")

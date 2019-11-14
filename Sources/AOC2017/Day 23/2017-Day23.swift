@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day23: Day {
+class Day23: Day {
     
     typealias Registers = Dictionary<String, Int>
     
@@ -92,16 +90,16 @@ public class Day23: Day {
         }
     }
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let instructions = input.rawLineWords.map { Instruction($0) }
         let p = Program(instructions: instructions)
         while p.step() == .ok { }
         return "\(p.mulCount)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         func isComposite(_ i: Int) -> Bool {
             for d in 2 ... Int(sqrt(Double(i))) {
                 if i % d == 0 { return true }
@@ -113,6 +111,4 @@ public class Day23: Day {
         return "\(count)"
     }
     
-}
-
 }

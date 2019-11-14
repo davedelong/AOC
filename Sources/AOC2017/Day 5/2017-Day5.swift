@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day5: Day {
+class Day5: Day {
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         var integers = input.lines.integers
         var stepCount = 0
         var index = 0
@@ -25,7 +23,7 @@ public class Day5: Day {
         return "\(stepCount)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         var integers = input.lines.integers
         var stepCount = 0
         var index = 0
@@ -39,6 +37,4 @@ public class Day5: Day {
         }
         return "\(stepCount)"
     }
-}
-
 }

@@ -8,8 +8,7 @@
 
 class Day11: Day {
     
-    init() { super.init(inputSource: .raw("hepxcrrq")) }
-    
+    @objc init() { super.init(inputSource: .raw("hepxcrrq")) }
     
     private let illegals = Set("iol")
     private let pairs = Regex(pattern: "(.)\\1.*(.)\\2")

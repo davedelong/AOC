@@ -6,13 +6,11 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day8: Day {
+class Day8: Day {
 
     typealias Registers = Dictionary<String, Int>
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
 
     func match(_ registers: Registers, _ register: String, _ op: String, _ value: String) -> Bool {
         let current = registers[register] ?? 0
@@ -27,7 +25,7 @@ public class Day8: Day {
         }
     }
 
-    override public func run() -> (String, String) {
+    override func run() -> (String, String) {
         let lines = input.lines.raw
         var registers = Registers()
         var intermediateMax = Int.min
@@ -45,7 +43,5 @@ public class Day8: Day {
 
         return ("\(registers.values.max()!)", "\(intermediateMax)")
     }
-
-}
 
 }

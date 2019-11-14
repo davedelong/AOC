@@ -8,7 +8,7 @@
 
 class Day13: Day {
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     typealias Path = Array<String>
     typealias Rule = (String, String, Int)

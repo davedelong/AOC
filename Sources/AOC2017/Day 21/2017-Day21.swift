@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day21: Day {
+class Day21: Day {
 
     typealias RuleSet = Dictionary<Matrix<Bit>, Matrix<Bit>>
     var rules = RuleSet()
@@ -19,7 +17,7 @@ public class Day21: Day {
         [.on,  .on,  .on]
     ])
 
-    public init() {
+    @objc init() {
         super.init(inputSource: .file(#file)) 
         let rawRules = input.lines.raw
         for rawRule in rawRules {
@@ -63,17 +61,15 @@ public class Day21: Day {
         return current
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         let part1 = apply(times: 5)
         let pixelsOn1 = part1.count(where: { $0 == .on })
         return "\(pixelsOn1)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         let part2 = apply(times: 18)
         let pixelsOn2 = part2.count(where: { $0 == .on })
         return "\(pixelsOn2)"
     }
-}
-
 }

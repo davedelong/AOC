@@ -6,15 +6,13 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day17: Day {
+class Day17: Day {
 
     let integer = 314
     
-    public init() { super.init() }
+    @objc init() { super.init() }
 
-    override public func part1() -> String {
+    override func part1() -> String {
         var buffer = [0]
 
         var position = 0
@@ -26,7 +24,7 @@ public class Day17: Day {
         return "\(buffer[position + 1])"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         var position = 0
         var latest = 0
 
@@ -37,6 +35,4 @@ public class Day17: Day {
 
         return "\(latest)"
     }
-}
-
 }

@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day18: Day {
+class Day18: Day {
 
     typealias Registers = Dictionary<String, Int>
 
@@ -168,9 +166,9 @@ public class Day18: Day {
         input.rawLineWords.map { Instruction(args: $0) }
     }()
     
-    public init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
 
-    override public func part1() -> String {
+    override func part1() -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)
         var received = 0
         while received <= 0 {
@@ -180,7 +178,7 @@ public class Day18: Day {
         return "\(received)"
     }
 
-    override public func part2() -> String {
+    override func part2() -> String {
         let p1 = Program(id: 1, instructions: instructions)
         let p2 = Program(id: 0, instructions: instructions)
 
@@ -203,7 +201,5 @@ public class Day18: Day {
 
         return "\(p1SendCount)"
     }
-
-}
 
 }

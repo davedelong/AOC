@@ -18,25 +18,21 @@ class HeadingNode: GKGraphNode {
     }
 }
 
-extension Year2018 {
-
-    public class Day20: Day {
-        
-        struct Node {
-            let moves: Array<Heading> // a nil heading would mean "no choice"?
-            let next: Array<Node>
-        }
-        
-        public init() { super.init(inputFile: #file) }
-        
-        override public func part1() -> String {
-            return #function
-        }
-        
-        override public func part2() -> String {
-            return #function
-        }
-        
+class Day20: Day {
+    
+    struct Node {
+        let moves: Array<Heading> // a nil heading would mean "no choice"?
+        let next: Array<Node>
     }
-
+    
+    @objc init() { super.init(inputFile: #file) }
+    
+    override func part1() -> String {
+        return #function
+    }
+    
+    override func part2() -> String {
+        return #function
+    }
+    
 }

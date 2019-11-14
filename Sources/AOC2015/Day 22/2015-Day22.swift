@@ -30,7 +30,7 @@ class Day22: Day {
     
     typealias Turns = Array<Turn>
     
-    init() { super.init(inputFile: #file) }
+    @objc init() { super.init(inputFile: #file) }
     
     private func determinePossibleTurns(from turns: Turns) -> Array<Turns> {
         

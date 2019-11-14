@@ -6,9 +6,7 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-extension Year2017 {
-
-public class Day25: Day {
+class Day25: Day {
     
     struct TuringState {
         let ifOne: (Int, Int, String)
@@ -31,7 +29,7 @@ public class Day25: Day {
     var iterations: Int = 0
     var states = Dictionary<String, TuringState>()
     
-    public init() {
+    @objc init() {
         
         super.init(inputSource: .file(#file))
         
@@ -70,7 +68,7 @@ public class Day25: Day {
         
     }
     
-    override public func part1() -> String {
+    override func part1() -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var state = State.A
@@ -149,7 +147,7 @@ public class Day25: Day {
         return "\(checksum)"
     }
     
-    override public func part2() -> String {
+    override func part2() -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var current = startingState
@@ -166,6 +164,4 @@ public class Day25: Day {
         return "\(checksum)"
     }
     
-}
-
 }
