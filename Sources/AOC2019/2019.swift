@@ -9,10 +9,10 @@ import Foundation
 
 @_exported import AOCCore
 
-public struct Year2019: Year {
-
-    public var days: Array<Day> {
-        return [
+public class Year2019: Year {
+    
+    public init() {
+        super.init(days: [
             Day1(),
             Day2(),
             Day3(),
@@ -38,9 +38,7 @@ public struct Year2019: Year {
             Day23(),
             Day24(),
             Day25()
-        ]
+        ])
     }
-    
-    public init() { }
     
 }

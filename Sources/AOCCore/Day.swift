@@ -6,13 +6,6 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-@_exported import Foundation
-@_exported import GameplayKit
-
-public protocol Year {
-    var days: Array<Day> { get }
-}
-
 open class Day {
     public enum InputSource {
         case none
