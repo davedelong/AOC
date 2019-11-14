@@ -79,7 +79,7 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     
     public func count(where matches: (T) -> Bool) -> Int {
         return data.reduce(0) { (soFar, row) -> Int in
-            return soFar + row.reduce(0) { $0 + (matches($1) ? 1 : 0) }
+            return soFar + row.count(where: matches)
         }
     }
     
