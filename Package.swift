@@ -9,7 +9,12 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .executable(name: "advent", targets: ["advent"]),
-        .library(name: "AOC", targets: ["AOC"]),
+        .library(name: "AOCCore", targets: ["AOCCore"]),
+        .library(name: "AOC2019", targets: ["AOC2019"]),
+        .library(name: "AOC2018", targets: ["AOC2018"]),
+        .library(name: "AOC2017", targets: ["AOC2017"]),
+        .library(name: "AOC2016", targets: ["AOC2016"]),
+        .library(name: "AOC2015", targets: ["AOC2015"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -18,8 +23,16 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "advent", dependencies: ["AOC"]),
-        .target(name: "AOC", dependencies: []),
-        .testTarget(name: "AOCTests", dependencies: ["AOC"]),
+        .target(name: "advent", dependencies: ["AOC2019"]),
+        
+        .target(name: "AOC2019", dependencies: ["AOCCore"]),
+        .target(name: "AOC2018", dependencies: ["AOCCore"]),
+        .target(name: "AOC2017", dependencies: ["AOCCore"]),
+        .target(name: "AOC2016", dependencies: ["AOCCore"]),
+        .target(name: "AOC2015", dependencies: ["AOCCore"]),
+        
+        .target(name: "AOCCore", dependencies: []),
+        
+        .testTarget(name: "AOCTests", dependencies: ["AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
     ]
 )

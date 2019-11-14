@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import AOC
+import AOC2017
 
 class Test2017: XCTestCase {
 
