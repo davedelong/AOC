@@ -23,7 +23,6 @@ open class Day: NSObject {
             guard let day = dayRegex.match(next.path)?.int(1) else { continue }
             
             files[Pair(year, day)] = next.path
-            print("Found \(year)-\(day) -> \(next.path)")
         }
         
         return files
