@@ -11,8 +11,7 @@ private func fuel(for mass: Int) -> Int {
 }
 
 private func allFuel(for mass: Int) -> Array<Int> {
-    let f: (Int) -> Int = { ($0 / 3) - 2 }
-    return Array(sequence(first: f(mass)) { m in
+    return Array(sequence(first: fuel(for: mass)) { m in
         let v = fuel(for: m)
         return v > 0 ? v : nil
     })
