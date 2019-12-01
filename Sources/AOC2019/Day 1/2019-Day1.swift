@@ -10,25 +10,23 @@ private func fuel(for mass: Int) -> Int {
     return (mass / 3) - 2
 }
 
-private func allFuel(for mass: Int) -> UnfoldFirstSequence<Int> {
+private func allFuel(for mass: Int) -> Array<Int> {
     let f: (Int) -> Int = { ($0 / 3) - 2 }
-    return sequence(first: f(mass)) { m in
+    return Array(sequence(first: f(mass)) { m in
         let v = fuel(for: m)
         return v > 0 ? v : nil
-    }
+    })
 }
 
 class Day1: Day {
     
-    override func part1() -> String {
+    override func run() -> (String, String) {
         let modules = input.lines.integers
-        let fuels = modules.map { fuel(for: $0) }
-        return "\(fuels.sum())"
-    }
-    
-    override func part2() -> String {
-        let modules = input.lines.integers
-        let masses = modules.map { Array(allFuel(for: $0)).sum() }
-        return "\(masses.sum())"
+        
+        let fuels = modules.map { allFuel(for: $0) }
+        
+        let p1 = fuels.compactMap { $0.first }.sum()
+        let p2 = fuels.map { $0.sum() }.sum()
+        return ("\(p1)", "\(p2)")
     }
 }
