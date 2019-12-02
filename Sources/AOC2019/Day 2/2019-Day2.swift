@@ -9,7 +9,7 @@
 class Day2: Day {
     
     private func intcode(noun: Int, verb: Int) -> Int {
-        var memory = input.lines[0].integers
+        var memory = input.integers
         memory[1] = noun
         memory[2] = verb
         let code = Intcode(memory: memory, supportedOperations: [.add, .multiply, .break])
