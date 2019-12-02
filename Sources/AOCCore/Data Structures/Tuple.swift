@@ -9,37 +9,53 @@ import Foundation
 
 public typealias Pair<T> = Tuple2<T, T>
 public typealias Triple<T> = Tuple3<T, T, T>
+public typealias Fourple<T> = Tuple4<T, T, T, T>
 
+@dynamicMemberLookup
 public struct Tuple2<A, B> {
     public let first: A
     public let second: B
+    public var tuple: (A, B) { return (first, second) }
     public init(_ first: A, _ second: B) {
         self.first = first
         self.second = second
     }
+    public subscript<T>(dynamicMember keyPath: KeyPath<(A,B), T>) -> T {
+        return tuple[keyPath: keyPath]
+    }
 }
 
+@dynamicMemberLookup
 public struct Tuple3<A, B, C> {
     public let first: A
     public let second: B
     public let third: C
+    public var tuple: (A, B, C) { return (first, second, third) }
     public init(_ first: A, _ second: B, _ third: C) {
         self.first = first
         self.second = second
         self.third = third
     }
+    public subscript<T>(dynamicMember keyPath: KeyPath<(A,B,C), T>) -> T {
+        return tuple[keyPath: keyPath]
+    }
 }
 
+@dynamicMemberLookup
 public struct Tuple4<A, B, C, D> {
     public let first: A
     public let second: B
     public let third: C
     public let fourth: D
+    public var tuple: (A, B, C, D) { return (first, second, third, fourth) }
     public init(_ first: A, _ second: B, _ third: C, _ fourth: D) {
         self.first = first
         self.second = second
         self.third = third
         self.fourth = fourth
+    }
+    public subscript<T>(dynamicMember keyPath: KeyPath<(A,B,C,D), T>) -> T {
+        return tuple[keyPath: keyPath]
     }
 }
 
