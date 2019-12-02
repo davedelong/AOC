@@ -12,23 +12,8 @@ class Day2: Day {
         var memory = input.lines[0].integers
         memory[1] = noun
         memory[2] = verb
-        
-        var current = 0
-        repeat {
-            let op = memory[current]
-            if op == 99 { break }
-            let p1 = memory[current+1]
-            let p2 = memory[current+2]
-            let p3 = memory[current+3]
-            if op == 1 {
-                memory[p3] = memory[p1] + memory[p2]
-            } else if op == 2 {
-                memory[p3] = memory[p1] * memory[p2]
-            }
-            current += 4
-        } while current < memory.count
-        
-        return memory[0]
+        let code = Intcode(memory: memory, supportedOperations: [.add, .multiply, .break])
+        return code.run()
     }
     
     override func part1() -> String {
