@@ -12,8 +12,8 @@ class Day3: Day {
         let start: XY
         let end: XY
         
-        var xRange: Range<Int> { return min(start.x, end.x) ... max(start.x, end.x) }
-        var yRange: Range<Int> { return min(start.y, end.y) ... max(start.y, end.y) }
+        var xRange: ClosedRange<Int> { return min(start.x, end.x) ... max(start.x, end.x) }
+        var yRange: ClosedRange<Int> { return min(start.y, end.y) ... max(start.y, end.y) }
         
         func intersection(with other: Segment) -> XY? {
             #warning("TODO: this")
