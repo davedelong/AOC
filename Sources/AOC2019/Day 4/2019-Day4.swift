@@ -6,24 +6,9 @@
 //  Copyright © 2019 Dave DeLong. All rights reserved.
 //
 
-extension Int {
-    
-    var digits: Array<Int> {
-        var d = Array<Int>()
-        var remainder = self
-        while remainder > 0 {
-            let m = remainder % 10
-            d.append(m)
-            remainder /= 10
-        }
-        return Array(d.reversed())
-    }
-    
-}
-
 class Day4: Day {
     
-    let range = 167487 ... 673251
+    let range = 197487 ... 673251
     
     override func part1() -> String {
         
@@ -40,7 +25,7 @@ class Day4: Day {
             return true
         }
         
-        let count = range.count(where: { matches($0) })
+        let count = range.count(where: matches)
         return "\(count)"
     }
     
@@ -62,7 +47,7 @@ class Day4: Day {
             return true
         }
         
-        let count = range.count(where: { matches($0) })
+        let count = range.count(where: matches)
         return "\(count)"
     }
     
