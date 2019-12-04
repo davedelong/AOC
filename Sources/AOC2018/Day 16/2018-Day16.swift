@@ -136,7 +136,7 @@ class Day16: Day {
             }
         }
         
-        while unsettled.isEmpty == false {
+        while unsettled.isNotEmpty {
             for i in 0 ..< Opcode.all.count {
                 if definitiveLookup[i] == nil {
                     let choices = possibilities[i]!.intersection(unsettled)

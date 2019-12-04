@@ -67,7 +67,7 @@ class Day17: Day {
         }
         
         var drop: Set<Position> = [Position(x: 500 - hOffset, y: min.y)]
-        while drop.isEmpty == false {
+        while drop.isNotEmpty {
             drop = tickFill(grid, droppingFrom: drop)
 //                print("====================")
 //                printGrid(grid)

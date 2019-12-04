@@ -10,6 +10,8 @@ import Foundation
 
 public extension Collection {
     
+    var isNotEmpty: Bool { return isEmpty == false }
+    
     func partition(by goesInFirst: (Element) -> Bool) -> (Array<Element>, Array<Element>) {
         var first = Array<Element>()
         var second = Array<Element>()
@@ -141,7 +143,7 @@ public extension Collection where Element: Comparable {
 public extension Collection where Element: Equatable {
     
     func consecutivelyEqualSubsequences() -> Array<SubSequence> {
-        guard isEmpty == false else { return [] }
+        guard isNotEmpty else { return [] }
         
         var rangeStart = startIndex
         var rangeItem = self[startIndex]

@@ -59,7 +59,7 @@ class Day24: Day {
         var unimprovableChains = Array<Chain>()
         var improvableChains = extend(chain: [])
         
-        while improvableChains.isEmpty == false {
+        while improvableChains.isNotEmpty {
             
             var newChains = Array<Chain>()
             

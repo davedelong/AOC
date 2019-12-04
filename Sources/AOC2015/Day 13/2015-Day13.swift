@@ -26,7 +26,7 @@ class Day13: Day {
     
     private func buildPaths(parent: Path, people: Set<String>) -> Array<Path> {
         let remainingPeople = people.subtracting(parent)
-        guard remainingPeople.isEmpty == false else { return [parent] }
+        guard remainingPeople.isNotEmpty else { return [parent] }
         
         let paths = remainingPeople.flatMap { c -> Array<Path> in
             return buildPaths(parent: parent + [c], people: people)

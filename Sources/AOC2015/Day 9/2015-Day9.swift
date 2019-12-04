@@ -46,7 +46,7 @@ class Day9: Day {
     private func buildPaths(parent: Path, cities: Set<String>, graph: Dictionary<Edge, Int>) -> Array<Path> {
         let lastCity = parent.0.last!
         let citiesToVisit = cities.subtracting(parent.0)
-        guard citiesToVisit.isEmpty == false else { return [parent] }
+        guard citiesToVisit.isNotEmpty else { return [parent] }
         
         let paths = citiesToVisit.flatMap { c -> Array<Path> in
             let edge1 = Pair(lastCity, c)

@@ -47,7 +47,7 @@ class Day12: Day {
     override func part2() -> String {
         var allNodes = Set(nodesByName.values)
         var subGraphCount = 0
-        while allNodes.isEmpty == false {
+        while allNodes.isNotEmpty {
             subGraphCount += 1
             
             let anyNode = allNodes.first!

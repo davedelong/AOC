@@ -43,7 +43,7 @@ public final class Input: StringInput {
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {
-        return raw.components(separatedBy: separatedBy).filter { $0.isEmpty == false }.map { Word($0) }
+        return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
     }
     
     public lazy var rawLines: Array<String> = { lines.raw }()
@@ -69,7 +69,7 @@ public final class Line: StringInput {
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {
-        return raw.components(separatedBy: separatedBy).filter { $0.isEmpty == false }.map { Word($0) }
+        return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
     }
 }
 

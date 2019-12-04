@@ -60,7 +60,7 @@ class Day7: Day {
     override func part1() -> String {
         var remaining = operations()
         var final = ""
-        while remaining.isEmpty == false {
+        while remaining.isNotEmpty {
             let next = remaining.filter { $0.deps.isEmpty }.first!
             final += next.name
             for op in remaining { op.deps.remove(next.name) }
@@ -83,7 +83,7 @@ class Day7: Day {
         
         var remaining = operations()
         
-        while remaining.isEmpty == false || workers.any { $0.0 != nil } {
+        while remaining.isNotEmpty || workers.any { $0.0 != nil } {
             tick += 1
             
             var updatedWorkers = Array<(Op?, UInt8)>()

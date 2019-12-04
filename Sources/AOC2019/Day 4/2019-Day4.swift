@@ -17,7 +17,7 @@ class Day4: Day {
             guard d.count == 6 else { return false }
             let pairs = d.consecutivePairs()
             let adjacentEqualPairs = pairs.filter({ $0.0 == $0.1 })
-            guard adjacentEqualPairs.isEmpty == false else { return false }
+            guard adjacentEqualPairs.isNotEmpty else { return false }
             
             let notInAscendingOrder = pairs.filter({ $0.0 > $0.1 })
             guard notInAscendingOrder.isEmpty else { return false }
@@ -36,7 +36,7 @@ class Day4: Day {
             guard d.count == 6 else { return false }
             let pairs = d.consecutivePairs()
             let adjacentEqualPairs = pairs.filter({ $0.0 == $0.1 })
-            guard adjacentEqualPairs.isEmpty == false else { return false }
+            guard adjacentEqualPairs.isNotEmpty else { return false }
             
             let notInAscendingOrder = pairs.filter({ $0.0 > $0.1 })
             guard notInAscendingOrder.isEmpty else { return false }

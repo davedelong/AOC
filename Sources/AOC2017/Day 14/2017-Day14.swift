@@ -84,7 +84,7 @@ class Day14: Day {
                 }
             }
             
-            if currentRegion.isEmpty == false {
+            if currentRegion.isNotEmpty {
                 regions.append(currentRegion)
                 currentRegion = []
             }
