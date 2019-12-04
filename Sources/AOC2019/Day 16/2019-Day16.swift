@@ -8,6 +8,10 @@
 
 class Day16: Day {
     
+    override func run() -> (String, String) {
+        return super.run()
+    }
+    
     override func part1() -> String {
         return #function
     }

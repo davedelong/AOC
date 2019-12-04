@@ -9,7 +9,27 @@
 import Foundation
 
 public enum Heading: CaseIterable {
+    static var up = Heading.north
+    static var down = Heading.south
+    static var left = Heading.west
+    static var right = Heading.east
+    
     case north, south, west, east
+    
+    public init?(character: Character) {
+        switch character {
+            case "U": self = .up
+            case "D": self = .down
+            case "L": self = .left
+            case "R": self = .right
+            case "N": self = .north
+            case "S": self = .south
+            case "E": self = .east
+            case "W": self = .west
+            default: return nil
+        }
+    }
+    
     public func turnLeft() -> Heading {
         switch self {
             case .north: return .west

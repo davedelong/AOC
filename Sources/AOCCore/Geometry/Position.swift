@@ -43,12 +43,12 @@ public extension Point2 {
         )
     }
     
-    func move(_ heading: Heading) -> Position {
+    func move(_ heading: Heading, length: Int = 1) -> Position {
         switch heading {
-            case .north: return Position(x: x, y: y-1)
-            case .south: return Position(x: x, y: y+1)
-            case .east: return Position(x: x+1, y: y)
-            case .west: return Position(x: x-1, y: y)
+            case .north: return Position(x: x, y: y-length)
+            case .south: return Position(x: x, y: y+length)
+            case .east: return Position(x: x+length, y: y)
+            case .west: return Position(x: x-length, y: y)
         }
     }
     

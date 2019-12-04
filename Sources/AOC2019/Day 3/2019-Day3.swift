@@ -8,33 +8,67 @@
 
 class Day3: Day {
     
+    struct Segment {
+        let start: XY
+        let end: XY
+        
+        var xRange: Range<Int> { return min(start.x, end.x) ... max(start.x, end.x) }
+        var yRange: Range<Int> { return min(start.y, end.y) ... max(start.y, end.y) }
+        
+        func intersection(with other: Segment) -> XY? {
+            #warning("TODO: this")
+            return nil
+        }
+    }
+    
+    override func run() -> (String, String) {
+        let words = input.lines.csvWords
+        
+        var current = XY.zero
+        let line1 = words[0].map { word -> Segment in
+            let h = Heading(character: word.characters[0])!
+            let l = Int(word.raw.dropFirst())!
+            let n = current.move(h, length: l)
+            let s = Segment(start: current, end: n)
+            current = n
+            return s
+        }
+        
+        current = .zero
+        let line2 = words[1].map { word -> Segment in
+            let h = Heading(character: word.characters[0])!
+            let l = Int(word.raw.dropFirst())!
+            let n = current.move(h, length: l)
+            let s = Segment(start: current, end: n)
+            current = n
+            return s
+        }
+        
+        var intersections = Set(line1.flatMap { seg -> Array<XY> in
+            return line2.compactMap { $0.intersection(with: seg) }
+        })
+        intersections.remove(.zero)
+        
+        let p1 = intersections.map { $0.manhattanDistance(to: .zero) }.min()!
+        return ("\(p1)", "")
+    }
+    
     enum Marker {
         case line1
         case line2
         case both
     }
     
-    struct Segment {
+    struct LinePart {
         let direction: Heading
         let length: Int
     }
     
-    override func run() -> (String, String) {
-        
-        let comma = CharacterSet(charactersIn: ",")
-        
-        let lines: Array<Array<Segment>> = input.lines.words(separatedBy: comma).map { words in
-            return words.map { word -> Segment in
-                let heading: Heading
-                switch word.characters[0] {
-                case "U": heading = .north
-                case "D": heading = .south
-                case "L": heading = .west
-                case "R": heading = .east
-                default: fatalError()
-                }
-                let length = Int(word.raw.dropFirst())!
-                return Segment(direction: heading, length: length)
+    func run_orig() -> (String, String) {
+        let lines: Array<Array<LinePart>> = input.lines.csvWords.map { words in
+            return words.compactMap { word -> LinePart? in
+                guard let h = Heading(character: word.characters[0]) else { return nil }
+                return LinePart(direction: h, length: Int(word.raw.dropFirst())!)
             }
         }
         
