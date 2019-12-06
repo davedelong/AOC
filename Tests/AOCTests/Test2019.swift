@@ -31,32 +31,32 @@ class Test2019: XCTestCase {
         let d = Day3()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "1640")
-        XCTAssertEqual(p2, "1126")
+        XCTAssertEqual(p1, "860")
+        XCTAssertEqual(p2, "9238")
     }
     
     func testDay4() {
         let d = Day4()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "11049715")
-        XCTAssertEqual(p2, "2140710")
+        XCTAssertEqual(p1, "1640")
+        XCTAssertEqual(p2, "1126")
     }
     
     func testDay5() {
         let d = Day5()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "11049715")
+        XCTAssertEqual(p2, "2140710")
     }
     
     func testDay6() {
         let d = Day6()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "261306")
+        XCTAssertEqual(p2, "382")
     }
     
     func testDay7() {
