@@ -23,6 +23,7 @@ public protocol StringInput {
     var words: Array<Word> { get }
     var csvWords: Array<Word> { get }
     func words(separatedBy: CharacterSet) -> Array<Word>
+    func words(separatedBy: String) -> Array<Word>
 }
 
 public final class Input: StringInput {
@@ -43,6 +44,10 @@ public final class Input: StringInput {
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {
+        return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
+    }
+    
+    public func words(separatedBy: String) -> Array<Word> {
         return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
     }
     
@@ -71,6 +76,10 @@ public final class Line: StringInput {
     public func words(separatedBy: CharacterSet) -> Array<Word> {
         return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
     }
+    
+    public func words(separatedBy: String) -> Array<Word> {
+        return raw.components(separatedBy: separatedBy).filter { $0.isNotEmpty }.map { Word($0) }
+    }
 }
 
 public final class Word: StringInput {
@@ -85,6 +94,7 @@ public final class Word: StringInput {
     public var words: Array<Word> { return [self] }
     public var csvWords: Array<Word> { return [self] }
     public func words(separatedBy: CharacterSet) -> Array<Word> { return [self] }
+    public func words(separatedBy: String) -> Array<Word> { return [self] }
 }
 
 extension Collection where Element: StringInput {
@@ -97,6 +107,9 @@ extension Collection where Element: StringInput {
     public var words: Array<Array<Word>> { return map { $0.words } }
     public var csvWords: Array<Array<Word>> { return map { $0.csvWords } }
     public func words(separatedBy: CharacterSet) -> Array<Array<Word>> {
+        return map { $0.words(separatedBy: separatedBy) }
+    }
+    public func words(separatedBy: String) -> Array<Array<Word>> {
         return map { $0.words(separatedBy: separatedBy) }
     }
 }

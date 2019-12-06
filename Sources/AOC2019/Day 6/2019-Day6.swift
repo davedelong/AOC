@@ -6,74 +6,34 @@
 //  Copyright © 2019 Dave DeLong. All rights reserved.
 //
 
-fileprivate class Node: Hashable {
-    static func ==(lhs: Node, rhs: Node) -> Bool { return lhs.value == rhs.value }
-    
-    let value: String
-    var parent: Node?
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
-    }
-    
-    init(value: String) { self.value = value }
-    
-    var countToRoot: Int { return count(to: nil) }
-    
-    func count(to root: Node?) -> Int {
-        var c = 0
-        var p = parent
-        while p != root {
-            c += 1
-            p = p?.parent
-        }
-        return c
-    }
-    
-    var parents: UnfoldFirstSequence<Node> {
-        return sequence(first: parent!, next: { $0.parent })
-    }
-}
-
 class Day6: Day {
     
     override func run() -> (String, String) {
-        let lines = input.lines
+        let lines = input.lines.words(separatedBy: ")")
         
-        var nodes = Dictionary<String, Node>()
-        for line in lines {
-            let parentName = String(line.raw.split(separator: ")")[0])
-            let childName = String(line.raw.split(separator: ")")[1])
+        var nodes = Dictionary<String, Node<String>>()
+        for pieces in lines {
+            let parentName = pieces[0].raw
+            let childName = pieces[1].raw
             
             let parentNode = nodes[parentName] ?? Node(value: parentName)
-            let child = nodes[childName] ?? Node(value: childName)
+            let childNode = nodes[childName] ?? Node(value: childName)
             
-            child.parent = parentNode
+            parentNode.addChild(childNode)
             nodes[parentName] = parentNode
-            nodes[childName] = child
+            nodes[childName] = childNode
         }
         
-        let countsToRoot = nodes.values.map { $0.countToRoot }
+        let countsToRoot = nodes.values.map { $0.numberOfParents }
         let sum = countsToRoot.sum()
-        
         let p1 = "\(sum)"
         
         let myNode = nodes["YOU"]!
         let santa = nodes["SAN"]!
+        let commonRoot = myNode.firstParentInCommon(with: santa)!
         
-        let myParents = Set(myNode.parents)
-        let santaParents = santa.parents
-        
-        var commonRoot: Node?
-        for sParent in santaParents {
-            if myParents.contains(sParent) {
-                commonRoot = sParent
-                break
-            }
-        }
-        
-        let myCount = myNode.count(to: commonRoot)
-        let santaCount = santa.count(to: commonRoot)
+        let myCount = myNode.numberOfParents(to: commonRoot)
+        let santaCount = santa.numberOfParents(to: commonRoot)
         
         
         

@@ -7,10 +7,10 @@
 
 import Foundation
 
-fileprivate class Node<T> {
+fileprivate class LLNode<T> {
     let value: T
-    weak var prev: Node<T>?
-    var next: Node<T>?
+    weak var prev: LLNode<T>?
+    var next: LLNode<T>?
     fileprivate init(_ value: T) {
         self.value = value
     }
@@ -18,7 +18,7 @@ fileprivate class Node<T> {
 
 public struct LinkedListIterator<Value>: IteratorProtocol {
     fileprivate let list: LinkedList<Value>
-    private var current: Node<Value>?
+    private var current: LLNode<Value>?
     private let mutationCount: Int
     
     init(_ list: LinkedList<Value>) {
@@ -39,8 +39,8 @@ public struct LinkedListIterator<Value>: IteratorProtocol {
 
 public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     
-    fileprivate var head: Node<Element>?
-    private var tail: Node<Element>?
+    fileprivate var head: LLNode<Element>?
+    private var tail: LLNode<Element>?
     fileprivate var mutationCounter = 0
     
     public private(set) var count: Int = 0
@@ -57,7 +57,7 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     public var first: Element? { return head?.value }
     public var last: Element? { return tail?.value }
     
-    private func node(at index: Int) -> Node<Element>? {
+    private func node(at index: Int) -> LLNode<Element>? {
         var current = head
         var offset = 0
         while offset < index && current != nil {
@@ -74,7 +74,7 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     }
     
     public func insert(_ value: Element, at index: Int) {
-        let node = Node(value)
+        let node = LLNode(value)
         
         if index <= 0 {
             node.next = head
@@ -143,7 +143,7 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     
     public func remove(at index: Int) -> Element {
         guard index >= 0 && index < count else { fatalError("Cannot retrieve node at index \(index)") }
-        let n: Node<Element>
+        let n: LLNode<Element>
         if index == 0 {
             n = head!
         } else if index == count - 1 {
