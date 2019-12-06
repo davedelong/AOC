@@ -30,14 +30,11 @@ class Day6: Day {
         
         let myNode = nodes["YOU"]!
         let santa = nodes["SAN"]!
+        
         let commonRoot = myNode.firstParentInCommon(with: santa)!
-        
-        let myCount = myNode.numberOfParents(to: commonRoot)
-        let santaCount = santa.numberOfParents(to: commonRoot)
-        
-        
-        
-        let p2 = "\(myCount + santaCount)"
+        let stepsToCurrentPositionToCommonRoot = myNode.numberOfParents(to: commonRoot)
+        let stepsFromCommonRootToSanta = santa.numberOfParents(to: commonRoot)
+        let p2 = "\(stepsToCurrentPositionToCommonRoot + stepsFromCommonRootToSanta)"
         
         return (p1, p2)
     }

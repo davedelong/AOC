@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Node<T>: Hashable {
+public class Node<T>: Hashable, CustomStringConvertible {
     public static func ==(lhs: Node<T>, rhs: Node<T>) -> Bool { return lhs.id == rhs.id }
     
     private lazy var id: ObjectIdentifier = { ObjectIdentifier(self) }()
@@ -19,6 +19,8 @@ public class Node<T>: Hashable {
     public private(set) var children: Set<Node<T>>
     
     public var numberOfParents: Int { return numberOfParents(to: nil) }
+    
+    public var description: String { return "Node<\(T.self)>(value: \(value))" }
     
     public init(value: T) {
         self.value = value
