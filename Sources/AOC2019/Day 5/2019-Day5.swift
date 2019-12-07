@@ -8,20 +8,14 @@
 
 class Day5: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
     override func part1() -> String {
-        let intcode = Intcode(memory: input.integers, supportedOperations: [.add, .multiply, .set, .get, .break])
-        intcode.run(input: 1)
-        return "\(intcode.io)"
+        let intcode = Intcode(memory: input.integers, input: 1)
+        return "\(intcode.run())"
     }
     
     override func part2() -> String {
-        let intcode = Intcode(memory: input.integers, supportedOperations: [.add, .multiply, .set, .get, .jumpIfTrue, .jumpIfFalse, .lessThan, .equal, .break])
-        intcode.run(input: 5)
-        return "\(intcode.io)"
+        let intcode = Intcode(memory: input.integers, input: 5)
+        return "\(intcode.run())"
     }
     
 }

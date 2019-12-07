@@ -12,7 +12,7 @@ class Day2: Day {
         var memory = input.integers
         memory[1] = noun
         memory[2] = verb
-        let code = Intcode(memory: memory, supportedOperations: [.add, .multiply, .break])
+        let code = Intcode(memory: memory)
         code.run()
         return code.memory[0]
     }
