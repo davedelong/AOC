@@ -36,7 +36,7 @@ class Intcode {
     func resetPC() { pc = 0 }
     
     func needsIO() -> Bool {
-        return isHalted == false && (memory[pc] % 100 == .read) && io == nil
+        return isHalted == false && (memory[pc] % 100 == .read)
     }
     
     func hasIO() -> Bool { return io != nil }
@@ -45,21 +45,6 @@ class Intcode {
         while isHalted == false {
             if memory[pc] % 100 == .write { return }
             if memory[pc] % 100 == .read { return }
-            step()
-        }
-    }
-    
-    func runUntilNextEvent() {
-        while isHalted == false {
-            if needsIO() { return }
-            let willHaveIO = (memory[pc] % 100 == .write)
-            step()
-            if willHaveIO { return }
-        }
-    }
-    
-    func runUntilNeedsIO() {
-        while isHalted == false && needsIO() == false {
             step()
         }
     }
