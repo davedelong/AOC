@@ -13,7 +13,8 @@ class Day2: Day {
         memory[1] = noun
         memory[2] = verb
         let code = Intcode(memory: memory, supportedOperations: [.add, .multiply, .break])
-        return code.run()
+        code.run()
+        return code.memory[0]
     }
     
     override func part1() -> String {

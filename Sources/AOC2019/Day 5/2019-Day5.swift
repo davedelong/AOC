@@ -14,14 +14,14 @@ class Day5: Day {
     
     override func part1() -> String {
         let intcode = Intcode(memory: input.integers, supportedOperations: [.add, .multiply, .set, .get, .break])
-        let answer = intcode.run(input: 1)
-        return "\(answer)"
+        intcode.run(input: 1)
+        return "\(intcode.io)"
     }
     
     override func part2() -> String {
         let intcode = Intcode(memory: input.integers, supportedOperations: [.add, .multiply, .set, .get, .jumpIfTrue, .jumpIfFalse, .lessThan, .equal, .break])
-        let answer = intcode.run(input: 5)
-        return "\(answer)"
+        intcode.run(input: 5)
+        return "\(intcode.io)"
     }
     
 }
