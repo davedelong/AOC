@@ -191,6 +191,11 @@ public extension RandomAccessCollection {
         return self[index]
     }
     
+    
+    func chunks(of size: Int) -> ChunkedCollection<Self> {
+        return ChunkedCollection(self, size: size)
+    }
+    
 }
 
 public extension Array {
@@ -215,4 +220,33 @@ public extension MutableCollection {
         }
     }
     
+}
+
+
+public struct ChunkedCollection<Base: Collection>: Collection {
+    private let base: Base
+    private let chunkSize: Int
+    
+    public init(_ base: Base, size: Int) {
+        self.base = base
+        chunkSize = size
+    }
+    
+    public typealias Index = Base.Index
+    
+    public var startIndex: Index {
+        return base.startIndex
+    }
+    
+    public var endIndex: Index {
+        return base.endIndex
+    }
+    
+    public func index(after index: Index) -> Index {
+        return base.index(index, offsetBy: chunkSize, limitedBy: base.endIndex) ?? base.endIndex
+    }
+    
+    public subscript(index: Index) -> Base.SubSequence {
+        return base[index..<self.index(after: index)]
+    }
 }
