@@ -69,7 +69,8 @@ class Intcode {
     }
     
     private func get(_ argIndex: Int) -> Int {
-        let mode = (memory[pc] / 100).digits.reversed().at(argIndex) ?? 0
+        let mask = pow(10.0, Double(argIndex + 2))
+        let mode = (memory[pc] / Int(mask)) % 10
         let v = memory[pc + argIndex + 1]
         switch mode {
             case 0: return memory[v]
@@ -80,7 +81,8 @@ class Intcode {
     }
     
     private func set(_ argIndex: Int, newValue: Int) {
-        let mode = (memory[pc] / 100).digits.reversed().at(argIndex) ?? 0
+        let mask = pow(10.0, Double(argIndex + 2))
+        let mode = (memory[pc] / Int(mask)) % 10
         let v = memory[pc + argIndex + 1]
         switch mode {
             case 0: memory[v] = newValue
