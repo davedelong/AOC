@@ -68,27 +68,29 @@ class Intcode {
         return io ?? 0
     }
     
-    private func get(_ argIndex: Int) -> Int {
-        let mask = pow(10.0, Double(argIndex + 2))
-        let mode = (memory[pc] / Int(mask)) % 10
-        let v = memory[pc + argIndex + 1]
-        switch mode {
-            case 0: return memory[v]
-            case 1: return v
-            case 2: return memory[relativeBase + v]
-            default: fatalError()
+    private subscript(argIndex: Int) -> Int {
+        get {
+            let mask = pow(10.0, Double(argIndex + 2))
+            let mode = (memory[pc] / Int(mask)) % 10
+            let v = memory[pc + argIndex + 1]
+            switch mode {
+                case 0: return memory[v]
+                case 1: return v
+                case 2: return memory[relativeBase + v]
+                default: fatalError()
+            }
         }
-    }
-    
-    private func set(_ argIndex: Int, newValue: Int) {
-        let mask = pow(10.0, Double(argIndex + 2))
-        let mode = (memory[pc] / Int(mask)) % 10
-        let v = memory[pc + argIndex + 1]
-        switch mode {
-            case 0: memory[v] = newValue
-            case 1: fatalError() // cannot set in immediate mode
-            case 2: memory[relativeBase + v] = newValue
-            default: fatalError()
+        
+        set {
+            let mask = pow(10.0, Double(argIndex + 2))
+            let mode = (memory[pc] / Int(mask)) % 10
+            let v = memory[pc + argIndex + 1]
+            switch mode {
+                case 0: memory[v] = newValue
+                case 1: fatalError() // cannot set in immediate mode
+                case 2: memory[relativeBase + v] = newValue
+                default: fatalError()
+            }
         }
     }
     
@@ -97,38 +99,38 @@ class Intcode {
         
         switch instruction {
             case .add: // add
-                set(2, newValue: get(0) + get(1))
+                self[2] = self[0] + self[1]
                 pc += 4
             case .multiply: // multiply
-                set(2, newValue: get(0) * get(1))
+                self[2] = self[0] * self[1]
                 pc += 4
             case .read: // read from IO
-                set(0, newValue: io!)
+                self[0] = io!
                 pc += 2
             case .write: // write to IO
-                io = get(0)
+                io = self[0]
                 pc += 2
             case .jumpIfTrue: // jump if true
-                if get(0) != 0 {
-                    pc = get(1)
+                if self[0] != 0 {
+                    pc = self[1]
                 } else {
                     pc += 3
                 }
             case .jumpIfFalse: // jump if false
-                if get(0) == 0 {
-                    pc = get(1)
+                if self[0] == 0 {
+                    pc = self[1]
                 } else {
                     pc += 3
                 }
             case .lessThan: // less than
-                set(2, newValue: get(0) < get(1) ? 1 : 0)
+                self[2] = self[0] < self[1] ? 1 : 0
                 pc += 4
             case .equal: // equal
-                set(2, newValue: get(0) == get(1) ? 1 : 0)
+                self[2] = self[0] == self[1] ? 1 : 0
                 pc += 4
             
             case .adjustRelativeBase:
-                relativeBase += get(0)
+                relativeBase += self[0]
                 pc += 2
             
             case .break: // break
