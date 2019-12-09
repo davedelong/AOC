@@ -16,24 +16,29 @@ fileprivate extension Int {
     static let jumpIfFalse = 6
     static let lessThan = 7
     static let equal = 8
+    static let adjustRelativeBase = 9
     
     static let `break` = 99
 }
 
 class Intcode {
     
-    private(set) var memory: Array<Int>
+    private(set) var memory: Sparse<Int>
     private var pc = 0
+    private var relativeBase = 0
     
     var io: Int?
-    var isHalted: Bool { return pc >= memory.count }
+    private(set) var isHalted: Bool = false
     
     init(memory: Array<Int>, input: Int? = nil) {
-        self.memory = memory
+        self.memory = Sparse(memory, default: 0)
         self.io = input
     }
     
-    func resetPC() { pc = 0 }
+    func resetPC() {
+        pc = 0
+        isHalted = false
+    }
     
     func needsIO() -> Bool {
         return isHalted == false && (memory[pc] % 100 == .read)
@@ -49,17 +54,39 @@ class Intcode {
         }
     }
     
+    func runUntilAfterNextOutput() {
+        while isHalted == false {
+            let shouldStop = (memory[pc] % 100 == .write)
+            step()
+            if shouldStop { return }
+        }
+    }
+    
     @discardableResult
     func run() -> Int {
         while isHalted == false { step() }
         return io ?? 0
     }
     
-    fileprivate func interpret(_ argCount: Int) -> Array<Int> {
-        let digits = Array((memory[pc] / 100).digits.reversed()) // chop off the instruction itself
-        return (0 ..< argCount).map { argIndex -> Int in
-            let v = memory[pc + argIndex + 1]
-            return (digits.at(argIndex) == 1) ? v : memory[v]
+    private func get(_ argIndex: Int) -> Int {
+        let mode = (memory[pc] / 100).digits.reversed().at(argIndex) ?? 0
+        let v = memory[pc + argIndex + 1]
+        switch mode {
+            case 0: return memory[v]
+            case 1: return v
+            case 2: return memory[relativeBase + v]
+            default: fatalError()
+        }
+    }
+    
+    private func set(_ argIndex: Int, newValue: Int) {
+        let mode = (memory[pc] / 100).digits.reversed().at(argIndex) ?? 0
+        let v = memory[pc + argIndex + 1]
+        switch mode {
+            case 0: memory[v] = newValue
+            case 1: fatalError() // cannot set in immediate mode
+            case 2: memory[relativeBase + v] = newValue
+            default: fatalError()
         }
     }
     
@@ -68,45 +95,42 @@ class Intcode {
         
         switch instruction {
             case .add: // add
-                let params = interpret(2) // the third argument is ALWAYS positional
-                memory[memory[pc+3]] = params[0] + params[1]
+                set(2, newValue: get(0) + get(1))
                 pc += 4
             case .multiply: // multiply
-                let params = interpret(2) // the third argument is ALWAYS positional
-                memory[memory[pc+3]] = params[0] * params[1]
+                set(2, newValue: get(0) * get(1))
                 pc += 4
             case .read: // read from IO
-                memory[memory[pc+1]] = io! // the first argument is ALWAYS positional
+                set(0, newValue: io!)
                 pc += 2
             case .write: // write to IO
-                let params = interpret(1)
-                io = params[0]
+                io = get(0)
                 pc += 2
             case .jumpIfTrue: // jump if true
-                let params = interpret(2)
-                if params[0] != 0 {
-                    pc = params[1]
+                if get(0) != 0 {
+                    pc = get(1)
                 } else {
                     pc += 3
                 }
             case .jumpIfFalse: // jump if false
-                let params = interpret(2)
-                if params[0] == 0 {
-                    pc = params[1]
+                if get(0) == 0 {
+                    pc = get(1)
                 } else {
                     pc += 3
                 }
             case .lessThan: // less than
-                let params = interpret(2) // the third argument is ALWAYS positional
-                memory[memory[pc+3]] = (params[0] < params[1]) ? 1 : 0
+                set(2, newValue: get(0) < get(1) ? 1 : 0)
                 pc += 4
             case .equal: // equal
-                let params = interpret(2) // the third argument is ALWAYS positional
-                memory[memory[pc+3]] = (params[0] == params[1]) ? 1 : 0
+                set(2, newValue: get(0) == get(1) ? 1 : 0)
                 pc += 4
             
+            case .adjustRelativeBase:
+                relativeBase += get(0)
+                pc += 2
+            
             case .break: // break
-                pc = memory.count
+                isHalted = true
             
             default:
                 fatalError("Unknown instruction: \(instruction)")

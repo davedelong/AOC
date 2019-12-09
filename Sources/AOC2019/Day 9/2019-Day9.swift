@@ -13,11 +13,15 @@ class Day9: Day {
     }
     
     override func part1() -> String {
-        return #function
+        let intcode = Intcode(memory: input.integers, input: 1)
+        intcode.runUntilAfterNextOutput() // the first output is what we care about
+        return "\(intcode.io!)"
     }
     
     override func part2() -> String {
-        return #function
+        let intcode = Intcode(memory: input.integers, input: 2)
+        intcode.runUntilAfterNextOutput() // the first output is what we care about
+        return "\(intcode.io!)"
     }
     
 }
