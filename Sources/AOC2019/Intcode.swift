@@ -68,12 +68,15 @@ class Intcode {
         return io ?? 0
     }
     
+    private func mode(_ argIndex: Int) -> Int {
+        let mask = pow(10.0, Double(argIndex + 2))
+        return (memory[pc] / Int(mask)) % 10
+    }
+    
     private subscript(argIndex: Int) -> Int {
         get {
-            let mask = pow(10.0, Double(argIndex + 2))
-            let mode = (memory[pc] / Int(mask)) % 10
             let v = memory[pc + argIndex + 1]
-            switch mode {
+            switch mode(argIndex) {
                 case 0: return memory[v]
                 case 1: return v
                 case 2: return memory[relativeBase + v]
@@ -82,10 +85,8 @@ class Intcode {
         }
         
         set {
-            let mask = pow(10.0, Double(argIndex + 2))
-            let mode = (memory[pc] / Int(mask)) % 10
             let v = memory[pc + argIndex + 1]
-            switch mode {
+            switch mode(argIndex) {
                 case 0: memory[v] = newValue
                 case 1: fatalError() // cannot set in immediate mode
                 case 2: memory[relativeBase + v] = newValue
