@@ -95,8 +95,8 @@ class Test2019: XCTestCase {
         let d = Day11()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "1885")
+        XCTAssertEqual(p2, "BFEAGHAF")
     }
     
     func testDay12() {
