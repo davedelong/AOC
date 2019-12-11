@@ -9,7 +9,6 @@
 class Day8: Day {
     
     override func run() -> (String, String) {
-        let size = CGSize(width: 25, height: 6)
         let numberOfPixels = 25 * 6
         let rawData = input.characters.compactMap { Int("\($0)") }
         let layers = rawData.chunks(of: numberOfPixels).map { Array($0) }
@@ -27,7 +26,7 @@ class Day8: Day {
         let p1 = "\(numberOfOnes * numberOfTwos)"
         
         
-        var resolvedPixels = Array<Int>(repeating: 0, count: numberOfPixels)
+        var resolvedPixels = Array<String>(repeating: " ", count: numberOfPixels)
         
         for p in 0 ..< numberOfPixels {
             var pixelValue = 0
@@ -36,17 +35,15 @@ class Day8: Day {
                 pixelValue = layer[p]
                 break
             }
-            resolvedPixels[p] = pixelValue
+            resolvedPixels[p] = pixelValue == 0 ? " " : "#"
         }
         
-        let rows = resolvedPixels.chunks(of: 25)
-        for row in rows {
-            let t = row.map { "\($0 == 0 ? " " : "#")" }.joined()
-            print(t)
-        }
-        
-        
-        return (p1, "CFCUG")
+        let joined = Array(resolvedPixels.joined())
+                        .chunks(of: 25)             // break up the buffer into lines
+                        .map { String($0) }         // turn each line into a string
+                        .joined(separator: "\n")    // join the strings
+        let p2 = RecognizeLetters(from: joined)
+        return (p1, p2)
     }
     
 }

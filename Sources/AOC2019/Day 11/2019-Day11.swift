@@ -63,15 +63,20 @@ class Day11: Day {
         let yRange = panels.keys.map { $0.y }.range()
         let xRange = panels.keys.map { $0.x }.range()
         
+        var painted = ""
+        
         for y in yRange {
             for x in xRange {
                 let color = panels[XY(x: x, y: y)] ?? .black
                 let char = (color == .white) ? "#" : " "
-                print(char, terminator: "")
+                painted.append(char)
             }
-            print("")
+            painted.append("\n")
         }
-        return "BFEAGHAF"
+        
+        let recognized = RecognizeLetters(from: painted)
+        
+        return recognized
     }
     
 }
