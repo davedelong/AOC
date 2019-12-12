@@ -6,18 +6,6 @@
 //  Copyright © 2019 Dave DeLong. All rights reserved.
 //
 
-
-extension Double {
-    static var tau: Double { return 2 * pi }
-}
-extension XY {
-    
-    func polarAngle(to other: XY) -> Double {
-        return atan2(Double(other.y - self.y), Double(other.x - self.x))
-    }
-    
-}
-
 class Day10: Day {
     
     override func run() -> (String, String) {

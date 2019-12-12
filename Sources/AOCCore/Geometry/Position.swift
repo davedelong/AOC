@@ -95,6 +95,10 @@ public extension Point2 {
         return closest
     }
     
+    func polarAngle(to other: Position) -> Double {
+        return atan2(Double(other.y - self.y), Double(other.x - self.x))
+    }
+    
 }
 
 extension Array where Element: RandomAccessCollection, Element.Index == Int {

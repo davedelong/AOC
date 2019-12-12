@@ -8,10 +8,18 @@
 
 import Foundation
 
-public protocol PointProtocol: Hashable {
+public protocol PointProtocol: Hashable, CustomStringConvertible {
     static var numberOfComponents: Int { get }
     var components: Array<Int> { get }
     init(_ components: Array<Int>)
+}
+
+public extension PointProtocol {
+    
+    var description: String {
+        return "(" + components.map { $0.description }.joined(separator: ", ") + ")"
+    }
+    
 }
 
 public extension PointProtocol {
