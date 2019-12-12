@@ -7,10 +7,16 @@
 
 import Foundation
 
-public protocol VectorProtocol: Hashable {
+public protocol VectorProtocol: Hashable, CustomStringConvertible {
     static var numberOfComponents: Int { get }
     var components: Array<Int> { get }
     init(_ components: Array<Int>)
+}
+
+public extension VectorProtocol {
+    var description: String {
+        return "(" + components.map { "\($0)" }.joined(separator: ", ") + ")"
+    }
 }
 
 public extension VectorProtocol {
@@ -74,11 +80,20 @@ public struct Vector2: VectorProtocol {
 public struct Vector3: VectorProtocol {
     public static let numberOfComponents = 3
     
-    public let components: Array<Int>
+    public private(set) var components: Array<Int>
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var z: Int { return components[2] }
+    public var x: Int {
+        get { return components[0] }
+        set { components[0] = newValue }
+    }
+    public var y: Int {
+        get { return components[1] }
+        set { components[1] = newValue }
+    }
+    public var z: Int {
+        get { return components[2] }
+        set { components[2] = newValue }
+    }
     
     public init(_ components: Array<Int>) {
         guard components.count == Vector3.numberOfComponents else {
@@ -87,7 +102,7 @@ public struct Vector3: VectorProtocol {
         self.components = components
     }
     
-    public init(x: Int, y: Int, z: Int, t: Int) { self.init([x, y, z]) }
+    public init(x: Int, y: Int, z: Int) { self.init([x, y, z]) }
 }
 
 public struct Vector4: VectorProtocol {
