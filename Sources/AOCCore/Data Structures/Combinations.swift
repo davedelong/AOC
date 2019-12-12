@@ -8,6 +8,20 @@
 
 import Foundation
 
+public struct PermutationSequence<T>: Sequence {
+    
+    private let produceIterator: () -> PermutationIterator<T>
+    
+    public init<C: Collection>(_ values: C) where C.Element == T {
+        produceIterator = { PermutationIterator(values) }
+    }
+    
+    public __consuming func makeIterator() -> PermutationIterator<T> {
+        return produceIterator()
+    }
+    
+}
+
 public struct PermutationIterator<T>: IteratorProtocol {
     
     private var hasReturnedInitial = false
@@ -47,6 +61,20 @@ public struct PermutationIterator<T>: IteratorProtocol {
         }
         return nil
     }
+}
+
+public struct CombinationSequence<T>: Sequence {
+    
+    private let produceIterator: () -> CombinationIterator<T>
+    
+    public init<C: Collection>(_ values: C, choose k: Int? = nil) where C.Element == T {
+        produceIterator = { CombinationIterator(values, choose: k) }
+    }
+    
+    public __consuming func makeIterator() -> CombinationIterator<T> {
+        return produceIterator()
+    }
+    
 }
 
 public struct CombinationIterator<T>: IteratorProtocol {

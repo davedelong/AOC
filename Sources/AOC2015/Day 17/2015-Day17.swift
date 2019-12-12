@@ -17,7 +17,7 @@ class Day17: Day {
         var numberOfContainersNeeded = Int.max
         var numberOfGroupsOfMinimumContainers = 0
         
-        while let setOfContainers = containerIterator.next() {
+        for setOfContainers in containers.combinations() {
             let s = setOfContainers.sum()
             if s == 150 {
                 matching += 1

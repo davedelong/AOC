@@ -12,6 +12,14 @@ public extension Collection {
     
     var isNotEmpty: Bool { return isEmpty == false }
     
+    var permutations: PermutationSequence<Element> {
+        return PermutationSequence(self)
+    }
+    
+    func combinations(choose k: Int? = nil) -> CombinationSequence<Element> {
+        return CombinationSequence(self, choose: k)
+    }
+    
     func partition(by goesInFirst: (Element) -> Bool) -> (Array<Element>, Array<Element>) {
         var first = Array<Element>()
         var second = Array<Element>()

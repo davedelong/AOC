@@ -60,9 +60,8 @@ class Day7: Day {
 //    }
     
     override func part1() -> String {
-        var combos = PermutationIterator(0...4)
         var m = 0
-        while let n = combos.next() {
+        for n in (0...4).permutations {
             var io = 0
             for phase in n {
                 io = Amp(phase: phase, code: self.input.integers).runP1(input: io)
@@ -75,9 +74,8 @@ class Day7: Day {
     
     override func part2() -> String {
         
-        var combos = PermutationIterator(5...9)
         var m = 0
-        while let n = combos.next() {
+        for n in (5...9).permutations {
             m = max(m, runAmpsInFeedbackMode(n))
         }
         
