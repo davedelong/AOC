@@ -29,6 +29,18 @@ public extension PointProtocol {
         return Self.init(ints)
     }
     
+    static func +<V: VectorProtocol>(lhs: Self, rhs: V) -> Self {
+        guard numberOfComponents == V.numberOfComponents else {
+            fatalError("Cannot add a Vector\(V.numberOfComponents) to a Point\(numberOfComponents)")
+        }
+        let new = zip(lhs.components, rhs.components).map { $0 + $1 }
+        return Self.init(new)
+    }
+    
+    static func -<V: VectorProtocol>(lhs: Self, rhs: V) -> Self {
+        return lhs + -rhs
+    }
+    
     static func +(lhs: Self, rhs: Self) -> Self {
         let new = zip(lhs.components, rhs.components).map { $0 + $1 }
         return Self.init(new)
@@ -96,7 +108,7 @@ public struct Point3: PointProtocol {
         self.components = components
     }
     
-    public init(x: Int, y: Int, z: Int, t: Int) { self.init([x, y, z]) }
+    public init(x: Int, y: Int, z: Int) { self.init([x, y, z]) }
 }
 
 public struct Point4: PointProtocol {

@@ -8,6 +8,22 @@
 
 class Day12: Day {
     
+    struct System {
+        var positions: Array<Point3> = [Point3(x: -3, y: 15, z: -11),
+                                        Point3(x: 3, y: 13, z: -19),
+                                        Point3(x: -13, y: 18, z: -2),
+                                        Point3(x: 6, y: 0, z: -1)]
+        var velocities: Array<Vector3> = [.zero, .zero, .zero, .zero]
+        
+        var totalEnergy: UInt {
+            return zip(velocities, positions).map { (v, p) -> UInt in
+                let pE = p.components.map { $0.magnitude }.sum()
+                let kE = v.components.map { $0.magnitude }.sum()
+                return pE * kE
+            }.sum()
+        }
+    }
+    
     struct State: Hashable {
         let p: Vector4
         let v: Vector4
@@ -17,71 +33,39 @@ class Day12: Day {
         return super.run()
     }
     
-    override func part1() -> String {
+    private func step(_ system: System) -> System {
+        var deltas: Array<Vector3> = [.zero, .zero, .zero, .zero]
         
-        var positions = [
-            Vector3(x: -3, y: 15, z: -11),
-            Vector3(x: 3, y: 13, z: -19),
-            Vector3(x: -13, y: 18, z: -2),
-            Vector3(x: 6, y: 0, z: -1),
-        ]
-        
-        var velocities = [
-            Vector3.zero,
-            Vector3.zero,
-            Vector3.zero,
-            Vector3.zero,
-        ]
-        
-        for _ in 0 ..< 1000 {
-            // first, apply gravity to velocities
-        
-            var deltas = [
-                Vector3.zero,
-                Vector3.zero,
-                Vector3.zero,
-                Vector3.zero,
-            ]
+        var iterator = CombinationIterator(system.positions.indices, choose: 2)
+        while let pair = iterator.next() {
+            let m1 = system.positions[pair[0]]
+            let m2 = system.positions[pair[1]]
             
-            var iterator = CombinationIterator(positions.indices, choose: 2)
-            while let pair = iterator.next() {
-                let m1 = positions[pair[0]]
-                let m2 = positions[pair[1]]
-                if m1.x < m2.x {
-                    deltas[pair[0]].x += 1
-                    deltas[pair[1]].x -= 1
-                } else if m1.x > m2.x {
-                    deltas[pair[0]].x -= 1
-                    deltas[pair[1]].x += 1
-                }
-                
-                if m1.y < m2.y {
-                    deltas[pair[0]].y += 1
-                    deltas[pair[1]].y -= 1
-                } else if m1.y > m2.y {
-                    deltas[pair[0]].y -= 1
-                    deltas[pair[1]].y += 1
-                }
-                
-                if m1.z < m2.z {
-                    deltas[pair[0]].z += 1
-                    deltas[pair[1]].z -= 1
-                } else if m1.z > m2.z {
-                    deltas[pair[0]].z -= 1
-                    deltas[pair[1]].z += 1
+            for axis in 0 ..< 3 {
+                if m1.components[axis] < m2.components[axis] {
+                    deltas[pair[0]].components[axis] += 1
+                    deltas[pair[1]].components[axis] -= 1
+                } else if m1.components[axis] > m2.components[axis] {
+                    deltas[pair[0]].components[axis] -= 1
+                    deltas[pair[1]].components[axis] += 1
                 }
             }
-            velocities = velocities.enumerated().map { $1 + deltas[$0] }
-            positions = positions.enumerated().map { $1 + velocities[$0] }
         }
         
-        let totalEnergy = zip(velocities, positions).map { (v, p) -> UInt in
-            let pE = p.components.map { $0.magnitude }.sum()
-            let kE = v.components.map { $0.magnitude }.sum()
-            return pE * kE
-        }.sum()
+        let newVelocities = system.velocities.enumerated().map { $1 + deltas[$0] }
+        let newPositions = system.positions.enumerated().map { $1 + newVelocities[$0] }
+        return System(positions: newPositions, velocities: newVelocities)
+    }
+    
+    override func part1() -> String {
         
-        return "\(totalEnergy)"
+        var s = System()
+        
+        for _ in 0 ..< 1000 {
+            s = step(s)
+        }
+        
+        return "\(s.totalEnergy)"
     }
     
     override func part2() -> String {

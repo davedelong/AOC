@@ -26,6 +26,10 @@ public extension VectorProtocol {
         return Self.init(ints)
     }
     
+    static prefix func -(lhs: Self) -> Self {
+        return Self.init(lhs.components.map { -$0 })
+    }
+    
     static func +(lhs: Self, rhs: Self) -> Self {
         let new = zip(lhs.components, rhs.components).map { $0 + $1 }
         return Self.init(new)
@@ -80,7 +84,7 @@ public struct Vector2: VectorProtocol {
 public struct Vector3: VectorProtocol {
     public static let numberOfComponents = 3
     
-    public private(set) var components: Array<Int>
+    public var components: Array<Int>
     
     public var x: Int {
         get { return components[0] }
