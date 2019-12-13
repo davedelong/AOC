@@ -23,7 +23,7 @@ fileprivate extension Int {
 
 class Intcode {
     
-    private(set) var memory: Sparse<Int>
+    var memory: Sparse<Int>
     private var pc = 0
     private var relativeBase = 0
     
