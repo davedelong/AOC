@@ -115,7 +115,7 @@ public extension Collection {
     
 }
 
-public extension Collection where Element: Numeric {
+public extension Sequence where Element: Numeric {
     
     func sum() -> Element {
         return reduce(0, +)
@@ -123,6 +123,26 @@ public extension Collection where Element: Numeric {
     
     func product() -> Element {
         return reduce(1, *)
+    }
+    
+}
+
+public extension Sequence {
+    
+    func sum<N: Numeric>(of element: (Element) -> N) -> N {
+        var f: N = 0
+        for i in self {
+            f += element(i)
+        }
+        return f
+    }
+    
+    func product<N: Numeric>(of element: (Element) -> N) -> N {
+        var f: N = 1
+        for i in self {
+            f *= element(i)
+        }
+        return f
     }
     
 }

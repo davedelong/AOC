@@ -119,16 +119,16 @@ class Test2019: XCTestCase {
         let d = Day14()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "143173")
+        XCTAssertEqual(p2, "8845261")
     }
     
     func testDay15() {
         let d = Day15()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "77038830")
+        XCTAssertEqual(p2, "28135104")
     }
     
     func testDay16() {
@@ -143,16 +143,16 @@ class Test2019: XCTestCase {
         let d = Day17()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "6000")
+        XCTAssertEqual(p2, "807320")
     }
     
     func testDay18() {
         let d = Day18()
         let (p1, p2) = d.run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "77038830")
+        XCTAssertEqual(p2, "28135104")
     }
     
     func testDay19() {

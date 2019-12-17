@@ -9,6 +9,10 @@ import Foundation
 
 extension FixedWidthInteger {
     
+    public var onesDigit: Self.Magnitude {
+        return magnitude % 10
+    }
+    
     public var digits: Array<Self> {
         var d = Array<Self>()
         var remainder = self
@@ -20,6 +24,18 @@ extension FixedWidthInteger {
             remainder /= 10
         }
         return Array(d.reversed())
+    }
+    
+}
+
+public extension Int {
+    
+    init<C: Collection>(digits: C) where C.Element == Int {
+        var i = 0
+        for (power, digit) in digits.reversed().enumerated() {
+            i += abs(digit) * Int(pow(10.0, Double(power)))
+        }
+        self = i
     }
     
 }
