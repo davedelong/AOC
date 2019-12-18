@@ -27,6 +27,9 @@ class Intcode {
     private var pc = 0
     private var relativeBase = 0
     
+    var input: () -> Int? = { return nil }
+    var output: (Int) -> Void = { _ in }
+    
     var io: Int?
     private(set) var isHalted: Bool = false
     
@@ -59,6 +62,20 @@ class Intcode {
             let shouldStop = (memory[pc] % 100 == .write)
             step()
             if shouldStop { return }
+        }
+    }
+    
+    func runWithHandlers() {
+        while isHalted == false {
+            runUntilBeforeNextIO()
+            if isHalted == true { break }
+            if needsIO() {
+                io = input()
+                step()
+            } else {
+                step()
+                output(io!)
+            }
         }
     }
     
