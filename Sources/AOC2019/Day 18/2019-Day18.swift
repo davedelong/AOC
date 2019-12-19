@@ -84,9 +84,7 @@ class Day18: Day {
         }
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
+    var memoizedPathCounts = Dictionary<Tuple2<Character, Set<Character>>, Int>()
     
     override func part1() -> String {
         var maze = XYGrid<Maze>()
@@ -161,7 +159,13 @@ class Day18: Day {
         guard state.remainingKeys.isNotEmpty else { return 0 }
         guard state.isValid(thisPath) else { return nil }
         
+        let cacheKey = Tuple2(thisPath.key, Set(state.remainingKeys.keys))
         let stepCount = thisPath.stepCount
+        
+        if let count = memoizedPathCounts[cacheKey] {
+            return stepCount + count
+        }
+        
         let key = thisPath.key
         
         // propose the removal of this key
@@ -181,8 +185,6 @@ class Day18: Day {
             return newState.validPath(from: key, to: k)
         }
         
-        print("\(newState.order) -> Found \(possibilities.count) paths")
-        
         guard possibilities.isNotEmpty else { return nil }
         
         let counts = possibilities.compactMap { p -> Int? in
@@ -190,7 +192,11 @@ class Day18: Day {
         }
         
         guard counts.isNotEmpty else { return nil } // none of these paths could solve
-        return stepCount + counts.min()!
+        
+        let c = counts.min()!
+        memoizedPathCounts[cacheKey] = c
+        
+        return stepCount + c
     }
     
     override func part2() -> String {
