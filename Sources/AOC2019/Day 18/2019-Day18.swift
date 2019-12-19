@@ -19,6 +19,18 @@ fileprivate func path<N>(from start: vector_int2, to end: vector_int2, in graph:
 
 class Day18: Day {
     
+    struct Path {
+        let nodes: Array<GridNode<Maze>>
+        var key: Character { nodes.last!.value!.key! }
+        let doors: Set<Character>
+        var stepCount: Int { nodes.count - 1 }
+        
+        init(nodes: Array<GridNode<Maze>>) {
+            self.nodes = nodes
+            self.doors = Set(nodes.compactMap { $0.value?.door })
+        }
+    }
+    
     enum Maze: Equatable {
         case wall
         case open
@@ -40,23 +52,35 @@ class Day18: Day {
     }
     
     struct State {
+        var order = ""
+        var stepCount = 0
+        var paths = Dictionary<Pair<Character>, Path>()
         var remainingKeys = Dictionary<Character, XY>()
         var lockedDoors = Set<Character>()
         
-        func isValid(_ path: Array<GridNode<Maze>>) -> Bool {
-            guard path.isNotEmpty else { return false }
+        func isValid(_ path: Path) -> Bool {
+            guard path.nodes.isNotEmpty else { return false }
+            if path.doors.isEmpty { return true }
+            if lockedDoors.intersects(path.doors) { return false }
             
-            for (index, step) in path.enumerated() {
-                // if the door is locked, too bad; can't do this path
-                if let d = step.value!.door, lockedDoors.contains(d) { return false }
-                
-                // this is a path that would run over a key to get here; we don't want that
-                // we want to only consider paths that have open doors and no keys in the way
-                if index > 0 && index < path.count - 1 {
-                    if let k = step.value!.key, remainingKeys[k] != nil { return false }
-                }
+            for node in path.nodes.dropLast() {
+                if let k = node.value?.key, remainingKeys[k] != nil { return false }
             }
+            
             return true
+        }
+        
+        func path(from: Character, to: Character) -> Path? {
+            let pair = Pair(from, to)
+            if let p = paths[pair] { return p }
+            let reversed = Pair(to, from)
+            return paths[reversed]
+        }
+        
+        func validPath(from: Character, to: Character) -> Path? {
+            guard let p = path(from: from, to: to) else { return nil }
+            guard isValid(p) else { return nil }
+            return p
         }
     }
     
@@ -70,7 +94,6 @@ class Day18: Day {
         var lockedDoors = Dictionary<Character, XY>()
         var remainingKeys = Dictionary<Character, XY>()
         
-        var collectedKeys = Set<Character>()
         var start: XY = .zero
         
         for (y, row) in input.lines.enumerated() {
@@ -102,11 +125,23 @@ class Day18: Day {
         state.remainingKeys = remainingKeys
         state.lockedDoors = Set(lockedDoors.keys)
         
-        let initialPaths = state.remainingKeys.values.map { xy -> Array<GridNode<Maze>> in
-            return path(from: start.position, to: xy.position, in: g)
+        for (key, startXY) in state.remainingKeys {
+            for (otherKey, endXY) in state.remainingKeys {
+                if key == otherKey { continue }
+                let p = path(from: startXY.position, to: endXY.position, in: g)
+                state.paths[Pair(key, otherKey)] = Path(nodes: p)
+            }
+        }
+        
+        let initialPaths = state.remainingKeys.values.map { xy -> Path in
+            return Path(nodes: path(from: start.position, to: xy.position, in: g))
         }.filter { state.isValid($0) }
         
-        let counts = initialPaths.compactMap { attempt(path: $0, state: state, in: g) }
+        print("ORDER: ")
+        let keys = initialPaths.map { $0.key }
+        print("\(keys)")
+        
+        let counts = initialPaths.compactMap { attempt(path: $0, state: state) }
         let steps = counts.min()!
         
         maze.draw(using: { m in
@@ -122,31 +157,36 @@ class Day18: Day {
         return "\(steps)"
     }
     
-    private func attempt(path thisPath: Array<GridNode<Maze>>, state: State, in graph: GKGridGraph<GridNode<Maze>>) -> Int? {
+    private func attempt(path thisPath: Path, state: State) -> Int? {
         guard state.remainingKeys.isNotEmpty else { return 0 }
         guard state.isValid(thisPath) else { return nil }
         
-        let stepCount = thisPath.count - 1 // don't count the start position
-        
-        // the key is at the last step
-        let key = thisPath.last!.value!.key!
+        let stepCount = thisPath.stepCount
+        let key = thisPath.key
         
         // propose the removal of this key
         var newState = state
+        newState.stepCount += thisPath.stepCount
+        newState.order.append(key)
         newState.remainingKeys[key] = nil
         newState.lockedDoors.remove(key.uppercased().first!)
         
         // if this was the last key, hooray!
-        if newState.remainingKeys.isEmpty { return stepCount }
-        
-        let currentPosition = thisPath.last!.gridPosition
-        let possibilities = newState.remainingKeys.values.map { xy -> Array<GridNode<Maze>> in
-            return path(from: currentPosition, to: xy.position, in: graph)
+        if newState.remainingKeys.isEmpty {
+            print("SOLUTION: \(state.order) (\(newState.stepCount))")
+            return stepCount
         }
         
+        let possibilities = newState.remainingKeys.keys.compactMap { k -> Path? in
+            return newState.validPath(from: key, to: k)
+        }
+        
+        print("\(newState.order) -> Found \(possibilities.count) paths")
+        
+        guard possibilities.isNotEmpty else { return nil }
+        
         let counts = possibilities.compactMap { p -> Int? in
-            guard newState.isValid(p) else { return nil }
-            return attempt(path: p, state: newState, in: graph)
+            return attempt(path: p, state: newState)
         }
         
         guard counts.isNotEmpty else { return nil } // none of these paths could solve
