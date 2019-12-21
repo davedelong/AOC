@@ -86,7 +86,7 @@ class Day18: Day {
     
     var memoizedPathCounts = Dictionary<Tuple2<Character, Set<Character>>, Int>()
     
-    override func part1() -> String {
+    private func parseMaze() -> (XY, XYGrid<Maze>) {
         var maze = XYGrid<Maze>()
         
         var lockedDoors = Dictionary<Character, XY>()
@@ -116,12 +116,20 @@ class Day18: Day {
                 
             }
         }
-        
+        return (start, maze)
+    }
+    
+    override func part1() -> String {
+        let (startXY, maze) = parseMaze()
         let g = maze.convertToGridGraph({ return $0 != .wall })
+        
+        let remainingKeys = maze.grid.filter({ $0.value.isKey }).map { e in
+            return (e.value.key!, e.key)
+        }
         
         var state = State()
         state.remainingKeys = remainingKeys
-        state.lockedDoors = Set(lockedDoors.keys)
+        state.lockedDoors = Set(maze.values.compactMap { $0.door })
         
         for (key, startXY) in state.remainingKeys {
             for (otherKey, endXY) in state.remainingKeys {
@@ -132,12 +140,8 @@ class Day18: Day {
         }
         
         let initialPaths = state.remainingKeys.values.map { xy -> Path in
-            return Path(nodes: path(from: start.position, to: xy.position, in: g))
+            return Path(nodes: path(from: startXY.position, to: xy.position, in: g))
         }.filter { state.isValid($0) }
-        
-        print("ORDER: ")
-        let keys = initialPaths.map { $0.key }
-        print("\(keys)")
         
         let counts = initialPaths.compactMap { attempt(path: $0, state: state) }
         let steps = counts.min()!
@@ -176,10 +180,7 @@ class Day18: Day {
         newState.lockedDoors.remove(key.uppercased().first!)
         
         // if this was the last key, hooray!
-        if newState.remainingKeys.isEmpty {
-            print("SOLUTION: \(state.order) (\(newState.stepCount))")
-            return stepCount
-        }
+        if newState.remainingKeys.isEmpty { return stepCount }
         
         let possibilities = newState.remainingKeys.keys.compactMap { k -> Path? in
             return newState.validPath(from: key, to: k)
@@ -200,6 +201,37 @@ class Day18: Day {
     }
     
     override func part2() -> String {
+        var (startXY, maze) = parseMaze()
+        
+        /**
+         Turn   ...  Into   @#@
+                .@.         ###
+                ...         @#@
+         
+         
+         */
+        
+        let s1 = startXY.move(.north).move(.west)
+        let s2 = startXY.move(.north).move(.east)
+        let s3 = startXY.move(.south).move(.west)
+        let s4 = startXY.move(.south).move(.east)
+        
+        maze[startXY] = .wall
+        maze[startXY.move(.north)] = .wall
+        maze[startXY.move(.south)] = .wall
+        maze[startXY.move(.east)] = .wall
+        maze[startXY.move(.west)] = .wall
+        
+        maze.draw(using: { m in
+            guard let e = m else { return "?" }
+            switch e {
+                case .wall: return "⬛️"
+                case .open: return "⬜️"
+                case .key(let k): return "\(k)⃝"
+                case .door(let d): return "\(d)⃞"
+            }
+        })
+        
         return #function
     }
     

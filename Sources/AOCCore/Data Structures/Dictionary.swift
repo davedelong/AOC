@@ -49,4 +49,13 @@ public extension Dictionary {
         }
     }
     
+    func map<NewKey: Hashable, NewValue>(_ mapper: (Element) -> (NewKey, NewValue)) -> Dictionary<NewKey, NewValue> {
+        var final = Dictionary<NewKey, NewValue>()
+        for item in self {
+            let (k, v) = mapper(item)
+            final[k] = v
+        }
+        return final
+    }
+    
 }

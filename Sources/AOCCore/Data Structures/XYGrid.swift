@@ -10,7 +10,7 @@ import GameplayKit
 
 public struct XYGrid<T> {
     
-    private var grid = Dictionary<XY, T>()
+    public private(set) var grid = Dictionary<XY, T>()
     
     public init() { }
     
@@ -18,6 +18,9 @@ public struct XYGrid<T> {
         get { return grid[key] }
         set { grid[key] = newValue }
     }
+    
+    public var positions: Dictionary<XY, T>.Keys { return grid.keys }
+    public var values: Dictionary<XY, T>.Values { return grid.values }
     
     public func draw(using renderer: (T?) -> String) {
         
