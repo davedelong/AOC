@@ -13,11 +13,54 @@ class Day21: Day {
     }
     
     override func part1() -> String {
-        return #function
+        let i = Intcode(memory: input.integers)
+        
+        // if (A == false || B == false || c == false) && D == true { jump }
+        // else walk
+        var input = """
+NOT A J
+NOT B T
+OR T J
+NOT C T
+OR T J
+NOT D T
+NOT T T
+AND T J
+WALK
+
+"""[...]
+        i.input = { input.popFirst()?.asciiValue.map { Int($0) } }
+        i.runWithHandlers()
+        return "\(i.io!)"
     }
     
     override func part2() -> String {
-        return #function
+        let i = Intcode(memory: input.integers)
+        
+        // if (A == false || B == false || c == false) && D == true { jump }
+        // else run
+        var input = """
+NOT A J
+NOT B T
+OR T J
+NOT C T
+OR T J
+OR A T
+AND B T
+AND C T
+AND D T
+NOT T T
+AND T J
+AND E T
+OR H T
+AND T J
+AND D J
+RUN
+
+"""[...]
+        i.input = { input.popFirst()?.asciiValue.map { Int($0) } }
+        i.runWithHandlers()
+        return "\(i.io!)"
     }
     
 }
