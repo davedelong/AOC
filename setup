@@ -1,0 +1,115 @@
+#!/usr/bin/xcrun --toolchain default swift
+
+import Foundation
+
+let today = Date()
+let calendar = Calendar(identifier: .gregorian)
+
+let day = calendar.component(.day, from: today)
+let month = calendar.component(.month, from: today)
+let year = calendar.component(.year, from: today)
+let todayString = "\(month)/\(day)/\(year % 100)"
+
+let u = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+let sources = u.appendingPathComponent("Sources")
+let yearFolder = sources.appendingPathComponent("AOC\(year)")
+
+print("Creating \(yearFolder.path)")
+mkdir(yearFolder)
+
+
+let mainContents = """
+//
+//  AOC\(year).swift
+//  
+//
+//  Created by Dave DeLong on \(todayString).
+//
+
+import Foundation
+
+@_exported import AOCCore
+"""
+mainContents >> yearFolder.appendingPathComponent("AOC\(year).swift")
+
+for day in 1 ... 25 {
+	let dayFolder = yearFolder.appendingPathComponent("Day \(day)")
+	mkdir(dayFolder)
+	
+	let dayContents = """
+	//
+	//  Day\(day).swift
+	//  test
+	//
+	//  Created by Dave DeLong on \(todayString).
+	//  Copyright © \(year) Dave DeLong. All rights reserved.
+	//
+
+	class Day\(day): Day {
+	
+		override func run() -> (String, String) {
+			return super.run()
+		}
+	
+		override func part1() -> String {
+			return #function
+		}
+	
+		override func part2() -> String {
+			return #function
+		}
+	
+	}
+	"""
+	dayContents >> dayFolder.appendingPathComponent("\(year)-Day\(day).swift")
+	
+
+	"" >> dayFolder.appendingPathComponent("input.txt")
+}
+
+let testFile = u.appendingPathComponent("Tests").appendingPathComponent("AOCTests").appendingPathComponent("Test\(year).swift")
+
+var contents = """
+//
+//  Test\(year).swift
+//  AOCTests
+//
+//  Created by Dave DeLong on \(todayString).
+//  Copyright © \(year) Dave DeLong. All rights reserved.
+//
+
+import XCTest
+@testable import AOC\(year)
+
+class Test\(year): XCTestCase {
+"""
+
+for day in 1 ... 25 {
+	let testContents = """
+	
+	
+		func testDay\(day)() {
+			let d = Day\(day)()
+			let (p1, p2) = d.run()
+
+			XCTAssertEqual(p1, "")
+			XCTAssertEqual(p2, "")
+		}
+	"""
+	contents += testContents
+}
+
+contents += """
+
+}
+"""
+contents >> testFile
+
+func mkdir(_ path: URL) {
+	try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+}
+
+infix operator >>
+func >> (lhs: String, rhs: URL) {
+	try! Data(lhs.utf8).write(to: rhs, options: [])
+}

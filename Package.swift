@@ -11,6 +11,7 @@ let package = Package(
         .executable(name: "advent", targets: ["advent"]),
         .library(name: "AOC", targets: ["AOC"]),
         .library(name: "AOCCore", targets: ["AOCCore"]),
+        .library(name: "AOC2020", targets: ["AOC2020"]),
         .library(name: "AOC2019", targets: ["AOC2019"]),
         .library(name: "AOC2018", targets: ["AOC2018"]),
         .library(name: "AOC2017", targets: ["AOC2017"]),
@@ -26,8 +27,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "advent", dependencies: ["AOC"]),
         
-        .target(name: "AOC", dependencies: ["AOCCore", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
+        .target(name: "AOC", dependencies: ["AOCCore", "AOC2020", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
         
+        .target(name: "AOC2020", dependencies: ["AOCCore"]),
         .target(name: "AOC2019", dependencies: ["AOCCore"]),
         .target(name: "AOC2018", dependencies: ["AOCCore"]),
         .target(name: "AOC2017", dependencies: ["AOCCore"]),

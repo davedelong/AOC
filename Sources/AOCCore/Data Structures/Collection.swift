@@ -66,10 +66,7 @@ public extension Collection {
     }
     
     func any(satisfy: (Element) -> Bool) -> Bool {
-        for item in self {
-            if satisfy(item) == true { return true }
-        }
-        return false
+        return contains(where: satisfy)
     }
     
     func pairs() -> Array<Pair<Element>> {

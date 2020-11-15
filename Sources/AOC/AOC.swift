@@ -13,3 +13,4 @@ import Foundation
 @_exported import AOC2017
 @_exported import AOC2018
 @_exported import AOC2019
+@_exported import AOC2020

@@ -83,7 +83,7 @@ class Day7: Day {
         
         var remaining = operations()
         
-        while remaining.isNotEmpty || workers.any { $0.0 != nil } {
+        while remaining.isNotEmpty || workers.any(satisfy: { $0.0 != nil }) {
             tick += 1
             
             var updatedWorkers = Array<(Op?, UInt8)>()

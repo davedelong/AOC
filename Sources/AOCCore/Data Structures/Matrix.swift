@@ -39,8 +39,8 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     }
     
     public var description: String {
-        return "[" + data.map({
-            "[" + $0.map { String(describing: $0) }.joined(separator: " ") + "]"
+        return "[" + data.map({ row -> String in
+            "[" + row.map { String(describing: $0) }.joined(separator: " ") + "]"
         }).joined(separator: "\n ") + "]"
     }
     
