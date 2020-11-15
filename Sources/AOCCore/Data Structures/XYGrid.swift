@@ -66,6 +66,16 @@ public struct XYGrid<T> {
     
 }
 
+extension XYGrid: Equatable where T: Equatable {
+    public static func ==(lhs: XYGrid<T>, rhs: XYGrid<T>) -> Bool { return lhs.grid == rhs.grid }
+}
+
+extension XYGrid: Hashable where T: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(grid)
+    }
+}
+
 public class GridNode<T>: GKGridGraphNode {
     
     public var value: T?
