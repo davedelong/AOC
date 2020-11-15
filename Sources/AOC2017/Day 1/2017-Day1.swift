@@ -9,7 +9,7 @@
 class Day1: Day {
     
     func checksum(_ ints: Array<Int>, offset: Int) -> String {
-        let consecutivelyEqual = ints.enumerated().map { (index, element) -> Int in
+        let consecutivelyEqual = ints.indexed().map { (index, element) -> Int in
             let pair = ints[(index + offset) % ints.count]
             return element == pair ? element : 0
         }

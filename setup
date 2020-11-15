@@ -105,6 +105,7 @@ for day in 1 ... 25 {
 contents += """
 
 }
+
 """
 contents >> testFile
 

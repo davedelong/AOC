@@ -19,7 +19,7 @@ class Day1: Day {
     
     override func part2() -> String {
         var floor = 0
-        for (position, char) in input.characters.enumerated() {
+        for (position, char) in input.characters.indexed() {
             if char == "(" { floor += 1 }
             if char == ")" { floor -= 1 }
             if floor == -1 { return "\(position + 1)" }

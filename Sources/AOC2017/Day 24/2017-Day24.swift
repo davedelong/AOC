@@ -34,7 +34,7 @@ class Day24: Day {
     
     @objc override init() {
         super.init()
-        ports = Set(input.lines.raw.enumerated().map { Port(id: $0.offset, string: $0.element) })
+        ports = Set(input.lines.raw.indexed().map { Port(id: $0, string: $1) })
     }
     
     func nextItem(in chain: Chain) -> Int {

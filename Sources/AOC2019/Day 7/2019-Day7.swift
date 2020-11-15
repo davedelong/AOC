@@ -61,7 +61,7 @@ class Day7: Day {
     
     override func part1() -> String {
         var m = 0
-        for n in (0...4).permutations {
+        for n in (0...4).permutations() {
             var io = 0
             for phase in n {
                 io = Amp(phase: phase, code: self.input.integers).runP1(input: io)
@@ -75,7 +75,7 @@ class Day7: Day {
     override func part2() -> String {
         
         var m = 0
-        for n in (5...9).permutations {
+        for n in (5...9).permutations() {
             m = max(m, runAmpsInFeedbackMode(n))
         }
         

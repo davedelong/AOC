@@ -11,22 +11,22 @@ class Day17: Day {
     override func run() -> (String, String) {
         let containers = input.lines.integers
         
-        var containerIterator = CombinationIterator(containers)
-        
         var matching = 0
         var numberOfContainersNeeded = Int.max
         var numberOfGroupsOfMinimumContainers = 0
         
-        for setOfContainers in containers.combinations() {
-            let s = setOfContainers.sum()
-            if s == 150 {
-                matching += 1
-                
-                if setOfContainers.count < numberOfContainersNeeded {
-                    numberOfContainersNeeded = setOfContainers.count
-                    numberOfGroupsOfMinimumContainers = 1
-                } else if setOfContainers.count == numberOfContainersNeeded {
-                    numberOfGroupsOfMinimumContainers += 1
+        for count in 1 ... containers.count {
+            for setOfContainers in containers.combinations(ofCount: count) {
+                let s = setOfContainers.sum()
+                if s == 150 {
+                    matching += 1
+                    
+                    if setOfContainers.count < numberOfContainersNeeded {
+                        numberOfContainersNeeded = setOfContainers.count
+                        numberOfGroupsOfMinimumContainers = 1
+                    } else if setOfContainers.count == numberOfContainersNeeded {
+                        numberOfGroupsOfMinimumContainers += 1
+                    }
                 }
             }
         }

@@ -85,7 +85,7 @@ class Day12: Day {
             }
         }
         
-        let onPots = current.enumerated().filter { $0.element == "#" }.map { $0.offset + potOffset }.sum()
+        let onPots = current.indexed().filter { $0.element == "#" }.map { $0.index + potOffset }.sum()
         return onPots
     }
     

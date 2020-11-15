@@ -10,7 +10,7 @@ import Foundation
 import CryptoKit
 
 public protocol BufferHashable {
-    func hash<H: HashFunction>(using algorithmType: H.Type = H.self) -> Data
+    func hash<H: HashFunction>(using algorithmType: H.Type) -> Data
 }
 
 extension BufferHashable {

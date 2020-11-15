@@ -24,7 +24,7 @@ class Day6: Day {
     lazy var positions: Dictionary<String, Position> = {
         let lines = input.lines.raw
         var positions = Dictionary<String, Position>()
-        for (index, line) in lines.enumerated() {
+        for (index, line) in lines.indexed() {
             let pieces = line.components(separatedBy: ", ")
             let x = Int(pieces[0])!
             let y = Int(pieces[1])!

@@ -12,12 +12,21 @@ public extension Collection {
     
     var isNotEmpty: Bool { return isEmpty == false }
     
-    var permutations: PermutationSequence<Element> {
-        return PermutationSequence(self)
-    }
-    
-    func combinations(choose k: Int? = nil) -> CombinationSequence<Element> {
-        return CombinationSequence(self, choose: k)
+    func combinations(choose k: Int? = nil) -> AnySequence<[Element]> {
+        guard isNotEmpty else { return AnySequence([]) }
+        
+        if let k = k {
+            return AnySequence(self.combinations(ofCount: k))
+        } else {
+            var s = AnySequence(self.combinations(ofCount: 1))
+            if count >= 2 {
+                for count in 2 ... self.count {
+                    let combo = self.combinations(ofCount: count)
+                    s = AnySequence(chain(s, combo))
+                }
+            }
+            return s
+        }
     }
     
     func partition(by goesInFirst: (Element) -> Bool) -> (Array<Element>, Array<Element>) {

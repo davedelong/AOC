@@ -23,7 +23,7 @@ class Day2: Day {
     override func part2() -> String {
         let linesOfCharacters = input.lines.characters // Array<Array<Character>>
         
-        for (index, line) in linesOfCharacters.enumerated() {
+        for (index, line) in linesOfCharacters.indexed() {
             let next = linesOfCharacters.index(after: index)
             
             for search in linesOfCharacters[next...] {

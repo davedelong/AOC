@@ -7,3 +7,4 @@
 
 @_exported import Foundation
 @_exported import GameplayKit
+@_exported import Algorithms

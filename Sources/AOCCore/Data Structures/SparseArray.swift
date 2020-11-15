@@ -10,11 +10,8 @@ import Foundation
 public struct Sparse<Element>: Collection {
     public func index(after i: Int) -> Int { return i + 1 }
     
-    
-    
     public let startIndex = 0
     public var endIndex: Int { return maxIndex }
-    
     
     private var data = Dictionary<Int, Element>()
     private let `default`: Element

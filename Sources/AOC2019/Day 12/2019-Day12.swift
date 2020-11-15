@@ -36,7 +36,7 @@ class Day12: Day {
         mutating func step() {
             var deltas: Array<Vector3> = [.zero, .zero, .zero, .zero]
             
-            for pair in positions.indices.combinations(choose: 2) {
+            for pair in positions.indices.combinations(ofCount: 2) {
                 let m1 = positions[pair[0]]
                 let m2 = positions[pair[1]]
                 
