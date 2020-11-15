@@ -13,9 +13,12 @@ let todayString = "\(month)/\(day)/\(year % 100)"
 let u = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 let sources = u.appendingPathComponent("Sources")
 let yearFolder = sources.appendingPathComponent("AOC\(year)")
+let resourcesFolder = yearFolder.appendingPathComponent("Resources")
 
 print("Creating \(yearFolder.path)")
+
 mkdir(yearFolder)
+mkdir(resourcesFolder)
 
 
 let mainContents = """
@@ -64,7 +67,7 @@ for day in 1 ... 25 {
 	dayContents >> dayFolder.appendingPathComponent("\(year)-Day\(day).swift")
 	
 
-	"" >> dayFolder.appendingPathComponent("input.txt")
+	"" >> resourcesFolder.appendingPathComponent("Day\(day).txt")
 }
 
 let testFile = u.appendingPathComponent("Tests").appendingPathComponent("AOCTests").appendingPathComponent("Test\(year).swift")

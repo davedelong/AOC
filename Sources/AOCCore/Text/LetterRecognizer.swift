@@ -2,21 +2,20 @@
 //  File.swift
 //  
 //
-//  Created by Dave DeLong on 12/10/19.
+//  Created by Dave DeLong on 11/15/20.
 //
 
 import Foundation
 
-fileprivate let alphabet = "ABCEFGHJKLPRUYZ"
-
-// missing: D, I, M, N, O, P, Q, S, T, V, W, X
-fileprivate let letters = """
- ##  ###   ##  #### ####  ##  #  #   ## #  # #    ###  ###  #  # #   #####
-#  # #  # #  # #    #    #  # #  #    # # #  #    #  # #  # #  # #   #   #
-#  # ###  #    ###  ###  #    ####    # ##   #    #  # #  # #  #  # #   #
-#### #  # #    #    #    # ## #  #    # # #  #    ###  ###  #  #   #   #
-#  # #  # #  # #    #    #  # #  # #  # # #  #    #    # #  #  #   #  #
-#  # ###   ##  #### #     ### #  #  ##  #  # #### #    #  #  ##    #  ####
+// missing: I, M, Q, S, T, V, W
+private let alphabet = "ABCDEFGHJKLNOPRUXYZ"
+private let letters = """
+ ##  ###   ##  ###  #### ####  ##  #  #   ## #  # #    #  #  ##  ###  ###  #  # #  # #   # ####
+#  # #  # #  # #  # #    #    #  # #  #    # # #  #    ## # #  # #  # #  # #  # #  # #   #    #
+#  # ###  #    #  # ###  ###  #    ####    # ##   #    ## # #  # #  # #  # #  #  ##   # #    #
+#### #  # #    #  # #    #    # ## #  #    # # #  #    # ## #  # ###  ###  #  #  ##    #    #
+#  # #  # #  # #  # #    #    #  # #  # #  # # #  #    # ## #  # #    # #  #  # #  #   #   #
+#  # ###   ##  ###  #### #     ### #  #  ##  #  # #### #  #  ##  #    #  #  ##  #  #   #   ####
 """
 
 fileprivate let letterDefinitions: Dictionary<String, String> = {
@@ -47,12 +46,7 @@ fileprivate func chunk(input: String, trimming: Int = 0) -> Array<String> {
     return final
 }
 
-func testRecognizer() {
-    let chunked = chunk(input: letters)
-    chunked.forEach { print($0) }
-}
-
-func RecognizeLetters(from input: String) -> String {
+public func RecognizeLetters(from input: String) -> String {
     var recognized = ""
     for trimLength in 0 ..< 5 {
         let chunks = chunk(input: input, trimming: trimLength)

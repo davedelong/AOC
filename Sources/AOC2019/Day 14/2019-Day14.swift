@@ -162,10 +162,6 @@ class Day14: Day {
     }
     
     override func run() -> (String, String) {
-        let d = Cheat()
-        d.part1()
-        d.part2()
-        
         testCases()
         
         let p1 = oreNeeded(for: input.lines.raw)

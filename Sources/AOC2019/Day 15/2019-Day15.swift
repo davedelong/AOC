@@ -139,7 +139,6 @@ class Droid {
 class Day15: Day {
     
     override func run() -> (String, String) {
-        return cheat15(code: input.integers)
         return super.run()
     }
     

@@ -8,9 +8,13 @@
 
 public struct Regex {
     
-    public static let integers = Regex(pattern: #"(-?\d+)"#)
+    public static let integers: Regex = #"(-?\d+)"#
     
     private let pattern: NSRegularExpression?
+    
+    public init(_ pattern: StaticString, options: NSRegularExpression.Options = []) {
+        self.pattern = try! NSRegularExpression(pattern: "\(pattern)", options: options)
+    }
     
     public init(pattern: String, options: NSRegularExpression.Options = []) {
         self.pattern = try? NSRegularExpression(pattern: pattern, options: options)
@@ -28,7 +32,7 @@ public struct Regex {
         
         let range = NSRange(location: 0, length: string.utf16.count)
         guard let match = pattern.firstMatch(in: string, options: [.withTransparentBounds], range: range) else { return nil }
-        return RegexMatch(result: match, source: string)
+        return RegexMatch(result: match, source: string as NSString)
     }
     
     public func matches(in string: String) -> Array<RegexMatch> {
@@ -37,7 +41,7 @@ public struct Regex {
         let range = NSRange(location: 0, length: string.utf16.count)
         pattern?.enumerateMatches(in: string, options: [], range: range) { (result, flags, stop) in
             if let result = result {
-                let match = RegexMatch(result: result, source: string)
+                let match = RegexMatch(result: result, source: string as NSString)
                 matches.append(match)
             }
         }
@@ -47,24 +51,22 @@ public struct Regex {
 }
 
 extension Regex: ExpressibleByStringLiteral {
-    public init(stringLiteral value: String) { self.init(pattern: value) }
-    public init(extendedGraphemeClusterLiteral value: String) { self.init(pattern: value) }
-    public init(unicodeScalarLiteral value: String) { self.init(pattern: value) }
+    public init(stringLiteral value: StaticString) { self.init(value) }
+    public init(extendedGraphemeClusterLiteral value: StaticString) { self.init(value) }
+    public init(unicodeScalarLiteral value: StaticString) { self.init(value) }
 }
 
 public struct RegexMatch {
     private let matches: Array<String?>
     
-    fileprivate init(result: NSTextCheckingResult, source: String) {
-        let nsSource = source as NSString
-        
+    fileprivate init(result: NSTextCheckingResult, source: NSString) {
         var matches = Array<String?>()
         for i in 0 ..< result.numberOfRanges {
             let r = result.range(at: i)
             if r.location == NSNotFound {
                 matches.append(nil)
             } else {
-                matches.append(nsSource.substring(with: r))
+                matches.append(source.substring(with: r))
             }
         }
         

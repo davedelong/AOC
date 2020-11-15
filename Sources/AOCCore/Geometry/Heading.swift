@@ -22,10 +22,12 @@ public enum Heading: CaseIterable {
             case "D": self = .down
             case "L": self = .left
             case "R": self = .right
+                
             case "N": self = .north
             case "S": self = .south
             case "E": self = .east
             case "W": self = .west
+                
             default: return nil
         }
     }
