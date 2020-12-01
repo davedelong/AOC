@@ -13,23 +13,15 @@ class Day1: Day {
     override func part1() -> String {
         let integers = input.integers
         let combos = integers.combinations(choose: 2)
-        for pair in combos {
-            if pair.sum() == 2020 {
-                return "\(pair.product())"
-            }
-        }
-        fatalError()
+        let pair = combos.first(where: { $0.sum() == 2020 })!
+        return "\(pair.product())"
     }
 
     override func part2() -> String {
         let integers = input.integers
         let combos = integers.combinations(choose: 3)
-        for pair in combos {
-            if pair.sum() == 2020 {
-                return "\(pair.product())"
-            }
-        }
-        fatalError()
+        let pair = combos.first(where: { $0.sum() == 2020 })!
+        return "\(pair.product())"
     }
 
 }
