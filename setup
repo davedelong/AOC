@@ -36,38 +36,38 @@ import Foundation
 mainContents >> yearFolder.appendingPathComponent("AOC\(year).swift")
 
 for day in 1 ... 25 {
-	let dayFolder = yearFolder.appendingPathComponent("Day \(day)")
-	mkdir(dayFolder)
-	
-	let dayContents = """
-	//
-	//  Day\(day).swift
-	//  test
-	//
-	//  Created by Dave DeLong on \(todayString).
-	//  Copyright © \(year) Dave DeLong. All rights reserved.
-	//
+    let dayFolder = yearFolder.appendingPathComponent("Day \(day)")
+    mkdir(dayFolder)
+    
+    let dayContents = """
+    //
+    //  Day\(day).swift
+    //  test
+    //
+    //  Created by Dave DeLong on \(todayString).
+    //  Copyright © \(year) Dave DeLong. All rights reserved.
+    //
 
-	class Day\(day): Day {
-	
-		override func run() -> (String, String) {
-			return super.run()
-		}
-	
-		override func part1() -> String {
-			return #function
-		}
-	
-		override func part2() -> String {
-			return #function
-		}
-	
-	}
-	"""
-	dayContents >> dayFolder.appendingPathComponent("\(year)-Day\(day).swift")
-	
+    class Day\(day): Day {
+    
+        override func run() -> (String, String) {
+            return super.run()
+        }
+    
+        override func part1() -> String {
+            return #function
+        }
+    
+        override func part2() -> String {
+            return #function
+        }
+    
+    }
+    """
+    dayContents >> dayFolder.appendingPathComponent("\(year)-Day\(day).swift")
+    
 
-	"" >> resourcesFolder.appendingPathComponent("Day\(day).txt")
+    "" >> resourcesFolder.appendingPathComponent("Day\(day).txt")
 }
 
 let testFile = u.appendingPathComponent("Tests").appendingPathComponent("AOCTests").appendingPathComponent("Test\(year).swift")
@@ -88,18 +88,18 @@ class Test\(year): XCTestCase {
 """
 
 for day in 1 ... 25 {
-	let testContents = """
-	
-	
-		func testDay\(day)() {
-			let d = Day\(day)()
-			let (p1, p2) = d.run()
+    let testContents = """
+    
+    
+        func testDay\(day)() {
+            let d = Day\(day)()
+            let (p1, p2) = d.run()
 
-			XCTAssertEqual(p1, "")
-			XCTAssertEqual(p2, "")
-		}
-	"""
-	contents += testContents
+            XCTAssertEqual(p1, "")
+            XCTAssertEqual(p2, "")
+        }
+    """
+    contents += testContents
 }
 
 contents += """
@@ -110,10 +110,10 @@ contents += """
 contents >> testFile
 
 func mkdir(_ path: URL) {
-	try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+    try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
 }
 
 infix operator >>
 func >> (lhs: String, rhs: URL) {
-	try! Data(lhs.utf8).write(to: rhs, options: [])
+    try! Data(lhs.utf8).write(to: rhs, options: [])
 }
