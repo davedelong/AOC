@@ -9,13 +9,13 @@
 import Foundation
 
 class Day12: Day {
-	
-	override func part1() -> String {
-		return #function
-	}
-	
-	override func part2() -> String {
-		return #function
-	}
+    
+    override func part1() -> String {
+        return #function
+    }
+    
+    override func part2() -> String {
+        return #function
+    }
 
 }
