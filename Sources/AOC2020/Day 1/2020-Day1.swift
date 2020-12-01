@@ -6,18 +6,30 @@
 //  Copyright © 2020 Dave DeLong. All rights reserved.
 //
 
+import Algorithms
+
 class Day1: Day {
 
-	override func run() -> (String, String) {
-		return super.run()
-	}
-
 	override func part1() -> String {
-		return #function
+        let integers = input.integers
+        let combos = integers.combinations(choose: 2)
+        for pair in combos {
+            if pair.sum() == 2020 {
+                return "\(pair.product())"
+            }
+        }
+        fatalError()
 	}
 
 	override func part2() -> String {
-		return #function
+        let integers = input.integers
+        let combos = integers.combinations(choose: 3)
+        for pair in combos {
+            if pair.sum() == 2020 {
+                return "\(pair.product())"
+            }
+        }
+        fatalError()
 	}
 
 }
