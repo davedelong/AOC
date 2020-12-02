@@ -77,10 +77,23 @@ public struct RegexMatch {
         return matches[index]
     }
     
-    public func int(_ index: Int) -> Int? {
+    public subscript(int index: Int) -> Int? {
         guard let string = self[index] else { return nil }
         return Int(string)
     }
+    
+    public subscript(char index: Int) -> Character? {
+        return self[index]?.first
+    }
+    
+    public subscript(array index: Int) -> Array<Character>? {
+        guard let string = self[index] else { return nil }
+        return Array(string)
+    }
+    
+    public func int(_ index: Int) -> Int? { return self[int: index] }
+    public func char(_ index: Int) -> Character? { self[char: index] }
+    public func array(_ index: Int) -> Array<Character>? { self[array: index] }
 }
 
 public func ~= (left: Regex, right: String) -> Bool {

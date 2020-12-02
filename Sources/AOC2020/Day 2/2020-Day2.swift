@@ -16,10 +16,10 @@ class Day2: Day {
         var p2 = 0
         
         lines.forEach { match in
-            let l = match.int(1)!
-            let u = match.int(2)!
-            let c = Character(match[3]!)
-            let pw = Array(match[4]!)
+            let l = match[int: 1]!
+            let u = match[int: 2]!
+            let c = match[char: 3]!
+            let pw = match[array: 4]!
             
             let cCount = pw.count(of: c)
             if l <= cCount && cCount <= u { p1 += 1 }
