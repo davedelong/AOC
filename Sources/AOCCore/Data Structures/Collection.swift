@@ -176,6 +176,10 @@ public extension Collection where Element: Comparable {
 
 public extension Collection where Element: Equatable {
     
+    func count(of element: Element) -> Int {
+        return self.count(where: { $0 == element })
+    }
+    
     func consecutivelyEqualSubsequences() -> Array<SubSequence> {
         guard isNotEmpty else { return [] }
         
