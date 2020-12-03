@@ -7,17 +7,47 @@
 //
 
 class Day3: Day {
-
-    override func run() -> (String, String) {
-        return super.run()
+    
+    enum Landscape: Character {
+        case empty = "."
+        case tree = "#"
     }
+    
+    lazy var landscapeElevations = input.lines.characters.map { $0.compactMap(Landscape.init(rawValue:)) }
 
     override func part1() -> String {
-        return #function
+        let count = traverse(using: Vector2(x: 3, y: 1))
+        return "\(count)"
     }
 
     override func part2() -> String {
-        return #function
+        let vectors = [
+            Vector2(x: 1, y: 1),
+            Vector2(x: 3, y: 1),
+            Vector2(x: 5, y: 1),
+            Vector2(x: 7, y: 1),
+            Vector2(x: 1, y: 2),
+        ]
+        
+        let counts = vectors.map {
+            self.traverse(using: $0)
+        }
+        
+        return "\(counts.product())"
+    }
+    
+    func traverse(using vector: Vector2) -> Int {
+        var treeCount = 0
+        var position = Point2.zero
+        while position.y < landscapeElevations.count {
+            let elevation = landscapeElevations[position.y]
+            let feature = elevation[position.x % elevation.count]
+            if feature == .tree {
+                treeCount += 1
+            }
+            position += vector
+        }
+        return treeCount
     }
 
 }

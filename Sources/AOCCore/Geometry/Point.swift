@@ -37,8 +37,16 @@ public extension PointProtocol {
         return Self.init(new)
     }
     
+    static func +=<V: VectorProtocol>(lhs: inout Self, rhs: V) {
+        lhs = lhs + rhs
+    }
+    
     static func -<V: VectorProtocol>(lhs: Self, rhs: V) -> Self {
         return lhs + -rhs
+    }
+    
+    static func -=<V: VectorProtocol>(lhs: inout Self, rhs: V) {
+        lhs = lhs - rhs
     }
     
     static func +(lhs: Self, rhs: Self) -> Self {
@@ -54,6 +62,10 @@ public extension PointProtocol {
     static func *(lhs: Self, rhs: Int) -> Self {
         let new = lhs.components.map { $0 * rhs }
         return Self.init(new)
+    }
+    
+    static func *=(lhs: inout Self, rhs: Int) {
+        lhs = lhs * rhs
     }
     
     func manhattanDistance(to other: Self) -> Int {
