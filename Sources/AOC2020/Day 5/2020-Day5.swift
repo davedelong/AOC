@@ -30,13 +30,7 @@ class Day5: Day {
         let largest = filledSeats.max()!
         let emptySeats = Set(0...1016).subtracting(filledSeats)
         
-        var mySeat = 0
-        for empty in emptySeats {
-            if filledSeats.contains(empty-1) && filledSeats.contains(empty+1) {
-                mySeat = empty
-                break
-            }
-        }
+        let mySeat = emptySeats.first(where: { filledSeats.contains($0-1) && filledSeats.contains($0+1) })!
         
         return ("\(largest)", "\(mySeat)")
     }
