@@ -38,6 +38,17 @@ public extension Int {
         self = i
     }
     
+    enum Direction {
+        case up
+        case down
+    }
+    func dividedBy(_ quotient: Int, rounding: Direction) -> Int {
+        if rounding == .down { return self / quotient }
+        let d = Double(self)
+        let q = Double(quotient)
+        let div = ceil(d / q)
+        return Int(div)
+    }
 }
 
 public func lcm<I: FixedWidthInteger>(_ values: I ...) -> I {
