@@ -20,28 +20,31 @@ public struct Regex {
         self.pattern = try? NSRegularExpression(pattern: pattern, options: options)
     }
     
-    public func matches(_ string: String) -> Bool  {
+    public func matches<S: StringProtocol>(_ string: S) -> Bool  {
         guard let pattern = pattern else { return false }
         
-        let range = NSRange(location: 0, length: string.utf16.count)
-        return pattern.numberOfMatches(in: string, options: [.withTransparentBounds], range: range) > 0
+        let str = String(string)
+        let range = NSRange(location: 0, length: str.utf16.count)
+        return pattern.numberOfMatches(in: str, options: [.withTransparentBounds], range: range) > 0
     }
     
-    public func match(_ string: String) -> RegexMatch? {
+    public func match<S: StringProtocol>(_ string: S) -> RegexMatch? {
         guard let pattern = pattern else { return nil }
         
-        let range = NSRange(location: 0, length: string.utf16.count)
-        guard let match = pattern.firstMatch(in: string, options: [.withTransparentBounds], range: range) else { return nil }
-        return RegexMatch(result: match, source: string as NSString)
+        let str = String(string)
+        let range = NSRange(location: 0, length: str.utf16.count)
+        guard let match = pattern.firstMatch(in: str, options: [.withTransparentBounds], range: range) else { return nil }
+        return RegexMatch(result: match, source: str as NSString)
     }
     
-    public func matches(in string: String) -> Array<RegexMatch> {
+    public func matches<S: StringProtocol>(in string: S) -> Array<RegexMatch> {
         var matches = Array<RegexMatch>()
         
-        let range = NSRange(location: 0, length: string.utf16.count)
-        pattern?.enumerateMatches(in: string, options: [], range: range) { (result, flags, stop) in
+        let str = String(string)
+        let range = NSRange(location: 0, length: str.utf16.count)
+        pattern?.enumerateMatches(in: str, options: [], range: range) { (result, flags, stop) in
             if let result = result {
-                let match = RegexMatch(result: result, source: string as NSString)
+                let match = RegexMatch(result: result, source: str as NSString)
                 matches.append(match)
             }
         }

@@ -30,6 +30,10 @@ extension FixedWidthInteger {
 
 public extension Int {
     
+    init<C: Collection>(bits: C) where C.Element == Bool {
+        self = bits.reduce(0, { $0 * 2 + ($1 ? 1 : 0) })
+    }
+    
     init<C: Collection>(digits: C) where C.Element == Int {
         var i = 0
         for (power, digit) in digits.reversed().enumerated() {
