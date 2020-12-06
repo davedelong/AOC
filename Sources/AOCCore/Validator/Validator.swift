@@ -61,6 +61,11 @@ extension Builder where Property: Equatable {
         return lhs({ $0 != rhs })
     }
     
+    
+    public static func ~= <C: Collection> (lhs: Builder<Base, Property>, rhs: C) -> Validator<Base> where C.Element == Property {
+        return lhs({ rhs.contains($0) })
+    }
+    
 }
 
 extension Builder where Property: Comparable {
@@ -79,6 +84,18 @@ extension Builder where Property: Comparable {
     
     public static func >= (lhs: Builder<Base, Property>, rhs: Property) -> Validator<Base> {
         return lhs({ $0 >= rhs })
+    }
+    
+    public static func ~= <R: RangeExpression> (lhs: Builder<Base, Property>, rhs: R) -> Validator<Base> where R.Bound == Property {
+        return lhs({ rhs ~= $0 })
+    }
+    
+}
+
+extension Builder where Property: StringProtocol {
+    
+    public static func ~= (lhs: Builder<Base, Property>, rhs: Regex) -> Validator<Base> {
+        return lhs({ rhs.matches($0) })
     }
     
 }
