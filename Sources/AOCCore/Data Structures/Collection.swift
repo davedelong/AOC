@@ -97,6 +97,30 @@ public extension Collection {
         return abc.map { ($0.0, $0.1, $1) }
     }
     
+    func split(on isBoundary: (Element) -> Bool) -> Array<SubSequence> {
+        var final = Array<SubSequence>()
+        
+        var subStart = startIndex
+        var currentIndex = startIndex
+        for index in indices {
+            if isBoundary(self[index]) {
+                if subStart <= currentIndex {
+                    final.append(self[subStart ... currentIndex])
+                }
+                subStart = self.index(after: index)
+                currentIndex = subStart
+            } else {
+                currentIndex = index
+            }
+        }
+        
+        if subStart < endIndex {
+            final.append(self[subStart...])
+        }
+        
+        return final
+    }
+    
     func partition(where matches: (Element) -> Bool) -> Array<SubSequence> {
         var final = Array<SubSequence>()
         var rangeStart = startIndex
@@ -204,6 +228,37 @@ public extension Collection where Element: Equatable {
         return subSequences
     }
     
+    func split<C: Collection>(on boundary: C) -> Array<SubSequence> where C.Element == Element {
+        var final = Array<SubSequence>()
+        
+        var subStart = startIndex
+        var subEnd = startIndex
+        
+        let b = Array(boundary)
+        var boundaryIndex = b.startIndex
+        for (index, element) in zip(indices, self) {
+            
+            if element == b[boundaryIndex] {
+                boundaryIndex = b.index(after: boundaryIndex)
+                if boundaryIndex == b.endIndex {
+                    final.append(self[subStart...subEnd])
+                    boundaryIndex = b.startIndex
+                    subStart = self.index(after: index)
+                    subEnd = subStart
+                }
+            } else {
+                subEnd = index
+                boundaryIndex = b.startIndex
+            }
+            
+        }
+        
+        if subStart < endIndex {
+            final.append(self[subStart...])
+        }
+        
+        return final
+    }
 }
 
 public extension Collection where Element: Hashable {

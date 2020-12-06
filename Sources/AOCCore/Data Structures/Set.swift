@@ -18,3 +18,14 @@ public extension Set {
     }
     
 }
+
+public extension Collection where Element: Collection, Element.Element: Hashable {
+    
+    func intersectingElements() -> Set<Element.Element> {
+        guard let f = first else { return [] }
+        var final = Set(f)
+        dropFirst().forEach { final.formIntersection($0) }
+        return final
+    }
+    
+}
