@@ -8,16 +8,34 @@
 
 class Day6: Day {
 
-    override func run() -> (String, String) {
-        return super.run()
-    }
-
     override func part1() -> String {
-        return #function
+        let rawGroups = input.raw.components(separatedBy: "\n\n")
+        
+        let groups = rawGroups.map { group -> Set<Character> in
+            let cleaned = group.components(separatedBy: .whitespacesAndNewlines).joined()
+            return Set(cleaned)
+        }
+        
+        let total = groups.sum(of: \.count)
+        
+        return "\(total)"
     }
 
     override func part2() -> String {
-        return #function
+        let rawGroups = input.raw.components(separatedBy: "\n\n")
+        
+        let groups = rawGroups.map { group -> Set<Character> in
+            let answers = group.components(separatedBy: .newlines)
+            var first = Set(answers[0])
+            for other in answers.dropFirst() {
+                first = first.intersection(other)
+            }
+            return first
+        }
+        
+        let total = groups.sum(of: \.count)
+        
+        return "\(total)"
     }
 
 }
