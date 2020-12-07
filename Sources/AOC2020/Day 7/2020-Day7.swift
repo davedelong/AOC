@@ -6,60 +6,47 @@
 //  Copyright © 2020 Dave DeLong. All rights reserved.
 //
 
-import GameplayKit
-
 class Day7: Day {
-
-    let nameRegex: Regex = #"^(.+?) bags?"#
-    let bagRegex: Regex = #"(\d+) (.+?) bags?"#
     
-    class Bag: GKGraphNode {
-        private var countMap = Dictionary<Bag, Int>()
+    class Bag: Hashable {
+        static func ==(lhs: Bag, rhs: Bag) -> Bool { lhs.name == rhs.name }
+        func hash(into hasher: inout Hasher) { hasher.combine(name) }
         
-        var subBags: Array<Bag> { return connectedNodes.compactMap { $0 as? Bag } }
+        private var parents = Set<Bag>()
+        private var children = Dictionary<Bag, Int>()
         
-        var totalCount: Int {
-            return countMap.reduce(into: 0) { $0 += (($1.key.totalCount + 1) * $1.value) }
-        }
+        var totalCount: Int { children.reduce(into: 0) { $0 += (($1.key.totalCount + 1) * $1.value) } }
+        var allParents: Set<Bag> { Set(parents + parents.flatMap(\.allParents)) }
+        
+        let name: String
+        init(name: String) { self.name = name }
         
         func addBag(_ other: Bag, count: Int) {
-            super.addConnections(to: [other], bidirectional: false)
-            countMap[other] = count
-        }
-        
-        override func cost(to node: GKGraphNode) -> Float {
-            if let bag = node as? Bag, let count = countMap[bag] { return Float(count) }
-            return super.cost(to: node)
+            other.parents.insert(self)
+            children[other, default: 0] += count
         }
 
     }
     
     override func run() -> (String, String) {
+        let nameRegex: Regex = #"^(.+?) bags?"#
+        let bagRegex: Regex = #"(\d+) (.+?) bags?"#
         
         var nodes = Dictionary<String, Bag>()
-        
         for line in input.rawLines {
             let name = nameRegex.match(line)![1]!
-            let nameNode = nodes[name, inserting: Bag()]
+            let nameNode = nodes[name, inserting: Bag(name: name)]
             
             for match in bagRegex.matches(in: line) {
-                let contained = nodes[match[2]!, inserting: Bag()]
+                let contained = nodes[match[2]!, inserting: Bag(name: match[2]!)]
                 nameNode.addBag(contained, count: match[int: 1]!)
             }
         }
         
-        let graph = GKGraph(Array(nodes.values))
         let target = nodes["shiny gold"]!
         
-        var p1 = 0
-        for other in nodes.values {
-            if other == target { continue }
-            let path = graph.findPath(from: other, to: target)
-            p1 += (path.isEmpty ? 0 : 1)
-        }
-        
+        let p1 = target.allParents.count
         let p2 = target.totalCount
-        
         return ("\(p1)", "\(p2)")
     }
 
