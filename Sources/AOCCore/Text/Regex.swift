@@ -62,6 +62,8 @@ extension Regex: ExpressibleByStringLiteral {
 public struct RegexMatch {
     private let matches: Array<String?>
     
+    public var numberOfCaptures: Int { matches.count }
+    
     fileprivate init(result: NSTextCheckingResult, source: NSString) {
         var matches = Array<String?>()
         for i in 0 ..< result.numberOfRanges {

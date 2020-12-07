@@ -12,6 +12,13 @@ fileprivate let classNameRegex = Regex(pattern: #"AOC(\d+).Day(\d+)"#)
 
 open class Day: NSObject {
     
+    public static func day(for date: Date) -> Day {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "America/New_York")!
+        let components = calendar.dateComponents([.year, .day], from: Date())
+        return Year(components.year!).day(components.day!)
+    }
+    
     private static let inputFiles: Dictionary<Pair<Int>, String> = {
         let root = URL(fileURLWithPath: "\(#file)").deletingLastPathComponent().deletingLastPathComponent()
         let enumerator = FileManager.default.enumerator(at: root, includingPropertiesForKeys: nil)

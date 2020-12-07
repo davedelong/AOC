@@ -7,7 +7,8 @@
 
 import AOC2020
 
-let d = Year(2020).day(6)
+let d = Day.day(for: Date())
 let (p1, p2) = d.run()
+print("Executing \(type(of: d))")
 print("Part 1: \(p1)")
 print("Part 2: \(p2)")
