@@ -14,19 +14,24 @@ class Day7: Day {
     let bagRegex: Regex = #"(\d+) (.+?) bags?"#
     
     class Bag: GKGraphNode {
-        private var costMap = Dictionary<GKGraphNode, Int>()
+        private var countMap = Dictionary<Bag, Int>()
         
         var subBags: Array<Bag> { return connectedNodes.compactMap { $0 as? Bag } }
         
-        func addBag(_ other: Bag, requiredAmount: Int) {
+        var totalCount: Int {
+            return countMap.reduce(into: 0) { $0 += (($1.key.totalCount + 1) * $1.value) }
+        }
+        
+        func addBag(_ other: Bag, count: Int) {
             super.addConnections(to: [other], bidirectional: false)
-            costMap[other] = requiredAmount
+            countMap[other] = count
         }
         
         override func cost(to node: GKGraphNode) -> Float {
-            if let c = costMap[node] { return Float(c) }
+            if let bag = node as? Bag, let count = countMap[bag] { return Float(count) }
             return super.cost(to: node)
         }
+
     }
     
     override func run() -> (String, String) {
@@ -35,23 +40,11 @@ class Day7: Day {
         
         for line in input.rawLines {
             let name = nameRegex.match(line)![1]!
-            let nameNode: Bag
-            if let e = nodes[name] {
-                nameNode = e
-            } else {
-                nameNode = Bag()
-                nodes[name] = nameNode
-            }
+            let nameNode = nodes[name, inserting: Bag()]
             
             for match in bagRegex.matches(in: line) {
-                let contained: Bag
-                if let e = nodes[match[2]!] {
-                    contained = e
-                } else {
-                    contained = Bag()
-                    nodes[match[2]!] = contained
-                }
-                nameNode.addBag(contained, requiredAmount: match[int: 1]!)
+                let contained = nodes[match[2]!, inserting: Bag()]
+                nameNode.addBag(contained, count: match[int: 1]!)
             }
         }
         
@@ -65,19 +58,7 @@ class Day7: Day {
             p1 += (path.isEmpty ? 0 : 1)
         }
         
-        var p2 = 0
-        var toProcess = [target]
-        while toProcess.isNotEmpty {
-            let next = toProcess.removeFirst()
-            let contained = next.subBags
-            for other in contained {
-                let cost = Int(next.cost(to: other))
-                for _ in 0 ..< cost {
-                    toProcess.append(other)
-                }
-                p2 += cost
-            }
-        }
+        let p2 = target.totalCount
         
         return ("\(p1)", "\(p2)")
     }

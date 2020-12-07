@@ -58,4 +58,13 @@ public extension Dictionary {
         return final
     }
     
+    subscript(key: Key, inserting value: @autoclosure () -> Value) -> Value {
+        mutating get {
+            if let e = self[key] { return e }
+            let newValue = value()
+            self[key] = newValue
+            return newValue
+        }
+    }
+    
 }
