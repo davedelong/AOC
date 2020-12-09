@@ -22,7 +22,7 @@ class Day9: Day {
         }
         
         var p2 = 0
-        // this is like O³. Oh well.
+        // this is like O(n³). Oh well.
         for i in 0 ..< ints.count - 1 {
             for j in i+1 ..< ints.count {
                 let slice = ints[i ... j]
