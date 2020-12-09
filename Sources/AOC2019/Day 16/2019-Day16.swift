@@ -19,7 +19,7 @@ class Day16: Day {
     func runPhase(_ input: Array<Int>, offsetDelta: Int = 0, output: inout Array<Int>) {
         let loopCount = input.count
         if offsetDelta > (input.count / 2) {
-            var s = input.sum()
+            var s = input.sum
             for i in 0 ..< loopCount {
                 output[i] = Int(s.onesDigit)
                 s -= input[i]

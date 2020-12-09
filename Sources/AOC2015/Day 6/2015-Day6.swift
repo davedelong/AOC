@@ -57,7 +57,7 @@ class Day6: Day {
                 m[p] = cmd.p2Action(m[p] ?? 0)
             }
         }
-        let total = m.values.sum()
+        let total = m.values.sum
         return "\(total)"
     }
     

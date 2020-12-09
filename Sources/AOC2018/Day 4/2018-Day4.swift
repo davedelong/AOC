@@ -44,7 +44,7 @@ class Day4: Day {
     }()
     
     override func part1() -> String {
-        let guardSleepTime = shifts.map { ($0, $1.sum()) }
+        let guardSleepTime = shifts.map { ($0, $1.sum) }
         let mostTimeSpentSleeping = guardSleepTime.map { $0.1 }.max()!
         
         // find the guardID of the guard who sleeps the most

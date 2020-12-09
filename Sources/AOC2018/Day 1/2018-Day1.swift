@@ -9,7 +9,7 @@
 class Day1: Day {
     
     override func part1() -> String {
-        let sum = input.lines.integers.sum()
+        let sum = input.lines.integers.sum
         return "\(sum)"
     }
     

@@ -14,7 +14,7 @@ class Day1: Day {
             return element == pair ? element : 0
         }
         
-        let sum = consecutivelyEqual.sum()
+        let sum = consecutivelyEqual.sum
         return "\(sum)"
     }
     

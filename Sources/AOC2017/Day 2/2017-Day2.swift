@@ -13,7 +13,7 @@ class Day2: Day {
     }()
     
     override func part1() -> String {
-        let answer = integers.map { $0.max()! - $0.min()! }.sum()
+        let answer = integers.map { $0.max()! - $0.min()! }.sum
         return "\(answer)"
     }
     
@@ -23,8 +23,8 @@ class Day2: Day {
                 let divisions = row.map { Double($0) / Double(item) }
                 let multiples = divisions.filter { ceil($0) == $0 && $0 != 1 }
                 return multiples.first.map { Int($0) } ?? 0
-            }.sum()
-        }.sum()
+            }.sum
+        }.sum
         return "\(answer)"
     }
     

@@ -13,12 +13,12 @@ class Day8: Day {
         let metadata: Array<Int>
         
         var metadataSum: Int {
-            return metadata.sum() + children.map { $0.metadataSum }.sum()
+            return metadata.sum + children.map { $0.metadataSum }.sum
         }
         
         var value: Int {
-            if children.isEmpty { return metadata.sum() }
-            return metadata.map { children.at($0 - 1)?.value ?? 0 }.sum()
+            if children.isEmpty { return metadata.sum }
+            return metadata.map { children.at($0 - 1)?.value ?? 0 }.sum
         }
     }
     

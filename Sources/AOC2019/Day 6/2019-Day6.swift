@@ -25,7 +25,7 @@ class Day6: Day {
         }
         
         let countsToRoot = nodes.values.map { $0.numberOfParents }
-        let sum = countsToRoot.sum()
+        let sum = countsToRoot.sum
         let p1 = "\(sum)"
         
         let myNode = nodes["YOU"]!

@@ -24,8 +24,8 @@ class Day1: Day {
         
         let fuels = modules.map { allFuel(for: $0) }
         
-        let p1 = fuels.compactMap { $0.first }.sum()
-        let p2 = fuels.map { $0.sum() }.sum()
+        let p1 = fuels.compactMap { $0.first }.sum
+        let p2 = fuels.map(\.sum).sum
         return ("\(p1)", "\(p2)")
     }
 }

@@ -50,7 +50,7 @@ class Day3: Day {
         
         while mostRecentSum < target {
             current = current.move(currentHeading)
-            mostRecentSum = valuesAround(current).sum()
+            mostRecentSum = valuesAround(current).sum
             grid[current] = mostRecentSum
             
             let ccwHeading = currentHeading.turn(counterClockwise: 1)

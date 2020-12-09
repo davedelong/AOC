@@ -74,7 +74,7 @@ class Day24: Day {
         let positions = current.grid.filter { $0.value == .bug }.map { $0.key }
         let indexes = positions.map { return ($0.y * 5) + ($0.x) }
         let powers = indexes.map { pow(2, $0) }
-        let biodiversity = powers.sum()
+        let biodiversity = powers.sum
         
         
         return "\(biodiversity)"

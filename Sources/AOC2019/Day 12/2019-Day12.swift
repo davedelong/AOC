@@ -22,10 +22,10 @@ class Day12: Day {
         
         var totalEnergy: UInt {
             return zip(velocities, positions).map { (v, p) -> UInt in
-                let pE = p.components.map { $0.magnitude }.sum()
-                let kE = v.components.map { $0.magnitude }.sum()
+                let pE = p.components.map { $0.magnitude }.sum
+                let kE = v.components.map { $0.magnitude }.sum
                 return pE * kE
-            }.sum()
+            }.sum
         }
         
         func snapshot(axis: Int) -> Snapshot {

@@ -54,7 +54,7 @@ Chocolate: capacity 0, durability 0, flavor -2, texture 2, calories 8
                     }
                     column += 1
                 }
-            } while n.sum() != max && n != sentinel
+            } while n.sum != max && n != sentinel
             latest = n == sentinel ? nil : n
             return l
         }
@@ -77,18 +77,18 @@ Chocolate: capacity 0, durability 0, flavor -2, texture 2, calories 8
         var proportions = RecipeAmounts(maximumAmount: 100, partitions: ingredients.count)
         while let p = proportions.next() {
             let pairs = zip(p, ingredients)
-            let numbers = [
-                max(pairs.map { $0 * $1.capacity }.sum(), 0),
-                max(pairs.map { $0 * $1.durability }.sum(), 0),
-                max(pairs.map { $0 * $1.flavor }.sum(), 0),
-                max(pairs.map { $0 * $1.texture }.sum(), 0)
+            let numbers: Array<Int> = [
+                max(pairs.map { $0 * $1.capacity }.sum, 0),
+                max(pairs.map { $0 * $1.durability }.sum, 0),
+                max(pairs.map { $0 * $1.flavor }.sum, 0),
+                max(pairs.map { $0 * $1.texture }.sum, 0)
             ]
-            let score = numbers.product()
+            let score = numbers.product
             if score > bestScore {
                 bestScore = score
             }
             
-            let calories = pairs.map { $0 * $1.calories }.sum()
+            let calories = pairs.map { $0 * $1.calories }.sum
             if calories == 500 && score > bestScoreWith500Calories {
                 bestScoreWith500Calories = score
             }

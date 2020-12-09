@@ -251,7 +251,7 @@ class Day24: Day {
             return nil
         }
         let kind = currentGroups[0].kind
-        let units = currentGroups.map { $0.units }.sum()
+        let units = currentGroups.map { $0.units }.sum
         return (kind, units)
     }
     

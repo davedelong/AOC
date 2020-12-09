@@ -101,7 +101,7 @@ class Day11: Day {
             // this starts with the *center* of the square
             let threeByThree = [position] + position.surroundingPositions(includingDiagonals: true)
             let values = threeByThree.map { grid[$0]! }
-            let totalPower = values.sum()
+            let totalPower = values.sum
             if totalPower > maxPower {
                 maxPower = totalPower
                 // since this position is the center of the square,

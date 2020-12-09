@@ -63,7 +63,7 @@ class Day17: Day {
         let parameters = aligned.map { $0.x * $0.y }
         g.draw(using: { $0!.character })
         
-        return "\(parameters.sum())"
+        return "\(parameters.sum)"
     }
     
     override func part2() -> String {

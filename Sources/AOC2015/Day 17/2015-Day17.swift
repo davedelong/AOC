@@ -17,7 +17,7 @@ class Day17: Day {
         
         for count in 1 ... containers.count {
             for setOfContainers in containers.combinations(ofCount: count) {
-                let s = setOfContainers.sum()
+                let s = setOfContainers.sum
                 if s == 150 {
                     matching += 1
                     

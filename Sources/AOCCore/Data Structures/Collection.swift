@@ -147,11 +147,11 @@ public extension Collection {
 
 public extension Sequence where Element: Numeric {
     
-    func sum() -> Element {
+    var sum: Element {
         return reduce(0, +)
     }
     
-    func product() -> Element {
+    var product: Element {
         return reduce(1, *)
     }
     

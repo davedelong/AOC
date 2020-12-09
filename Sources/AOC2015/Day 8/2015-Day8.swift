@@ -10,7 +10,7 @@ class Day8: Day {
     
     override func part1() -> String {
         let linesOfCharacters = input.lines.characters
-        let numberOfCodeCharacters = linesOfCharacters.map { $0.count }.sum()
+        let numberOfCodeCharacters = linesOfCharacters.map { $0.count }.sum
         
         let cleaned = linesOfCharacters.map { chars -> String in
             var final = ""
@@ -37,7 +37,7 @@ class Day8: Day {
             
             return final
         }
-        let numberOfCleanedCharacters = cleaned.map { $0.count }.sum()
+        let numberOfCleanedCharacters = cleaned.map { $0.count }.sum
         
         return "\(numberOfCodeCharacters - numberOfCleanedCharacters)"
     }
@@ -55,8 +55,8 @@ class Day8: Day {
             return final
         }
         
-        let encodedCharacterCount = encodedCharacters.map { $0.count }.sum()
-        let originalCharacterCount = linesOfCharacters.map { $0.count }.sum()
+        let encodedCharacterCount = encodedCharacters.map { $0.count }.sum
+        let originalCharacterCount = linesOfCharacters.map { $0.count }.sum
         let difference = encodedCharacterCount - originalCharacterCount
         return "\(difference)"
         

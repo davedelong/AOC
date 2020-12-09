@@ -14,7 +14,7 @@ class Day9: Day {
         var p1 = 0
         for index in 25..<ints.count {
             let preamble = ints[index-25..<index]
-            let sums = Set(preamble.combinations(choose: 2).map { $0.sum() })
+            let sums = Set(preamble.combinations(choose: 2).map(\.sum))
             if sums.contains(ints[index]) == false {
                 p1 = ints[index]
                 break
@@ -26,7 +26,7 @@ class Day9: Day {
         for i in 0 ..< ints.count - 1 {
             for j in i+1 ..< ints.count {
                 let slice = ints[i ... j]
-                let sum = slice.sum()
+                let sum = slice.sum
                 if sum == p1 {
                     let (low, high) = slice.extremes()
                     p2 = low + high

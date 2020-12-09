@@ -33,7 +33,7 @@ class Day3: Day {
             self.traverse(using: $0)
         }
         
-        return "\(counts.product())"
+        return "\(counts.product)"
     }
     
     func traverse(using vector: Vector2) -> Int {

@@ -40,12 +40,12 @@ class Day2: Day {
     }()
     
     override func part1() -> String {
-        let totalSurfaceArea = boxes.map { $0.surfaceArea }.sum()
+        let totalSurfaceArea = boxes.map { $0.surfaceArea }.sum
         return "\(totalSurfaceArea)"
     }
     
     override func part2() -> String {
-        let totalRibbonLength = boxes.map { $0.ribbonLength }.sum()
+        let totalRibbonLength = boxes.map { $0.ribbonLength }.sum
         return "\(totalRibbonLength)"
     }
     
