@@ -10,15 +10,9 @@ class Day10: Day {
     
     override func part1() -> String {
         let adapters = input.lines.integers.sorted()
-        var _1diff = 1
-        var _3diff = 1
-        
-        for (p, t) in adapters.consecutivePairs() {
-            if t - p == 1 { _1diff += 1 }
-            if t - p == 3 { _3diff += 1 }
-        }
-        
-        return "\(_1diff * _3diff)"
+        let diffs = adapters.reversed().consecutivePairs().map(-)
+        let answer = (diffs.count(of: 1) + 1) * (diffs.count(of: 3) + 1)
+        return "\(answer)"
     }
 
     override func part2() -> String {
