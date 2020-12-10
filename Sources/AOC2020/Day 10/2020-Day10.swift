@@ -16,13 +16,12 @@ class Day10: Day {
     }
 
     override func part2() -> String {
-        let adapters = [0] + input.lines.integers.sorted()
+        let adapters = input.lines.integers.sorted()
         var memo = [0:1]
         
         for target in adapters {
-            let possible = adapters.filter { $0 >= (target-3) && $0 < target }
-            let counts = possible.map { memo[$0, default: 1] }
-            if target > 0 { memo[target] = counts.sum }
+            let sum = (1...3).sum { memo[target - $0] ?? 0 }
+            memo[target] = sum
         }
         let total = memo[adapters.last!]!
         return "\(total)"
