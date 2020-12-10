@@ -8,22 +8,17 @@
 
 class Day10: Day {
     
-    override func part1() -> String {
+    override func run() -> (String, String) {
         let adapters = input.lines.integers.sorted()
         let diffs = adapters.reversed().consecutivePairs().map(-)
-        let answer = (diffs.count(of: 1) + 1) * (diffs.count(of: 3) + 1)
-        return "\(answer)"
-    }
-
-    override func part2() -> String {
-        let adapters = input.lines.integers.sorted()
-        var memo = [0:1]
+        let p1 = (diffs.count(of: 1) + 1) * (diffs.count(of: 3) + 1)
         
+        var memo = [0:1]
         for target in adapters {
-            let sum = (1...3).sum { memo[target - $0] ?? 0 }
-            memo[target] = sum
+            memo[target] = (1...3).sum { memo[target - $0] ?? 0 }
         }
-        let total = memo[adapters.last!]!
-        return "\(total)"
+        let p2 = memo[adapters.last!]!
+        
+        return ("\(p1)", "\(p2)")
     }
 }
