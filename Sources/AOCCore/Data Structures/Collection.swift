@@ -98,27 +98,7 @@ public extension Collection {
     }
     
     func split(on isBoundary: (Element) -> Bool) -> Array<SubSequence> {
-        var final = Array<SubSequence>()
-        
-        var subStart = startIndex
-        var currentIndex = startIndex
-        for index in indices {
-            if isBoundary(self[index]) {
-                if subStart <= currentIndex {
-                    final.append(self[subStart ... currentIndex])
-                }
-                subStart = self.index(after: index)
-                currentIndex = subStart
-            } else {
-                currentIndex = index
-            }
-        }
-        
-        if subStart < endIndex {
-            final.append(self[subStart...])
-        }
-        
-        return final
+        return split(omittingEmptySubsequences: false, whereSeparator: isBoundary)
     }
     
     func partition(where matches: (Element) -> Bool) -> Array<SubSequence> {
