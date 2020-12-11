@@ -31,22 +31,19 @@ class Day11: Day {
     
     private func seatPeople_p1(_ grid: Matrix<Feature>) -> Matrix<Feature> {
         let copy = grid.copy()
-        for row in 0 ..< grid.rowCount {
-            for col in 0 ..< grid.colCount {
-                let p = Position(row: row, column: col)
-                if grid[p] == .floor { continue }
-                
-                let around = p.surroundingPositions(includingDiagonals: true).compactMap { grid.at($0) }
-                if grid[p] == .occupied {
-                    // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
-                    if around.count(where: { $0 == .occupied }) >= 4 {
-                        copy[p] = .seat
-                    }
-                } else {
-                    // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
-                    if around.allSatisfy({ $0 != .occupied }) {
-                        copy[p] = .occupied
-                    }
+        for p in grid.positions {
+            if grid[p] == .floor { continue }
+            
+            let around = p.surroundingPositions(includingDiagonals: true).compactMap { grid.at($0) }
+            if grid[p] == .occupied {
+                // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
+                if around.count(where: { $0 == .occupied }) >= 4 {
+                    copy[p] = .seat
+                }
+            } else {
+                // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
+                if around.allSatisfy({ $0 != .occupied }) {
+                    copy[p] = .occupied
                 }
             }
         }
@@ -76,22 +73,18 @@ class Day11: Day {
             Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
         ]
         
-        
-        for row in 0 ..< grid.rowCount {
-            for col in 0 ..< grid.colCount {
-                let p = Position(row: row, column: col)
-                if grid[p] == .floor { continue }
-                let around = vectors.compactMap { grid.first(from: p, along: $0, where: { $0 != .floor })}
-                if grid[p] == .occupied {
-                    // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
-                    if around.count(where: { $0 == .occupied }) >= 5 {
-                        copy[p] = .seat
-                    }
-                } else {
-                    // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
-                    if around.allSatisfy({ $0 != .occupied }) {
-                        copy[p] = .occupied
-                    }
+        for p in grid.positions {
+            if grid[p] == .floor { continue }
+            let around = vectors.compactMap { grid.first(from: p, along: $0, where: { $0 != .floor })}
+            if grid[p] == .occupied {
+                // If a seat is occupied (#) and five or more seats adjacent to it are also occupied, the seat becomes empty.
+                if around.count(where: { $0 == .occupied }) >= 5 {
+                    copy[p] = .seat
+                }
+            } else {
+                // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
+                if around.allSatisfy({ $0 != .occupied }) {
+                    copy[p] = .occupied
                 }
             }
         }

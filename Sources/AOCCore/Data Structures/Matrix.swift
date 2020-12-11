@@ -30,6 +30,25 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     public var rowCount: Int { return data.count }
     public var colCount: Int { return data.first?.count ?? 0 }
     
+    public var positions: AnySequence<Position> {
+        let maxY = rowCount
+        let maxX = colCount
+        let s = sequence(state: (x: -1, y: 0)) { s -> Position? in
+            if s.x < maxX-1 {
+                s.x += 1
+            } else {
+                s.x = 0
+                s.y += 1
+            }
+            if s.y < maxY {
+                return Position(x: s.x, y: s.y)
+            } else {
+                return nil
+            }
+        }
+        return AnySequence(s)
+    }
+    
     public func copy() -> Matrix<T> {
         return Matrix(data)
     }
