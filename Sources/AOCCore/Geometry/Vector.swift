@@ -26,6 +26,11 @@ public extension VectorProtocol {
         return Self.init(ints)
     }
     
+    static var unit: Self {
+        let ints = Array(repeating: 1, count: self.numberOfComponents)
+        return Self.init(ints)
+    }
+    
     static prefix func -(lhs: Self) -> Self {
         return Self.init(lhs.components.map { -$0 })
     }
@@ -62,6 +67,12 @@ public extension VectorProtocol {
 
 public struct Vector2: VectorProtocol {
     public static let numberOfComponents = 2
+    
+    public static let adjacents: Array<Vector2> = [
+        Vector2(x: -1, y: -1), Vector2(x: 0, y: -1), Vector2(x: 1, y: -1),
+        Vector2(x: -1, y: 0),                        Vector2(x: 1, y: 0),
+        Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
+    ]
     
     public let components: Array<Int>
     

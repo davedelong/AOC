@@ -12,6 +12,10 @@ class Day11: Day {
         case floor = "."
         case seat = "L"
         case occupied = "#"
+        
+        var isFloor: Bool { self == .floor }
+        var isSeat: Bool { self == .seat }
+        var isOccupied: Bool { self == .occupied }
     }
     
     override func part1() -> String {
@@ -24,7 +28,7 @@ class Day11: Day {
             grid = newGrid
         }
         
-        let occupied = grid.count(where: { $0 == .occupied })
+        let occupied = grid.count(where: \.isOccupied)
         
         return "\(occupied)"
     }
@@ -37,12 +41,12 @@ class Day11: Day {
             let around = p.surroundingPositions(includingDiagonals: true).compactMap { grid.at($0) }
             if grid[p] == .occupied {
                 // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
-                if around.count(where: { $0 == .occupied }) >= 4 {
+                if around.count(where: \.isOccupied) >= 4 {
                     copy[p] = .seat
                 }
             } else {
                 // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
-                if around.allSatisfy({ $0 != .occupied }) {
+                if around.allSatisfy(\.isOccupied.negated) {
                     copy[p] = .occupied
                 }
             }
@@ -60,30 +64,24 @@ class Day11: Day {
             grid = newGrid
         }
         
-        let occupied = grid.count(where: { $0 == .occupied })
+        let occupied = grid.count(where:\.isOccupied)
         return "\(occupied)"
     }
     
     private func seatPeople_p2(_ grid: Matrix<Feature>) -> Matrix<Feature> {
         let copy = grid.copy()
         
-        let vectors = [
-            Vector2(x: -1, y: -1), Vector2(x: 0, y: -1), Vector2(x: 1, y: -1),
-            Vector2(x: -1, y: 0),                        Vector2(x: 1, y: 0),
-            Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
-        ]
-        
         for p in grid.positions {
             if grid[p] == .floor { continue }
-            let around = vectors.compactMap { grid.first(from: p, along: $0, where: { $0 != .floor })}
+            let around = Vector2.adjacents.compactMap { grid.first(from: p, along: $0, where: { $0 != .floor })}
             if grid[p] == .occupied {
                 // If a seat is occupied (#) and five or more seats adjacent to it are also occupied, the seat becomes empty.
-                if around.count(where: { $0 == .occupied }) >= 5 {
+                if around.count(where:\.isOccupied) >= 5 {
                     copy[p] = .seat
                 }
             } else {
                 // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
-                if around.allSatisfy({ $0 != .occupied }) {
+                if around.allSatisfy(\.isOccupied.not) {
                     copy[p] = .occupied
                 }
             }
