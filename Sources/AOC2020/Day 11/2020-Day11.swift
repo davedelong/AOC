@@ -7,17 +7,96 @@
 //
 
 class Day11: Day {
-
-    override func run() -> (String, String) {
-        return super.run()
+    
+    enum Feature: Character {
+        case floor = "."
+        case seat = "L"
+        case occupied = "#"
     }
-
+    
     override func part1() -> String {
-        return #function
+        let area = input.lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
+        var grid = Matrix(area)
+        var keepGoing = true
+        while keepGoing {
+            let newGrid = seatPeople_p1(grid)
+            keepGoing = (newGrid != grid)
+            grid = newGrid
+        }
+        
+        let occupied = grid.count(where: { $0 == .occupied })
+        
+        return "\(occupied)"
+    }
+    
+    private func seatPeople_p1(_ grid: Matrix<Feature>) -> Matrix<Feature> {
+        let copy = grid.copy()
+        for row in 0 ..< grid.rowCount {
+            for col in 0 ..< grid.colCount {
+                let p = Position(row: row, column: col)
+                if grid[p] == .floor { continue }
+                
+                let around = p.surroundingPositions(includingDiagonals: true).compactMap { grid.at($0) }
+                if grid[p] == .occupied {
+                    // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
+                    if around.count(where: { $0 == .occupied }) >= 4 {
+                        copy[p] = .seat
+                    }
+                } else {
+                    // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
+                    if around.allSatisfy({ $0 != .occupied }) {
+                        copy[p] = .occupied
+                    }
+                }
+            }
+        }
+        return copy
     }
 
     override func part2() -> String {
-        return #function
+        let area = input.lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
+        var grid = Matrix(area)
+        var keepGoing = true
+        while keepGoing {
+            let newGrid = seatPeople_p2(grid)
+            keepGoing = (newGrid != grid)
+            grid = newGrid
+        }
+        
+        let occupied = grid.count(where: { $0 == .occupied })
+        return "\(occupied)"
+    }
+    
+    private func seatPeople_p2(_ grid: Matrix<Feature>) -> Matrix<Feature> {
+        let copy = grid.copy()
+        
+        let vectors = [
+            Vector2(x: -1, y: -1), Vector2(x: 0, y: -1), Vector2(x: 1, y: -1),
+            Vector2(x: -1, y: 0),                        Vector2(x: 1, y: 0),
+            Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
+        ]
+        
+        
+        for row in 0 ..< grid.rowCount {
+            for col in 0 ..< grid.colCount {
+                let p = Position(row: row, column: col)
+                if grid[p] == .floor { continue }
+                let around = vectors.compactMap { grid.first(from: p, along: $0, where: { $0 != .floor })}
+                if grid[p] == .occupied {
+                    // If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
+                    if around.count(where: { $0 == .occupied }) >= 5 {
+                        copy[p] = .seat
+                    }
+                } else {
+                    // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
+                    if around.allSatisfy({ $0 != .occupied }) {
+                        copy[p] = .occupied
+                    }
+                }
+            }
+        }
+        
+        return copy
     }
 
 }

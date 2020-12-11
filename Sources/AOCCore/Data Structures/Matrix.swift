@@ -112,12 +112,25 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         return coordinate.row >= 0 && coordinate.row < rowCount && coordinate.col >= 0 && coordinate.col < colCount
     }
     
+    public func at(_ position: Position) -> T? {
+        return data.at(position.row)?.at(position.col)
+    }
+    
     public func get(_ row: Int, col: Int) -> T {
         return data[row][col]
     }
     
     public func set(_ row: Int, col: Int, _ val: T) {
         data[row][col] = val
+    }
+    
+    public func first(from position: Position, along vector: Vector2, where matches: (T) -> Bool) -> T? {
+        var p = position + vector
+        while has(p) {
+            if matches(self[p]) { return self[p] }
+            p += vector
+        }
+        return nil
     }
     
     public func rotate(_ clockwiseTurns: Int) -> Matrix<T> {

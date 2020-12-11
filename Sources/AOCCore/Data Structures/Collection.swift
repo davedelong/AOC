@@ -97,8 +97,8 @@ public extension Collection {
         return abc.map { ($0.0, $0.1, $1) }
     }
     
-    func split(on isBoundary: (Element) -> Bool) -> Array<SubSequence> {
-        return split(omittingEmptySubsequences: false, whereSeparator: isBoundary)
+    func split(on isBoundary: (Element) -> Bool, includeEmpty: Bool = true) -> Array<SubSequence> {
+        return split(omittingEmptySubsequences: !includeEmpty, whereSeparator: isBoundary)
     }
     
     func partition(where matches: (Element) -> Bool) -> Array<SubSequence> {
