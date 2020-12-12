@@ -56,6 +56,25 @@ public enum Heading: CaseIterable {
             case .west: return .east
         }
     }
+    public func turn(left: Bool, times: Int) -> Heading {
+        if left {
+            return turnLeft(times: times)
+        } else {
+            return turnRight(times: times)
+        }
+    }
+    public func turnLeft(times: Int) -> Heading {
+        if times < 0 { return turnRight(times: -times) }
+        let mod = times % 4
+        if mod == 0 { return self }
+        return (0 ..< mod).reduce(into: self) { h, _ in h = h.turnLeft() }
+    }
+    public func turnRight(times: Int) -> Heading {
+        if times < 0 { return turnLeft(times: -times) }
+        let mod = times % 4
+        if mod == 0 { return self }
+        return (0 ..< mod).reduce(into: self) { h, _ in h = h.turnRight() }
+    }
     public func turn(clockwise: UInt) -> Heading {
         let times = clockwise % 4
         if times == 1 { return turnRight() }

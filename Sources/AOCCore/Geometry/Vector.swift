@@ -9,7 +9,7 @@ import Foundation
 
 public protocol VectorProtocol: Hashable, CustomStringConvertible {
     static var numberOfComponents: Int { get }
-    var components: Array<Int> { get }
+    var components: Array<Int> { get set }
     init(_ components: Array<Int>)
 }
 
@@ -102,6 +102,28 @@ public struct Vector2: VectorProtocol {
     
     public init(x: Int, y: Int) { self.init([x, y]) }
     public init(row: Int, column: Int) { self.init([column, row]) }
+    
+    public func rotateLeft() -> Vector2 { Vector2(x: -y, y: x) }
+    public func rotateRight() -> Vector2 { Vector2(x: y, y: -x) }
+    public func rotateLeft(times: Int) -> Vector2 {
+        if times < 0 { return rotateRight(times: -times) }
+        let mod = times % 4
+        if mod == 0 { return self }
+        return (0 ..< mod).reduce(into: self) { v, _ in v = v.rotateLeft() }
+    }
+    public func rotateRight(times: Int) -> Vector2 {
+        if times < 0 { return rotateLeft(times: -times) }
+        let mod = times % 4
+        if mod == 0 { return self }
+        return (0 ..< mod).reduce(into: self) { v, _ in v = v.rotateRight() }
+    }
+    public func rotate(left: Bool, times: Int) -> Vector2 {
+        if left {
+            return rotateLeft(times: times)
+        } else {
+            return rotateRight(times: times)
+        }
+    }
 }
 
 public struct Vector3: VectorProtocol {
@@ -110,15 +132,15 @@ public struct Vector3: VectorProtocol {
     public var components: Array<Int>
     
     public var x: Int {
-        get { return components[0] }
+        get { components[0] }
         set { components[0] = newValue }
     }
     public var y: Int {
-        get { return components[1] }
+        get { components[1] }
         set { components[1] = newValue }
     }
     public var z: Int {
-        get { return components[2] }
+        get { components[2] }
         set { components[2] = newValue }
     }
     
@@ -135,12 +157,24 @@ public struct Vector3: VectorProtocol {
 public struct Vector4: VectorProtocol {
     public static let numberOfComponents = 4
     
-    public let components: Array<Int>
+    public var components: Array<Int>
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var z: Int { return components[2] }
-    public var t: Int { return components[3] }
+    public var x: Int {
+        get { components[0] }
+        set { components[0] = newValue }
+    }
+    public var y: Int {
+        get { components[1] }
+        set { components[1] = newValue }
+    }
+    public var z: Int {
+        get { components[2] }
+        set { components[2] = newValue }
+    }
+    public var t: Int {
+        get { components[3] }
+        set { components[3] = newValue }
+    }
     
     public init(_ components: Array<Int>) {
         guard components.count == Vector4.numberOfComponents else {

@@ -9,7 +9,7 @@
 class Day12: Day {
     
     enum Instruction {
-        case ahead(Int)
+        case forward(Int)
         case move(Heading, Int)
         case turn(Bool, Int)
     }
@@ -20,14 +20,10 @@ class Day12: Day {
             let int = Int(line.dropFirst())!
             
             switch i {
-                case "N": return .move(.north, int)
-                case "E": return .move(.east, int)
-                case "W": return .move(.west, int)
-                case "S": return .move(.south, int)
-                case "L": return .turn(true, int)
-                case "R": return .turn(false, int)
-                case "F": return .ahead(int)
-                default: fatalError()
+                case "L": return .turn(true, int / 90)
+                case "R": return .turn(false, int / 90)
+                case "F": return .forward(int)
+                default: return .move(Heading(character: i)!, int)
             }
         }
     }()
@@ -40,14 +36,9 @@ class Day12: Day {
             switch i {
                 case .move(let h, let d):
                     p = p.move(h, length: d)
-                case .turn(let left, let d):
-                    let times = d / 90
-                    if left {
-                        for _ in 0 ..< times { h = h.turnLeft() }
-                    } else {
-                        for _ in 0 ..< times { h = h.turnRight() }
-                    }
-                case .ahead(let d):
+                case .turn(let left, let times):
+                    h = h.turn(left: left, times: times)
+                case .forward(let d):
                     p = p.move(h, length: d)
             }
         }
@@ -70,17 +61,8 @@ class Day12: Day {
                         case .west: w.x -= d
                     }
                 case .turn(let left, let d):
-                    var times = (d / 90) % 4
-                    if left == false { times = 4 - times }
-                    
-                    switch times {
-                        case 0: continue
-                        case 1: w = Vector2(x: -w.y, y: w.x)
-                        case 2: w = Vector2(x: -w.x, y: -w.y)
-                        case 3: w = Vector2(x: w.y, y: -w.x)
-                        default: fatalError()
-                    }
-                case .ahead(let d):
+                    w = w.rotate(left: left, times: d)
+                case .forward(let d):
                     p += (w * d)
             }
         }
