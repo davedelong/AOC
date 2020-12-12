@@ -16,7 +16,11 @@ open class Day: NSObject {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "America/New_York")!
         let components = calendar.dateComponents([.year, .day], from: Date())
-        return Year(components.year!).day(components.day!)
+        return day(for: components.year!, day: components.day!)
+    }
+    
+    public static func day(for year: Int, day: Int) -> Day {
+        return Year(year).day(day)
     }
     
     private static let inputFiles: Dictionary<Pair<Int>, String> = {

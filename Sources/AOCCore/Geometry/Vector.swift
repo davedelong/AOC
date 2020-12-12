@@ -74,12 +74,24 @@ public struct Vector2: VectorProtocol {
         Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
     ]
     
-    public let components: Array<Int>
+    public var components: Array<Int>
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var row: Int { return components[1] }
-    public var col: Int { return components[0] }
+    public var x: Int {
+        get { components[0] }
+        set { components[0] = newValue }
+    }
+    public var y: Int {
+        get { components[1] }
+        set { components[1] = newValue }
+    }
+    public var row: Int {
+        get { components[1] }
+        set { components[1] = newValue }
+    }
+    public var col: Int {
+        get { components[0] }
+        set { components[0] = newValue }
+    }
     
     public init(_ components: Array<Int>) {
         guard components.count == Vector2.numberOfComponents else {
