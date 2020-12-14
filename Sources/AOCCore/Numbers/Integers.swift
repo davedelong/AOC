@@ -26,6 +26,14 @@ extension FixedWidthInteger {
         return Array(d.reversed())
     }
     
+    public var bits: Array<Bool> {
+        var bits = Array<Bool>()
+        for offset in 0 ..< Self.bitWidth {
+            bits.append((self & (1 << offset)) > 0)
+        }
+        return bits.reversed()
+    }
+    
 }
 
 public extension Int {

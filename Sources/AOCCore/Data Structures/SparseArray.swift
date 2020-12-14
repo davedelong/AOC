@@ -38,3 +38,11 @@ public struct Sparse<Element>: Collection {
     }
     
 }
+
+extension Sparse where Element: Numeric {
+    
+    public var sum: Element {
+        return data.values.sum
+    }
+    
+}
