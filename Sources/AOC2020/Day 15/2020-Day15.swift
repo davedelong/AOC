@@ -25,26 +25,26 @@ class Day15: Day {
     }
     
     private func run(times: Int) -> Int {
-        var turnForNumber = Dictionary<Int, Pair<Int>>()
+        typealias P = (Int, Int?)
+        var turnForNumber = Dictionary<Int, P>(minimumCapacity: 100_000)
         var turn = 0
         
         var lastNumberSpoken = 0
         for int in input.integers {
             turn += 1
-            turnForNumber[int] = Pair(turn, -1)
+            turnForNumber[int] = P(turn, nil)
             lastNumberSpoken = int
         }
         
         while turn < times {
             turn += 1
-            let p = turnForNumber[lastNumberSpoken] ?? Pair(-1, -1)
-            if p.first >= 0 && p.second >= 0 {
-                lastNumberSpoken = p.first - p.second
+            if let p = turnForNumber[lastNumberSpoken], let s = p.1 {
+                lastNumberSpoken = p.0 - s
             } else {
                 lastNumberSpoken = 0
             }
-            let p2 = turnForNumber[lastNumberSpoken] ?? Pair(-1, -1)
-            turnForNumber[lastNumberSpoken] = Pair(turn, p2.first)
+            let p2 = turnForNumber[lastNumberSpoken]?.0
+            turnForNumber[lastNumberSpoken] = P(turn, p2)
         }
         return lastNumberSpoken
     }
