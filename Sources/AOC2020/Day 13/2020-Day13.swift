@@ -13,7 +13,31 @@ class Day13: Day {
     }
 
     override func part1() -> String {
-        return #function
+        let timestamp = input.lines[0].integer!
+        let buses = input.lines[1].integers
+        
+        var bus = 0
+        var wait = Int.max
+        var departure = Int.max
+        
+        for nextBus in buses {
+            if timestamp % nextBus == 0 {
+                // wait 0 minutes
+                return "0"
+            } else {
+                let d = nextBus * ((timestamp+nextBus)/nextBus)
+                let waitForBus = d - timestamp
+                
+                if d < departure {
+                    departure = d
+                    wait = waitForBus
+                    bus = nextBus
+                }
+            }
+        }
+        
+        
+        return "\(bus * wait)"
     }
 
     override func part2() -> String {

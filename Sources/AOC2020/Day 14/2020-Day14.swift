@@ -43,8 +43,7 @@ class Day14: Day {
                 oneMask = o
                 zeroMask = z
             } else if case .assign(let slot, let value) = op {
-                let newValue = (value | oneMask) & ~zeroMask
-                memory[slot] = newValue
+                memory[slot] = (value | oneMask) & ~zeroMask
             }
         }
         
