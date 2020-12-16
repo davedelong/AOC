@@ -72,6 +72,8 @@ class Day16: Day {
                         }
                     }
                 }
+                
+                if mappedFields.count(where: { $0.value.count == 1 }) == mappedFields.count { break }
             }
         }
         
