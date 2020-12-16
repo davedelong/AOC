@@ -71,6 +71,26 @@ class Day16: Day {
                             mappedFields[k]?.remove(narrowed.first!)
                         }
                     }
+                    
+                    /*
+                     // this alternative version will subsequently filter out any field that is identified
+                     // in the course of narrowing down this field
+                     
+                     // it runs in about the same amount of time
+                     if narrowed.count == 1 {
+                         var pop: Array<(Int, Field)> = [(idx, narrowed.first!)]
+                         while let (fieldIdx, field) = pop.first {
+                             pop.removeFirst()
+                             for k in mappedFields.keys {
+                                 guard k != fieldIdx else { continue }
+                                 if let _ = mappedFields[k]?.remove(field), mappedFields[k]?.count == 1 {
+                                     pop.append((k, mappedFields[k]!.first!))
+                                 }
+                             }
+                         }
+                     }
+                     
+                     */
                 }
                 
                 if mappedFields.count(where: { $0.value.count == 1 }) == mappedFields.count { break }
