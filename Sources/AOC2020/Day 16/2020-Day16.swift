@@ -21,14 +21,6 @@ class Day16: Day {
     
     struct Ticket {
         let values: Array<Int>
-        
-        func isValid(for fields: Array<Field>) -> Bool {
-            for value in values {
-                let invalidCount = fields.count(where: { $0.contains(value) == false })
-                if invalidCount == fields.count { return false }
-            }
-            return true
-        }
     }
     
     lazy var fields: Array<Field> = {
@@ -55,23 +47,17 @@ class Day16: Day {
         var valid = Array<Ticket>()
         
         for ticket in tickets {
-            var isValid = true
-            for value in ticket.values {
+            let invalidTicketValues = ticket.values.filter { value -> Bool in
                 let invalidCount = fields.count(where: { $0.contains(value) == false })
-                if invalidCount == fields.count {
-                    isValid = false
-                    invalidValues.append(value)
-                }
+                if invalidCount == fields.count { return true }
+                return false
             }
-            if isValid {
-                valid.append(ticket)
-            }
+            invalidValues.append(contentsOf: invalidTicketValues)
+            if invalidTicketValues.isEmpty { valid.append(ticket) }
         }
         
         var mappedFields = Dictionary<Int, Set<Field>>()
-        for i in 0 ..< 20 {
-            mappedFields[i] = Set(fields)
-        }
+        for i in 0 ..< 20 { mappedFields[i] = Set(fields) }
         
         while mappedFields.values.contains(where: { $0.count > 1 }) {
             for ticket in valid {
@@ -90,10 +76,9 @@ class Day16: Day {
         }
         
         let departureFields = Set(fields.filter { $0.name.hasPrefix("departure") })
-        let mapping = mappedFields.filter { departureFields.contains($0.value.first!) }.mapValues { $0.first! }
+        let mapping = mappedFields.mapValues { $0.first! }.filter { departureFields.contains($0.value) }
         
-        let myTicket = tickets[0]
-        let myValues = mapping.keys.map { myTicket.values[$0] }
+        let myValues = mapping.keys.map { tickets[0].values[$0] }
         
         return ("\(invalidValues.sum)", "\(myValues.product)")
     }
