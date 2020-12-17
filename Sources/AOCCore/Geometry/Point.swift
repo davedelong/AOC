@@ -10,7 +10,7 @@ import Foundation
 
 public protocol PointProtocol: Hashable, CustomStringConvertible {
     static var numberOfComponents: Int { get }
-    var components: Array<Int> { get }
+    var components: Array<Int> { get set }
     init(_ components: Array<Int>)
 }
 
@@ -23,6 +23,39 @@ public extension PointProtocol {
 }
 
 public extension PointProtocol {
+    
+    private static func all<C: Collection>(between lower: C, and upper: C) -> Array<Array<Int>> where C.Element == Int {
+        guard lower.count == upper.count else { return [] }
+        guard let l = lower.first, let u = upper.first else { return [] }
+        
+        let remainder = all(between: lower.dropFirst(), and: upper.dropFirst())
+        
+        let range = l...u
+        if remainder.isEmpty { return range.map { [$0] } }
+        
+        return range.flatMap { prefix -> Array<Array<Int>> in
+            remainder.map { [prefix] + $0 }
+        }
+    }
+    
+    static func all(between lower: Self, and upper: Self) -> Array<Self> {
+        let combos = all(between: lower.components, and: upper.components)
+        return combos.map(Self.init(_:))
+    }
+    
+    static func extremes<C: Collection>(of positions: C) -> (Self, Self) where C.Element == Self {
+        var mins = Array(repeating: Int.max, count: numberOfComponents)
+        var maxs = Array(repeating: Int.min, count: numberOfComponents)
+        
+        for p in positions {
+            for i in 0 ..< numberOfComponents {
+                mins[i] = min(mins[i], p.components[i])
+                maxs[i] = max(maxs[i], p.components[i])
+            }
+        }
+        
+        return (Self.init(mins), Self.init(maxs))
+    }
     
     static var zero: Self {
         let ints = Array(repeating: 0, count: self.numberOfComponents)
@@ -73,6 +106,25 @@ public extension PointProtocol {
         return pairs.reduce(0) { $0 + abs($1.0 - $1.1) }
     }
     
+    func allSurroundingPoints() -> Array<Self> {
+        let combos = self.combos(around: components)
+        return combos.map(Self.init(_:)).filter { $0 != self }
+    }
+    
+    private func combos<C: Collection>(around: C) -> Array<Array<Int>> where C.Element == Int {
+        guard let f = around.first else { return [] }
+        let remainders = combos(around: around.dropFirst())
+        
+        if remainders.isEmpty {
+            return [[f-1], [f], [f+1]]
+        }
+        let before = remainders.map { [f-1] + $0 }
+        let during = remainders.map { [f] + $0 }
+        let after = remainders.map { [f+1] + $0 }
+        
+        return before + during + after
+    }
+    
     init(_ source: String) {
         let matches = Regex.integers.matches(in: source)
         let ints = matches.compactMap { match -> Int? in
@@ -86,7 +138,7 @@ public extension PointProtocol {
 public struct Point2: PointProtocol {
     public static let numberOfComponents = 2
     
-    public let components: Array<Int>
+    public var components: Array<Int>
     
     public var x: Int { return components[0] }
     public var y: Int { return components[1] }
@@ -107,7 +159,7 @@ public struct Point2: PointProtocol {
 public struct Point3: PointProtocol {
     public static let numberOfComponents = 3
     
-    public let components: Array<Int>
+    public var components: Array<Int>
     
     public var x: Int { return components[0] }
     public var y: Int { return components[1] }
@@ -126,7 +178,7 @@ public struct Point3: PointProtocol {
 public struct Point4: PointProtocol {
     public static let numberOfComponents = 4
     
-    public let components: Array<Int>
+    public var components: Array<Int>
     
     public var x: Int { return components[0] }
     public var y: Int { return components[1] }

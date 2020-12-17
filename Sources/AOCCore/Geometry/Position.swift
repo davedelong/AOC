@@ -17,23 +17,6 @@ public extension Point2 {
         }
     }
     
-    static func extremes<C: Collection>(of positions: C) -> (Position, Position) where C.Element == Position {
-        var minX = Int.max
-        var maxX = Int.min
-        
-        var minY = Int.max
-        var maxY = Int.min
-        
-        for p in positions {
-            minX = min(minX, p.x)
-            minY = min(minY, p.y)
-            maxX = max(maxX, p.x)
-            maxY = max(maxY, p.y)
-        }
-        
-        return (Position(x: minX, y: minY), Position(x: maxX, y: maxY))
-    }
-    
     static func edges(of xRange: ClosedRange<Int>, _ yRange: ClosedRange<Int>) -> Set<Position> {
         return Set(
             xRange.map { Position(x: $0, y: yRange.lowerBound) } +
