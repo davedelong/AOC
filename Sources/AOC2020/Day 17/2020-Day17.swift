@@ -7,7 +7,8 @@
 //
 
 class Day17: Day {
-    typealias Space<P: PointProtocol> = Dictionary<P, Bool>
+    typealias Active = Void
+    typealias Space<P: PointProtocol> = Dictionary<P, Active>
     
     override func run() -> (String, String) {
         return super.run()
@@ -36,7 +37,7 @@ class Day17: Day {
                 var p = P.zero
                 p.components[0] = x
                 p.components[1] = y
-                space[p] = col == "#"
+                space[p] = col == "#" ? () : nil
             }
         }
         
@@ -44,7 +45,7 @@ class Day17: Day {
             print("Tick #\(t)")
             space = tick(space: space)
         }
-        return space.count(where: \.value)
+        return space.values.count
     }
 
     func tick<P>(space: Space<P>) -> Space<P> {
@@ -56,12 +57,12 @@ class Day17: Day {
         var newSpace = space
         for p in points {
             let surround = p.allSurroundingPoints()
-            let activeNeighbors = surround.reduce(into: 0) { $0 += (space[$1] == true ? 1 : 0) }
+            let activeNeighbors = surround.reduce(into: 0) { $0 += (space[$1] != nil ? 1 : 0) }
             
-            if space[p] == true {
-                newSpace[p] = (2...3).contains(activeNeighbors)
+            if space[p] != nil {
+                newSpace[p] = (2...3).contains(activeNeighbors) ? () : nil
             } else {
-                newSpace[p] = activeNeighbors == 3
+                newSpace[p] = activeNeighbors == 3 ? () : nil
             }
         }
         return newSpace
