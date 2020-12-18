@@ -21,7 +21,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "swift-algorithms", url: "git@github.com:apple/swift-algorithms.git", from: "0.0.2")
+        .package(name: "swift-algorithms", url: "git@github.com:apple/swift-algorithms.git", from: "0.0.2"),
+        .package(name: "MathParser", url: "git@github.com:davedelong/DDMathParser.git", .branch("master"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -30,7 +31,7 @@ let package = Package(
         
         .target(name: "AOC", dependencies: ["AOCCore", "AOC2020", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
         
-        .target(name: "AOC2020", dependencies: ["AOCCore"]),
+        .target(name: "AOC2020", dependencies: ["AOCCore", "MathParser"]),
         .target(name: "AOC2019", dependencies: ["AOCCore"]),
         .target(name: "AOC2018", dependencies: ["AOCCore"]),
         .target(name: "AOC2017", dependencies: ["AOCCore"]),

@@ -101,6 +101,15 @@ public extension PointProtocol {
         lhs = lhs * rhs
     }
     
+    init(_ source: String) {
+        let matches = Regex.integers.matches(in: source)
+        let ints = matches.compactMap { match -> Int? in
+            guard let piece = match[1] else { return nil }
+            return Int(piece)
+        }
+        self.init(ints)
+    }
+    
     func manhattanDistance(to other: Self) -> Int {
         let pairs = zip(components, other.components)
         return pairs.reduce(0) { $0 + abs($1.0 - $1.1) }
@@ -125,13 +134,20 @@ public extension PointProtocol {
         return before + during + after
     }
     
-    init(_ source: String) {
-        let matches = Regex.integers.matches(in: source)
-        let ints = matches.compactMap { match -> Int? in
-            guard let piece = match[1] else { return nil }
-            return Int(piece)
+    func closestPosition<C: Collection>(in points: C) -> Self? where C.Element == Self {
+        
+        var closest: Self?
+        var distance = Int.max
+        
+        for other in points {
+            let d = manhattanDistance(to: other)
+            if d < distance {
+                closest = other
+                distance = d
+            }
         }
-        self.init(ints)
+        
+        return closest
     }
 }
 

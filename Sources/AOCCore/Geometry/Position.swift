@@ -62,22 +62,6 @@ public extension Point2 {
         ]
     }
     
-    func closestPosition<C: Collection>(in points: C) -> Position? where C.Element == Position {
-        
-        var closest: Position?
-        var distance = Int.max
-        
-        for other in points {
-            let d = manhattanDistance(to: other)
-            if d < distance {
-                closest = other
-                distance = d
-            }
-        }
-        
-        return closest
-    }
-    
     func polarAngle(to other: Position) -> Double {
         return atan2(Double(other.y - self.y), Double(other.x - self.x))
     }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "MathParser",
+        "repositoryURL": "git@github.com:davedelong/DDMathParser.git",
+        "state": {
+          "branch": "master",
+          "revision": "6f5bd1281216200dfb96998836fcb35ef7cd024e",
+          "version": null
+        }
+      },
+      {
         "package": "swift-algorithms",
         "repositoryURL": "git@github.com:apple/swift-algorithms.git",
         "state": {
