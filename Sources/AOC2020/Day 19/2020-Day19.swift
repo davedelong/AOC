@@ -6,6 +6,14 @@
 //  Copyright © 2020 Dave DeLong. All rights reserved.
 //
 
+extension Array where Element == Int {
+    init<S: StringProtocol>(integersIn string: S) {
+        let matches = Regex.integers.matches(in: string)
+        let ints = matches.compactMap { $0[int: 1] }
+        self = ints
+    }
+}
+
 class Day19: Day {
     
     enum Rule {
@@ -15,12 +23,6 @@ class Day19: Day {
     }
     
     lazy var rawRules: Dictionary<Int, Rule> = {
-        let l: Regex = #""(.)""#
-        let o: Regex = #"(\d+)"#
-        let s: Regex = #"(\d+) (\d+)"#
-        let e1: Regex = #"(\d+) \| (\d+)"#
-        let e2: Regex = #"(\d+) (\d+) \| (\d+) (\d+)"#
-        
         var rawRules = Dictionary<Int, Rule>()
         for line in input.rawLines {
             if line.isEmpty { break }
@@ -29,20 +31,17 @@ class Day19: Day {
             let remainder = line.suffix(after: ":")!.trimmed()
             
             let rule: Rule
-            if let m = e2.match(remainder) {
-                rule = .either([m[int: 1]!, m[int: 2]!],
-                               [m[int: 3]!, m[int: 4]!])
-            } else if let m = e1.match(remainder) {
-                rule = .either([m[int: 1]!],
-                               [m[int: 2]!])
-            } else if let m = s.match(remainder) {
-                rule = .sequence([m[int: 1]!, m[int: 2]!])
-            } else if let m = o.match(remainder) {
-                rule = .sequence([m[int: 1]!])
-            } else if let m = l.match(remainder) {
-                rule = .literal(m[char: 1]!)
+            if remainder.hasPrefix("\"") {
+                // literal
+                rule = .literal(Array(remainder)[1])
             } else {
-                fatalError()
+                let split = remainder.split(on: "|")
+                let ints = split.map { Array(integersIn: $0) }
+                if ints.count == 1 {
+                    rule = .sequence(ints[0])
+                } else {
+                    rule = .either(ints[0], ints[1])
+                }
             }
             rawRules[int] = rule
         }

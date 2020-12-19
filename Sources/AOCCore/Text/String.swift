@@ -38,7 +38,7 @@ public extension String {
     }
     
     func trimmed() -> String {
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+        String(self.trimming(\.isWhitespaceOrNewline))
     }
     
 }

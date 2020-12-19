@@ -12,6 +12,14 @@ public extension Collection {
     
     var isNotEmpty: Bool { return isEmpty == false }
     
+    func removingFirst(while matches: (Element) -> Bool) -> SubSequence {
+        var index = startIndex
+        while index < endIndex && matches(self[index]) {
+            index = self.index(after: index)
+        }
+        return self[index...]
+    }
+    
     func combinations(choose k: Int? = nil) -> AnySequence<[Element]> {
         guard isNotEmpty else { return AnySequence([]) }
         
@@ -255,6 +263,21 @@ public extension Collection where Element: Hashable {
         return final
     }
     
+}
+
+public extension BidirectionalCollection {
+    
+    func removingLast(while matches: (Element) -> Bool) -> SubSequence {
+        var index = self.index(before: endIndex)
+        while index >= startIndex && matches(self[index]) {
+            index = self.index(before: index)
+        }
+        return self[...index]
+    }
+    
+    func trimming(_ matches: (Element) -> Bool) -> SubSequence {
+        return removingFirst(while: matches).removingLast(while: matches)
+    }
 }
 
 public extension RandomAccessCollection {
