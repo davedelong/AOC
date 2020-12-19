@@ -22,4 +22,23 @@ public extension String {
         return indices
     }
     
+    func prefix(upTo character: Character) -> String? {
+        guard let idx = self.firstIndex(of: character) else {
+            return nil
+        }
+        return String(self[..<idx])
+    }
+    
+    func suffix(after character: Character) -> String? {
+        guard let idx = self.lastIndex(of: character) else {
+            return nil
+        }
+        let after = self.index(after: idx)
+        return String(self[after...])
+    }
+    
+    func trimmed() -> String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
 }
