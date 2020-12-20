@@ -19,6 +19,11 @@ public struct XYGrid<T> {
         set { grid[key] = newValue }
     }
     
+    public subscript(x: Int, _ y: Int) -> T? {
+        get { self[Point2(x: x, y: y)] }
+        set { self[Point2(x: x, y: y)] = newValue }
+    }
+    
     public var positions: Dictionary<XY, T>.Keys { return grid.keys }
     public var values: Dictionary<XY, T>.Values { return grid.values }
     
@@ -64,6 +69,22 @@ public struct XYGrid<T> {
         return g
     }
     
+    public func convertToNestedArray() -> Array<Array<T?>> {
+        var final = Array<Array<T?>>()
+        
+        let xRange = grid.keys.map { $0.x }.range()
+        let yRange = grid.keys.map { $0.y }.range()
+        
+        for y in yRange {
+            var row = Array<T?>()
+            for x in xRange {
+                row.append(self[Point2(x: x, y: y)])
+            }
+            final.append(row)
+        }
+        
+        return final
+    }
 }
 
 extension XYGrid: Equatable where T: Equatable {

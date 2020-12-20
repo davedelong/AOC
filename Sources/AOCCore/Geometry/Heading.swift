@@ -9,10 +9,14 @@
 import Foundation
 
 public enum Heading: CaseIterable {
-    static var up = Heading.north
-    static var down = Heading.south
-    static var left = Heading.west
-    static var right = Heading.east
+    public static let up = Heading.north
+    public static let top = Heading.north
+    
+    public static let down = Heading.south
+    public static let bottom = Heading.south
+    
+    public static let left = Heading.west
+    public static let right = Heading.east
     
     case north, south, west, east
     

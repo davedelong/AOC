@@ -66,6 +66,24 @@ public extension Point2 {
         return atan2(Double(other.y - self.y), Double(other.x - self.x))
     }
     
+    func heading(to other: Position) -> Heading? {
+        guard other.x == self.x || other.y == self.y else { return nil }
+        if other == self { return nil }
+        if self.x == other.x {
+            if other.y < self.y {
+                return .north
+            } else {
+                return .south
+            }
+        } else {
+            if other.x < self.x {
+                return .west
+            } else {
+                return .east
+            }
+        }
+    }
+    
 }
 
 extension Array where Element: RandomAccessCollection, Element.Index == Int {

@@ -102,11 +102,11 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         }
     }
     
-    public func map(_ block: (_ row: Int, _ col: Int, _ value: T) -> T) -> Matrix<T> {
-        var newData = Array<Array<T>>()
+    public func map<New>(_ block: (_ row: Int, _ col: Int, _ value: T) -> New) -> Matrix<New> {
+        var newData = Array<Array<New>>()
         
         for (rowIndex, row) in data.enumerated() {
-            var newRow = Array<T>()
+            var newRow = Array<New>()
             for (colIndex, value) in row.enumerated() {
                 let newValue = block(rowIndex, colIndex, value)
                 newRow.append(newValue)
@@ -114,7 +114,7 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             newData.append(newRow)
         }
         
-        return Matrix(newData)
+        return Matrix<New>(newData)
     }
     
     public subscript(_ row: Int, _ col: Int) -> T {
@@ -152,6 +152,15 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         return nil
     }
     
+    public func rotateCW() -> Matrix<T> {
+        let newRowCount = data[0].count
+        let newColCount = data.count
+        let newData = (0 ..< newRowCount).map { row in
+            return (0 ..< newColCount).map { data[newColCount - $0 - 1][row] }
+        }
+        return Matrix(newData)
+    }
+    
     public func rotate(_ clockwiseTurns: Int) -> Matrix<T> {
         let turns = clockwiseTurns % 4
         if turns == 0 { return Matrix(data) }
@@ -177,6 +186,10 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             flipped.append(row)
         }
         return Matrix(flipped)
+    }
+    
+    public func mirror() {
+        data = data.map { $0.reversed() }
     }
     
     public func subdivide() -> Matrix<Matrix<T>> {
@@ -208,6 +221,42 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         }
         
         return Matrix<Matrix<T>>(newData)
+    }
+    
+    public func inset(by insets: Dictionary<Heading, Int>) {
+        var newData = data
+        if let dropTop = insets[.top] {
+            newData.removeFirst(dropTop)
+        }
+        if let dropBottom = insets[.bottom] {
+            newData.removeLast(dropBottom)
+        }
+        if let dropLeft = insets[.left] {
+            newData = newData.map { Array($0.dropFirst(dropLeft)) }
+        }
+        if let dropRight = insets[.right] {
+            newData = newData.map { Array($0.dropLast(dropRight)) }
+        }
+    }
+    
+    public func withSlidingWindow(of size: Size, perform: (Array<Array<T>>) -> Void) {
+        let xTranslations = data[0].count - size.width
+        let yTranslations = data.count - size.height
+        
+        guard xTranslations > 0 else { return }
+        guard yTranslations > 0 else { return }
+        
+        for yOffset in (0 ..< yTranslations) {
+            for xOffset in (0 ..< xTranslations) {
+                var window = Array<Array<T>>()
+                for h in (0 ..< size.height) {
+                    let row = data[yOffset + h]
+                    window.append(Array(row[xOffset ..< (xOffset + size.width)]))
+                }
+                perform(window)
+            }
+        }
+        
     }
 }
 
