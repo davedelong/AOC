@@ -6,6 +6,9 @@
 //  Copyright © 2020 Dave DeLong. All rights reserved.
 //
 
+// this needs . instead of spaces
+// because xcode very "helpfully" would trim the whitespace at the end of the lines
+// which makes all the lines no longer be the same size
 let rawSeaMonster = """
 ..................#.
 #....##....##....###
@@ -21,11 +24,6 @@ class Day20: Day {
         }
         func hash(into hasher: inout Hasher) {
             hasher.combine(id)
-        }
-        
-        enum Action {
-            case rotateCW
-            case mirror
         }
         
         let id: Int
@@ -70,35 +68,29 @@ class Day20: Day {
             }
         }
         
-        func perform(action: Action) {
-            if action == .rotateCW {
-                matrix = matrix.rotate(1)
-            } else {
-                matrix = matrix.flip()
-            }
-        }
+        func rotate() { matrix = matrix.rotate(1) }
+        func mirror() { matrix = matrix.flip() }
         
-        func make(edge: Array<Bool>, beOnSide targetSide: Heading, canRotate: Bool) {
+        func make(edge: Array<Bool>, beOnSide targetSide: Heading, canTransform: Bool) {
             guard edges.contains(edge) else { fatalError() }
             if self.edge(for: targetSide) == edge { return }
             
-            if canRotate == true {
-                perform(action: .rotateCW)
+            if canTransform == true {
+                rotate()
                 if self.edge(for: targetSide) == edge { return }
-                perform(action: .rotateCW)
+                rotate()
                 if self.edge(for: targetSide) == edge { return }
-                perform(action: .rotateCW)
+                rotate()
                 if self.edge(for: targetSide) == edge { return }
-            }
-            perform(action: .mirror)
-            if self.edge(for: targetSide) == edge { return }
-            
-            if canRotate == true {
-                perform(action: .rotateCW)
+                
+                mirror()
                 if self.edge(for: targetSide) == edge { return }
-                perform(action: .rotateCW)
+                    
+                rotate()
                 if self.edge(for: targetSide) == edge { return }
-                perform(action: .rotateCW)
+                rotate()
+                if self.edge(for: targetSide) == edge { return }
+                rotate()
                 if self.edge(for: targetSide) == edge { return }
             }
             fatalError()
@@ -138,56 +130,63 @@ class Day20: Day {
         let corners = self.findCorners()
         
         var grid = XYGrid<Tile>()
-        var row = 0
-        var col = 1
-        var keepBuildingRow = true
         
         let topLeft = corners[0]
         remainingTiles.remove(topLeft)
         
-        var matches = Set(remainingTiles.compactMap { tile -> Array<Bool>? in
+        var cornerEdges = Set(remainingTiles.compactMap { tile -> Array<Bool>? in
             let matches = topLeft.coreEdges.intersection(tile.edges)
             return matches.first
         })
-        matches.formUnion(matches.map { $0.reversed() })
+        cornerEdges.formUnion(cornerEdges.map { $0.reversed() })
         
-        while Set([topLeft.edge(for: .right), topLeft.edge(for: .bottom)]).isSubset(of: matches) == false {
-            topLeft.perform(action: .rotateCW)
+        // rotate the corner tile until the common edges are facing down and right
+        while Set([topLeft.edge(for: .right), topLeft.edge(for: .bottom)]).isSubset(of: cornerEdges) == false {
+            topLeft.rotate()
         }
         
         grid[0, 0] = topLeft
         
+        var row = 0
+        var col = 1
+        var keepBuildingRow = true
         while remainingTiles.isNotEmpty {
             while keepBuildingRow {
                 let p = Point2(row: row, column: col)
-                print("Attempting to build \(p)")
                 let pointsAround = p.surroundingPositions(includingDiagonals: false).filter { grid[$0] != nil }
+                // when building a grid, a new tile can only connect to one or two existing tiles
                 guard pointsAround.count <= 2 else { fatalError() }
                 
                 var possibleMatches = remainingTiles
-                var canRotate = true
+                var canTransform = true
+                
+                // for each already-placed tile...
                 for around in pointsAround {
                     let theirSide = around.heading(to: p)!
                     let their = grid[around]!
+                    // get their edge we'd need to connect to
                     let theirEdge = their.edge(for: theirSide)
+                    // find the remaining tiles that can connect to it
                     possibleMatches = possibleMatches.filter { $0.edges.contains(theirEdge) }
+                    // make sure they're oriented correctly
                     possibleMatches.forEach { tile in
-                        tile.make(edge: theirEdge, beOnSide: theirSide.turnAround(), canRotate: canRotate)
+                        tile.make(edge: theirEdge, beOnSide: theirSide.turnAround(), canTransform: canTransform)
                     }
                     if possibleMatches.isEmpty { break }
-                    canRotate.toggle()
+                    canTransform.toggle()
                 }
                 
+                // if we got a tile, put it in the grid
                 if let tile = possibleMatches.first {
                     grid[p] = possibleMatches.first
                     remainingTiles.remove(tile)
-                } else {
-                    print("Nothing connects to \(p)")
                 }
                 
                 col += 1
+                // if there wasn't a matching tile, we reached the end of the row
                 keepBuildingRow = possibleMatches.isNotEmpty
             }
+            // move to the next row
             row += 1
             col = 0
             keepBuildingRow = true
@@ -201,7 +200,7 @@ class Day20: Day {
         
         let grid = self.buildGrid()
         // inset to remove the borders
-//        grid.grid.values.forEach { $0.matrix.inset(by: [.top: 1, .bottom: 1, .left: 1, .right: 1]) }
+        grid.grid.values.forEach { $0.matrix.inset(by: [.top: 1, .bottom: 1, .left: 1, .right: 1]) }
         
         let nested = grid.convertToNestedArray()
         var new = Array<Array<Bool>>()
@@ -211,16 +210,19 @@ class Day20: Day {
             for rowIdx in 0 ..< subRowCount {
                 var newRow = Array<Bool>()
                 for tile in row {
-                    newRow.append(contentsOf: tile!.matrix.data[rowIdx])
+                    newRow.append(contentsOf: tile!.matrix.row(rowIdx))
                 }
                 new.append(newRow)
             }
         }
         var combined = Matrix(new)
+//        combined = combined.rotate(1)
+//        combined.mirror()
+//
+//        let debug = combined.map({ _, _, b -> String in return b ? "#" : "." })
+//        print(debug)
         
-        let debug = combined.map({ _, _, b -> String in return b ? "X" : " " })
-        print(debug)
-        
+        // try all the orientations of the image to see which one has the monsters
         var seaMonstersFound = countSeaMonsters(in: combined)
         if seaMonstersFound == 0 {
             combined = combined.rotate(1)
@@ -252,7 +254,7 @@ class Day20: Day {
         }
         
         let hashSquares = combined.count(where: { $0 })
-        let part2 = hashSquares - (seaMonstersFound * 13)
+        let part2 = hashSquares - (seaMonstersFound * seaMonsterTileCount)
         
         return ("\(corners.product(of: \.id))", "\(part2)")
     }
@@ -261,6 +263,12 @@ class Day20: Day {
         return rawSeaMonster.split(on: "\n").map { line -> Array<Bool?> in
             return line.map { $0 == "#" ? true : nil }
         }
+    }()
+    
+    lazy var seaMonsterTileCount: Int = {
+        return seaMonster.sum(of: { line -> Int in
+            line.count(where: { $0 == true })
+        })
     }()
     
     private func countSeaMonsters(in matrix: Matrix<Bool>) -> Int {

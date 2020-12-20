@@ -237,6 +237,7 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         if let dropRight = insets[.right] {
             newData = newData.map { Array($0.dropLast(dropRight)) }
         }
+        data = newData
     }
     
     public func withSlidingWindow(of size: Size, perform: (Array<Array<T>>) -> Void) {
