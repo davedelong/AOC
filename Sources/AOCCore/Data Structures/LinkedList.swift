@@ -53,6 +53,13 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
         elements.forEach(self.append)
     }
     
+    public convenience init<C: Collection>(_ collection: C) where C.Element == Element {
+        self.init()
+        for item in collection {
+            append(item)
+        }
+    }
+    
     public var isEmpty: Bool { return count == 0 }
     public var first: Element? { return head?.value }
     public var last: Element? { return tail?.value }
