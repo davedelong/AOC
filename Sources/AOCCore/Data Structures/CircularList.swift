@@ -52,6 +52,15 @@ public enum CircularList {
             return (before, after)
         }
         
+        public func removeAfter() -> T {
+            let value = cw!.value
+            let cw2 = cw!.cw!
+            
+            cw = cw2
+            cw2.ccw = self
+            return value
+        }
+        
         public func cw(_ amount: Int = 1) -> Node<T> {
             var c = self
             for _ in 0 ..< amount { c = c.cw }
