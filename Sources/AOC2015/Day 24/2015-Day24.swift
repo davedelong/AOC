@@ -9,6 +9,13 @@
 class Day24: Day {
     
     override func part1() -> String {
+        let weights = input.integers
+        let totalWeight = weights.sum
+        let groupWeight = totalWeight / 3
+        
+        let possibilities = weights.combinations().filter({ $0.sum == groupWeight })
+        print(possibilities)
+        
         return #function
     }
     
