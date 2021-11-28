@@ -8,19 +8,25 @@
 
 import Foundation
 
-public enum Heading: CaseIterable {
-    public static let up = Heading.north
-    public static let top = Heading.north
+public typealias Heading = Vector2
+
+public extension Vector2 {
+    static var cardinalHeadings: Array<Self> { [up, down, left, right] }
     
-    public static let down = Heading.south
-    public static let bottom = Heading.south
+    static var top: Vector2 { up }
+    static var bottom: Vector2 { down }
     
-    public static let left = Heading.west
-    public static let right = Heading.east
+    static var up: Vector2 { Vector2(x: 0, y: 1) }
+    static var down: Vector2 { Vector2(x: 0, y: -1) }
+    static var left: Vector2 { Vector2(x: -1, y: 0) }
+    static var right: Vector2 { Vector2(x: 1, y: 0) }
     
-    case north, south, west, east
+    static var north: Vector2 { up }
+    static var south: Vector2 { down }
+    static var east: Vector2 { right }
+    static var west: Vector2 { left }
     
-    public init?(character: Character) {
+    init?(character: Character) {
         switch character {
             case "U": self = .up
             case "D": self = .down
@@ -36,50 +42,51 @@ public enum Heading: CaseIterable {
         }
     }
     
-    public func turnLeft() -> Heading {
+    func turnLeft() -> Self {
         switch self {
             case .north: return .west
             case .west: return .south
             case .south: return .east
             case .east: return .north
+            default: fatalError("Do some trig")
         }
     }
-    public func turnRight() -> Heading {
+    
+    func turnRight() -> Heading {
         switch self {
             case .north: return .east
             case .east: return .south
             case .south: return .west
             case .west: return .north
+            default: fatalError("Do some trig")
         }
     }
-    public func turnAround() -> Heading {
-        switch self {
-            case .north: return .south
-            case .south: return .north
-            case .east: return .west
-            case .west: return .east
-        }
-    }
-    public func turn(left: Bool, times: Int) -> Heading {
+    
+    func turnAround() -> Heading { Vector2(x: -x, y: -y) }
+    
+    func turn(left: Bool, times: Int) -> Heading {
         if left {
             return turnLeft(times: times)
         } else {
             return turnRight(times: times)
         }
     }
-    public func turnLeft(times: Int) -> Heading {
+    
+    func turnLeft(times: Int) -> Heading {
         if times < 0 { return turnRight(times: -times) }
         let mod = times % 4
         if mod == 0 { return self }
         return (0 ..< mod).reduce(into: self) { h, _ in h = h.turnLeft() }
     }
-    public func turnRight(times: Int) -> Heading {
+    
+    func turnRight(times: Int) -> Heading {
         if times < 0 { return turnLeft(times: -times) }
         let mod = times % 4
         if mod == 0 { return self }
         return (0 ..< mod).reduce(into: self) { h, _ in h = h.turnRight() }
     }
-    public func turn(clockwise: UInt) -> Heading {
+    
+    func turn(clockwise: UInt) -> Heading {
         let times = clockwise % 4
         if times == 1 { return turnRight() }
         if times == 2 { return turnAround() }
@@ -87,7 +94,7 @@ public enum Heading: CaseIterable {
         return self
     }
     
-    public func turn(counterClockwise: UInt) -> Heading {
+    func turn(counterClockwise: UInt) -> Heading {
         let times = counterClockwise % 4
         if times == 1 { return turnLeft() }
         if times == 2 { return turnAround() }

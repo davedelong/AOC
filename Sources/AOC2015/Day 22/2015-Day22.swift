@@ -146,6 +146,10 @@ class Day22: Day {
         
     }
     
+    override func run() -> (String, String) {
+        return ("", "")
+    }
+    
     override func part1() -> String {
         let initial = Turn(player: Player(hitPoints: 50, mana: 500, armor: 0, shieldTime: 0, rechargeTime: 0),
                            boss: Boss(hitPoints: 58, damage: 9, poisonTime: 0),

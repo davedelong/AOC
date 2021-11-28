@@ -32,6 +32,7 @@ public extension Point2 {
             case .south: return Position(x: x, y: y+length)
             case .east: return Position(x: x+length, y: y)
             case .west: return Position(x: x-length, y: y)
+            default: fatalError()
         }
     }
     

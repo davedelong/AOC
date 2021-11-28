@@ -7,6 +7,10 @@
 //
 
 class Day24: Day {
+
+    override func run() -> (String, String) {
+        return ("", "")
+    }
     
     override func part1() -> String {
         let weights = input.integers

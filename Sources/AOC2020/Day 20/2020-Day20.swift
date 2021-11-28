@@ -65,6 +65,7 @@ class Day20: Day {
                 case .east: return matrix.data.compactMap(\.last)
                 case .south: return matrix.data.last!
                 case .west: return matrix.data.compactMap(\.first)
+                default: fatalError()
             }
         }
         

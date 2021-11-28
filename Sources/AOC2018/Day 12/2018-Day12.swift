@@ -98,6 +98,7 @@ class Day12: Day {
     }
     
     override func part2() -> String {
+        return #function
         let initial = "####..##.##..##..#..###..#....#.######..###########.#...#.##..####.###.#.###.###..#.####..#.#..##..#"
         let answer = run(input: initial, generations: 50_000_000_000)
         return "\(answer)"
