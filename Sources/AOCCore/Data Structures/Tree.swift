@@ -34,7 +34,7 @@ public class Node<T>: Hashable, CustomStringConvertible {
     public func addChild(_ node: Node<T>) {
         node.removeFromParent()
         node.parent = self
-        children.insert(self)
+        children.insert(node)
     }
     
     public func removeFromParent() {
