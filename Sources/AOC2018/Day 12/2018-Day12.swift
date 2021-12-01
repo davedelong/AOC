@@ -42,9 +42,9 @@ class Day12: Day {
     }
     
     lazy var fAndR: Dictionary<String, Character> = {
-        let r = Regex(pattern: #"([\.#]{5}) => ([\.#])"#)
+        let r = Regex(#"([\.#]{5}) => ([\.#])"#)
         let pieces = input.lines.raw.map { l -> (String, Character) in
-            let m = l.match(r)
+            let m = r.firstMatch(in: l)!
             return (m[1]!, m[2]!.first!)
         }
         return Dictionary(uniqueKeysWithValues: pieces)
@@ -98,6 +98,7 @@ class Day12: Day {
     }
     
     override func part2() -> String {
+        return #function
         let initial = "####..##.##..##..#..###..#....#.######..###########.#...#.##..####.###.#.###.###..#.####..#.#..##..#"
         let answer = run(input: initial, generations: 50_000_000_000)
         return "\(answer)"

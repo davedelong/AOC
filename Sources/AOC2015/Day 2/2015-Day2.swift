@@ -28,12 +28,12 @@ class Day2: Day {
     }
     
     lazy var boxes: Array<Box> = {
-        let regex = Regex(pattern: #"(\d+)x(\d+)x(\d+)"#)
+        let regex = Regex(#"(\d+)x(\d+)x(\d+)"#)
         let lines = input.lines.raw
         
         var boxes = Array<Box>()
         for line in lines {
-            let m = line.match(regex)
+            let m = regex.firstMatch(in: line)!
             boxes.append(Box(length: m.int(1)!, width: m.int(2)!, height: m.int(3)!))
         }
         return boxes

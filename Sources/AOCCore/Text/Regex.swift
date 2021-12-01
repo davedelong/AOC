@@ -16,8 +16,8 @@ public struct Regex {
         self.pattern = try! NSRegularExpression(pattern: "\(pattern)", options: options)
     }
     
-    public init(pattern: String, options: NSRegularExpression.Options = []) {
-        self.pattern = try? NSRegularExpression(pattern: pattern, options: options)
+    public init(pattern: String, options: NSRegularExpression.Options = []) throws {
+        self.pattern = try NSRegularExpression(pattern: pattern, options: options)
     }
     
     public func matches<S: StringProtocol>(_ string: S) -> Bool  {
@@ -28,7 +28,12 @@ public struct Regex {
         return pattern.numberOfMatches(in: str, options: [.withTransparentBounds], range: range) > 0
     }
     
+    @available(*, deprecated, renamed: "firstMatch(in:)")
     public func match<S: StringProtocol>(_ string: S) -> RegexMatch? {
+        return firstMatch(in: string)
+    }
+    
+    public func firstMatch<S: StringProtocol>(in string: S) -> RegexMatch? {
         guard let pattern = pattern else { return nil }
         
         let str = String(string)
@@ -106,18 +111,5 @@ public func ~= (left: Regex, right: String) -> Bool {
 }
 
 public func ~= (left: Regex, right: String) -> RegexMatch? {
-    return left.match(right)
-}
-
-public extension String {
-    
-    func match(_ pattern: String) -> RegexMatch {
-        let regex = Regex(pattern: pattern)
-        return regex.match(self)!
-    }
-    
-    func match(_ regex: Regex) -> RegexMatch {
-        return regex.match(self)!
-    }
-    
+    return left.firstMatch(in: right)
 }

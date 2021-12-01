@@ -12,9 +12,9 @@ class Day13: Day {
     typealias Rule = (String, String, Int)
     
     lazy var rules: Array<Rule> = {
-        let r = Regex(pattern: #"(.+?) would (gain|lose) (\d+) happiness units by sitting next to (.+?)\."#)
+        let r = Regex(#"(.+?) would (gain|lose) (\d+) happiness units by sitting next to (.+?)\."#)
         return input.lines.raw.map { l in
-            let m = l.match(r)
+            let m = r.firstMatch(in: l)!
             let person1 = m[1]!
             let multiplier = m[2] == "gain" ? 1 : -1
             let points = m.int(3)!

@@ -59,6 +59,7 @@ class Day12: Day {
                         case .south: w.y -= d
                         case .east: w.x += d
                         case .west: w.x -= d
+                        default: fatalError()
                     }
                 case .turn(let left, let d):
                     w = w.rotate(left: left, times: d)

@@ -9,7 +9,7 @@
 import XCTest
 @testable import AOC2020
 
-class Test2020: XCTestCase {
+class Test2020: AOCTestCase {
 
 	func testDay1() {
 		let d = Day1()

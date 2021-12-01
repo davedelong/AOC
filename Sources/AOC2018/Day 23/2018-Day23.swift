@@ -30,9 +30,9 @@ class Day23: Day {
     }
     
     lazy var bots: Array<Nanobot> = {
-        let r = Regex(pattern: #"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)"#)
+        let r = Regex(#"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)"#)
         return input.lines.raw.map { line -> Nanobot in
-            let m = line.match(r)
+            let m = r.firstMatch(in: line)!
             return Nanobot(x: m.int(1)!, y: m.int(2)!, z: m.int(3)!, r: m.int(4)!)
         }
     }()

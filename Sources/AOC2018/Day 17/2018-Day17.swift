@@ -25,10 +25,10 @@ class Day17: Day {
     }
     
     lazy var clayPositions: Set<Position> = {
-        let r = Regex(pattern: #"(x|y)=(\d+), (x|y)=(\d+)\.\.(\d+)"#)
+        let r = Regex(#"(x|y)=(\d+), (x|y)=(\d+)\.\.(\d+)"#)
         var positions = Set<Position>()
         for line in input.lines.raw {
-            let m = line.match(r)
+            let m = r.firstMatch(in: line)!
             let p1 = m[1]!
             let p2 = m[3]!
             

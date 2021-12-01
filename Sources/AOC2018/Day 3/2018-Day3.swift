@@ -14,9 +14,9 @@ class Day3: Day {
     }
     
     lazy var claims: Array<Claim> = {
-        let claimRegex = Regex(pattern: #"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$"#)
+        let claimRegex = Regex(#"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$"#)
         let claims = input.lines.raw.map { line -> Claim in
-            let match = line.match(claimRegex)
+            let match = claimRegex.firstMatch(in: line)!
             
             let x = match.int(2)!
             let y = match.int(3)!

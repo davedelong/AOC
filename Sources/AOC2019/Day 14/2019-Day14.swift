@@ -16,14 +16,14 @@ class Day14: Day {
     }
     
     private func parse(_ inputLines: Array<String>) -> Dictionary<String, Reaction> {
-        let regex = Regex(pattern: #"(\d+) ([A-Z]+)"#)
+        let regex = Regex(#"(\d+) ([A-Z]+)"#)
         var reactions = Dictionary<String, Reaction>()
         
         for line in inputLines {
             let parts = line.components(separatedBy: "=>")
             
             let inputMatches = regex.matches(in: parts[0])
-            let output = regex.match(parts[1])!
+            let output = regex.firstMatch(in: parts[1])!
             
             var inputs = Dictionary<String, Int>()
             for match in inputMatches {

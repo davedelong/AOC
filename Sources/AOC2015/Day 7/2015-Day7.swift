@@ -14,9 +14,9 @@ class Day7: Day {
     typealias Command = (Registers) -> Registers
     
     lazy var commands: Array<Command> = {
-        let r = Regex(pattern: #"(NOT (.+?)|(\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)"#)
+        let r = Regex(#"(NOT (.+?)|(\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)"#)
         return input.lines.raw.map { l -> Command in
-            let m = l.match(r)
+            let m = r.firstMatch(in: l)!
             let dst = m[8]!
             
             if let notRegister = m[2] {

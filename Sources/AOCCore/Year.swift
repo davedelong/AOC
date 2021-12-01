@@ -17,8 +17,20 @@ public class Year {
     }
     
     public func day(_ day: Int) -> Day {
-        let dayClass = objc_getClass("AOC\(year).Day\(day)")
-        return (dayClass as! NSObject.Type).init() as! Day
+        guard let dayClass = objc_getClass("AOC\(year).Day\(day)") else {
+            return Bad()
+        }
+        guard let dayType = dayClass as? NSObject.Type else {
+            return Bad()
+        }
+        
+        let instance = dayType.init()
+        
+        guard let day = instance as? Day else {
+            return Bad()
+        }
+        
+        return day
     }
     
     public func allDays() -> Array<Day> {

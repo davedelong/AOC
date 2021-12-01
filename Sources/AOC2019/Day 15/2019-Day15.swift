@@ -70,6 +70,7 @@ class Droid {
                     case .south: i.io = 2
                     case .west: i.io = 3
                     case .east: i.io = 4
+                    default: fatalError()
                 }
                 i.step()
             } else {

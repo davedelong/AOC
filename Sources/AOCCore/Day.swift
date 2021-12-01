@@ -6,20 +6,21 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-fileprivate let yearRegex = Regex(pattern: #"/AOC(\d+)/"#)
-fileprivate let dayRegex = Regex(pattern: #".+?Day (\d+).+?\.txt$"#)
-fileprivate let classNameRegex = Regex(pattern: #"AOC(\d+).Day(\d+)"#)
+fileprivate let yearRegex = Regex(#"/AOC(\d+)/"#)
+fileprivate let dayRegex = Regex(#".+?Day (\d+).+?\.txt$"#)
+fileprivate let classNameRegex = Regex(#"AOC(\d+).Day(\d+)"#)
 
 open class Day: NSObject {
     
     public static func day(for date: Date) -> Day {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(identifier: "America/New_York")!
-        let components = calendar.dateComponents([.year, .day], from: Date())
-        return day(for: components.year!, day: components.day!)
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        return day(for: components.year ?? 0, month: components.month ?? 0, day: components.day ?? 0)
     }
     
-    public static func day(for year: Int, day: Int) -> Day {
+    public static func day(for year: Int, month: Int, day: Int) -> Day {
+        guard month == 12 else { return Bad() }
         return Year(year).day(day)
     }
     
@@ -30,8 +31,8 @@ open class Day: NSObject {
         var files = Dictionary<Pair<Int>, String>()
         
         while let next = enumerator?.nextObject() as? URL {
-            guard let year = yearRegex.match(next.path)?.int(1) else { continue }
-            guard let day = dayRegex.match(next.path)?.int(1) else { continue }
+            guard let year = yearRegex.firstMatch(in: next.path)?.int(1) else { continue }
+            guard let day = dayRegex.firstMatch(in: next.path)?.int(1) else { continue }
             
             files[Pair(year, day)] = next.path
         }
@@ -48,14 +49,11 @@ open class Day: NSObject {
     
     public override init() {
         let name = String(cString: class_getName(type(of: self)))
-        let match = name.match(classNameRegex)
-        let year = match.int(1)!
-        let day = match.int(2)!
         
-        if let onDiskInputFile = Day.inputFiles[Pair(year, day)] {
-            self.input = Input(file: onDiskInputFile)
+        if let match = classNameRegex.firstMatch(in: name), let year = match[int: 1], let day = match[int: 2], let file = Day.inputFiles[Pair(year, day)] {
+            input = Input(file: file)
         } else {
-            self.input = Input("")
+            input = Input("")
         }
         super.init()
     }
@@ -67,4 +65,10 @@ open class Day: NSObject {
     }
     open func part1() -> String { fatalError("Implement \(#function)") }
     open func part2() -> String { fatalError("Implement \(#function)") }
+}
+
+internal class Bad: Day {
+    override func run() -> (String, String) {
+        return ("Invalid day", "Invalid day")
+    }
 }

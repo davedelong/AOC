@@ -34,7 +34,7 @@ class Day7: Day {
         
         var nodes = Dictionary<String, Bag>()
         for line in input.rawLines {
-            let name = nameRegex.match(line)![1]!
+            let name = nameRegex.firstMatch(in: line)![1]!
             let nameNode = nodes[name, inserting: Bag(name: name)]
             
             for match in bagRegex.matches(in: line) {

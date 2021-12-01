@@ -9,10 +9,10 @@
 class Day16: Day {
     
     lazy var sues: Array<Dictionary<String, Int>> = {
-        let r = Regex(pattern: #"Sue (\d+): (.+)"#)
-        let attrs = Regex(pattern: #"([a-z]+): (\d+)"#)
+        let r = Regex(#"Sue (\d+): (.+)"#)
+        let attrs = Regex(#"([a-z]+): (\d+)"#)
         return input.lines.raw.map { l -> Dictionary<String, Int> in
-            let m = l.match(r)
+            let m = r.firstMatch(in: l)!
             var info = Dictionary<String, Int>()
             info["sue"] = m.int(1)!
             

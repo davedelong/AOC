@@ -37,8 +37,8 @@ class Day5: Day {
     }
     
     override func part2() -> String {
-        let rule1 = Regex(pattern: #"(..).*\1"#) // a pair of characters repeated in the string
-        let rule2 = Regex(pattern: #"(.).\1"#) // a character repeated w/ a single character in between
+        let rule1 = Regex(#"(..).*\1"#) // a pair of characters repeated in the string
+        let rule2 = Regex(#"(.).\1"#) // a character repeated w/ a single character in between
         let niceCount = input.lines.raw.count { line -> Bool in
             return rule1.matches(line) && rule2.matches(line)
         }

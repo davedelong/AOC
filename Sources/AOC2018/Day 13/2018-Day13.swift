@@ -75,6 +75,7 @@ class Day13: Day {
                                 case .north: newHeading = heading.turnLeft()
                                 case .east: newHeading = heading.turnRight()
                                 case .west: newHeading = heading.turnRight()
+                                default: fatalError()
                             }
                         case "/":
                             switch heading {
@@ -82,6 +83,7 @@ class Day13: Day {
                                 case .north: newHeading = heading.turnRight()
                                 case .east: newHeading = heading.turnLeft()
                                 case .west: newHeading = heading.turnLeft()
+                                default: fatalError()
                             }
                         default:
                             break
