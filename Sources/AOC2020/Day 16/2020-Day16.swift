@@ -25,7 +25,7 @@ class Day16: Day {
     
     lazy var fields: Array<Field> = {
         return input.rawLines.compactMap { line -> Field? in
-            guard let m = field.match(line) else { return nil }
+            guard let m = field.firstMatch(in: line) else { return nil }
             return Field(name: m[1]!,
                          ranges: [
                             m[int: 2]!...m[int: 3]!,

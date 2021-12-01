@@ -22,7 +22,7 @@ class Day8: Day {
     private lazy var instructions: Array<Instruction> = {
         let r: Regex = #"(jmp|acc|nop) ([-+]?\d+)"#
         return input.rawLines.map { line -> Instruction in
-            let match = r.match(line)!
+            let match = r.firstMatch(in: line)!
             switch match[1]! {
                 case "jmp": return .jmp(match[int: 2]!)
                 case "acc": return .acc(match[int: 2]!)

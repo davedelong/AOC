@@ -6,9 +6,9 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-fileprivate let yearRegex = Regex(pattern: #"/AOC(\d+)/"#)
-fileprivate let dayRegex = Regex(pattern: #".+?Day (\d+).+?\.txt$"#)
-fileprivate let classNameRegex = Regex(pattern: #"AOC(\d+).Day(\d+)"#)
+fileprivate let yearRegex = Regex(#"/AOC(\d+)/"#)
+fileprivate let dayRegex = Regex(#".+?Day (\d+).+?\.txt$"#)
+fileprivate let classNameRegex = Regex(#"AOC(\d+).Day(\d+)"#)
 
 open class Day: NSObject {
     
@@ -31,8 +31,8 @@ open class Day: NSObject {
         var files = Dictionary<Pair<Int>, String>()
         
         while let next = enumerator?.nextObject() as? URL {
-            guard let year = yearRegex.match(next.path)?.int(1) else { continue }
-            guard let day = dayRegex.match(next.path)?.int(1) else { continue }
+            guard let year = yearRegex.firstMatch(in: next.path)?.int(1) else { continue }
+            guard let day = dayRegex.firstMatch(in: next.path)?.int(1) else { continue }
             
             files[Pair(year, day)] = next.path
         }
@@ -50,7 +50,7 @@ open class Day: NSObject {
     public override init() {
         let name = String(cString: class_getName(type(of: self)))
         
-        if let match = classNameRegex.match(name), let year = match[int: 1], let day = match[int: 2], let file = Day.inputFiles[Pair(year, day)] {
+        if let match = classNameRegex.firstMatch(in: name), let year = match[int: 1], let day = match[int: 2], let file = Day.inputFiles[Pair(year, day)] {
             input = Input(file: file)
         } else {
             input = Input("")

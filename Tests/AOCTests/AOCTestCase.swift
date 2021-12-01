@@ -29,7 +29,7 @@ open class AOCTestCase: XCTestCase {
             fatalError("Cannot match day number")
         }
         
-        return Day.day(for: year, day: day)
+        return Day.day(for: year, month: 12, day: day)
     }
     
 }

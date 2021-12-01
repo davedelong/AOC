@@ -25,7 +25,7 @@ class Day24: Day {
             static let regex: Regex = {
                 let values = allCases.map { $0.rawValue }
                 let raw = values.joined(separator: "|")
-                return Regex(pattern: #"("# + raw + ")")
+                return try! Regex(pattern: #"("# + raw + ")")
             }()
             case slashing
             case bludgeoning
@@ -85,7 +85,7 @@ class Day24: Day {
         var currentKind = Group.Kind.immuneSystem
         var currentOrder = 1
         
-        let r = Regex(pattern: #"(\d+) units each with (\d+) hit points( \((.+?)\))? with an attack that does (\d+) (.+?) damage at initiative (\d+)"#)
+        let r = Regex(#"(\d+) units each with (\d+) hit points( \((.+?)\))? with an attack that does (\d+) (.+?) damage at initiative (\d+)"#)
         
         for line in input.lines.raw {
             if line == "Immune System:" {
@@ -96,7 +96,7 @@ class Day24: Day {
                 currentOrder = groups.count { $0.kind == currentKind } + 1
             }
             
-            guard let m = r.match(line) else { continue }
+            guard let m = r.firstMatch(in: line) else { continue }
             var weak = Set<Group.Attack>()
             var immune = Set<Group.Attack>()
             if let vulnerabilities = m[4] {

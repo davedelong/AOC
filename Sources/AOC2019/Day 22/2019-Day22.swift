@@ -43,10 +43,10 @@ class Day22: Day {
          cut 8530
          deal with increment 35
          */
-        let r = Regex(pattern: #"((cut (-?\d+))|(deal (into new stack|with increment (\d+))))"#)
+        let r = Regex(#"((cut (-?\d+))|(deal (into new stack|with increment (\d+))))"#)
         var instructions = Array<Instruction>()
         for line in input.lines {
-            let match = line.raw.match(r)
+            let match = r.firstMatch(in: line.raw)!
             if let cut = match.int(3) {
                 instructions.append(.cut(cut))
             } else if let inc = match.int(6) {

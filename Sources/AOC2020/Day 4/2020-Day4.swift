@@ -18,7 +18,7 @@ class Day4: Day {
         let passports = passportChunks.map { chunk -> Passport in
             let pairs = chunk
                 .components(separatedBy: .whitespacesAndNewlines)
-                .compactMap { r.match($0) }
+                .compactMap { r.firstMatch(in: $0) }
                 .map { ($0[1]!, $0[2]!) }
             return Dictionary(uniqueKeysWithValues: pairs)
         }

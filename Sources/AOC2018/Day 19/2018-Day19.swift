@@ -95,9 +95,9 @@ class Day19: Day {
     lazy var instructions: Array<Instruction> = {
         let codes = Opcode.all.keyedBy { $0.name }
         
-        let r = Regex(pattern: #"(.+?) (\d+) (\d+) (\d+)"#)
+        let r = Regex(#"(.+?) (\d+) (\d+) (\d+)"#)
         return input.lines.raw.compactMap { line -> Instruction? in
-            guard let m = r.match(line) else { return nil }
+            guard let m = r.firstMatch(in: line) else { return nil }
             guard let code = codes[m[1]!] else { return nil }
             return Instruction(opcode: code, arguments: [m.int(2)!, m.int(3)!, m.int(4)!])
         }

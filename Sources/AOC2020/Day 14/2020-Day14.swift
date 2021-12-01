@@ -22,12 +22,12 @@ class Day14: Day {
         }
         
         let ops = input.rawLines.map { line -> Op in
-            if let m = maskR.match(line) {
+            if let m = maskR.firstMatch(in: line) {
                 let line = m[1]!
                 let ones = Int(bits: line.map { $0 == "1" })
                 let zeros = Int(bits: line.map { $0 == "0" })
                 return .mask(ones: ones, zeros: zeros)
-            } else if let m = assignR.match(line) {
+            } else if let m = assignR.firstMatch(in: line) {
                 return .assign(m[int: 1]!, m[int: 2]!)
             } else {
                 fatalError()
@@ -57,10 +57,10 @@ class Day14: Day {
         }
         
         let ops = input.rawLines.map { line -> Op in
-            if let m = maskR.match(line) {
+            if let m = maskR.firstMatch(in: line) {
                 let line = m[1]!
                 return .mask(line.map { $0 == "1" ? true : ($0 == "0" ? false : nil) })
-            } else if let m = assignR.match(line) {
+            } else if let m = assignR.firstMatch(in: line) {
                 return .assign(m[int: 1]!, m[int: 2]!)
             } else {
                 fatalError()

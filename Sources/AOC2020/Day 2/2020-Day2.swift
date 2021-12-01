@@ -10,7 +10,7 @@ class Day2: Day {
     let r: Regex = #"(\d+)-(\d+) (.): (.+)"#
 
     override func run() -> (String, String) {
-        let lines = input.rawLines.map { r.match($0)! }
+        let lines = input.rawLines.map { r.firstMatch(in: $0)! }
         
         var p1 = 0
         var p2 = 0

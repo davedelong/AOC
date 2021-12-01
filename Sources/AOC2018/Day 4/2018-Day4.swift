@@ -14,14 +14,14 @@ class Day4: Day {
         // - the value is a 60-element array (minutes in the hour) where the value at an array position
         //   is the number of times that guard was sleeping at that minute
         
-        let regex = Regex(pattern: #"\[.+?(\d{2})\] (Guard #(\d+) begins shift|falls asleep|wakes up)"#)
+        let regex = Regex(#"\[.+?(\d{2})\] (Guard #(\d+) begins shift|falls asleep|wakes up)"#)
         
         var shifts = Dictionary<Int, Array<Int>>()
         
         var currentGuard = 0
         var fallsAsleep: Int?
         for line in input.lines.raw {
-            let match = line.match(regex)
+            let match = regex.firstMatch(in: line)!
             let minute = match.int(1)!
             
             let event = match[2]!

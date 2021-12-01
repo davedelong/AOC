@@ -24,9 +24,7 @@ public class Year {
             return Bad()
         }
         
-        guard let instance = class_createInstance(dayType, 0) else {
-            return Bad()
-        }
+        let instance = dayType.init()
         
         guard let day = instance as? Day else {
             return Bad()

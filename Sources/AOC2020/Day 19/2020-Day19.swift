@@ -82,7 +82,7 @@ class Day19: Day {
 
     override func part1() -> String {
         let r = "^" + self.buildRegexPattern(0, part2: false) + "$"
-        let regex = Regex(pattern: r)
+        let regex = try! Regex(pattern: r)
         let inputs = input.raw.split(on: "\n\n")[1].split(on: "\n")
         
         let count = inputs.count(where: { regex.matches($0) })
@@ -94,7 +94,7 @@ class Day19: Day {
         rawRules[11] = .either([42, 31], [42, 11, 31])
         
         let r = "^" + self.buildRegexPattern(0, part2: true) + "$"
-        let regex = Regex(pattern: r)
+        let regex = try! Regex(pattern: r)
         let inputs = input.raw.split(on: "\n\n")[1].split(on: "\n")
         
         let count = inputs.count(where: { regex.matches($0) })

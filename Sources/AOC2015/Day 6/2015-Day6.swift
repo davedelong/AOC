@@ -16,9 +16,9 @@ class Day6: Day {
     }
     
     lazy var commands: Array<Command> = {
-        let r = Regex(pattern: #"(toggle|turn on|turn off) (\d+),(\d+) through (\d+),(\d+)"#)
+        let r = Regex(#"(toggle|turn on|turn off) (\d+),(\d+) through (\d+),(\d+)"#)
         return input.lines.raw.map { l -> Command in
-            let m = l.match(r)
+            let m = r.firstMatch(in: l)!
             let p1Action: (Bit) -> Bit
             let p2Action: (Int) -> Int
             
