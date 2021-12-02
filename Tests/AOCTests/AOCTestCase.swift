@@ -20,12 +20,12 @@ open class AOCTestCase: XCTestCase {
         }
         
         let testClass = String(describing: type(of: self))
-        guard let year = yearRegex.match(testClass)?[int: 1] else {
+        guard let year = yearRegex.firstMatch(in: testClass)?[int: 1] else {
             fatalError("Cannot match year name")
         }
         
         let testSelector = NSStringFromSelector(invocation.selector)
-        guard let day = dayRegex.match(testSelector)?[int: 1] else {
+        guard let day = dayRegex.firstMatch(in: testSelector)?[int: 1] else {
             fatalError("Cannot match day number")
         }
         

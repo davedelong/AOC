@@ -21,8 +21,8 @@ class Test2021: AOCTestCase {
     func testDay2() {
         let (p1, p2) = day.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "1524750")
+        XCTAssertEqual(p2, "1592426537")
     }
 
     func testDay3() {
