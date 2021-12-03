@@ -33,4 +33,28 @@ public extension Dictionary where Value == Int {
         }
     }
     
+    func mostCommon() -> Key? {
+        return self.max(by: { $0.value >= $1.value })?.key
+    }
+    
+    func leastCommon() -> Key? {
+        return self.min(by: { $0.value <= $1.value })?.key
+    }
+    
+    func mostCommon(preferring tieBreaker: Key) -> Key {
+        guard let maxCount = self.values.max() else { return tieBreaker }
+        let keys = self.filter { $0.value == maxCount }.map(\.key)
+        if keys.count == 0 { return tieBreaker }
+        if keys.count == 1 { return keys[0] }
+        return tieBreaker
+    }
+    
+    func leastCommon(preferring tieBreaker: Key) -> Key {
+        guard let minCount = self.values.min() else { return tieBreaker }
+        let keys = self.filter { $0.value == minCount }.map(\.key)
+        if keys.count == 0 { return tieBreaker }
+        if keys.count == 1 { return keys[0] }
+        return tieBreaker
+    }
+    
 }
