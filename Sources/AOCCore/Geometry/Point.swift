@@ -17,7 +17,7 @@ public protocol PointProtocol: Hashable, CustomStringConvertible {
 public extension PointProtocol {
     
     var description: String {
-        return "(" + components.map { $0.description }.joined(separator: ", ") + ")"
+        return "(" + components.map(\.description).joined(separator: ", ") + ")"
     }
     
 }

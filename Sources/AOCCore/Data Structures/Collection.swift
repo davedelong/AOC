@@ -294,6 +294,14 @@ public extension RandomAccessCollection {
     
 }
 
+public extension RandomAccessCollection where Element: RandomAccessCollection {
+    
+    subscript(vertical index: Element.Index) -> LazyMapCollection<Self, Element.Element> {
+        return lazy.map { $0[index] }
+    }
+    
+}
+
 public extension Array {
     
     init(count: Int, elementProducer: () -> Element) {

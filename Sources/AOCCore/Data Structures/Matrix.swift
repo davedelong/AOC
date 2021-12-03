@@ -6,16 +6,6 @@
 //  Copyright © 2017 Dave DeLong. All rights reserved.
 //
 
-public enum Bit {
-    case on
-    case off
-    
-    public func toggled() -> Bit {
-        if self == .on { return .off }
-        return .on
-    }
-}
-
 public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     
     public static func ==(lhs: Matrix, rhs: Matrix) -> Bool {

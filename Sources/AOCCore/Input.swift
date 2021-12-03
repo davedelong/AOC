@@ -22,6 +22,7 @@ public protocol StringInput {
     var lines: Array<Line> { get }
     var words: Array<Word> { get }
     var csvWords: Array<Word> { get }
+    var bits: Array<Bit> { get }
     func words(separatedBy: CharacterSet) -> Array<Word>
     func words(separatedBy: String) -> Array<Word>
 }
@@ -33,6 +34,7 @@ public final class Input: StringInput {
     public let raw: String
     public lazy var integer: Int? = { Int(raw) }()
     public lazy var characters: Array<Character> = { Array(raw) }()
+    public lazy var bits: Array<Bit> = { raw.map { Bit($0) } }()
     
     public lazy var trimmed: Input = { Input(raw.trimmingCharacters(in: .whitespacesAndNewlines)) }()
     public lazy var lines: Array<Line> = { return raw.components(separatedBy: .newlines).map { Line($0) } }()
@@ -62,6 +64,7 @@ public final class Line: StringInput {
     public let raw: String
     public lazy var integer: Int? = { Int(raw) }()
     public lazy var characters: Array<Character> = { Array(raw) }()
+    public lazy var bits: Array<Bit> = { raw.map { Bit($0) } }()
     
     public lazy var trimmed: Line = { Line(raw.trimmingCharacters(in: .whitespacesAndNewlines)) }()
     public var lines: Array<Line> { return [self] }
@@ -88,6 +91,7 @@ public final class Word: StringInput {
     public let raw: String
     public lazy var integer: Int? = { Int(raw) }()
     public lazy var characters: Array<Character> = { Array(raw) }()
+    public lazy var bits: Array<Bit> = { raw.map { Bit($0) } }()
     
     public lazy var trimmed: Word = { Word(raw.trimmingCharacters(in: .whitespacesAndNewlines)) }()
     public lazy var lines: Array<Line> = { return [Line(raw)] }()
@@ -101,6 +105,7 @@ extension Collection where Element: StringInput {
     public var raw: Array<String> { return map { $0.raw } }
     public var integers: Array<Int> { return map { $0.integer! } }
     public var characters: Array<Array<Character>> { return map { $0.characters } }
+    public var bits: Array<Array<Bit>> { map { $0.bits } }
     
     public var trimmed: Array<Element> { return map { $0.trimmed } }
     public var lines: Array<Array<Line>> { return map { $0.lines } }
@@ -121,4 +126,5 @@ extension Collection where Element: Collection, Element.Element: StringInput {
 
 extension Collection where Element == Character {
     public var integers: Array<Int> { return map { Int("\($0)")! } }
+    public var bits: Array<Bit> { map { Bit($0) } }
 }
