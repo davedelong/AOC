@@ -10,7 +10,7 @@ public struct Regex {
     
     public static let integers: Regex = #"(-?\d+)"#
     
-    private let pattern: NSRegularExpression?
+    internal let pattern: NSRegularExpression
     
     public init(_ pattern: StaticString, options: NSRegularExpression.Options = []) {
         self.pattern = try! NSRegularExpression(pattern: "\(pattern)", options: options)
@@ -21,8 +21,6 @@ public struct Regex {
     }
     
     public func matches<S: StringProtocol>(_ string: S) -> Bool  {
-        guard let pattern = pattern else { return false }
-        
         let str = String(string)
         let range = NSRange(location: 0, length: str.utf16.count)
         return pattern.numberOfMatches(in: str, options: [.withTransparentBounds], range: range) > 0
@@ -34,8 +32,6 @@ public struct Regex {
     }
     
     public func firstMatch<S: StringProtocol>(in string: S) -> RegexMatch? {
-        guard let pattern = pattern else { return nil }
-        
         let str = String(string)
         let range = NSRange(location: 0, length: str.utf16.count)
         guard let match = pattern.firstMatch(in: str, options: [.withTransparentBounds], range: range) else { return nil }
@@ -47,7 +43,7 @@ public struct Regex {
         
         let str = String(string)
         let range = NSRange(location: 0, length: str.utf16.count)
-        pattern?.enumerateMatches(in: str, options: [], range: range) { (result, flags, stop) in
+        pattern.enumerateMatches(in: str, options: [], range: range) { (result, flags, stop) in
             if let result = result {
                 let match = RegexMatch(result: result, source: str as NSString)
                 matches.append(match)
@@ -62,6 +58,67 @@ extension Regex: ExpressibleByStringLiteral {
     public init(stringLiteral value: StaticString) { self.init(value) }
     public init(extendedGraphemeClusterLiteral value: StaticString) { self.init(value) }
     public init(unicodeScalarLiteral value: StaticString) { self.init(value) }
+}
+
+extension Regex: ExpressibleByStringInterpolation {
+    
+    public class StringInterpolation: StringInterpolationProtocol {
+        public typealias StringLiteralType = StaticString
+        
+        internal enum Segment {
+            case literal(String)
+            case keyedRegex(String, Regex)
+            case unkeyedRegex(Regex)
+        }
+        
+        internal var segments = Array<Segment>()
+        
+        public required init(literalCapacity: Int, interpolationCount: Int) { }
+        
+        public func appendLiteral(_ literal: StaticString) {
+            let string = literal.description
+            if string.isEmpty == false { segments.append(.literal(string)) }
+        }
+        
+        public func appendInterpolation<T: RegexDecodable>(_ type: T.Type) {
+            segments.append(.unkeyedRegex(T.regex))
+        }
+        
+        public var appendInterpolation: Trampoline { Trampoline(self) }
+        
+        @dynamicCallable
+        public class Trampoline {
+            private let interpolation: StringInterpolation
+            fileprivate init(_ interpolation: StringInterpolation) {
+                self.interpolation = interpolation
+            }
+            
+            public func dynamicallyCall<T: RegexDecodable>(withKeywordArguments args: KeyValuePairs<String, T.Type>) {
+                for arg in args {
+                    interpolation.segments.append(.keyedRegex(arg.key, arg.value.regex))
+                }
+            }
+            
+            public func dynamicallyCall<T: CaseIterable>(withKeywordArguments args: KeyValuePairs<String, T.Type>) where T: RawRepresentable, T.RawValue == String {
+                for arg in args {
+                    interpolation.segments.append(.keyedRegex(arg.key, arg.value.regex))
+                }
+            }
+        }
+    }
+    
+    public init(stringInterpolation: StringInterpolation) {
+        let pattern = stringInterpolation.segments.map { segment -> String in
+            switch segment {
+                case .literal(let s): return s.regexEscaped
+                case .unkeyedRegex(let r): return "(" + r.pattern.pattern + ")"
+                case .keyedRegex(let name, let r): return "(?<" + name + ">" + r.pattern.pattern + ")"
+            }
+        }.joined()
+        
+        try! self.init(pattern: pattern)
+    }
+    
 }
 
 public struct RegexMatch {

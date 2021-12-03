@@ -8,7 +8,19 @@
 
 import Foundation
 
+private let specialRegexCharacters = Set(#".[]{}()\|^$,=<>?*+!"#)
+
 public extension String {
+    
+    var regexEscaped: String {
+        return String(flatMap { char -> [Character] in
+            if specialRegexCharacters.contains(char) {
+                return [char, "\\"]
+            } else {
+                return [char]
+            }
+        })
+    }
     
     func locate(_ substring: String) -> Array<Range<String.Index>> {
         
