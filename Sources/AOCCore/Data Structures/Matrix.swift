@@ -47,6 +47,10 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         return data[r]
     }
     
+    public func col(_ c: Int) -> Array<T> {
+        return Array(data[vertical: c])
+    }
+    
     public var description: String {
         return "[" + data.map({ row -> String in
             "[" + row.map { String(describing: $0) }.joined(separator: " ") + "]"
@@ -89,6 +93,15 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     public func count(where matches: (T) -> Bool) -> Int {
         return data.reduce(0) { (soFar, row) -> Int in
             return soFar + row.count(where: matches)
+        }
+    }
+    
+    public func diagonal(positive: Bool) -> Array<T> {
+        let start = Position(row: positive ? rowCount - 1 : 0, column: 0)
+        let heading = Vector2(row: positive ? -1 : 1, column: 1)
+        
+        return (0 ..< min(rowCount, colCount)).map { offset in
+            return self[start + (heading * offset)]
         }
     }
     
@@ -248,6 +261,42 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             }
         }
         
+    }
+    
+    public func position(of element: T) -> Position? {
+        for r in 0 ..< rowCount {
+            for c in 0 ..< colCount {
+                if self[r, c] == element { return Position(row: r, column: c) }
+            }
+        }
+        return nil
+    }
+    
+    public func hasBingo() -> Bool {
+        for r in 0 ..< rowCount {
+            let row = self.row(r)
+            if row.allSatisfy({ $0 == row[0] }) { return true }
+        }
+        for c in 0 ..< colCount {
+            let col = self.col(c)
+            if col.allSatisfy({ $0 == col[0] }) { return true }
+        }
+        
+//        let dP = self.diagonal(positive: true)
+//        if dP.allSatisfy({ $0 == dP[0] }) { return true }
+//        
+//        let dN = self.diagonal(positive: false)
+//        if dN.allSatisfy({ $0 == dN[0] }) { return true }
+//        
+        return false
+    }
+    
+    public func replaceAll(_ element: T, with newValue: T) {
+        for r in 0 ..< rowCount {
+            for c in 0 ..< colCount {
+                if self[r, c] == element { self[r, c] = newValue }
+            }
+        }
     }
 }
 
