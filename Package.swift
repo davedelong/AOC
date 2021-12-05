@@ -2,6 +2,7 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import Foundation
 
 let package = Package(
     name: "Advent of Code",
@@ -26,13 +27,13 @@ let package = Package(
         
         .target(name: "AOC", dependencies: ["AOCCore", "AOC2021", "AOC2020", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
         
-        .target(name: "AOC2021", dependencies: ["AOCCore"]),
-        .target(name: "AOC2020", dependencies: ["AOCCore", "MathParser"]),
-        .target(name: "AOC2019", dependencies: ["AOCCore"]),
-        .target(name: "AOC2018", dependencies: ["AOCCore"]),
-        .target(name: "AOC2017", dependencies: ["AOCCore"]),
-        .target(name: "AOC2016", dependencies: ["AOCCore"]),
-        .target(name: "AOC2015", dependencies: ["AOCCore"]),
+        .target(name: "AOC2021", dependencies: ["AOCCore"], exclude: inputFiles(for: 2021)),
+        .target(name: "AOC2020", dependencies: ["AOCCore", "MathParser"], exclude: inputFiles(for: 2020)),
+        .target(name: "AOC2019", dependencies: ["AOCCore"], exclude: inputFiles(for: 2019)),
+        .target(name: "AOC2018", dependencies: ["AOCCore"], exclude: inputFiles(for: 2018)),
+        .target(name: "AOC2017", dependencies: ["AOCCore"], exclude: inputFiles(for: 2017)),
+        .target(name: "AOC2016", dependencies: ["AOCCore"], exclude: inputFiles(for: 2016)),
+        .target(name: "AOC2015", dependencies: ["AOCCore"], exclude: inputFiles(for: 2015)),
         
         .target(name: "AOCCore", dependencies: [
             .product(name: "Algorithms", package: "swift-algorithms"),
@@ -42,3 +43,15 @@ let package = Package(
         .testTarget(name: "AOCTests", dependencies: ["AOC"]),
     ]
 )
+
+// this eagerly excludes all possible input files from the target
+// however, there's no way to test if the file actually exists, because
+// there's no way to get the source root.
+// so either we have warnings for "extraneous input.txt file" or
+// we have warnings for "extraneous input.txt exclusion" or
+// we manually list out everything.
+//
+// no good options
+func inputFiles(for year: Int) -> Array<String> {
+    return (1...25).map { "Day \($0)/input.txt" }
+}
