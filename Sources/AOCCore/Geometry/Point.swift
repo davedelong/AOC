@@ -30,7 +30,7 @@ public extension PointProtocol {
         
         let remainder = all(between: lower.dropFirst(), and: upper.dropFirst())
         
-        let range = l...u
+        let range = min(l, u)...max(l, u)
         if remainder.isEmpty { return range.map { [$0] } }
         
         return range.flatMap { prefix -> Array<Array<Int>> in
