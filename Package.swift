@@ -44,14 +44,12 @@ let package = Package(
     ]
 )
 
-// this eagerly excludes all possible input files from the target
-// however, there's no way to test if the file actually exists, because
-// there's no way to get the source root.
-// so either we have warnings for "extraneous input.txt file" or
-// we have warnings for "extraneous input.txt exclusion" or
-// we manually list out everything.
-//
-// no good options
 func inputFiles(for year: Int) -> Array<String> {
-    return (1...25).map { "Day \($0)/input.txt" }
+    let sourceDirectory = URL(fileURLWithPath: #file).deletingLastPathComponent()
+    return (1...25).compactMap { day in
+        let fragment = "Day \(day)/input.txt"
+        let path = sourceDirectory.appendingPathComponent("Sources/AOC\(year)/\(fragment)")
+        if FileManager.default.fileExists(atPath: path.path) { return fragment }
+        return nil
+    }
 }
