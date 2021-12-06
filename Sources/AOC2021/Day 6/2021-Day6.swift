@@ -26,7 +26,7 @@ class Day6: Day {
             fish[int, default: 0] += 1
         }
         
-        for day in 0 ..< days {
+        for _ in 0 ..< days {
             var newFish = Dictionary<Int, Int>()
             for (day, count) in fish {
                 var daysLeft = day-1
