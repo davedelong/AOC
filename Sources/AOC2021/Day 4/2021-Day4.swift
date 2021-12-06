@@ -30,7 +30,7 @@ class Day4: Day {
     }()
 
     override func part1() -> String {
-        var b = boards.map { $0.copy() }
+        let b = boards.map { $0.copy() }
         
         for n in numbers {
             for board in b {

@@ -12,6 +12,10 @@ public typealias CountedSet<T: Hashable> = Dictionary<T, Int>
 
 public extension Dictionary where Value == Int {
     
+    init<C: Collection>(_ other: C) where C.Element == Key {
+        self.init(counting: other)
+    }
+    
     init<C: Collection>(counting: C) where C.Element == Key {
         self.init(minimumCapacity: counting.count)
         for item in counting {

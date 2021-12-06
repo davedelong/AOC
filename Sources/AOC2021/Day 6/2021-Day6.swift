@@ -6,6 +6,8 @@
 //  Copyright © 2021 Dave DeLong. All rights reserved.
 //
 
+import AOCCore
+
 class Day6: Day {
 
     override func run() -> (String, String) {
@@ -21,13 +23,10 @@ class Day6: Day {
     }
     
     func countFish(_ days: Int) -> Int {
-        var fish = Dictionary<Int, Int>()
-        for int in input.integers {
-            fish[int, default: 0] += 1
-        }
+        var fish = CountedSet(input.integers)
         
         for _ in 0 ..< days {
-            var newFish = Dictionary<Int, Int>()
+            var newFish = CountedSet<Int>()
             for (day, count) in fish {
                 var daysLeft = day-1
                 if daysLeft < 0 {
