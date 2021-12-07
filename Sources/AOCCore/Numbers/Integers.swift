@@ -87,3 +87,7 @@ public func gcd<I: FixedWidthInteger>(_ m: I, _ n: I) -> I {
     }
     return b
 }
+
+public func triangular(_ number: Int) -> Int {
+    return (number * (number + 1)) / 2
+}

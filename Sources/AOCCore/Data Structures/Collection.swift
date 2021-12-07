@@ -145,6 +145,15 @@ public extension Sequence where Element: Numeric {
     
 }
 
+public extension Collection where Element: BinaryInteger {
+    
+    var average: Double {
+        guard count > 0 else { return .nan }
+        return Double(sum) / Double(count)
+    }
+    
+}
+
 public extension Sequence {
     
     func sum<N: Numeric>(of element: (Element) -> N) -> N {
