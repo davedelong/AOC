@@ -9,6 +9,14 @@ import Foundation
 
 public extension Set {
     
+    static func + (lhs: Self, rhs: Self) -> Self {
+        return lhs.union(rhs)
+    }
+    
+    static func - (lhs: Self, rhs: Self) -> Self {
+        return lhs.subtracting(rhs)
+    }
+    
     func intersects(_ other: Set<Element>) -> Bool {
         return self.intersection(other).isNotEmpty
     }
