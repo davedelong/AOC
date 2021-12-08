@@ -19,11 +19,13 @@ class Day8: Day {
             return slice.map { Digit($0) }
         }
         
-        let ones = words.count(where: { $0.count == 2 })
-        let fours = words.count(where: { $0.count == 4 })
-        let sevens = words.count(where: { $0.count == 3 })
-        let eights = words.count(where: { $0.count == 7 })
-        return "\(ones + fours + sevens + eights)"
+        let count = words.count(where: { word in
+            return word.count == 2 ||   // one
+                   word.count == 4 ||   // four
+                   word.count == 3 ||   // seven
+                   word.count == 7      // eight
+        })
+        return "\(count)"
     }
 
     override func part2() -> String {
