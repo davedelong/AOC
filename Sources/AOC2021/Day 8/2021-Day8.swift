@@ -68,9 +68,7 @@ class Day8: Day {
      */
     
     func deduce(signals: Array<Digit>, output: Array<Digit>) -> Int {
-        var maps = Dictionary<Digit, Int>()
-        
-        var remaining = Set(signals + output)
+        var remaining = Set(signals)
         
         // every input has one of these
         let one = remaining.first(where: { $0.count == 2 })!
@@ -86,29 +84,30 @@ class Day8: Day {
         var fPossible = Set("abcdefg")
         var gPossible = Set("abcdefg")
         
-        maps[one] = 1
         remaining.remove(one)
-        
-        maps[four] = 4
         remaining.remove(four)
-        
-        maps[seven] = 7
         remaining.remove(seven)
-        
-        maps[eight] = 8
         remaining.remove(eight)
         
         aPossible = seven.subtracting(one) // DONE
         bPossible = four.subtracting(one)
         dPossible = four.subtracting(one)
         
+        // add the "a" line to the four digit
+        // use that to search for the remaining digit that has all those segments
+        // that's the nine digit
         let nineSearch = four.union(aPossible)
         let nine = remaining.first(where: { $0.isSuperset(of: nineSearch) })!
         remaining.remove(nine)
-        maps[nine] = 9
+        
+        // the segment that was missing from the search set is the "g" segment
         gPossible = nine.subtracting(nineSearch) // DONE
+        
+        // the segment that eight has that nine doesn't is the "e" segment
         ePossible = eight.subtracting(nine) // DONE
         
+        // the remaining digit that has one of the possible one segments missing
+        // is the six digit
         var _six: Digit?
         for cf in one {
             let sixSearch = eight.subtracting([cf])
@@ -119,33 +118,41 @@ class Day8: Day {
         }
         let six = _six!
         remaining.remove(six)
-        maps[six] = 6
         
+        // the thing that was missing from the six is the "c" segment
         cPossible = eight.subtracting(six) // DONE
-        fPossible = fPossible.subtracting(cPossible) // DONE
+        
+        // the other part of the one digit is the "f" segment
+        fPossible = one.subtracting(cPossible) // DONE
         
         // missing b and d at this point
         assert(bPossible.count == 2 && bPossible == dPossible)
+        
+        // subtract one of the two possibilities of b/d from eight
+        // the remaining digit that matches is zero
         var _zero: Digit?
         for bd in bPossible {
             let zeroMatch = eight.subtracting([bd])
             if let zero = remaining.first(where: { $0 == zeroMatch }) {
+                
+                // the thing that was used to find zero is the missing "d" segment
                 dPossible = [bd] // DONE
+                // and the other half of the b/d pair is the "b" segment
                 bPossible = bPossible.subtracting(dPossible) // DONE
                 _zero = zero; break
             }
         }
         let zero = _zero!
         remaining.remove(zero)
-        maps[zero] = 0
         
-        fPossible = eight.subtracting(aPossible + bPossible + cPossible + dPossible + ePossible + gPossible)
-        
+        // at this point, we've identified every segment!
+        // just to make sure...
         [aPossible, bPossible, cPossible, dPossible, ePossible, fPossible, gPossible].forEach {
             assert($0.count == 1)
         }
         
-        let digits = [
+        // using the definitions above, we now know what each digit is made of:
+        let digitSegments = [
             aPossible + bPossible + cPossible + ePossible + fPossible + gPossible: 0,
             cPossible + fPossible: 1,
             aPossible + cPossible + dPossible + ePossible + gPossible: 2,
@@ -158,8 +165,9 @@ class Day8: Day {
             aPossible + bPossible + cPossible + dPossible + fPossible + gPossible: 9
         ]
         
-        let something = output.map { digits[$0]! }
-        return Int(digits: something)
+        // figure out what the four-digit number is
+        let digits = output.map { digitSegments[$0]! }
+        return Int(digits: digits)
     }
 
 }
