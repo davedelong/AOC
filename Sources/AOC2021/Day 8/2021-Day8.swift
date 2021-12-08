@@ -42,14 +42,6 @@ class Day8: Day {
     }
     
     /*
-     
-     
-     
-     
-     
-     
-     
-     
      0:      1:      2:      3:      4:
     aaaa    ....    aaaa    aaaa    ....
    b    c  .    c  .    c  .    c  b    c
@@ -91,11 +83,13 @@ class Day8: Day {
         remaining.remove(seven)
         remaining.remove(eight)
         
+        // the segment that seven has but one doesn't is the "a" segment
         aPossible = seven.subtracting(one) // DONE
+        
         bPossible = four.subtracting(one)
         dPossible = four.subtracting(one)
         
-        // add the "a" line to the four digit
+        // add the "a" segment to the four digit
         // use that to search for the remaining digit that has all those segments
         // that's the nine digit
         let nineSearch = four.union(aPossible)
