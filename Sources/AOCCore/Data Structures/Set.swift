@@ -25,6 +25,12 @@ public extension Set {
         return self.intersection(other).isNotEmpty
     }
     
+    init<C: Collection>(unioning: Array<C>) where C.Element == Element {
+        self.init()
+        for other in unioning {
+            self.formUnion(other)
+        }
+    }
 }
 
 public extension Collection where Element: Collection, Element.Element: Hashable {

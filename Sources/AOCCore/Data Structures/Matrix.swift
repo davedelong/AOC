@@ -130,6 +130,17 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         set { data[coordinate.row][coordinate.col] = newValue }
     }
     
+    public subscript(safe coordinate: Position) -> T? {
+        get {
+            guard coordinate.row < data.count else { return nil }
+            guard coordinate.row >= 0 else { return nil }
+            let row = data[coordinate.row]
+            guard coordinate.col < row.count else { return nil }
+            guard coordinate.col >= 0 else { return nil }
+            return row[coordinate.col]
+        }
+    }
+    
     public func has(_ coordinate: Position) -> Bool {
         return coordinate.row >= 0 && coordinate.row < rowCount && coordinate.col >= 0 && coordinate.col < colCount
     }
@@ -295,6 +306,14 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         for r in 0 ..< rowCount {
             for c in 0 ..< colCount {
                 if self[r, c] == element { self[r, c] = newValue }
+            }
+        }
+    }
+    
+    public func forEach(_ element: (Position, T) -> Void) {
+        for r in 0 ..< rowCount {
+            for c in 0 ..< colCount {
+                element(Position(row: r, column: c), self[r, c])
             }
         }
     }

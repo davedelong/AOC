@@ -308,7 +308,6 @@ public extension RandomAccessCollection where Element: RandomAccessCollection {
     subscript(vertical index: Element.Index) -> LazyMapCollection<Self, Element.Element> {
         return lazy.map { $0[index] }
     }
-    
 }
 
 public extension Array {
@@ -319,6 +318,15 @@ public extension Array {
         for _ in 0 ..< count {
             self.append(elementProducer())
         }
+    }
+    
+    mutating func pluck<C: Collection>(_ indices: C) -> Array<Element> where C.Element == Index {
+        let sorted = indices.sorted(by: >)
+        var final = Array<Element>()
+        for index in sorted {
+            final.append(self.remove(at: index))
+        }
+        return final
     }
     
 }
@@ -332,7 +340,6 @@ public extension MutableCollection {
             index = self.index(after: index)
         }
     }
-    
 }
 
 
