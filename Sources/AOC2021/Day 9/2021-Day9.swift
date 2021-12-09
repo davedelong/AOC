@@ -15,6 +15,7 @@ class Day9: Day {
         let matrix = Matrix(intChars)
         
         var lowSum = 0
+        var lowPoints = Array<Position>()
         
         // go through every point
         matrix.forEach { p, e in
@@ -26,56 +27,33 @@ class Day9: Day {
             if others.allSatisfy({ $0 > e }) {
                 // then this is a low position
                 lowSum += e + 1
+                lowPoints.append(p)
             }
         }
         
         let part1 = lowSum
         
         // part 2
-        
-        var basins = Array<Set<Position>>()
-        matrix.forEach { p, e in
-            guard e < 9 else { return } // not a basin position
-            
-            // find the positions around this point
-            let orthos = p.surroundingPositions(includingDiagonals: false)
-            
-            // look for known basins that contain the surrounding points
-            let matchingBasins = basins.indices.filter { basins[$0].intersects(orthos) }
-            
-            if matchingBasins.isEmpty {
-                // there were no basins that are adjacent to this point
-                // this is a new basin
-                basins.append([p])
-            } else if matchingBasins.count == 1 {
-                // this point is part of one basin
-                // add it directly
-                basins[matchingBasins[0]].insert(p)
-                
-            } else {
-                // there were two or more basins that is adjacent to this point
-                
-                // extract them all
-                let matching = basins.pluck(matchingBasins)
-                // union them all together (because they're all adjacent to the same point,
-                // which means they're all the same basin)
-                var unioned = Set(unioning: matching)
-                unioned.insert(p)
-                
-                // save the new, joined basin together
-                basins.append(unioned)
+        var basinSizes = Array<Int>()
+        for point in lowPoints {
+            var basinPositions = Set<Position>()
+            var toConsider = [point]
+            while toConsider.isEmpty == false {
+                let next = toConsider.removeFirst()
+                basinPositions.insert(next)
+                let ortho = next.surroundingPositions(includingDiagonals: false)
+                for neighbor in ortho {
+                    if let value = matrix[safe: neighbor], value < 9, basinPositions.contains(neighbor) == false {
+                        toConsider.append(neighbor)
+                    }
+                }
             }
+            
+            basinSizes.append(basinPositions.count)
         }
         
-        // sort the basins by size
-        let sortedBasins = basins.sorted(by: { $0.count > $1.count })
-        
-        // get the first (largest) three
-        let firstThree = sortedBasins.prefix(3)
-        
-        // multiply their sizes together
-        let part2 = firstThree.product(of: \.count)
-        
+        let sortedSizes = basinSizes.sorted(by: >)
+        let part2 = sortedSizes.prefix(3).product
         return ("\(part1)", "\(part2)")
     }
 
