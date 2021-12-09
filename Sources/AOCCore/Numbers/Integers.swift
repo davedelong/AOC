@@ -50,6 +50,23 @@ public extension Int {
         self = i
     }
     
+    init?(_ character: Character) {
+        guard character.isNumber && character.isASCII else { return nil }
+        switch character {
+            case "0": self = 0
+            case "1": self = 1
+            case "2": self = 2
+            case "3": self = 3
+            case "4": self = 4
+            case "5": self = 5
+            case "6": self = 6
+            case "7": self = 7
+            case "8": self = 8
+            case "9": self = 9
+            default: return nil
+        }
+    }
+    
     enum Direction {
         case up
         case down

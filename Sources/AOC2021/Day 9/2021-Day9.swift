@@ -11,9 +11,7 @@ import AOCCore
 class Day9: Day {
 
     override func run() -> (String, String) {
-        let intChars = input.lines.characters.map { line -> Array<Int> in
-            return line.map { Int("\($0)")! }
-        }
+        let intChars = input.lines.digits
         let matrix = Matrix(intChars)
         
         var lowSum = 0
