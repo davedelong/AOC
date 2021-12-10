@@ -289,6 +289,11 @@ public extension BidirectionalCollection {
     }
 }
 
+public enum RoundingDirection {
+    case up
+    case down
+}
+
 public extension RandomAccessCollection {
     
     func at(_ index: Index) -> Element? {
@@ -299,6 +304,18 @@ public extension RandomAccessCollection {
     
     func chunks(of size: Int) -> ChunkedCollection<Self> {
         return ChunkedCollection(self, size: size)
+    }
+    
+    func median(rounding direction: RoundingDirection = .down) -> Element {
+        let span = Double(distance(from: startIndex, to: endIndex))
+        let half = span / 2
+        let medianDistance: Int
+        switch direction {
+            case .up: medianDistance = Int(ceil(half))
+            case .down: medianDistance = Int(floor(half))
+        }
+        let medianIndex = index(startIndex, offsetBy: medianDistance)
+        return self[medianIndex]
     }
     
 }
