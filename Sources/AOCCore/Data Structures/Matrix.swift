@@ -131,14 +131,12 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     }
     
     public subscript(safe coordinate: Position) -> T? {
-        get {
-            guard coordinate.row < data.count else { return nil }
-            guard coordinate.row >= 0 else { return nil }
-            let row = data[coordinate.row]
-            guard coordinate.col < row.count else { return nil }
-            guard coordinate.col >= 0 else { return nil }
-            return row[coordinate.col]
-        }
+        guard coordinate.row < data.count else { return nil }
+        guard coordinate.row >= 0 else { return nil }
+        let row = data[coordinate.row]
+        guard coordinate.col < row.count else { return nil }
+        guard coordinate.col >= 0 else { return nil }
+        return row[coordinate.col]
     }
     
     public func has(_ coordinate: Position) -> Bool {
@@ -317,5 +315,25 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             }
         }
     }
+    
+    public func allSatisfy(_ element: (T) -> Bool) -> Bool {
+        return data.allSatisfy { $0.allSatisfy(element) }
+    }
+    
+    public func contains(where element: (T) -> Bool) -> Bool {
+        return data.contains { $0.contains(where: element) }
+    }
 }
 
+//extension Matrix: Collection {
+//    public typealias Element = T
+//    public typealias Index = Position
+//
+//    public var startIndex: Position { Position(row: 0, column: 0) }
+//    public var endIndex: Position { Position(row: rowCount, column: colCount) }
+//
+//    public func makeIterator() -> AnyIterator<Element> {
+//        let positions = self.positions
+//        return AnyIterator(positions.map { self[$0] }.makeIterator())
+//    }
+//}
