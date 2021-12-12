@@ -6,51 +6,31 @@
 //  Copyright © 2021 Dave DeLong. All rights reserved.
 //
 
-import GameplayKit
-
 class Day12: Day {
     
-    lazy var caveSystem: GKGraph = {
-        var caves = Dictionary<String, Cave>()
-        
-        let graph = GKGraph([])
+    struct Cave: Hashable, GraphNode {
+        let id: String
+        var isSmall: Bool { id != "start" && id != "end" && id.first!.isLowercase }
+        var isLarge: Bool { id != "start" && id != "end" && id.first!.isUppercase }
+    }
+    
+    lazy var caveSystem: Graph<Cave> = {
+        let g = Graph<Cave>()
         for line in input.rawLines {
             let pieces = line.split(on: "-")
             let c1 = String(pieces[0])
             let c2 = String(pieces[1])
             
-            let cave1: Cave
-            let cave2: Cave
-            if let c = caves[c1] {
-                cave1 = c
-            } else {
-                cave1 = Cave(name: c1)
-                caves[c1] = cave1
-            }
-            if let c = caves[c2] {
-                cave2 = c
-            } else {
-                cave2 = Cave(name: c2)
-                caves[c2] = cave2
-            }
+            let cave1 = g.node(with: c1, default: Cave(id: c1))
+            let cave2 = g.node(with: c2, default: Cave(id: c2))
             
-            graph.add([cave1, cave2])
-            cave1.addConnections(to: [cave2], bidirectional: true)
+            g.connect(node: cave1, to: cave2)
         }
-        return graph
+        return g
     }()
     
-    var startCave: Cave {
-        (caveSystem.nodes as! Array<Cave>).first(where: { $0.name == "start" })!
-    }
-    
-    var endCave: Cave {
-        (caveSystem.nodes as! Array<Cave>).first(where: { $0.name == "end" })!
-    }
-
-    override func run() -> (String, String) {
-        return super.run()
-    }
+    var startCave: Cave { caveSystem.node(with: "start")! }
+    var endCave: Cave { caveSystem.node(with: "end")! }
 
     override func part1() -> String {
         let paths = self.computePaths(from: startCave, to: endCave)
@@ -66,7 +46,7 @@ class Day12: Day {
     
     typealias CavePath = Array<Cave>
     func computePaths(from start: Cave, to end: Cave, smallCaveCount: Int = 1) -> Array<CavePath> {
-        var caves = Set(caveSystem.nodes as! Array<Cave>)
+        var caves = Set(caveSystem.nodes)
         caves.remove(start)
         
         var counts = CountedSet<Cave>(counting: caves)
@@ -90,7 +70,7 @@ class Day12: Day {
     }
     
     private func _countPaths(from start: Cave, to end: Cave, visitableCaves: CountedSet<Cave>) -> Array<CavePath> {
-        var possibilities = start.connectedNodes as! Array<Cave>
+        var possibilities = caveSystem.connections(from: start)
         // only caves that can be visited are possible
         possibilities.removeAll(where: { visitableCaves.count(for: $0) == 0 })
         
@@ -112,22 +92,4 @@ class Day12: Day {
         return finalPathCount
     }
 
-}
-
-class Cave: GKGraphNode {
-    let name: String
-    var isSmall: Bool { name != "start" && name != "end" && name.first!.isLowercase }
-    var isLarge: Bool { name != "start" && name != "end" && name.first!.isUppercase }
-    
-    override var description: String { name }
-    
-    init(name: String) {
-        self.name = name
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
