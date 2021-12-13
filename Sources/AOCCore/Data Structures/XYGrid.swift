@@ -28,6 +28,11 @@ public struct XYGrid<T> {
     public var values: Dictionary<XY, T>.Values { return grid.values }
     
     public func draw(using renderer: (T?) -> String) {
+        print(render(using: renderer))
+    }
+    
+    public func render(using renderer: (T?) -> String) -> String {
+        var final = String()
         
         let xRange = grid.keys.map { $0.x }.range()
         let yRange = grid.keys.map { $0.y }.range()
@@ -36,11 +41,12 @@ public struct XYGrid<T> {
             for x in xRange {
                 let xy = XY(x: x, y: y)
                 let s = renderer(grid[xy])
-                print(s, terminator: "")
+                final.append(s)
             }
-            print("")
+            final.append("\n")
         }
         
+        return final
     }
     
     public func convertToGridGraph(_ canEnterPosition: (T) -> Bool) -> GKGridGraph<GridNode<T>> {
