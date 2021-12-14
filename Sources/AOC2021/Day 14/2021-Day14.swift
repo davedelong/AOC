@@ -45,23 +45,16 @@ class Day14: Day {
                 finalCounts[char, default: 0] += count
             }
         }
-        // HOWEVER
-        // everything just got double-counted
-        let first = source.first!
-        let last = source.last!
-        for (char, count) in finalCounts {
-            var newCount = count
-            // the first and last digits were not double counted
-            // count them again before the division by 2
-            if char == first || char == last { newCount += 1 }
-            finalCounts[char] = newCount / 2
-        }
+        // everything's been double-counted except the first and last characters
+        finalCounts[source.first!, default: 0] += 1
+        finalCounts[source.last!, default: 0] += 1
         
         let max = finalCounts.mostCommon()!
         let min = finalCounts.leastCommon()!
         
-        let maxCount = finalCounts.count(for: max)
-        let minCount = finalCounts.count(for: min)
+        // "un" double-count the values
+        let maxCount = finalCounts.count(for: max) / 2
+        let minCount = finalCounts.count(for: min) / 2
         
         return maxCount - minCount
     }
