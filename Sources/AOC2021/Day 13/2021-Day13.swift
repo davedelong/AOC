@@ -41,7 +41,7 @@ class Day13: Day {
             grid = foldGrid(grid, axis: fold.0, line: fold.1)
         }
         
-        grid.draw(using: { $0 == true ? "⬛️" : "⬜️" })
+        grid.draw()
         
         let string = grid.render(using: { $0 == true ? "#" : " " })
         return RecognizeLetters(from: string)

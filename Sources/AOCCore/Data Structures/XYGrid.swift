@@ -93,6 +93,18 @@ public struct XYGrid<T> {
     }
 }
 
+extension XYGrid where T == Bool {
+    
+    public func render() -> String {
+        return self.render(using: { $0 == true ? "⬛️" : "⬜️" })
+    }
+    
+    public func draw() {
+        print(render())
+    }
+    
+}
+
 extension XYGrid: Equatable where T: Equatable {
     public static func ==(lhs: XYGrid<T>, rhs: XYGrid<T>) -> Bool { return lhs.grid == rhs.grid }
 }

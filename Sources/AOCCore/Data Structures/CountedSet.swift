@@ -38,7 +38,7 @@ public extension Dictionary where Value == Int {
     }
     
     func mostCommon() -> Key? {
-        return self.max(by: { $0.value >= $1.value })?.key
+        return self.max(by: { $0.value <= $1.value })?.key
     }
     
     func leastCommon() -> Key? {
