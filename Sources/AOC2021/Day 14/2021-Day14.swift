@@ -35,7 +35,7 @@ class Day14: Day {
             counts["\(f)\(c)", default: 0] += 1
         }
         
-        for i in 0 ..< times {
+        for _ in 0 ..< times {
             counts = applyRules(to: counts)
         }
         
