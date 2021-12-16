@@ -8,29 +8,29 @@
 
 class Day12: Day {
     
-    struct Cave: Hashable, GraphNode {
+    struct CaveID: Hashable {
         let id: String
         var isSmall: Bool { id != "start" && id != "end" && id.first!.isLowercase }
         var isLarge: Bool { id != "start" && id != "end" && id.first!.isUppercase }
     }
     
-    lazy var caveSystem: Graph<Cave> = {
-        let g = Graph<Cave>()
+    lazy var caveSystem: Graph<CaveID, CaveID> = {
+        var g = Graph<CaveID, CaveID>()
         for line in input.rawLines {
             let pieces = line.split(on: "-")
-            let c1 = String(pieces[0])
-            let c2 = String(pieces[1])
+            let c1 = CaveID(id: String(pieces[0]))
+            let c2 = CaveID(id: String(pieces[1]))
             
-            let cave1 = g.node(with: c1, default: Cave(id: c1))
-            let cave2 = g.node(with: c2, default: Cave(id: c2))
+            _ = g.value(with: c1, default: c1)
+            _ = g.value(with: c2, default: c2)
             
-            g.connect(node: cave1, to: cave2)
+            g.connect(c1, to: c2)
         }
         return g
     }()
     
-    var startCave: Cave { caveSystem.node(with: "start")! }
-    var endCave: Cave { caveSystem.node(with: "end")! }
+    var startCave: CaveID { CaveID(id: "start") }
+    var endCave: CaveID { CaveID(id: "end") }
 
     override func part1() -> String {
         let paths = self.computePaths(from: startCave, to: endCave)
@@ -44,12 +44,12 @@ class Day12: Day {
         return "\(uniqued.count)"
     }
     
-    typealias CavePath = Array<Cave>
-    func computePaths(from start: Cave, to end: Cave, smallCaveCount: Int = 1) -> Array<CavePath> {
-        var caves = Set(caveSystem.nodes)
+    typealias CavePath = Array<CaveID>
+    func computePaths(from start: CaveID, to end: CaveID, smallCaveCount: Int = 1) -> Array<CavePath> {
+        var caves = Set(caveSystem.values)
         caves.remove(start)
         
-        var counts = CountedSet<Cave>(counting: caves)
+        var counts = CountedSet<CaveID>(counting: caves)
         for cave in caves {
             if cave.isLarge { counts[cave] = Int.max }
         }
@@ -69,7 +69,7 @@ class Day12: Day {
         }
     }
     
-    private func _countPaths(from start: Cave, to end: Cave, visitableCaves: CountedSet<Cave>) -> Array<CavePath> {
+    private func _countPaths(from start: CaveID, to end: CaveID, visitableCaves: CountedSet<CaveID>) -> Array<CavePath> {
         var possibilities = caveSystem.connections(from: start)
         // only caves that can be visited are possible
         possibilities.removeAll(where: { visitableCaves.count(for: $0) == 0 })

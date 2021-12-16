@@ -8,90 +8,178 @@
 import Foundation
 import GameplayKit
 
-public protocol GraphNode: Equatable {
-    associatedtype ID: Hashable
-    var id: ID { get }
-}
-
-extension Int: GraphNode {
-    public var id: Int { self }
-}
-extension String: GraphNode {
-    public var id: String { self }
-}
-extension Double: GraphNode {
-    public var id: Double { self }
-}
-
-public class Graph<Node: GraphNode> {
-    private let graph: GKGraph
-    private var gkNodes = Dictionary<Node.ID, _GKNode<Node>>()
+public struct Graph<ID: Hashable, Value: Equatable> {
+    fileprivate typealias Node = _GKNode<ID, Value>
+    
+    private var graph: GKGraph
+    private var nodesByID = Dictionary<ID, Node>()
+    
+    @discardableResult
+    private mutating func mutate<T>(_ mutation: (inout Self, GKGraph) -> T) -> T {
+        if !isKnownUniquelyReferenced(&graph) { duplicateGraph() }
+        return mutation(&self, graph)
+    }
+    
+    private mutating func duplicateGraph() {
+        let g = GKGraph()
+        let nodes = (graph.nodes ?? []) as! Array<Node>
+        let dupes = nodes.map { Node(id: $0.id, value: $0.value) }
+        let dupesByID = Dictionary(uniqueKeysWithValues: dupes.map { ($0.id, $0) })
+        
+        g.add(dupes)
+        
+        for node in nodes {
+            let connections = (node.connectedNodes as! Array<Node>).map(\.id)
+            
+            let dupedNode = dupesByID[node.id]
+            let dupedConnections = connections.map { dupesByID[$0]! }
+            dupedNode?.addConnections(to: dupedConnections, bidirectional: false)
+        }
+        
+        graph = g
+        nodesByID = dupesByID
+    }
     
     public init() {
-        self.graph = GKGraph()
+        graph = GKGraph()
     }
     
-    public var nodes: Array<Node> {
-        return (graph.nodes as! Array<_GKNode<Node>>).map(\.node)
-    }
+    public var values: Array<Value> { nodesByID.values.map(\.value) }
     
-    public func add(_ node: Node) {
-        guard gkNodes[node.id] == nil else { return }
-        let n = _GKNode(node)
-        gkNodes[node.id] = n
-        graph.add([n])
-    }
-    
-    public func remove(_ node: Node) {
-        if let n = gkNodes.removeValue(forKey: node.id) {
-            graph.remove([n])
+    public subscript(id: ID) -> Value? {
+        get { nodesByID[id]?.value }
+        set {
+            mutate { s, g in
+                let node = s.nodesByID[id]
+                switch (newValue, node) {
+                    case (.none, .none):
+                        break
+                    case (.none, .some(let n)):
+                        g.remove([n])
+                        s.nodesByID.removeValue(forKey: n.id)
+                    case (.some(let v), .none):
+                        let newNode = Node(id: id, value: v)
+                        g.add([newNode])
+                        s.nodesByID[id] = newNode
+                    case (.some(let v), .some(let n)):
+                        n.value = v
+                }
+            }
         }
     }
     
-    public func node(with id: Node.ID) -> Node? {
-        return gkNodes[id]?.node
-    }
-    
-    public func node(with id: Node.ID, default missing: @autoclosure () -> Node) -> Node {
-        if let existing = gkNodes[id] {
-            return existing.node
-        } else {
-            let newNode = missing()
-            assert(newNode.id == id)
-            add(newNode)
-            return newNode
+    public mutating func value(with id: ID, default missing: @autoclosure () -> Value) -> Value {
+        if let existing = self[id] { return existing }
+        return mutate { s, g in
+            let newValue = missing()
+            let newNode = Node(id: id, value: newValue)
+            s.nodesByID[id] = newNode
+            g.add([newNode])
+            return newValue
         }
     }
     
-    public func connect(node: Node, to other: Node, bidirectional: Bool = true) {
-        guard let s = gkNodes[node.id], let e = gkNodes[other.id] else { return }
-        s.addConnections(to: [e], bidirectional: bidirectional)
+    public mutating func connect(_ id: ID, to other: ID, bidirectional: Bool = true) {
+        mutate { s, _ in
+            guard let sNode = s.nodesByID[id] else { return }
+            guard let eNode = s.nodesByID[other] else { return }
+            sNode.addConnections(to: [eNode], bidirectional: bidirectional)
+        }
     }
     
-    public func disconnect(node: Node, from other: Node, bidirectional: Bool = true) {
-        guard let s = gkNodes[node.id], let e = gkNodes[other.id] else { return }
-        s.removeConnections(to: [e], bidirectional: bidirectional)
+    public mutating func disconnect(_ id: ID, from other: ID, bidirectional: Bool = true) {
+        mutate { s, _ in
+            guard let sNode = s.nodesByID[id] else { return }
+            guard let eNode = s.nodesByID[other] else { return }
+            sNode.removeConnections(to: [eNode], bidirectional: bidirectional)
+        }
     }
     
-    public func connections(from node: Node) -> Array<Node> {
-        guard let n = gkNodes[node.id] else { return [] }
-        let connections = n.connectedNodes as! Array<_GKNode<Node>>
-        return connections.map(\.node)
+    public func connections(from id: ID) -> Array<ID> {
+        guard let node = nodesByID[id] else { return [] }
+        return (node.connectedNodes as! Array<Node>).map(\.id)
     }
     
-    public func path(from start: Node, to end: Node) -> Array<Node> {
-        guard let s = gkNodes[start.id], let e = gkNodes[end.id] else { return [] }
-        let path = graph.findPath(from: s, to: e) as! Array<_GKNode<Node>>
-        return path.map(\.node)
+    public func path(from start: ID, to end: ID) -> Array<ID> {
+        guard let s = nodesByID[start] else { return [] }
+        guard let e = nodesByID[end] else { return [] }
+        let path = graph.findPath(from: s, to: e) as! Array<Node>
+        return path.map(\.id)
     }
     
 }
 
-private class _GKNode<N: GraphNode>: GKGraphNode {
-    let node: N
+extension Graph: Sequence {
     
-    init(_ node: N) {
-        self.node = node
+    public typealias Element = (id: ID, value: Value)
+    
+    public struct Iterator: IteratorProtocol {
+        fileprivate var base: Dictionary<ID, Node>.Iterator
+        
+        public mutating func next() -> Element? {
+            guard let (id, node) = base.next() else { return nil }
+            return (id: id, value: node.value)
+        }
+    }
+    
+    public func makeIterator() -> Iterator {
+        let i = nodesByID.makeIterator()
+        return Iterator(base: i)
+    }
+    
+}
+
+extension Graph: Equatable {
+    
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        if lhs.graph === rhs.graph { return true }
+        // not the same graph
+        // but maybe they have the same structure?
+        
+        // they must have the same set of node IDs
+        if lhs.nodesByID.keys != rhs.nodesByID.keys { return false }
+        
+        // the node values must be equal
+        for (id, lhsNode) in lhs.nodesByID {
+            let rhsNode = rhs.nodesByID[id]! // safe; i've already determined their key sets are equal
+            // the node values must be equal
+            if lhsNode.value != rhsNode.value { return false }
+        }
+        
+        // finally, the connections between nodes must be equal
+        for (id, _) in lhs {
+            let lConnections = lhs.connections(from: id)
+            let rConnections = rhs.connections(from: id)
+            
+            if lConnections.count != rConnections.count { return false }
+            if Set(lConnections) != Set(rConnections) { return false }
+        }
+        
+        return true
+    }
+    
+}
+
+extension Graph: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        // quick and dirty way to do a hash
+        // graphs that have different numbers of nodes will hash to different values
+        hasher.combine(values.count)
+    }
+    
+}
+
+
+
+internal class _GKNode<ID: Hashable, V: Equatable>: GKGraphNode {
+    
+    let id: ID
+    var value: V
+    
+    required init(id: ID, value: V) {
+        self.id = id
+        self.value = value
         super.init()
     }
     

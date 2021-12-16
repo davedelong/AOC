@@ -9,6 +9,70 @@
 public typealias Position = Point2
 public typealias XY = Point2
 
+public struct PointRect: Hashable {
+    public var origin: Position
+    public var width: Int
+    public var height: Int
+    
+    public var count: Int { width * height }
+    
+    private var xRange: Range<Int> { origin.x ..< (origin.x + width) }
+    private var yRange: Range<Int> { origin.y ..< (origin.y + height) }
+    
+    public init(origin: Position, width: Int, height: Int) {
+        var oX = origin.x
+        var oY = origin.y
+        var w = width
+        var h = height
+        
+        if w < 0 {
+            oX += w
+            w *= -1
+        }
+        if h < 0 {
+            oY += h
+            h *= -1
+        }
+        
+        self.origin = Position(x: oX, y: oY)
+        self.width = w
+        self.height = h
+    }
+    
+    public func contains(_ point: Position) -> Bool {
+        return xRange.contains(point.x) && yRange.contains(point.y)
+    }
+}
+
+extension PointRect: Sequence {
+    
+    public struct Iterator: IteratorProtocol {
+        private var point: Position
+        private let rect: PointRect
+        
+        public init(rect: PointRect) {
+            self.rect = rect
+            self.point = rect.origin.offset(dx: -1, dy: 0)
+        }
+        
+        public mutating func next() -> Position? {
+            var next = point.offset(dx: 1, dy: 0)
+            if rect.contains(next) == false {
+                next.x = rect.origin.x
+                next.y += 1
+            }
+            point = next
+            if rect.contains(next) == false { return nil }
+            return next
+        }
+    }
+    
+    public func makeIterator() -> Iterator {
+        return Iterator(rect: self)
+    }
+    
+}
+
 public extension Point2 {
     
     static func all(in xRange: ClosedRange<Int>, _ yRange: ClosedRange<Int>) -> Array<Position> {
@@ -24,6 +88,10 @@ public extension Point2 {
                 yRange.map { Position(x: xRange.lowerBound, y: $0) } +
                 yRange.map { Position(x: xRange.upperBound, y: $0) }
         )
+    }
+    
+    func offset(dx: Int, dy: Int) -> Self {
+        return Position(x: x + dx, y: y + dy)
     }
     
     func move(_ heading: Heading, length: Int = 1) -> Position {

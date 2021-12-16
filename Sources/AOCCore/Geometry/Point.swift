@@ -156,8 +156,16 @@ public struct Point2: PointProtocol {
     
     public var components: Array<Int>
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
+    public var x: Int {
+        get { return components[0] }
+        set { components[0] = newValue }
+    }
+    
+    public var y: Int {
+        get { return components[1] }
+        set { components[1] = newValue }
+    }
+    
     public var row: Int { return components[1] }
     public var col: Int { return components[0] }
     

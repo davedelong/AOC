@@ -13,15 +13,21 @@ public typealias Fourple<T> = Tuple4<T, T, T, T>
 
 @dynamicMemberLookup
 public struct Tuple2<A, B> {
-    public let first: A
-    public let second: B
-    public var tuple: (A, B) { return (first, second) }
-    public init(_ first: A, _ second: B) {
-        self.first = first
-        self.second = second
+    public var tuple: (A, B)
+    public var first: A {
+        get { tuple.0 }
+        set { tuple.0 = newValue }
     }
-    public subscript<T>(dynamicMember keyPath: KeyPath<(A,B), T>) -> T {
-        return tuple[keyPath: keyPath]
+    public var second: B {
+        get { tuple.1 }
+        set { tuple.1 = newValue }
+    }
+    public init(_ first: A, _ second: B) {
+        self.tuple = (first, second)
+    }
+    public subscript<T>(dynamicMember keyPath: WritableKeyPath<(A,B), T>) -> T {
+        get { return tuple[keyPath: keyPath] }
+        set { tuple[keyPath: keyPath] = newValue }
     }
 }
 
