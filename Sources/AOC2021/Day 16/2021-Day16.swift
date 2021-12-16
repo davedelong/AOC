@@ -30,6 +30,23 @@ class Day16: Day {
                 default: fatalError()
             }
         }
+        
+        var description: String { return description(0).joined(separator: "\n") }
+        
+        private func description(_ level: Int) -> Array<String> {
+            let indent = String(repeating: "  ", count: level)
+            var lines = Array<String>()
+            lines.append(indent + "Version: \(version)")
+            lines.append(indent + "Type: \(typeID)")
+            if typeID == 4 {
+                lines.append(indent + "Value: \(value)")
+            } else {
+                for subPacket in subPackets {
+                    lines.append(contentsOf: subPacket.description(level + 1))
+                }
+            }
+            return lines
+        }
     }
     
     lazy var bits = input.characters.flatMap { Int("\($0)", radix: 16)!.bits.suffix(4) }
@@ -79,8 +96,7 @@ class Day16: Day {
     
     
     override func part1() -> String {
-        let p = rootPacket
-        return "\(p.versionSum)"
+        return "\(rootPacket.versionSum)"
     }
 
     override func part2() -> String {
