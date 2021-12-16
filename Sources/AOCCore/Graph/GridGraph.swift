@@ -15,7 +15,8 @@ public struct GridGraph<Value: Equatable> {
     fileprivate typealias Node = _GKGridNode<Value>
     fileprivate typealias Graph = GKGridGraph<Node>
     
-    private var graph: Graph
+    private var box: RefBox<Graph>
+    private var graph: Graph { box.object }
     private var _defaultTravelCost: Float = 1
     
     public var origin: Position { Position(graphPosition: graph.gridOrigin) }
@@ -25,15 +26,17 @@ public struct GridGraph<Value: Equatable> {
     
     @discardableResult
     private mutating func mutate<T>(_ mutation: (inout Self, Graph) -> T) -> T {
-        if !isKnownUniquelyReferenced(&graph) { duplicateGraph() }
+        if !isKnownUniquelyReferenced(&box) {
+            box = RefBox(duplicateGraph())
+        }
         return mutation(&self, graph)
     }
     
-    private mutating func duplicateGraph() {
+    private func duplicateGraph() -> Graph {
         let g = GKGridGraph<Node>(fromGridStartingAt: graph.gridOrigin,
                                   width: Int32(graph.gridWidth), height: Int32(graph.gridHeight),
                                   diagonalsAllowed: graph.diagonalsAllowed,
-                                  nodeClass: graph.classForGenericArgument(at: 0))
+                                  nodeClass: Node.self)
         
         for position in self.rect {
             if let oldNode = graph.node(atGridPosition: position.graphPosition),
@@ -46,14 +49,37 @@ public struct GridGraph<Value: Equatable> {
             }
         }
         
-        graph = g
+        return g
     }
     
     public init(origin: Position = .zero, width: Int, height: Int, positionsConnectDiagonally: Bool = false) {
-        graph = GKGridGraph<Node>(fromGridStartingAt: origin.graphPosition,
+        let g = GKGridGraph<Node>(fromGridStartingAt: origin.graphPosition,
                                   width: Int32(width), height: Int32(height),
                                   diagonalsAllowed: positionsConnectDiagonally,
                                   nodeClass: Node.self)
+        box = RefBox(g)
+    }
+    
+    public init(matrix: Matrix<Value>) where Value: Hashable {
+        self.init(width: matrix.colCount, height: matrix.rowCount)
+        matrix.forEach { position, value in
+            let node = graph.node(atGridPosition: position.graphPosition)
+            node?.value = value
+            node?.defaultTravelCost = defaultTravelCost
+        }
+    }
+    
+    public init(_ data: Array<Array<Value>>) {
+        assert(data.isNotEmpty)
+        assert(data[0].isNotEmpty)
+        self.init(width: data[0].count, height: data.count)
+        for row in 0 ..< data.count {
+            for col in 0 ..< data[row].count {
+                let node = graph.node(atGridPosition: vector_int2(x: Int32(col), y: Int32(row)))
+                node?.value = data[row][col]
+                node?.defaultTravelCost = defaultTravelCost
+            }
+        }
     }
     
     public var defaultTravelCost: Float {

@@ -19,13 +19,14 @@ import GameplayKit
 public struct Graph<ID: Hashable, Value: Equatable> {
     fileprivate typealias Node = _GKNode<ID, Value>
     
-    private var graph: GKGraph
+    private var box: RefBox<GKGraph>
+    private var graph: GKGraph { box.object }
     private var nodesByID = Dictionary<ID, Node>()
     private var _defaultTravelCost: Float = 1
     
     @discardableResult
     private mutating func mutate<T>(_ mutation: (inout Self, GKGraph) -> T) -> T {
-        if !isKnownUniquelyReferenced(&graph) { duplicateGraph() }
+        if !isKnownUniquelyReferenced(&box) { duplicateGraph() }
         return mutation(&self, graph)
     }
     
@@ -49,12 +50,20 @@ public struct Graph<ID: Hashable, Value: Equatable> {
             dupedNode?.exitCost = node.exitCost
         }
         
-        graph = g
+        box = RefBox(g)
         nodesByID = dupesByID
     }
     
     public init() {
-        graph = GKGraph()
+        box = RefBox(GKGraph())
+    }
+    
+    public init<C: Collection>(_ items: C) where C.Element: Identifiable, ID == C.Element.ID, Value == C.Element {
+        self.init()
+        for item in items {
+            #warning("FIXME")
+            self[item.id] = item
+        }
     }
     
     public var values: Array<Value> { nodesByID.values.map(\.value) }

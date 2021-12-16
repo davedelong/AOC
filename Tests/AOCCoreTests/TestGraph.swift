@@ -168,4 +168,23 @@ class TestGraph: XCTestCase {
         XCTAssertEqual(g2.cost(from: a, to: b), 2)
     }
     
+    func testNestedArrayInitializer() {
+        let g = GridGraph([
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ])
+        
+        XCTAssertEqual(g.rect.count, 9)
+        XCTAssertEqual(g[0, 0], 1)
+        XCTAssertEqual(g[1, 0], 2)
+        XCTAssertEqual(g[2, 0], 3)
+        XCTAssertEqual(g[0, 1], 4)
+        XCTAssertEqual(g[1, 1], 5)
+        XCTAssertEqual(g[2, 1], 6)
+        XCTAssertEqual(g[0, 2], 7)
+        XCTAssertEqual(g[1, 2], 8)
+        XCTAssertEqual(g[2, 2], 9)
+    }
+    
 }

@@ -7,6 +7,7 @@
 //
 
 import GameplayKit
+import AOCCore
 
 class Day15: Day {
     
@@ -19,75 +20,42 @@ class Day15: Day {
      */
 
     override func part1() -> String {
-        let graph: GKGridGraph<CostNode> = {
-            let width = input.lines[0].characters.count
-            let height = input.lines.count
-            
-            let graph = GKGridGraph<CostNode>(fromGridStartingAt: vector_int2(x: 0, y: 0),
-                                    width: Int32(width),
-                                    height: Int32(height),
-                                    diagonalsAllowed: false,
-                                              nodeClass: CostNode.self)
-            
-            (0 ..< input.lines.count).forEach { y in
-                let row = input.lines[y].characters
-                (0 ..< row.count).forEach { x in
-                    let node = graph.node(atGridPosition: vector_int2(x: Int32(x), y: Int32(y)))!
-                    node.cost = Int(row[x])!
-                }
-            }
-            return graph
-        }()
+        var graph = GridGraph(input.lines.digits)
+        graph.defaultTravelCost = 0
+        for p in Array(graph.rect) {
+            let value = graph[p]!
+            graph[entranceCost: p] = Float(value)
+        }
         
-        let topLeft = graph.node(atGridPosition: vector_int2(x: 0, y: 0))!
-        let bottomRight = graph.node(atGridPosition: vector_int2(x: Int32(graph.gridWidth-1),
-                                                                 y: Int32(graph.gridHeight-1)))!
-        let path = graph.findPath(from: topLeft, to: bottomRight) as! Array<CostNode>
-        
-        let cost = path.dropFirst().sum(of: \.cost)
+        let cost = Int(graph.cost(from: .zero, to: Position(x: graph.width - 1, y: graph.height - 1))!)
         
         return "\(cost)"
     }
 
     override func part2() -> String {
-        let graph: GKGridGraph<CostNode> = {
-            let width = input.lines[0].characters.count
-            let height = input.lines.count
-            
-            let graph = GKGridGraph<CostNode>(fromGridStartingAt: vector_int2(x: 0, y: 0),
-                                    width: Int32(width * 5),
-                                    height: Int32(height * 5),
-                                    diagonalsAllowed: false,
-                                              nodeClass: CostNode.self)
-            
-            for y in (0 ..< input.lines.count) {
-                let row = input.lines[y]
-                for x in (0 ..< row.characters.count) {
-                    let col = row.characters[x]
-                    let baseValue = Int(col)!
-                    
-                    for xOffset in 0 ..< 5 {
-                        for yOffset in 0 ..< 5 {
-                            let position = vector_int2(Int32(x + (xOffset * row.characters.count)),
-                                                       Int32(y + (yOffset * input.lines.count)))
-                            let node = graph.node(atGridPosition: position)!
-                            
-                            let cost = (baseValue + xOffset + yOffset) % 9
-                            node.cost = cost == 0 ? 9 : cost
-                        }
+        let digits = input.lines.digits
+        let width = digits[0].count * 5
+        let height = digits.count * 5
+        var g = GridGraph<Int>(width: width, height: height)
+        g.defaultTravelCost = 0
+        
+        for y in 0 ..< digits.count {
+            let row = digits[y]
+            for x in 0 ..< row.count {
+                let baseValue = row[x]
+                for xOffset in 0 ..< 5 {
+                    for yOffset in 0 ..< 5 {
+                        let cost = (baseValue + xOffset + yOffset) % 9
+                        let actualCost = cost == 0 ? 9 : cost
+                        let p = Position(x: x + (xOffset * row.count), y: y + (yOffset * digits.count))
+                        g[p] = actualCost
+                        g[entranceCost: p] = Float(actualCost)
                     }
                 }
             }
-            return graph
-        }()
+        }
         
-        let topLeft = graph.node(atGridPosition: vector_int2(x: 0, y: 0))!
-        let bottomRight = graph.node(atGridPosition: vector_int2(x: Int32(graph.gridWidth-1),
-                                                                 y: Int32(graph.gridHeight-1)))!
-        let path = graph.findPath(from: topLeft, to: bottomRight) as! Array<CostNode>
-        print(path.map(\.cost))
-        
-        let cost = path.dropFirst().sum(of: \.cost)
+        let cost = Int(g.cost(from: .zero, to: Position(x: g.width - 1, y: g.height - 1))!)
         
         return "\(cost)"
     }
