@@ -8,7 +8,7 @@
 import XCTest
 @testable import AOCCore
 
-class TestCore_Point: XCTestCase {
+class TestPoint: XCTestCase {
     
     func testPointRect() {
         let p = PointRect(origin: .zero, width: 2, height: 2)

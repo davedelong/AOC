@@ -121,6 +121,7 @@ public struct Graph<ID: Hashable, Value: Equatable> {
         return mutate { s, g in
             let newValue = missing()
             let newNode = Node(id: id, value: newValue)
+            newNode.defaultTravelCost = s._defaultTravelCost
             s.nodesByID[id] = newNode
             g.add([newNode])
             return newValue
@@ -174,7 +175,7 @@ public struct Graph<ID: Hashable, Value: Equatable> {
     public func travelCost(from start: ID, to end: ID) -> Float {
         guard let s = nodesByID[start] else { return 0 }
         guard let e = nodesByID[end] else { return 0 }
-        return s.travelCosts[e.id] ?? 0
+        return s.travelCosts[e.id] ?? _defaultTravelCost
     }
     
     public mutating func setTravelCost(_ cost: Float?, from start: ID, to end: ID, bidirectional: Bool = true) {
@@ -276,7 +277,7 @@ internal class _GKNode<ID: Hashable, V: Equatable>: GKGraphNode {
     var travelCosts: Dictionary<ID, Float> = [:]
     var exitCost: Float = 0
     
-    var defaultTravelCost: Float = 0
+    var defaultTravelCost: Float = 1
     
     required init(id: ID, value: V) {
         self.id = id
