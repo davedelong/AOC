@@ -72,7 +72,7 @@ class Day12: Day {
     private func _countPaths(from start: CaveID, to end: CaveID, visitableCaves: CountedSet<CaveID>) -> Array<CavePath> {
         var possibilities = caveSystem.connections(from: start)
         // only caves that can be visited are possible
-        possibilities.removeAll(where: { visitableCaves.count(for: $0) == 0 })
+        possibilities = possibilities.filter { visitableCaves.count(for: $0) > 0 }
         
         var remainingVisitable = visitableCaves
         remainingVisitable.remove(item: start) // mark that we've visited this cave

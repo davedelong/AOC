@@ -76,9 +76,9 @@ public struct GridGraph<Value: Equatable> {
         }
     }
     
-    public func connections(from position: Position) -> Array<Position> {
+    public func connections(from position: Position) -> Set<Position> {
         guard let node = graph.node(atGridPosition: position.graphPosition) else { return [] }
-        return (node.connectedNodes as! Array<Node>).map(\.position)
+        return Set((node.connectedNodes as! Array<Node>).map(\.position))
     }
     
     public func path(from start: Position, to end: Position) -> Array<Position> {
