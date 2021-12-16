@@ -172,6 +172,31 @@ public extension Sequence {
         return f
     }
     
+    func min<N: Comparable>(of element: (Element) -> N) -> N {
+        var final: N?
+        for i in self {
+            let v = element(i)
+            if let m = final {
+                final = Swift.min(m, v)
+            } else {
+                final = v
+            }
+        }
+        return final!
+    }
+    
+    func max<N: Comparable>(of element: (Element) -> N) -> N {
+        var final: N?
+        for i in self {
+            let v = element(i)
+            if let m = final {
+                final = Swift.max(m, v)
+            } else {
+                final = v
+            }
+        }
+        return final!
+    }
 }
 
 public extension Collection where Element: Comparable {
@@ -344,6 +369,22 @@ public extension Array {
             final.append(self.remove(at: index))
         }
         return final
+    }
+    
+}
+
+extension ArraySlice {
+    
+    public mutating func popFirst() -> Element {
+        return removeFirst()
+    }
+    
+    public mutating func popFirst(_ k: Int) -> Array<Element> {
+        var a = Array<Element>()
+        while a.count < k {
+            a.append(popFirst())
+        }
+        return a
     }
     
 }
