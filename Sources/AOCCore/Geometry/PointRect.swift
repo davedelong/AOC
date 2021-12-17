@@ -44,8 +44,16 @@ public struct PointRect: Hashable {
         self.height = nH
     }
     
+    public init(x: Int, y: Int, width: Int, height: Int) {
+        self.init(x: x, y: y, w: width, h: height)
+    }
+    
     public init(origin: Position, width: Int, height: Int) {
         self.init(x: origin.x, y: origin.y, w: width, h: height)
+    }
+    
+    public init(origin: Position, size: Size) {
+        self.init(x: origin.x, y: origin.y, w: size.width, h: size.height)
     }
     
     public init(xRange: Range<Int>, yRange: Range<Int>) {

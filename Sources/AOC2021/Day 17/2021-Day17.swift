@@ -25,7 +25,7 @@ class Day17: Day {
         // p = vᵪ + vᵪ-1 + vᵪ-2 + vᵪ-3 ...
         // therefore in order to even *enter* the target area, we have to start with a high enough x velocity
         // such that that velocity's triangular number is greater than or equal to the leading edge of the box
-        let lowerXBound = (0 ... targetArea.origin.x).first(where: { triangular($0) >= targetArea.origin.x }) ?? 0
+        let lowerXBound = (0 ... targetArea.minX).first(where: { triangular($0) >= targetArea.minX }) ?? 0
         
         // observe:
         // the upper bound of x velocities *that allow positive y velocities* is the first number
@@ -35,19 +35,19 @@ class Day17: Day {
         //
         // however we can still allow x velocities higher than this, but the initial y velocity must be *negative*
         // to compensate for the probe's horizontal movement
-        let upperXBound = (0 ... targetArea.origin.x).first(where: { triangular($0) > (targetArea.origin.x + targetArea.width) })!
+        let upperXBound = (0 ... targetArea.minX).first(where: { triangular($0) > targetArea.maxX })!
         
         var maxY = Int.min
         var entranceCount = 0
-        for vX in lowerXBound ... (targetArea.origin.x + targetArea.width) {
+        for vX in lowerXBound ... targetArea.maxX {
             let yRange: ClosedRange<Int>
             if vX < upperXBound {
                 // the probe can still go up and maybe hit the area
-                yRange = targetArea.origin.y ... Int(targetArea.origin.y.magnitude)
+                yRange = targetArea.minY ... Int(targetArea.minY.magnitude)
             } else {
                 // the vX is too large to hit the area
                 // the y velocity must therefore be negative to compensane
-                yRange = targetArea.origin.y ... 0
+                yRange = targetArea.minY ... 0
             }
             for vY in yRange {
                 if let y = vectorEntersTargetArea(.init(x: vX, y: vY)) {
