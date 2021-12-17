@@ -40,7 +40,7 @@ for day in 1 ... 25 {
     let dayContents = """
     //
     //  Day\(day).swift
-    //  test
+    //  AOC\(year)
     //
     //  Created by Dave DeLong on \(todayString).
     //  Copyright © \(year) Dave DeLong. All rights reserved.

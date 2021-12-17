@@ -16,8 +16,8 @@ public struct PointRect: Hashable {
     
     public var count: Int { width * height }
     
-    private var xRange: Range<Int> { origin.x ..< (origin.x + width) }
-    private var yRange: Range<Int> { origin.y ..< (origin.y + height) }
+    private var xRange: Range<Int> { origin.x ..< (origin.x + width + 1) }
+    private var yRange: Range<Int> { origin.y ..< (origin.y + height + 1) }
     
     public init(origin: Position, width: Int, height: Int) {
         var oX = origin.x
