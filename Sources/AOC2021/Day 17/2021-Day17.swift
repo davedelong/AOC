@@ -10,8 +10,15 @@ import AOCCore
 
 class Day17: Day {
     
-    let targetArea = PointRect(origin: Position(x: 70, y: -179), width: 26, height: 55)
-//    let targetArea = PointRect(origin: Position(x: 20, y: -10), width: 10, height: 5)
+    lazy var targetArea: PointRect = {
+        let ints = input.integers
+        return PointRect(xRange: ints[0] ... ints[1], yRange: ints[2] ... ints[3])
+    }()
+    
+    override init() {
+        super.init(rawInput: "target area: x=70..96, y=-179..-124")
+        // super.init(rawInput: "target area: x=20..30, y=-10..-5")
+    }
 
     override func run() -> (String, String) {
         // observe: the x velocity proceeds as triangular numbers:
