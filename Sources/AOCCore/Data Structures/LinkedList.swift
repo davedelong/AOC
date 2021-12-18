@@ -7,18 +7,9 @@
 
 import Foundation
 
-fileprivate class LLNode<T> {
-    let value: T
-    weak var prev: LLNode<T>?
-    var next: LLNode<T>?
-    fileprivate init(_ value: T) {
-        self.value = value
-    }
-}
-
 public struct LinkedListIterator<Value>: IteratorProtocol {
     fileprivate let list: LinkedList<Value>
-    private var current: LLNode<Value>?
+    private var current: LinkedList<Value>.Node?
     private let mutationCount: Int
     
     init(_ list: LinkedList<Value>) {
@@ -39,8 +30,17 @@ public struct LinkedListIterator<Value>: IteratorProtocol {
 
 public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     
-    fileprivate var head: LLNode<Element>?
-    private var tail: LLNode<Element>?
+    public class Node {
+        public var value: Element
+        public fileprivate(set) weak var prev: Node?
+        public fileprivate(set) var next: Node?
+        fileprivate init(_ value: Element) {
+            self.value = value
+        }
+    }
+    
+    public private(set) var head: Node?
+    public private(set) var tail: Node?
     fileprivate var mutationCounter = 0
     
     public private(set) var count: Int = 0
@@ -64,7 +64,7 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     public var first: Element? { return head?.value }
     public var last: Element? { return tail?.value }
     
-    private func node(at index: Int) -> LLNode<Element>? {
+    private func node(at index: Int) -> Node? {
         var current = head
         var offset = 0
         while offset < index && current != nil {
@@ -74,14 +74,28 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
         return current
     }
     
+    // copying
+    
+    public func copy() -> LinkedList<Element> {
+        let c = LinkedList<Element>()
+        for item in self {
+            c.append(item)
+        }
+        return c
+    }
+    
     // additions
     
     public func append(_ value: Element) {
-        insert(value, at: count)
+        let node = Node(value)
+        tail?.next = node
+        node.prev = tail
+        tail = node
+        if head == nil { head = node }
     }
     
     public func insert(_ value: Element, at index: Int) {
-        let node = LLNode(value)
+        let node = Node(value)
         
         if index <= 0 {
             node.next = head
@@ -105,6 +119,43 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
             fatalError("Unable to insert value at index \(index)")
         }
         count += 1
+        mutationCounter += 1
+    }
+    
+    @discardableResult
+    public func insert(_ value: Element, after prior: Node) -> Node {
+        let node = Node(value)
+        
+        let next = prior.next
+        prior.next = node
+        node.prev = prior
+        
+        node.next = next
+        next?.prev = node
+        
+        if next == nil {
+            tail = node
+        }
+        count += 1
+        mutationCounter += 1
+        
+        return node
+    }
+    
+    public func delete(_ node: Node) {
+        let prior = node.prev
+        let after = node.next
+        
+        prior?.next = after
+        after?.prev = prior
+        
+        if prior == nil {
+            head = after
+        }
+        if after == nil {
+            tail = prior
+        }
+        count -= 1
         mutationCounter += 1
     }
     
@@ -150,7 +201,7 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
     
     public func remove(at index: Int) -> Element {
         guard index >= 0 && index < count else { fatalError("Cannot retrieve node at index \(index)") }
-        let n: LLNode<Element>
+        let n: Node
         if index == 0 {
             n = head!
         } else if index == count - 1 {
@@ -173,6 +224,12 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
         count -= 1
         mutationCounter += 1
         return value
+    }
+    
+    public func append<S: Sequence>(contentsOf sequence: S) where S.Element == Element {
+        for i in sequence {
+            self.append(i)
+        }
     }
     
     // iteration
