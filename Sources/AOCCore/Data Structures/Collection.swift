@@ -197,6 +197,22 @@ public extension Sequence {
         }
         return final!
     }
+    
+    func range<N: Comparable>(of element: (Element) -> N) -> ClosedRange<N> {
+        var r: ClosedRange<N>?
+        
+        for i in self {
+            let value = element(i)
+            if let range = r {
+                if value < range.lowerBound { r = value ... range.upperBound }
+                if value > range.upperBound { r = range.lowerBound ... value }
+            } else {
+                r = value ... value
+            }
+        }
+        
+        return r!
+    }
 }
 
 public extension Collection where Element: Comparable {
@@ -297,6 +313,13 @@ public extension Collection where Element: Hashable {
         return final
     }
     
+}
+
+public extension Collection where Element: Collection {
+    
+    func flatten() -> Array<Element.Element> {
+        flatMap { $0 }
+    }
 }
 
 public extension BidirectionalCollection {

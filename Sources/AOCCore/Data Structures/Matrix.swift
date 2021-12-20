@@ -57,6 +57,12 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         }).joined(separator: "\n ") + "]"
     }
     
+    public func describe(_ element: (T) -> String) -> String {
+        return data.map({ row -> String in
+            row.map(element).joined()
+        }).joined(separator: "\n")
+    }
+    
     public init(_ initial: [[T]]) {
         data = initial
     }
@@ -253,23 +259,27 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     }
     
     public func withSlidingWindow(of size: Size, perform: (Array<Array<T>>) -> Void) {
+        withSlidingWindow(of: size, perform: { _, values in perform(values) })
+    }
+    
+    public func withSlidingWindow(of size: Size, perform: (Position, Array<Array<T>>) -> Void) {
         let xTranslations = data[0].count - size.width
         let yTranslations = data.count - size.height
         
         guard xTranslations > 0 else { return }
         guard yTranslations > 0 else { return }
         
-        for yOffset in (0 ..< yTranslations) {
-            for xOffset in (0 ..< xTranslations) {
+        for yOffset in (0 ... yTranslations) {
+            for xOffset in (0 ... xTranslations) {
                 var window = Array<Array<T>>()
                 for h in (0 ..< size.height) {
                     let row = data[yOffset + h]
                     window.append(Array(row[xOffset ..< (xOffset + size.width)]))
                 }
-                perform(window)
+                let p = Position(x: xOffset, y: yOffset)
+                perform(p, window)
             }
         }
-        
     }
     
     public func position(of element: T) -> Position? {
@@ -311,7 +321,8 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     public func forEach(_ element: (Position, T) -> Void) {
         for r in 0 ..< rowCount {
             for c in 0 ..< colCount {
-                element(Position(row: r, column: c), self[r, c])
+                let p = Position(row: r, column: c)
+                element(p, self[p])
             }
         }
     }

@@ -14,6 +14,15 @@ public struct XYGrid<T> {
     
     public init() { }
     
+    public init(data: Array<Array<T>>) {
+        for y in 0 ..< data.count {
+            let row = data[y]
+            for x in 0 ..< row.count {
+                self[x, y] = row[x]
+            }
+        }
+    }
+    
     public subscript(key: XY) -> T? {
         get { return grid[key] }
         set { grid[key] = newValue }
@@ -90,6 +99,10 @@ public struct XYGrid<T> {
         }
         
         return final
+    }
+    
+    public func forEach(_ element: (Position, T) -> Void) {
+        grid.forEach(element)
     }
 }
 

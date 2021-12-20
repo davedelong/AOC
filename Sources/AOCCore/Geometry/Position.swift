@@ -58,6 +58,16 @@ public extension Point2 {
         return surround
     }
     
+    func centeredWindow(of size: Size) -> Array<Position> {
+        let xMin = x - size.width/2
+        let xMax = xMin + size.width - 1
+        
+        let yMin = y - size.height/2
+        let yMax = yMin + size.height - 1
+        
+        return Position.all(in: xMin...xMax, yMin...yMax)
+    }
+    
     func neighbors() -> Array<Position> {
         return [
             move(.north),
