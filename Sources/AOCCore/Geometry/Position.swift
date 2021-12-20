@@ -89,13 +89,6 @@ public extension Point2 {
         }
     }
     
-    func vector(to other: Position) -> Vector2 {
-        if other == self { return .zero }
-        let dx = other.x - self.x
-        let dy = other.y - self.y
-        return Vector2(x: dx, y: dy)
-    }
-    
     func unitVector(to other: Position) -> Vector2 {
         var v = self.vector(to: other)
         if v.x != 0 { v.x /= abs(v.x) }

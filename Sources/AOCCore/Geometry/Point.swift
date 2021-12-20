@@ -9,8 +9,9 @@
 import Foundation
 
 public protocol PointProtocol: Hashable, CustomStringConvertible {
+    associatedtype Vector: VectorProtocol
     static var numberOfComponents: Int { get }
-    var components: Array<Int> { get set }
+    var components: Array<Int> { get }
     init(_ components: Array<Int>)
 }
 
@@ -62,23 +63,23 @@ public extension PointProtocol {
         return Self.init(ints)
     }
     
-    static func +<V: VectorProtocol>(lhs: Self, rhs: V) -> Self {
-        guard numberOfComponents == V.numberOfComponents else {
-            fatalError("Cannot add a Vector\(V.numberOfComponents) to a Point\(numberOfComponents)")
+    static func +(lhs: Self, rhs: Vector) -> Self {
+        guard numberOfComponents == Vector.numberOfComponents else {
+            fatalError("Cannot add a Vector\(Vector.numberOfComponents) to a Point\(numberOfComponents)")
         }
         let new = zip(lhs.components, rhs.components).map { $0 + $1 }
         return Self.init(new)
     }
     
-    static func +=<V: VectorProtocol>(lhs: inout Self, rhs: V) {
+    static func +=(lhs: inout Self, rhs: Vector) {
         lhs = lhs + rhs
     }
     
-    static func -<V: VectorProtocol>(lhs: Self, rhs: V) -> Self {
+    static func -(lhs: Self, rhs: Vector) -> Self {
         return lhs + -rhs
     }
     
-    static func -=<V: VectorProtocol>(lhs: inout Self, rhs: V) {
+    static func -=(lhs: inout Self, rhs: Vector) {
         lhs = lhs - rhs
     }
     
@@ -149,57 +150,69 @@ public extension PointProtocol {
         
         return closest
     }
+    
+    func vector(to other: Self) -> Vector {
+        if other == self { return .zero }
+        assert(Vector.numberOfComponents == Self.numberOfComponents)
+        
+        let deltas = zip(components, other.components).map(-)
+        return Vector(deltas)
+    }
+    
+    func apply(_ vector: Vector) -> Self {
+        assert(Vector.numberOfComponents == Self.numberOfComponents)
+        return Self(zip(components, vector.components).map(+))
+    }
 }
 
 public struct Point2: PointProtocol {
+    public typealias Vector = Vector2
     public static let numberOfComponents = 2
     
-    public var components: Array<Int>
+    public var components: Array<Int> { [x, y] }
     
-    public var x: Int {
-        get { return components[0] }
-        set { components[0] = newValue }
+    public let x: Int
+    public let y: Int
+    
+    public var row: Int { y }
+    public var col: Int { x }
+    
+    public init(x: Int, y: Int) {
+        self.x = x; self.y = y
     }
-    
-    public var y: Int {
-        get { return components[1] }
-        set { components[1] = newValue }
-    }
-    
-    public var row: Int { return components[1] }
-    public var col: Int { return components[0] }
     
     public init(_ components: Array<Int>) {
         guard components.count == Point2.numberOfComponents else {
             fatalError("Invalid components provided to \(#function). Expected \(Point2.numberOfComponents), but got \(components.count)")
         }
-        self.components = components
+        self.init(x: components[0], y: components[1])
     }
     
-    public init(x: Int, y: Int) { self.init([x, y]) }
-    public init(row: Int, column: Int) { self.init([column, row]) }
+    public init(row: Int, column: Int) { self.init(x: column, y: row) }
 }
 
 public struct Point3: PointProtocol {
+    public typealias Vector = Vector3
     public static let numberOfComponents = 3
     
-    public var components: Array<Int>
+    public var components: Array<Int> { [x, y, z] }
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var z: Int { return components[2] }
+    public let x: Int
+    public let y: Int
+    public let z: Int
     
     public init(_ components: Array<Int>) {
         guard components.count == Point3.numberOfComponents else {
             fatalError("Invalid components provided to \(#function). Expected \(Point3.numberOfComponents), but got \(components.count)")
         }
-        self.components = components
+        self.init(x: components[0], y: components[1], z: components[2])
     }
     
-    public init(x: Int, y: Int, z: Int) { self.init([x, y, z]) }
+    public init(x: Int, y: Int, z: Int) { self.x = x; self.y = y; self.z = z }
 }
 
 public struct Point4: PointProtocol {
+    public typealias Vector = Vector4
     public static let numberOfComponents = 4
     
     public var components: Array<Int>

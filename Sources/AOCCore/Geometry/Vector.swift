@@ -9,7 +9,7 @@ import Foundation
 
 public protocol VectorProtocol: Hashable, CustomStringConvertible {
     static var numberOfComponents: Int { get }
-    var components: Array<Int> { get set }
+    var components: Array<Int> { get }
     init(_ components: Array<Int>)
 }
 
@@ -17,6 +17,8 @@ public extension VectorProtocol {
     var description: String {
         return "(" + components.map { "\($0)" }.joined(separator: ", ") + ")"
     }
+    
+    var magnitude: Self { return Self(components.map(abs)) }
 }
 
 public extension VectorProtocol {
@@ -74,34 +76,32 @@ public struct Vector2: VectorProtocol {
         Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
     ]
     
-    public var components: Array<Int>
+    public var components: Array<Int> {
+        get { [x, y] }
+        set { x = newValue[0]; y = newValue[1] }
+    }
     
-    public var x: Int {
-        get { components[0] }
-        set { components[0] = newValue }
-    }
-    public var y: Int {
-        get { components[1] }
-        set { components[1] = newValue }
-    }
+    public var x: Int
+    public var y: Int
+    
     public var row: Int {
-        get { components[1] }
-        set { components[1] = newValue }
+        get { y }
+        set { y = newValue }
     }
     public var col: Int {
-        get { components[0] }
-        set { components[0] = newValue }
+        get { x }
+        set { x = newValue }
     }
     
     public init(_ components: Array<Int>) {
         guard components.count == Vector2.numberOfComponents else {
             fatalError("Invalid components provided to \(#function). Expected \(Vector2.numberOfComponents), but got \(components.count)")
         }
-        self.components = components
+        self.init(x: components[0], y: components[1])
     }
     
-    public init(x: Int, y: Int) { self.init([x, y]) }
-    public init(row: Int, column: Int) { self.init([column, row]) }
+    public init(x: Int, y: Int) { self.x = x; self.y = y }
+    public init(row: Int, column: Int) { self.init(x: column, y: row) }
     
     public func rotateLeft() -> Vector2 { Vector2(x: -y, y: x) }
     public func rotateRight() -> Vector2 { Vector2(x: y, y: -x) }
@@ -129,29 +129,23 @@ public struct Vector2: VectorProtocol {
 public struct Vector3: VectorProtocol {
     public static let numberOfComponents = 3
     
-    public var components: Array<Int>
+    public var components: Array<Int> {
+        get { [x, y, z] }
+        set { x = newValue[0]; y = newValue[1]; z = newValue[2] }
+    }
     
-    public var x: Int {
-        get { components[0] }
-        set { components[0] = newValue }
-    }
-    public var y: Int {
-        get { components[1] }
-        set { components[1] = newValue }
-    }
-    public var z: Int {
-        get { components[2] }
-        set { components[2] = newValue }
-    }
+    public var x: Int
+    public var y: Int
+    public var z: Int
     
     public init(_ components: Array<Int>) {
         guard components.count == Vector3.numberOfComponents else {
             fatalError("Invalid components provided to \(#function). Expected \(Vector3.numberOfComponents), but got \(components.count)")
         }
-        self.components = components
+        self.init(x: components[0], y: components[1], z: components[2])
     }
     
-    public init(x: Int, y: Int, z: Int) { self.init([x, y, z]) }
+    public init(x: Int, y: Int, z: Int) { self.x = x; self.y = y; self.z = z }
 }
 
 public struct Vector4: VectorProtocol {

@@ -34,9 +34,7 @@ class Day17: Day {
         var space = Space<P>()
         for (y, row) in input.lines.enumerated() {
             for (x, col) in row.characters.enumerated() {
-                var p = P.zero
-                p.components[0] = x
-                p.components[1] = y
+                let p = P([x, y])
                 space[p] = col == "#" ? () : nil
             }
         }

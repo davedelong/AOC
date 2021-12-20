@@ -371,6 +371,11 @@ public extension Array {
         return final
     }
     
+    mutating func popFirst() -> Element? {
+        if isEmpty { return nil }
+        return removeFirst()
+    }
+    
 }
 
 extension ArraySlice {

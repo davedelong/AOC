@@ -83,8 +83,7 @@ extension PointRect: Sequence {
         public mutating func next() -> Position? {
             var next = point.offset(dx: 1, dy: 0)
             if rect.contains(next) == false {
-                next.x = rect.origin.x
-                next.y += 1
+                next = Position(x: rect.origin.x, y: next.y + 1)
             }
             point = next
             if rect.contains(next) == false { return nil }
