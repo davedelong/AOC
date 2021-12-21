@@ -22,6 +22,15 @@ public enum CircularList {
             cw = self
         }
         
+        public convenience init<C: Collection>(values: C) where C.Element == T {
+            self.init(values.first!)
+            
+            var current: Node<T> = self
+            for value in values.dropFirst() {
+                current = current.insert(after: value)
+            }
+        }
+        
         public func insert(after value: T) -> Node<T> {
             let after = cw!
             
@@ -73,6 +82,19 @@ public enum CircularList {
             return c
         }
         
+    }
+    
+}
+
+extension CircularList.Node where T: Equatable {
+    
+    public func find(value: T) -> CircularList.Node<T>? {
+        var current = self
+        repeat {
+            if current.value == value { return current }
+            current = current.cw
+        } while current !== self
+        return nil
     }
     
 }
