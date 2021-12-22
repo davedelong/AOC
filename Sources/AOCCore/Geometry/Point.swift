@@ -10,6 +10,8 @@ import Foundation
 
 public protocol PointProtocol: Hashable, CustomStringConvertible {
     associatedtype Vector: VectorProtocol
+    associatedtype Span: SpanProtocol where Span.Point == Self
+    
     static var numberOfComponents: Int { get }
     var components: Array<Int> { get }
     init(_ components: Array<Int>)
@@ -167,6 +169,7 @@ public extension PointProtocol {
 
 public struct Point2: PointProtocol {
     public typealias Vector = Vector2
+    public typealias Span = PointSpan2
     public static let numberOfComponents = 2
     
     public var components: Array<Int> { [x, y] }
@@ -193,6 +196,7 @@ public struct Point2: PointProtocol {
 
 public struct Point3: PointProtocol {
     public typealias Vector = Vector3
+    public typealias Span = PointSpan3
     public static let numberOfComponents = 3
     
     public var components: Array<Int> { [x, y, z] }
@@ -213,6 +217,7 @@ public struct Point3: PointProtocol {
 
 public struct Point4: PointProtocol {
     public typealias Vector = Vector4
+    public typealias Span = PointSpan4
     public static let numberOfComponents = 4
     
     public var components: Array<Int>

@@ -64,12 +64,11 @@ class Day21: Day {
         // keeping track of "given this game state, how many times does p1 win vs p2 win?"
         var outcomeCounts = Dictionary<GameState, (Int, Int)>()
         
-        func countWins(p1: Int, p2: Int, s1: Int, s2: Int) -> (p1: Int, p2: Int) {
-            if s1 >= 21 { return (1, 0) } // player 1 always wins
-            if s2 >= 21 { return (0, 1) } // player 2 always wins
+        func countWins(_ state: GameState) -> (p1: Int, p2: Int) {
+            if state.s1 >= 21 { return (1, 0) } // player 1 always wins
+            if state.s2 >= 21 { return (0, 1) } // player 2 always wins
             
             // see if we've calculated this game before
-            let state = GameState(p1: p1, p2: p2, s1: s1, s2: s2)
             if let e = outcomeCounts[state] { return e }
             
             var answer = (0, 0)
@@ -89,13 +88,13 @@ class Day21: Day {
              */
             for (rollTotal, times) in [3: 1, 4: 3, 5: 6, 6: 7, 7: 6, 8: 3, 9: 1] {
                 // find player 1's new position and score
-                let total = p1 + rollTotal
+                let total = state.p1 + rollTotal
                 let newP1 = (total > 10) ? total-10 : total
-                let newS1 = s1 + newP1
+                let newS1 = state.s1 + newP1
                 
                 // recurse, but swap player 1 and player 2 (because p2 goes next and "becomes" player 1)
                 // this allows us to re-use game states for p1/p2
-                let (p2Wins, p1Wins) = countWins(p1: p2, p2: newP1, s1: s2, s2: newS1)
+                let (p2Wins, p1Wins) = countWins(.init(p1: state.p2, p2: newP1, s1: state.s2, s2: newS1))
                 // add up the respective win counts
                 answer = (answer.0 + p1Wins * times, answer.1 + p2Wins * times)
             }
@@ -104,7 +103,7 @@ class Day21: Day {
             return answer
         }
         
-        let (p1Wins, p2Wins) = countWins(p1: 1, p2: 3, s1: 0, s2: 0)
+        let (p1Wins, p2Wins) = countWins(.init(p1: 1, p2: 3, s1: 0, s2: 0))
         return max(p1Wins, p2Wins).description
     }
 

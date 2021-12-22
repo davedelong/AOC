@@ -23,3 +23,22 @@ extension Range where Bound: Strideable {
     }
     
 }
+
+extension ClosedRange {
+    
+    public func overlap(with other: Self) -> Self? {
+        let left = self.lowerBound < other.lowerBound ? self : other
+        let right = (left == self) ? other : self
+        
+        if left.lowerBound < right.lowerBound {
+            if left.upperBound < right.lowerBound { return nil }
+            if left.upperBound == right.lowerBound { return right.lowerBound ... right.lowerBound }
+            if left.upperBound <= right.upperBound { return right.lowerBound ... left.upperBound }
+            /* if left.upperBound > right.upperBound { */ return right
+        } else {
+            assert(left.lowerBound == right.lowerBound)
+            return left.lowerBound ... Swift.min(left.upperBound, right.upperBound)
+        }
+    }
+    
+}
