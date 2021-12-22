@@ -28,7 +28,7 @@ class Day3: Day {
         let line1 = words[0].map { word -> Segment in
             let h = Heading(character: word.characters[0])!
             let l = Int(word.raw.dropFirst())!
-            let n = current.move(h, length: l)
+            let n = current.move(along: h, length: l)
             let s = Segment(start: current, end: n)
             current = n
             return s
@@ -38,7 +38,7 @@ class Day3: Day {
         let line2 = words[1].map { word -> Segment in
             let h = Heading(character: word.characters[0])!
             let l = Int(word.raw.dropFirst())!
-            let n = current.move(h, length: l)
+            let n = current.move(along: h, length: l)
             let s = Segment(start: current, end: n)
             current = n
             return s

@@ -118,23 +118,28 @@ public extension PointProtocol {
         return pairs.reduce(0) { $0 + abs($1.0 - $1.1) }
     }
     
-    func allSurroundingPoints() -> Array<Self> {
-        let combos = self.combos(around: components)
-        return combos.map(Self.init(_:)).filter { $0 != self }
+    func allNeighbors() -> Array<Self> {
+        let vectors = Vector.adjacents(orthogonalOnly: false, includingSelf: false)
+        return vectors.map { self.apply($0) }
     }
     
-    private func combos<C: Collection>(around: C) -> Array<Array<Int>> where C.Element == Int {
-        guard let f = around.first else { return [] }
-        let remainders = combos(around: around.dropFirst())
-        
-        if remainders.isEmpty {
-            return [[f-1], [f], [f+1]]
-        }
-        let before = remainders.map { [f-1] + $0 }
-        let during = remainders.map { [f] + $0 }
-        let after = remainders.map { [f+1] + $0 }
-        
-        return before + during + after
+    func orthogonalNeighbors() -> Array<Self> {
+        let vectors = Vector.adjacents(orthogonalOnly: true, includingSelf: false)
+        return vectors.map { self.apply($0) }
+    }
+    
+    func neighbors(includingDiagonals: Bool) -> Array<Self> {
+        let vectors = Vector.adjacents(orthogonalOnly: !includingDiagonals, includingSelf: false)
+        return vectors.map { self.apply($0) }
+    }
+    
+    func neighbors() -> Array<Self> { orthogonalNeighbors() }
+    func allSurroundingPoints() -> Array<Self> { allNeighbors() }
+    func surroundingPositions(includingDiagonals: Bool = false) -> Array<Self> { neighbors(includingDiagonals: includingDiagonals) }
+    
+    func centeredWindow(length: Int) -> Array<Self> {
+        let vectors = Vector.adjacents(orthogonalOnly: false, includingSelf: true, length: length)
+        return vectors.map { self.apply($0) }
     }
     
     func closestPosition<C: Collection>(in points: C) -> Self? where C.Element == Self {
@@ -161,78 +166,24 @@ public extension PointProtocol {
         return Vector(deltas)
     }
     
+    // a heading is strictly orthogonal
+    func heading(to other: Self) -> Vector? {
+        let componentDifferences = zip(components, other.components).map { $1 - $0 }
+        // only one vector component can be non-zero
+        // otherwise it's not orthogonal
+        guard componentDifferences.count(where: { $0 != 0 }) == 1 else { return nil }
+        return Vector(componentDifferences)
+    }
+    
     func apply(_ vector: Vector) -> Self {
         assert(Vector.numberOfComponents == Self.numberOfComponents)
         return Self(zip(components, vector.components).map(+))
     }
-}
-
-public struct Point2: PointProtocol {
-    public typealias Vector = Vector2
-    public typealias Span = PointSpan2
-    public static let numberOfComponents = 2
     
-    public var components: Array<Int> { [x, y] }
+    func move(_ vector: Vector) -> Self { apply(vector) }
     
-    public let x: Int
-    public let y: Int
-    
-    public var row: Int { y }
-    public var col: Int { x }
-    
-    public init(x: Int, y: Int) {
-        self.x = x; self.y = y
+    func move(along vector: Vector, length: Int = 1) -> Self {
+        let scaled = vector * length
+        return apply(scaled)
     }
-    
-    public init(_ components: Array<Int>) {
-        guard components.count == Point2.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point2.numberOfComponents), but got \(components.count)")
-        }
-        self.init(x: components[0], y: components[1])
-    }
-    
-    public init(row: Int, column: Int) { self.init(x: column, y: row) }
-}
-
-public struct Point3: PointProtocol {
-    public typealias Vector = Vector3
-    public typealias Span = PointSpan3
-    public static let numberOfComponents = 3
-    
-    public var components: Array<Int> { [x, y, z] }
-    
-    public let x: Int
-    public let y: Int
-    public let z: Int
-    
-    public init(_ components: Array<Int>) {
-        guard components.count == Point3.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point3.numberOfComponents), but got \(components.count)")
-        }
-        self.init(x: components[0], y: components[1], z: components[2])
-    }
-    
-    public init(x: Int, y: Int, z: Int) { self.x = x; self.y = y; self.z = z }
-}
-
-public struct Point4: PointProtocol {
-    public typealias Vector = Vector4
-    public typealias Span = PointSpan4
-    public static let numberOfComponents = 4
-    
-    public var components: Array<Int>
-    
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var z: Int { return components[2] }
-    public var t: Int { return components[3] }
-    
-    public init(_ components: Array<Int>) {
-        guard components.count == Point4.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point4.numberOfComponents), but got \(components.count)")
-        }
-        self.components = components
-    }
-    
-    public init(x: Int, y: Int, z: Int, t: Int) { self.init([x, y, z, t]) }
 }

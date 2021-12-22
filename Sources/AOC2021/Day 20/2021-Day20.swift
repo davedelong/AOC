@@ -51,7 +51,7 @@ class Day20: Day {
         for x in xRange {
             for y in yRange {
                 let p = Position(x: x, y: y)
-                let window = p.centeredWindow(of: Size(width: 3, height: 3))
+                let window = p.centeredWindow(length: 3)
                 
                 let bits = window.map { grid[$0] ?? infiniteValue }
                 let index = Int(bits: bits)

@@ -52,6 +52,33 @@ public extension VectorProtocol {
         return Self.init(new)
     }
     
+    internal static func adjacents(orthogonalOnly: Bool, includingSelf: Bool, length: Int = 3) -> Array<Self> {
+        let combos = self.combos(count: Self.numberOfComponents, length: length)
+        var all = combos.map(Self.init(_:))
+        if orthogonalOnly { all = all.filter(\.isOrthogonal) }
+        if includingSelf == false { all = all.filter(\.isNotZero) }
+        return all
+    }
+    
+    private static func combos(count: Int, length: Int) -> Array<Array<Int>> {
+        guard count > 0 else { return [] }
+        let remainders = combos(count: count-1, length: length)
+        
+        let lengthRange = (-length/2) ... (-length/2 + length - 1)
+        if remainders.isEmpty { return Array(lengthRange).map { [$0] } }
+        
+        return lengthRange.flatMap { l -> Array<Array<Int>> in
+            return remainders.map { [l] + $0 }
+        }
+    }
+    
+    var isZero: Bool { components.allSatisfy { $0 == 0 } }
+    var isNotZero: Bool { !isZero }
+    
+    var isOrthogonal: Bool {
+        return components.count(where: { $0 != 0 }) <= 1
+    }
+    
     func manhattanDistance(to other: Self) -> Int {
         let pairs = zip(components, other.components)
         return pairs.reduce(0) { $0 + abs($1.0 - $1.1) }

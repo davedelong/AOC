@@ -22,6 +22,10 @@ extension Range where Bound: Strideable {
         set { self = newValue ..< newValue.advanced(by: length) }
     }
     
+    public var asClosedRange: ClosedRange<Bound> {
+        let u = self.upperBound.advanced(by: -1)
+        return self.lowerBound ... u
+    }
 }
 
 extension ClosedRange {
@@ -39,6 +43,19 @@ extension ClosedRange {
             assert(left.lowerBound == right.lowerBound)
             return left.lowerBound ... Swift.min(left.upperBound, right.upperBound)
         }
+    }
+    
+}
+
+extension ClosedRange where Bound: Strideable {
+    
+    public init(extreme: Bound, length: Bound.Stride) {
+        let e1 = extreme
+        let e2 = extreme.advanced(by: length)
+        
+        let lower = Swift.min(e1, e2)
+        let upper = Swift.max(e1, e2)
+        self = lower ... upper.advanced(by: -1)
     }
     
 }

@@ -8,11 +8,9 @@
 import Foundation
 import GameplayKit
 
-public struct XYGrid<T> {
-    
-    public private(set) var grid = Dictionary<XY, T>()
-    
-    public init() { }
+public typealias XYGrid<T> = Space<Point2, T>
+
+extension Space where P == Point2 {
     
     public init(data: Array<Array<T>>) {
         for y in 0 ..< data.count {
@@ -23,18 +21,13 @@ public struct XYGrid<T> {
         }
     }
     
-    public subscript(key: XY) -> T? {
-        get { return grid[key] }
-        set { grid[key] = newValue }
-    }
-    
     public subscript(x: Int, _ y: Int) -> T? {
         get { self[Point2(x: x, y: y)] }
         set { self[Point2(x: x, y: y)] = newValue }
     }
     
-    public var positions: Dictionary<XY, T>.Keys { return grid.keys }
-    public var values: Dictionary<XY, T>.Values { return grid.values }
+    public var positions: Dictionary<P, T>.Keys { return grid.keys }
+    public var values: Dictionary<P, T>.Values { return grid.values }
     
     public func draw(using renderer: (T?) -> String) {
         print(render(using: renderer))
@@ -43,13 +36,13 @@ public struct XYGrid<T> {
     public func render(using renderer: (T?) -> String) -> String {
         var final = String()
         
-        let xRange = grid.keys.map { $0.x }.range()
-        let yRange = grid.keys.map { $0.y }.range()
+        let xRange = grid.keys.map(\.x).range()
+        let yRange = grid.keys.map(\.y).range()
         
         for y in yRange {
             for x in xRange {
-                let xy = XY(x: x, y: y)
-                let s = renderer(grid[xy])
+                let p = P(x: x, y: y)
+                let s = renderer(grid[p])
                 final.append(s)
             }
             final.append("\n")
@@ -106,7 +99,7 @@ public struct XYGrid<T> {
     }
 }
 
-extension XYGrid where T == Bool {
+extension Space where P == Point2, T == Bool {
     
     public func render() -> String {
         return self.render(using: { $0 == true ? "⬛️" : "⬜️" })
@@ -116,16 +109,6 @@ extension XYGrid where T == Bool {
         print(render())
     }
     
-}
-
-extension XYGrid: Equatable where T: Equatable {
-    public static func ==(lhs: XYGrid<T>, rhs: XYGrid<T>) -> Bool { return lhs.grid == rhs.grid }
-}
-
-extension XYGrid: Hashable where T: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(grid)
-    }
 }
 
 public class GridNode<T>: GKGridGraphNode {

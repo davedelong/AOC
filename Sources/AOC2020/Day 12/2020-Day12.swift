@@ -35,11 +35,11 @@ class Day12: Day {
         for i in instructions {
             switch i {
                 case .move(let h, let d):
-                    p = p.move(h, length: d)
+                    p = p.move(along: h, length: d)
                 case .turn(let left, let times):
                     h = h.turn(left: left, times: times)
                 case .forward(let d):
-                    p = p.move(h, length: d)
+                    p = p.move(along: h, length: d)
             }
         }
         

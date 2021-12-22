@@ -43,7 +43,7 @@ class Day11: Day {
                     } else {
                         currentHeading = currentHeading.turnRight()
                     }
-                    currentPosition = currentPosition.move(currentHeading, length: 1)
+                    currentPosition = currentPosition.move(currentHeading)
                 }
                 wantsColor.toggle()
             }
