@@ -60,7 +60,9 @@ open class Day: NSObject {
     
     open func run() -> (String, String) {
         return autoreleasepool {
-            (part1(), part2())
+            let p1 = part1()
+            let p2 = part2()
+            return (p1, p2)
         }
     }
     open func part1() -> String { fatalError("Implement \(#function)") }

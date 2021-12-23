@@ -14,6 +14,13 @@ public protocol VectorProtocol: Hashable, CustomStringConvertible {
 }
 
 public extension VectorProtocol {
+    
+    static func assertComponents(_ components: Array<Int>, caller: StaticString = #function) {
+        if components.count != numberOfComponents {
+            fatalError("Invalid components provided to \(caller). Expected \(numberOfComponents), but got \(components.count)")
+        }
+    }
+    
     var description: String {
         return "(" + components.map { "\($0)" }.joined(separator: ", ") + ")"
     }
@@ -121,9 +128,7 @@ public struct Vector2: VectorProtocol {
     }
     
     public init(_ components: Array<Int>) {
-        guard components.count == Vector2.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Vector2.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.init(x: components[0], y: components[1])
     }
     
@@ -166,9 +171,7 @@ public struct Vector3: VectorProtocol {
     public var z: Int
     
     public init(_ components: Array<Int>) {
-        guard components.count == Vector3.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Vector3.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.init(x: components[0], y: components[1], z: components[2])
     }
     
@@ -198,9 +201,7 @@ public struct Vector4: VectorProtocol {
     }
     
     public init(_ components: Array<Int>) {
-        guard components.count == Vector4.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Vector4.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.components = components
     }
     

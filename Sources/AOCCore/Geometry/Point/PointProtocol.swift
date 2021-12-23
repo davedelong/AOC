@@ -13,11 +13,18 @@ public protocol PointProtocol: Hashable, CustomStringConvertible {
     associatedtype Span: SpanProtocol where Span.Point == Self
     
     static var numberOfComponents: Int { get }
+    
     var components: Array<Int> { get }
     init(_ components: Array<Int>)
 }
 
 public extension PointProtocol {
+    
+    static func assertComponents(_ components: Array<Int>, caller: StaticString = #function) {
+        if components.count != numberOfComponents {
+            fatalError("Invalid components provided to \(caller). Expected \(numberOfComponents), but got \(components.count)")
+        }
+    }
     
     var description: String {
         return "(" + components.map(\.description).joined(separator: ", ") + ")"

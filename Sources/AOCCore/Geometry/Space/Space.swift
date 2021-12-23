@@ -35,3 +35,9 @@ extension Space: Hashable where T: Hashable {
         hasher.combine(grid)
     }
 }
+
+extension Space: Sequence {
+    
+    public func makeIterator() -> Dictionary<P, T>.Iterator { grid.makeIterator() }
+    
+}

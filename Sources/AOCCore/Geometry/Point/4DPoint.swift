@@ -20,9 +20,7 @@ public struct Point4: PointProtocol {
     public var t: Int { return components[3] }
     
     public init(_ components: Array<Int>) {
-        guard components.count == Point4.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point4.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.components = components
     }
     

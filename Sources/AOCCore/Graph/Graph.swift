@@ -66,6 +66,7 @@ public struct Graph<ID: Hashable, Value: Equatable> {
         }
     }
     
+    public var ids: Set<ID> { Set(nodesByID.keys) }
     public var values: Array<Value> { nodesByID.values.map(\.value) }
     
     public var defaultTravelCost: Float {

@@ -27,6 +27,11 @@ public extension Dictionary where Value == Int {
         return self[item, default: 0]
     }
     
+    mutating func insert(item: Key, times: Int) {
+        guard times > 0 else { return }
+        self[item, default: 0] += times
+    }
+    
     mutating func remove(item: Key) {
         if let value = self[item] {
             if value > 1 {
