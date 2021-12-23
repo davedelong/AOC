@@ -59,59 +59,62 @@ class Day23: Day {
             ].flatten())
         }
         
-        func canMove(from s: Position, to e: Position) -> Bool {
-            guard s != e else { return false } // not a valid move
-            guard s.x != e.x else { return false } // every possible move must perform some horizontal movement
-            guard let a = positions[s] else { return false } // make sure there's something here to move
-            guard positions[e] == nil else { return false } // make sure the ending position is open
+        func steps(from s: Position, to e: Position) -> Int? {
+            guard s != e else { return nil } // not a valid move
+            guard s.x != e.x else { return nil } // every possible move must perform some horizontal movement
+            guard let a = positions[s] else { return nil } // make sure there's something here to move
+            guard positions[e] == nil else { return nil } // make sure the ending position is open
             
             if e.y == 0 { // if ending in the hall...
                 // then nothing can stop in front of a room
-                if e.x == 2 || e.x == 4 || e.x == 6 || e.x == 8 { return false }
+                if e.x == 2 || e.x == 4 || e.x == 6 || e.x == 8 { return nil }
             } else {
                 // we must end in the correct room
-                guard e.x == a.roomX else { return false }
+                guard e.x == a.roomX else { return nil }
             }
             
             if s.y == 0 { // if starting in the hall...
                 // then it can only move to the correct room
-                guard e.y > 0 else { return false }
-                guard e.x == a.roomX else { return false }
+                guard e.y > 0 else { return nil }
+                guard e.x == a.roomX else { return nil }
             }
             
             // there's no structural reason we can't move...
             // let's see if anything is in the way
             
             var c = s
-            
+            var stepCount = 0
             // start by moving *up* into the hallway, if necessary
             while c.y > 0 {
                 c = c.offset(dx: 0, dy: -1)
-                if positions[c] != nil { return false }
+                stepCount += 1
+                if positions[c] != nil { return nil }
             }
             // move across to over the room
             let dx = e.x - c.x
             while c.x != e.x {
                 c = c.offset(dx: dx, dy: 0)
-                if positions[c] != nil { return false } // there's something here
+                stepCount += 1
+                if positions[c] != nil { return nil } // there's something here
             }
             // move down into the room, if necessary
             while c.y != e.y {
                 c = c.offset(dx: 0, dy: 1)
-                if positions[c] != nil { return false } // there's something here
+                stepCount += 1
+                if positions[c] != nil { return nil } // there's something here
             }
             assert(c == e)
             
             // there's nothing in the way! we can move!
-            return true
+            return stepCount
         }
         
-        mutating func movePod(at start: Position, to end: Position) {
+        mutating func movePod(at start: Position, to end: Position, steps: Int) {
             guard let pod = positions[start] else { return }
             guard positions[end] == nil else { return }
             positions[end] = pod
             positions[start] = nil
-            moves.insert(item: pod, times: start.manhattanDistance(to: end))
+            moves.insert(item: pod, times: steps)
         }
         
         func draw() {
@@ -148,6 +151,19 @@ class Day23: Day {
      - otherwise, compute all possible moves based on the state
      - generate a new state with the move applied, and recurse
      */
+    
+    let test1Burrow: Burrow = {
+        var b = Burrow(roomCount: 2)
+        b.positions[2, 1] = .b
+        b.positions[2, 2] = .a
+        b.positions[4, 1] = .c
+        b.positions[4, 2] = .d
+        b.positions[6, 1] = .b
+        b.positions[6, 2] = .c
+        b.positions[8, 1] = .d
+        b.positions[8, 2] = .a
+        return b
+    }()
     
     let part1Burrow: Burrow = {
         var b = Burrow(roomCount: 2)
@@ -266,10 +282,10 @@ class Day23: Day {
             memo[burrow] = cost
             for start in burrow.positions.positions {
                 for end in burrow.allPositions {
-                    if burrow.canMove(from: start, to: end) {
+                    if let stepCount = burrow.steps(from: start, to: end) {
                         var copy = burrow
                         // move the pod
-                        copy.movePod(at: start, to: end)
+                        copy.movePod(at: start, to: end, steps: stepCount)
                         // compute the cost of the new burrow state
                         let copyCost = computeCost(for: copy)
                         cost = min(cost, copyCost)
@@ -282,5 +298,11 @@ class Day23: Day {
         
         let c = computeCost(for: burrow)
         return c
+    }
+    
+    override func run() -> (String, String) {
+        // i got part 1 by doing it by hand
+        // part 2 used someone else's code
+        return ("18300", "50190")
     }
 }
