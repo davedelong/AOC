@@ -36,6 +36,10 @@ class Day23: Day {
     }
     
     struct Burrow: Hashable {
+        // burrows are equal if the positions of the amphipods are identical
+        static func ==(lhs: Self, rhs: Self) -> Bool { lhs.positions == rhs.positions }
+        func hash(into hasher: inout Hasher) { positions.hash(into: &hasher) }
+        
         let roomCount: Int
         let allPositions: Array<Position>
         
@@ -236,16 +240,15 @@ class Day23: Day {
         var memo = Dictionary<Burrow, Int>()
         
         func computeCost(for burrow: Burrow) -> Int {
-            if burrow.isFinished {
-                return burrow.cost
-            }
+            if burrow.isFinished { return burrow.cost }
             if let c = memo[burrow] { return c }
             
             // it's not finished; compute all possible moves
             var cost = Int.max
             // if we recurse to this state again, assume it's unsolveable
+            // (because we'll be in the middle of solving it)
             memo[burrow] = cost
-            for start in burrow.allPositions {
+            for start in burrow.positions.positions {
                 for end in burrow.allPositions {
                     if burrow.canMove(from: start, to: end) {
                         var copy = burrow
@@ -254,9 +257,6 @@ class Day23: Day {
                         // compute the cost of the new burrow state
                         let copyCost = computeCost(for: copy)
                         cost = min(cost, copyCost)
-                        memo[burrow] = cost
-                    } else {
-                        // cannot move between these two positions
                     }
                 }
             }
