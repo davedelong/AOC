@@ -55,42 +55,33 @@ class Day23: Day {
             ].flatten()
         }
         
-        func stepsToMove(from s: Position, to e: Position) -> Int? {
-            guard s != e else { return nil } // not a valid move
-            guard s.y != e.y else { return nil } // can only move from room to hall and vice versa
-            guard s.x != e.x else { return nil } // can only move from room to hall and vice versa
+        func canMove(from s: Position, to e: Position) -> Bool {
+            guard s != e else { return false } // not a valid move
+            guard s.y != e.y else { return false } // can only move from room to hall and vice versa
+            guard s.x != e.x else { return false } // can only move from room to hall and vice versa
             
-            guard let a = positions[s] else { return nil } // make sure there's something here to move
-            guard positions[e] == nil else { return nil } // make sure the ending position is open
+            guard let a = positions[s] else { return false } // make sure there's something here to move
+            guard positions[e] == nil else { return false } // make sure the ending position is open
             
             if e.y == 0 { // if ending in the hall...
                 // then nothing can stop in front of a room
-                if e.x == 2 || e.x == 4 || e.x == 6 || e.x == 8 { return nil }
+                if e.x == 2 || e.x == 4 || e.x == 6 || e.x == 8 { return false }
             }
             
             if s.y == 0 { // if starting in the hall...
                 // then it can only move to the correct room
-                guard e.y != 0 else { return nil }
-                guard e.x == a.roomX else { return nil }
+                guard e.y != 0 else { return false }
+                guard e.x == a.roomX else { return false }
             }
             
             if s.x > 0 { // if starting inside a room ...
                 // then it can only move to the hallway
-                guard e.y == 0 else { return nil }
+                guard e.y == 0 else { return false }
             }
             
-            let steps = intermediateSteps(from: s, to: e)
-            for i in steps {
-                // we cannot move through an occupied position
-                if positions[i] != nil { return nil }
-            }
+            // there's no structural reason we can't move...
+            // let's see if anything is in the way
             
-            // the number of steps is the manhattan distance between them
-            return s.manhattanDistance(to: e)
-        }
-        
-        private func intermediateSteps(from s: Position, to e: Position) -> Array<Position> {
-            var intermediate = Array<Position>()
             let vector = e.vector(to: s)
             var c = s
             
@@ -98,26 +89,34 @@ class Day23: Day {
                 // starting in the hall; move to over the room first, then down into the room
                 while c.x != e.x {
                     c = c.offset(dx: vector.x.signum(), dy: 0)
-                    intermediate.append(c)
+                    if positions[c] != nil { return false } // there's something here
                 }
                 while c.y != e.y {
                     c = c.offset(dx: 0, dy: vector.y.signum())
-                    intermediate.append(c)
+                    if positions[c] != nil { return false } // there's something here
                 }
             } else {
                 // starting in the room; move up to the hall first, then across
                 while c.y != e.y {
                     c = c.offset(dx: 0, dy: vector.y.signum())
-                    intermediate.append(c)
+                    if positions[c] != nil { return false } // there's something here
                 }
                 while c.x != e.x {
                     c = c.offset(dx: vector.x.signum(), dy: 0)
-                    intermediate.append(c)
+                    if positions[c] != nil { return false }
                 }
             }
             
-            assert(intermediate.last == e)
-            return intermediate.dropLast()
+            // there's nothing in the way! we can move!
+            return true
+        }
+        
+        mutating func movePod(at start: Position, to end: Position) {
+            guard let pod = positions[start] else { return }
+            guard positions[end] == nil else { return }
+            positions[end] = pod
+            positions[start] = nil
+            moves.insert(item: pod, times: start.manhattanDistance(to: end))
         }
     }
     
@@ -248,14 +247,14 @@ class Day23: Day {
             memo[burrow] = cost
             for start in burrow.allPositions {
                 for end in burrow.allPositions {
-                    if let steps = burrow.stepsToMove(from: start, to: end) {
+                    if burrow.canMove(from: start, to: end) {
                         var copy = burrow
-                        let pod = copy.positions[start]!
-                        copy.positions[end] = pod
-                        copy.positions[start] = nil
-                        copy.moves.insert(item: pod, times: steps)
+                        // move the pod
+                        copy.movePod(at: start, to: end)
+                        // compute the cost of the new burrow state
                         let copyCost = computeCost(for: copy)
                         cost = min(cost, copyCost)
+                        memo[burrow] = cost
                     } else {
                         // cannot move between these two positions
                     }
