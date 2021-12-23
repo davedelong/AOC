@@ -41,7 +41,7 @@ class Day23: Day {
         func hash(into hasher: inout Hasher) { positions.hash(into: &hasher) }
         
         let roomCount: Int
-        let allPositions: Array<Position>
+        let allPositions: Set<Position>
         
         var positions = XYGrid<Amphipod>()
         var moves = CountedSet<Amphipod>()
@@ -50,66 +50,57 @@ class Day23: Day {
         
         init(roomCount: Int) {
             self.roomCount = roomCount
-            self.allPositions = [
+            self.allPositions = Set([
                 (0...10).map { Position(x: $0, y: 0) },
                 (1...roomCount).map { Position(x: 2, y: $0) },
                 (1...roomCount).map { Position(x: 4, y: $0) },
                 (1...roomCount).map { Position(x: 6, y: $0) },
                 (1...roomCount).map { Position(x: 8, y: $0) },
-            ].flatten()
+            ].flatten())
         }
         
         func canMove(from s: Position, to e: Position) -> Bool {
             guard s != e else { return false } // not a valid move
-            guard s.y != e.y else { return false } // can only move from room to hall and vice versa
-            guard s.x != e.x else { return false } // can only move from room to hall and vice versa
-            
+            guard s.x != e.x else { return false } // every possible move must perform some horizontal movement
             guard let a = positions[s] else { return false } // make sure there's something here to move
             guard positions[e] == nil else { return false } // make sure the ending position is open
             
             if e.y == 0 { // if ending in the hall...
                 // then nothing can stop in front of a room
                 if e.x == 2 || e.x == 4 || e.x == 6 || e.x == 8 { return false }
+            } else {
+                // we must end in the correct room
+                guard e.x == a.roomX else { return false }
             }
             
             if s.y == 0 { // if starting in the hall...
                 // then it can only move to the correct room
-                guard e.y != 0 else { return false }
+                guard e.y > 0 else { return false }
                 guard e.x == a.roomX else { return false }
-            }
-            
-            if s.x > 0 { // if starting inside a room ...
-                // then it can only move to the hallway
-                guard e.y == 0 else { return false }
             }
             
             // there's no structural reason we can't move...
             // let's see if anything is in the way
             
-            let vector = e.vector(to: s)
             var c = s
             
-            if s.y == 0 {
-                // starting in the hall; move to over the room first, then down into the room
-                while c.x != e.x {
-                    c = c.offset(dx: vector.x.signum(), dy: 0)
-                    if positions[c] != nil { return false } // there's something here
-                }
-                while c.y != e.y {
-                    c = c.offset(dx: 0, dy: vector.y.signum())
-                    if positions[c] != nil { return false } // there's something here
-                }
-            } else {
-                // starting in the room; move up to the hall first, then across
-                while c.y != e.y {
-                    c = c.offset(dx: 0, dy: vector.y.signum())
-                    if positions[c] != nil { return false } // there's something here
-                }
-                while c.x != e.x {
-                    c = c.offset(dx: vector.x.signum(), dy: 0)
-                    if positions[c] != nil { return false }
-                }
+            // start by moving *up* into the hallway, if necessary
+            while c.y > 0 {
+                c = c.offset(dx: 0, dy: -1)
+                if positions[c] != nil { return false }
             }
+            // move across to over the room
+            let dx = e.x - c.x
+            while c.x != e.x {
+                c = c.offset(dx: dx, dy: 0)
+                if positions[c] != nil { return false } // there's something here
+            }
+            // move down into the room, if necessary
+            while c.y != e.y {
+                c = c.offset(dx: 0, dy: 1)
+                if positions[c] != nil { return false } // there's something here
+            }
+            assert(c == e)
             
             // there's nothing in the way! we can move!
             return true
@@ -121,6 +112,29 @@ class Day23: Day {
             positions[end] = pod
             positions[start] = nil
             moves.insert(item: pod, times: start.manhattanDistance(to: end))
+        }
+        
+        func draw() {
+            print("#############")
+            print("#", terminator: "")
+            for x in 0 ... 10 {
+                let b = positions[x, 0]?.rawValue ?? "."
+                print(b, terminator: "")
+            }
+            print("#")
+            for r in 1 ... roomCount {
+                for x in -1 ... 11 {
+                    let p = Position(x: x, y: r)
+                    if allPositions.contains(p) {
+                        let b = positions[p]?.rawValue ?? "."
+                        print(b, terminator: "")
+                    } else {
+                        print("#", terminator: "")
+                    }
+                }
+                print("")
+            }
+            print("  #########  ")
         }
     }
     
@@ -242,7 +256,9 @@ class Day23: Day {
         func computeCost(for burrow: Burrow) -> Int {
             if burrow.isFinished { return burrow.cost }
             if let c = memo[burrow] { return c }
-            
+//
+//            print("")
+//            burrow.draw()
             // it's not finished; compute all possible moves
             var cost = Int.max
             // if we recurse to this state again, assume it's unsolveable
