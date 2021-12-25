@@ -17,8 +17,8 @@ public struct Point2: PointProtocol {
     
     public var components: Array<Int> { [x, y] }
     
-    public let x: Int
-    public let y: Int
+    public var x: Int
+    public var y: Int
     
     public var row: Int { y }
     public var col: Int { x }

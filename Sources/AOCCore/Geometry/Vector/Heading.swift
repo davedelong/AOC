@@ -33,6 +33,11 @@ public extension Vector2 {
             case "L": self = .left
             case "R": self = .right
                 
+            case "^": self = .down  // assuming top-left origin, y *shrinks*
+            case "v": self = .up    // assuming top-left origin, y *grows*
+            case "<": self = .left
+            case ">": self = .right
+                
             case "N": self = .north
             case "S": self = .south
             case "E": self = .east

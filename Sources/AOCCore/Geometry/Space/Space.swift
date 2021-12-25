@@ -8,8 +8,9 @@
 import Foundation
 
 public struct Space<P: PointProtocol, T> {
+    public typealias Storage = Dictionary<P, T>
     
-    public private(set) var grid = Dictionary<P, T>()
+    public private(set) var grid = Storage()
     
     public init() { }
     
@@ -37,7 +38,20 @@ extension Space: Hashable where T: Hashable {
 }
 
 extension Space: Sequence {
+    public func makeIterator() -> Storage.Iterator { grid.makeIterator() }
+}
+
+extension Space: Collection {
+    public subscript(position: Storage.Index) -> Storage.Element {
+        get { grid[position] }
+    }
     
-    public func makeIterator() -> Dictionary<P, T>.Iterator { grid.makeIterator() }
-    
+    public var startIndex: Storage.Index { grid.startIndex }
+    public var endIndex: Storage.Index { grid.endIndex }
+    public typealias Index = Storage.Index
+
+    public var count: Int { grid.count }
+    public func index(after i: Storage.Index) -> Storage.Index { grid.index(after: i) }
+    public func index(_ i: Storage.Index, offsetBy distance: Int) -> Storage.Index { grid.index(i, offsetBy: distance) }
+    public func distance(from start: Storage.Index, to end: Storage.Index) -> Int { grid.distance(from: start, to: end) }
 }

@@ -115,6 +115,7 @@ extension Collection where Element: StringInput {
     public var trimmed: Array<Element> { return map { $0.trimmed } }
     public var lines: Array<Array<Line>> { return map { $0.lines } }
     public var words: Array<Array<Word>> { return map { $0.words } }
+    public var rawWords: Array<Array<String>> { map { $0.words.raw } }
     public var csvWords: Array<Array<Word>> { return map { $0.csvWords } }
     public func words(separatedBy: CharacterSet) -> Array<Array<Word>> {
         return map { $0.words(separatedBy: separatedBy) }
