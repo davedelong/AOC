@@ -13,14 +13,13 @@ class Day3: Day {
         case tree = "#"
     }
     
-    lazy var landscapeElevations = input.lines.characters.map { $0.compactMap(Landscape.init(rawValue:)) }
+    lazy var landscapeElevations = input().lines.characters.map { $0.compactMap(Landscape.init(rawValue:)) }
 
-    override func part1() -> String {
-        let count = traverse(using: Vector2(x: 3, y: 1))
-        return "\(count)"
+    func part1() async throws -> Int {
+        return traverse(using: Vector2(x: 3, y: 1))
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         let vectors = [
             Vector2(x: 1, y: 1),
             Vector2(x: 3, y: 1),
@@ -33,7 +32,7 @@ class Day3: Day {
             self.traverse(using: $0)
         }
         
-        return "\(counts.product)"
+        return counts.product
     }
     
     func traverse(using vector: Vector2) -> Int {

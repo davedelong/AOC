@@ -30,12 +30,9 @@ class Day24: Day {
         func has(input: Int) -> Bool { return a == input || b == input }
     }
     
-    var ports: Set<Port> = []
-    
-    @objc override init() {
-        super.init()
-        ports = Set(input.lines.raw.indexed().map { Port(id: $0, string: $1) })
-    }
+    lazy var ports: Set<Port> = {
+        Set(input().lines.raw.indexed().map { Port(id: $0, string: $1) })
+    }()
     
     func nextItem(in chain: Chain) -> Int {
         var next = 0
@@ -54,7 +51,7 @@ class Day24: Day {
         return nextPorts.map { chain + [$0] }
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         
         var unimprovableChains = Array<Chain>()
         var improvableChains = extend(chain: [])

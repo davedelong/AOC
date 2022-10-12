@@ -12,8 +12,8 @@ class Day8: Day {
 
     typealias Digit = Set<Character>
 
-    override func part1() -> String {
-        let words = input.lines.words.raw.flatMap { words -> Array<Digit> in
+    func part1() async throws -> Int {
+        let words = input().lines.words.raw.flatMap { words -> Array<Digit> in
             let index = words.firstIndex(of: "|")!
             let slice = words[index+1 ..< words.count]
             return slice.map { Digit($0) }
@@ -25,11 +25,11 @@ class Day8: Day {
                    word.count == 3 ||   // seven
                    word.count == 7      // eight
         })
-        return "\(count)"
+        return count
     }
 
-    override func part2() -> String {
-        let numbers = input.lines.words.raw.map { words -> Int in
+    func part2() async throws -> Int {
+        let numbers = input().lines.words.raw.map { words -> Int in
             let index = words.firstIndex(of: "|")!
             
             let input = words[0 ..< index ].map { Digit($0) }
@@ -38,7 +38,7 @@ class Day8: Day {
             return deduce(signals: input, output: output)
         }
         
-        return "\(numbers.sum)"
+        return numbers.sum
     }
     
     /*

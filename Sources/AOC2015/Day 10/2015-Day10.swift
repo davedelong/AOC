@@ -8,12 +8,12 @@
 
 class Day10: Day {
     
-    @objc override init() { super.init(rawInput: "1321131112") }
+    static var rawInput: String? { "1321131112" }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var p1 = ""
         
-        var data = input.characters
+        var data = input().characters
         
         for i in 1 ... 50 {
             let subSequences = data.consecutivelyEqualSubsequences()

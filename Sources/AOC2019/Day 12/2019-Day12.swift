@@ -56,7 +56,7 @@ class Day12: Day {
         }
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var p1: String? = nil
         var p2: String? = nil
         

@@ -14,8 +14,8 @@ class Day10: Day {
         case error(Character)
     }
 
-    override func run() -> (String, String) {
-        let lines = input.lines.characters
+    func run() async throws -> (Int, Int) {
+        let lines = input().lines.characters
         var part1 = 0
         
         var completions = Array<String>()
@@ -53,7 +53,7 @@ class Day10: Day {
         let sortedScores = scores.sorted(by: <)
         let part2 = sortedScores.median()
         
-        return ("\(part1)", "\(part2)")
+        return (part1, part2)
     }
     
     private func parseChunk(_ remaining: inout ArraySlice<Character>) -> ParseResult {

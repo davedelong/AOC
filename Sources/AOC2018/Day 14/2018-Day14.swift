@@ -8,16 +8,16 @@
 
 class Day14: Day {
     
-    @objc override init() { super.init(rawInput: "330121") }
+    static var rawInput: String? { "330121" }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         
         var scores = [3, 7]
         
         var elf1Position = 0
         var elf2Position = 1
         
-        let target = input.integer!
+        let target = input().integer!
         
         while scores.count < target+10 {
             let e1Score = scores[elf1Position]
@@ -39,14 +39,14 @@ class Day14: Day {
         return answer
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         
         var scores = [3, 7]
         
         var elf1Position = 0
         var elf2Position = 1
         var lastScanPosition = 0
-        let scanningFor = ArraySlice(input.characters.integers)
+        let scanningFor = ArraySlice(input().characters.integers)
         
         while true {
             let e1Score = scores[elf1Position]

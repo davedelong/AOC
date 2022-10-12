@@ -28,12 +28,12 @@ class Day7: Day {
 
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         let nameRegex: Regex = #"^(.+?) bags?"#
         let bagRegex: Regex = #"(\d+) (.+?) bags?"#
         
         var nodes = Dictionary<String, Bag>()
-        for line in input.rawLines {
+        for line in input().lines.raw {
             let name = nameRegex.firstMatch(in: line)![1]!
             let nameNode = nodes[name, inserting: Bag(name: name)]
             
@@ -47,7 +47,7 @@ class Day7: Day {
         
         let p1 = target.allParents.count
         let p2 = target.totalCount
-        return ("\(p1)", "\(p2)")
+        return (p1, p2)
     }
 
 }

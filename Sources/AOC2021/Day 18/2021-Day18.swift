@@ -12,7 +12,7 @@ class Day18: Day {
     
     let useOriginalApproach = true
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         if useOriginalApproach {
             return approach1_part1()
         } else {
@@ -20,7 +20,7 @@ class Day18: Day {
         }
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         if useOriginalApproach {
             return approach2_part1()
         } else {
@@ -40,7 +40,7 @@ class Day18: Day {
     }
     
     var parseInput: Array<LinkedList<RidiculousFish>> {
-        return input.rawLines.map { line -> LinkedList<RidiculousFish> in
+        return input().lines.raw.map { line -> LinkedList<RidiculousFish> in
             let l = LinkedList<RidiculousFish>()
             for char in line {
                 switch char {
@@ -207,7 +207,7 @@ class Day18: Day {
     // MARK: initial implementation
     
     var fish: Array<Fish> {
-        return input.lines.characters.map { chars -> Fish in
+        return input().lines.characters.map { chars -> Fish in
             var slice = chars[...]
             var allFish = Dictionary<Int, Fish>()
             let fish = parseFish(&slice, allFish: &allFish)

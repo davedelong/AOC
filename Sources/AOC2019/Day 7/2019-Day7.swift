@@ -59,12 +59,12 @@ class Day7: Day {
 //        super.init(rawInput: "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5")
 //    }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var m = 0
         for n in (0...4).permutations() {
             var io = 0
             for phase in n {
-                io = Amp(phase: phase, code: self.input.integers).runP1(input: io)
+                io = Amp(phase: phase, code: self.input().integers).runP1(input: io)
             }
             m = max(m, io)
         }
@@ -72,7 +72,7 @@ class Day7: Day {
         return "\(m)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         
         var m = 0
         for n in (5...9).permutations() {
@@ -83,11 +83,11 @@ class Day7: Day {
     }
     
     private func runAmpsInFeedbackMode(_ phases: Array<Int>) -> Int {
-        let a = Amp(phase: phases[0], code: input.integers)
-        let b = Amp(phase: phases[1], code: input.integers)
-        let c = Amp(phase: phases[2], code: input.integers)
-        let d = Amp(phase: phases[3], code: input.integers)
-        let e = Amp(phase: phases[4], code: input.integers)
+        let a = Amp(phase: phases[0], code: input().integers)
+        let b = Amp(phase: phases[1], code: input().integers)
+        let c = Amp(phase: phases[2], code: input().integers)
+        let d = Amp(phase: phases[3], code: input().integers)
+        let e = Amp(phase: phases[4], code: input().integers)
         
         var eOutput = 0
         while e.isFinished == false {

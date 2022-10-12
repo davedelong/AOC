@@ -9,8 +9,8 @@
 
 class Day7: Day {
 
-    override func part1() -> String {
-        let positions = input.integers
+    func part1() async throws -> Int {
+        let positions = input().integers
         let range = positions.range()
         
         func cost(to position: Int) -> Int {
@@ -18,11 +18,11 @@ class Day7: Day {
         }
         
         let least = range.lazy.map(cost(to:)).min()!
-        return "\(least)"
+        return least
     }
 
-    override func part2() -> String {
-        let positions = input.integers
+    func part2() async throws -> Int {
+        let positions = input().integers
         let range = positions.range()
         
         func cost(to position: Int) -> Int {
@@ -30,7 +30,7 @@ class Day7: Day {
         }
         
         let least = range.lazy.map(cost(to:)).min()!
-        return "\(least)"
+        return least
     }
 
 }

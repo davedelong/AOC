@@ -17,7 +17,7 @@ class Day6: Day {
     
     lazy var commands: Array<Command> = {
         let r = Regex(#"(toggle|turn on|turn off) (\d+),(\d+) through (\d+),(\d+)"#)
-        return input.lines.raw.map { l -> Command in
+        return input().lines.raw.map { l -> Command in
             let m = r.firstMatch(in: l)!
             let p1Action: (Bit) -> Bit
             let p2Action: (Int) -> Int
@@ -37,7 +37,7 @@ class Day6: Day {
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var m = Dictionary<Position, Bit>()
         for cmd in commands {
             let positions = Position.all(in: cmd.rowRange, cmd.columnRange)
@@ -49,7 +49,7 @@ class Day6: Day {
         return "\(count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var m = Dictionary<Position, Int>()
         for cmd in commands {
             let positions = Position.all(in: cmd.rowRange, cmd.columnRange)

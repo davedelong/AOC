@@ -8,8 +8,8 @@
 
 class Day2: Day {
         
-    override func part1() -> String {
-        let rawLines = input.lines.raw
+    func part1() async throws -> String {
+        let rawLines = input().lines.raw
         
         // this groups the lines by the number of repeated characters
         // so b[1] contains all the lines that have a character that does not repeat
@@ -20,8 +20,8 @@ class Day2: Day {
         return "\(c)"
     }
 
-    override func part2() -> String {
-        let linesOfCharacters = input.lines.characters // Array<Array<Character>>
+    func part2() async throws -> String {
+        let linesOfCharacters = input().lines.characters // Array<Array<Character>>
         
         for (index, line) in linesOfCharacters.indexed() {
             let next = linesOfCharacters.index(after: index)

@@ -12,9 +12,9 @@ class Day4: Day {
     let fields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
     let colors = Set(["amb", "blu", "brn", "gry", "grn", "hzl", "oth"])
     
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         let r: Regex = #"^(.+):(.+)$"#
-        let passportChunks = input.raw.components(separatedBy: "\n\n")
+        let passportChunks = input().raw.components(separatedBy: "\n\n")
         let passports = passportChunks.map { chunk -> Passport in
             let pairs = chunk
                 .components(separatedBy: .whitespacesAndNewlines)
@@ -26,7 +26,7 @@ class Day4: Day {
         let p1 = passports.filter(p1_isValid(_:))
         let p2 = p1.filter(p2_isValid(_:))
         
-        return ("\(p1.count)", "\(p2.count)")
+        return (p1.count, p2.count)
     }
     
     private func p1_isValid(_ ps: Passport) -> Bool {

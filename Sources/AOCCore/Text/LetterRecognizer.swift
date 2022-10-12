@@ -60,177 +60,178 @@ public func RecognizeLetters(from input: String) -> String {
     return recognized
     
 }
-// missing: I, M, Q, S, T, V, W
-private let definitions: Dictionary<String, String> = [
-    "A":
-"""
+
+struct Letter {
+    let character: Character
+    let pattern: String
+    
+    let height: Int
+    let width: Int
+    
+    init(character: Character, pattern: String) {
+        self.character = character
+        self.pattern = pattern
+        
+        let lines = pattern.split(separator: "\n")
+        self.height = lines.count
+        self.width = lines.map(\.count).max()!
+    }
+}
+
+extension Letter {
+    // missing: I, M, Q, S, T, V, W
+    static let all = [a, b, c, d, e, f, g, h, j, k, l, n, o, p, r, u, x, y, z]
+    
+    static let a = Letter(character: "A", pattern: """
  ##
 #  #
 #  #
 ####
 #  #
 #  #
-""",
-    "B":
-"""
+""")
+    static let b = Letter(character: "B", pattern: """
 ###
 #  #
 ###
 #  #
 #  #
 ###
-""",
-    "C":
-"""
+""")
+    static let c = Letter(character: "C", pattern: """
  ##
 #  #
 #
 #
 #  #
  ##
-""",
-    "D":
-"""
+""")
+    static let d = Letter(character: "D", pattern: """
 ###
 #  #
 #  #
 #  #
 #  #
 ###
-""",
-    "E":
-"""
+""")
+    static let e = Letter(character: "E", pattern: """
 ####
 #
 ###
 #
 #
 ####
-""",
-    "F":
-"""
+""")
+    static let f = Letter(character: "F", pattern: """
 ####
 #
 ###
 #
 #
 #
-""",
-    "G":
-"""
+""")
+    static let g = Letter(character: "G", pattern: """
  ##
 #  #
 #
 # ##
 #  #
  ###
-""",
-    "H":
-"""
+""")
+    static let h = Letter(character: "H", pattern: """
 #  #
 #  #
 ####
 #  #
 #  #
 #  #
-""",
-    "J":
-"""
+""")
+    static let j = Letter(character: "J", pattern: """
   ##
    #
    #
    #
 #  #
  ##
-""",
-    "K":
-"""
+""")
+    static let k = Letter(character: "K", pattern: """
 #  #
 # #
 ##
 # #
 # #
 #  #
-""",
-    "L":
-"""
+""")
+    static let l = Letter(character: "L", pattern: """
 #
 #
 #
 #
 #
 ####
-""",
-    "N":
-"""
+""")
+    static let n = Letter(character: "N", pattern: """
 #  #
 ## #
 ## #
 # ##
 # ##
 #  #
-""",
-    "O":
-"""
+""")
+    static let o = Letter(character: "O", pattern: """
  ##
 #  #
 #  #
 #  #
 #  #
  ##
-""",
-    "P":
-"""
+""")
+    static let p = Letter(character: "P", pattern: """
 ###
 #  #
 #  #
 ###
 #
 #
-""",
-    "R":
-"""
+""")
+    static let r = Letter(character: "R", pattern: """
 ###
 #  #
 #  #
 ###
 # #
 #  #
-""",
-    "U":
-"""
+""")
+    static let u = Letter(character: "U", pattern: """
 #  #
 #  #
 #  #
 #  #
 #  #
  ##
-""",
-    "X":
-"""
+""")
+    static let x = Letter(character: "X", pattern: """
 #  #
 #  #
  ##
  ##
 #  #
 #  #
-""",
-    "Y":
-"""
+""")
+    static let y = Letter(character: "Y", pattern: """
 #   #
 #   #
  # #
   #
   #
   #
-""",
-    "Z":
-"""
+""")
+    static let z = Letter(character: "Z", pattern: """
 ####
    #
   #
  #
 #
 ####
-"""
-]
+""")
+}

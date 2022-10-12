@@ -8,8 +8,8 @@
 
 class Day10: Day {
     
-    override func run() -> (String, String) {
-        let adapters = input.lines.integers.sorted()
+    func run() async throws -> (Int, Int) {
+        let adapters = input().lines.integers.sorted()
         let diffs = adapters.reversed().consecutivePairs().map(-)
         let p1 = (diffs.count(of: 1) + 1) * (diffs.count(of: 3) + 1)
         
@@ -19,6 +19,6 @@ class Day10: Day {
         }
         let p2 = memo[adapters.last!]!
         
-        return ("\(p1)", "\(p2)")
+        return (p1, p2)
     }
 }

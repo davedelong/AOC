@@ -13,12 +13,8 @@ class Day11: Day {
         case white = 1
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
     private func paint(initialPanelColor: Color) -> Dictionary<XY, Color> {
-        let intcode = Intcode(memory: input.integers)
+        let intcode = Intcode(memory: input().integers)
         
         var panels = Dictionary<XY, Color>()
         var currentHeading = Heading.north
@@ -51,13 +47,13 @@ class Day11: Day {
         return panels
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let panels = paint(initialPanelColor: .black)
         let count = panels.count
         return "\(count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let panels = paint(initialPanelColor: .white)
         
         let yRange = panels.keys.map { $0.y }.range()

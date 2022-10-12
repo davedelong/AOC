@@ -15,7 +15,7 @@ class Day3: Day {
     
     lazy var claims: Array<Claim> = {
         let claimRegex = Regex(#"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$"#)
-        let claims = input.lines.raw.map { line -> Claim in
+        let claims = input().lines.raw.map { line -> Claim in
             let match = claimRegex.firstMatch(in: line)!
             
             let x = match.int(2)!
@@ -30,7 +30,7 @@ class Day3: Day {
         return claims
     }()
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         let counts = CountedSet(counting: claims.flatMap { $0.positions })
         let part1 = counts.values.count(where: { $0 >= 2 })
         let part2 = claims.first { c in c.positions.allSatisfy { counts[$0] == 1 } }!.id

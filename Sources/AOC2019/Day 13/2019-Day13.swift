@@ -20,12 +20,8 @@ class Day13: Day {
         case ball = 4
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
-        let i = Intcode(memory: input.integers)
+    func part1() async throws -> String {
+        let i = Intcode(memory: input().integers)
         
         var final = Dictionary<XY, Tile>()
         var next = Array<Int>()
@@ -45,8 +41,8 @@ class Day13: Day {
         return "\(c)"
     }
     
-    override func part2() -> String {
-        let i = Intcode(memory: input.integers)
+    func part2() async throws -> String {
+        let i = Intcode(memory: input().integers)
         i.memory[0] = 2
         
         var grid = Dictionary<XY, Tile>()

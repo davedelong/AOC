@@ -8,8 +8,8 @@
 
 class Day8: Day {
     
-    override func part1() -> String {
-        let linesOfCharacters = input.lines.characters
+    func part1() async throws -> String {
+        let linesOfCharacters = input().lines.characters
         let numberOfCodeCharacters = linesOfCharacters.map { $0.count }.sum
         
         let cleaned = linesOfCharacters.map { chars -> String in
@@ -42,8 +42,8 @@ class Day8: Day {
         return "\(numberOfCodeCharacters - numberOfCleanedCharacters)"
     }
     
-    override func part2() -> String {
-        let linesOfCharacters = input.lines.characters
+    func part2() async throws -> String {
+        let linesOfCharacters = input().lines.characters
         
         let encodedCharacters = linesOfCharacters.map { chars -> String in
             var final = "\""

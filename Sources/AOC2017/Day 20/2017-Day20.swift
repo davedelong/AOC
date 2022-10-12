@@ -38,11 +38,11 @@ class Day20: Day {
     }
     
     func particles() -> Array<Particle> {
-        let rawParticles = input.lines.raw
+        let rawParticles = input().lines.raw
         return rawParticles.indexed().map { Particle(id: $0, line: $1) }
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let allParticles = particles()
         var overallClosest = -1
         for _ in 0 ..< 1_000 {
@@ -62,7 +62,7 @@ class Day20: Day {
         return "\(overallClosest)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         var remaining = particles()
         var collided = Set<Particle>()
         

@@ -11,7 +11,7 @@ import Foundation
 class Day12: Day {
     
     lazy var json: Any = {
-        let d = Data(input.raw.utf8)
+        let d = Data(input().raw.utf8)
         return try! JSONSerialization.jsonObject(with: d, options: [])
     }()
     
@@ -30,7 +30,7 @@ class Day12: Day {
         }
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var sum = 0
         walkJSON(json) { j in
             let n = (j as? Int) ?? 0
@@ -40,7 +40,7 @@ class Day12: Day {
         return "\(sum)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var sum = 0
         walkJSON(json) { j -> Bool in
             let d = j as? Dictionary<String, Any>

@@ -9,15 +9,15 @@
 class Day2: Day {
     
     lazy var integers: Array<Array<Int>> = {
-        return input.lines.words.integers
+        return input().lines.words.integers
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let answer = integers.map { $0.max()! - $0.min()! }.sum
         return "\(answer)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let answer = integers.map { row -> Int in
             row.map { item in
                 let divisions = row.map { Double($0) / Double(item) }

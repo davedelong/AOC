@@ -13,7 +13,7 @@ class Day13: Day {
     
     lazy var rules: Array<Rule> = {
         let r = Regex(#"(.+?) would (gain|lose) (\d+) happiness units by sitting next to (.+?)\."#)
-        return input.lines.raw.map { l in
+        return input().lines.raw.map { l in
             let m = r.firstMatch(in: l)!
             let person1 = m[1]!
             let multiplier = m[2] == "gain" ? 1 : -1
@@ -54,7 +54,7 @@ class Day13: Day {
         return cost
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let allPeople = Set(rules.flatMap { [$0.0, $0.1] })
         
         let allArrangements = allPeople.flatMap {
@@ -67,7 +67,7 @@ class Day13: Day {
         return "\(mostHappyFirst[0].1)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var rulesWithMe = rules
         var allPeople = Set(rulesWithMe.flatMap { [$0.0, $0.1] })
         for p in allPeople {

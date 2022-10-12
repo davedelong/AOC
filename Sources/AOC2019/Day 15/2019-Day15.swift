@@ -139,12 +139,8 @@ class Droid {
 
 class Day15: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
-        let i = Intcode(memory: input.integers)
+    func part1() async throws -> String {
+        let i = Intcode(memory: input().integers)
         let d = Droid(code: i)
         let o2 = d.run()
         d.draw()
@@ -152,7 +148,7 @@ class Day15: Day {
         return "\(p1)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
     

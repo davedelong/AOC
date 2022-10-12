@@ -6,20 +6,20 @@
 //  Copyright © 2015 Dave DeLong. All rights reserved.
 //
 
-class Day1: Day {
+struct Day1: Day {
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var floor = 0
-        for char in input.characters {
+        for char in input().characters {
             if char == "(" { floor += 1 }
             if char == ")" { floor -= 1 }
         }
         return "\(floor)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var floor = 0
-        for (position, char) in input.characters.indexed() {
+        for (position, char) in input().characters.indexed() {
             if char == "(" { floor += 1 }
             if char == ")" { floor -= 1 }
             if floor == -1 { return "\(position + 1)" }

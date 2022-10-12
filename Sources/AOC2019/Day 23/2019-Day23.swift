@@ -27,11 +27,7 @@ fileprivate class Computer {
 
 class Day23: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
+    func part1() async throws -> String {
         
         let inputs = (0 ..< 50).map { idx -> LinkedList<Int> in
             let l = LinkedList<Int>()
@@ -41,7 +37,7 @@ class Day23: Day {
         
         var p2: Int?
         
-        let computers = (0..<50).map { _ in return Intcode(memory: input.integers) }
+        let computers = (0..<50).map { _ in return Intcode(memory: input().integers) }
         
         var currentComputer = 0
         
@@ -60,7 +56,7 @@ class Day23: Day {
         return "\(p2!)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
     

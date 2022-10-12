@@ -8,15 +8,11 @@
 
 class Day20: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
+    func part1() async throws -> String {
         return #function
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
     

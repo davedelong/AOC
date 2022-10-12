@@ -163,10 +163,10 @@ class Day18: Day {
     }
 
     lazy var instructions: Array<Instruction> = {
-        input.rawLineWords.map { Instruction(args: $0) }
+        input().lines.words.raw.map { Instruction(args: $0) }
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> String {
         let p1 = Program(id: 0, instructions: instructions, part1Logic: true)
         var received = 0
         while received <= 0 {
@@ -176,7 +176,7 @@ class Day18: Day {
         return "\(received)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         let p1 = Program(id: 1, instructions: instructions)
         let p2 = Program(id: 0, instructions: instructions)
 

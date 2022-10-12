@@ -8,8 +8,8 @@
 
 class Day9: Day {
 
-    override func run() -> (String, String) {
-        let ints = input.lines.integers
+    func run() async throws -> (Int, Int) {
+        let ints = input().lines.integers
         
         var p1 = 0
         for index in 25..<ints.count {
@@ -35,7 +35,7 @@ class Day9: Day {
             }
         }
         
-        return ("\(p1)", "\(p2)")
+        return (p1, p2)
     }
 
 }

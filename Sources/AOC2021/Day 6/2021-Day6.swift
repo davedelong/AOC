@@ -10,20 +10,16 @@ import AOCCore
 
 class Day6: Day {
 
-    override func run() -> (String, String) {
-        return super.run()
+    func part1() async throws -> Int {
+        return countFish(80)
     }
 
-    override func part1() -> String {
-        return "\(countFish(80))"
-    }
-
-    override func part2() -> String {
-        return "\(countFish(256))"
+    func part2() async throws -> Int {
+        return countFish(256)
     }
     
     func countFish(_ days: Int) -> Int {
-        var fish = CountedSet(input.integers)
+        var fish = CountedSet(input().integers)
         
         for _ in 0 ..< days {
             var newFish = CountedSet<Int>()

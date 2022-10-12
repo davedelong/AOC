@@ -7,16 +7,12 @@
 //
 
 class Day22: Day {
-
-    override func run() -> (String, String) {
-        return super.run()
-    }
     
     func decks() -> (LinkedList<Int>, LinkedList<Int>) {
         let p1 = LinkedList<Int>()
         let p2 = LinkedList<Int>()
         
-        let pieces = input.raw.split(on: "\n\n")
+        let pieces = input().raw.split(on: "\n\n")
         for int in Array(integersIn: pieces[0].dropFirst(10)) {
             p1.append(int)
         }
@@ -35,7 +31,7 @@ class Day22: Day {
         return sum
     }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let (p1, p2) = decks()
         
         while p1.count > 0 && p2.count > 0 {
@@ -52,13 +48,13 @@ class Day22: Day {
         }
         
         let winner = p1.isEmpty ? p2 : p1
-        return "\(score(for: winner))"
+        return score(for: winner)
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         let (p1, p2) = decks()
         let (_, score) = recusiveCombat(p1: Array(p1), p2: Array(p2))
-        return "\(score)"
+        return score
     }
     
     func recusiveCombat(p1: Array<Int>, p2: Array<Int>) -> (Bool, Int) {

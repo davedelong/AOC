@@ -9,7 +9,7 @@
 class Day19: Day {
     
     lazy var grid: Array<Array<Character>> = {
-        return input.lines.characters
+        return input().lines.characters
     }()
     
     func isValid(_ pos: Position) -> Bool {
@@ -48,7 +48,7 @@ class Day19: Day {
         return heading
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         let startX = grid[0].firstIndex(of: "|")!
 
         var position = Position(x: startX, y: 0)

@@ -8,8 +8,8 @@
 
 class Day6: Day {
 
-    override func part1() -> String {
-        let groups = input.raw
+    func part1() async throws -> String {
+        let groups = input().raw
             .split(on: "\n\n")
             .map { Set($0.split(on: \.isWhitespaceOrNewline).joined()) }
         let total = groups.sum(of: \.count)
@@ -17,8 +17,8 @@ class Day6: Day {
         return "\(total)"
     }
 
-    override func part2() -> String {
-        let groups = input.raw
+    func part2() async throws -> String {
+        let groups = input().raw
             .split(on: "\n\n")
             .map { $0.split(on: \.isNewline).intersectingElements() }
         

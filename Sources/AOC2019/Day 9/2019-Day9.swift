@@ -8,18 +8,14 @@
 
 class Day9: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
-        let intcode = Intcode(memory: input.integers, input: 1)
+    func part1() async throws -> String {
+        let intcode = Intcode(memory: input().integers, input: 1)
         intcode.runUntilAfterNextOutput() // the first output is what we care about
         return "\(intcode.io!)"
     }
     
-    override func part2() -> String {
-        let intcode = Intcode(memory: input.integers, input: 2)
+    func part2() async throws -> String {
+        let intcode = Intcode(memory: input().integers, input: 2)
         intcode.runUntilAfterNextOutput() // the first output is what we care about
         return "\(intcode.io!)"
     }

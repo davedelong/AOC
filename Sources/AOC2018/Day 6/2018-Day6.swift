@@ -8,21 +8,8 @@
 
 class Day6: Day {
     
-    @objc override init() {
-//            super.init(rawInput: """
-//1, 1
-//1, 6
-//8, 3
-//3, 4
-//5, 5
-//8, 9
-//"""))
-        
-        super.init()
-    }
-    
     lazy var positions: Dictionary<String, Position> = {
-        let lines = input.lines.raw
+        let lines = input().lines.raw
         var positions = Dictionary<String, Position>()
         for (index, line) in lines.indexed() {
             let pieces = line.components(separatedBy: ", ")
@@ -33,7 +20,7 @@ class Day6: Day {
         return positions
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let input = positions.values
         
         // given an Array<Position>, find the minX, maxX, minY, and maxY
@@ -47,14 +34,14 @@ class Day6: Day {
         let infinitePositions = Set(edgePoints.compactMap { gridPointsToClosestPosition[$0] })
         let gridPointsWithoutInfinitePoints = gridPointsToClosestPosition.filter { infinitePositions.contains($0.value) == false }
         
-        let locations = gridPointsWithoutInfinitePoints.values.compactMap { $0 }
+        let locations = gridPointsWithoutInfinitePoints.values.compacted()
         let counts = CountedSet(counting: locations)
         
         let largestNumberOfNearbyPoints = counts.values.max()!
         return "\(largestNumberOfNearbyPoints)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let positions = Array(self.positions.values)
         
         let (min, max) = Position.extremes(of: positions)

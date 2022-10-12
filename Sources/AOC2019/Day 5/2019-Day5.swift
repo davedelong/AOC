@@ -8,13 +8,13 @@
 
 class Day5: Day {
     
-    override func part1() -> String {
-        let intcode = Intcode(memory: input.integers, input: 1)
+    func part1() async throws -> String {
+        let intcode = Intcode(memory: input().integers, input: 1)
         return "\(intcode.run())"
     }
     
-    override func part2() -> String {
-        let intcode = Intcode(memory: input.integers, input: 5)
+    func part2() async throws -> String {
+        let intcode = Intcode(memory: input().integers, input: 5)
         return "\(intcode.run())"
     }
     

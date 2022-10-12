@@ -8,18 +8,6 @@
 
 class Day9: Day {
     
-    @objc override init() {
-//            super.init(rawInput: .raw(
-//            """
-//London to Dublin = 464
-//London to Belfast = 518
-//Dublin to Belfast = 141
-//"""
-//            ))
-        
-        super.init()
-    }
-    
     typealias Edge = Pair<String>
     typealias Path = (Array<String>, Int)
     
@@ -27,7 +15,7 @@ class Day9: Day {
         let r = Regex(#"(.+?) to (.+?) = (\d+)"#)
         
         var g = Dictionary<Edge, Int>()
-        for line in input.lines.raw {
+        for line in input().lines.raw {
             let m = r.firstMatch(in: line)!
             g[Pair(m[1]!, m[2]!)] = m.int(3)!
         }
@@ -60,14 +48,14 @@ class Day9: Day {
         return paths
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let shortestFirst = paths.sorted { $0.1 < $1.1 }
         let shortest = shortestFirst[0]
         
         return "\(shortest.1)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let longestFirst = paths.sorted { $0.1 > $1.1 }
         let longest = longestFirst[0]
         

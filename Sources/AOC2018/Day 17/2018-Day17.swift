@@ -8,26 +8,10 @@
 
 class Day17: Day {
     
-    @objc override init() {
-        
-//            super.init(rawInput: """
-//x=495, y=2..7
-//y=7, x=495..501
-//x=501, y=3..7
-//x=498, y=2..4
-//x=506, y=1..2
-//x=498, y=10..13
-//x=504, y=10..13
-//y=13, x=498..504
-//"""))
-        
-        super.init()
-    }
-    
     lazy var clayPositions: Set<Position> = {
         let r = Regex(#"(x|y)=(\d+), (x|y)=(\d+)\.\.(\d+)"#)
         var positions = Set<Position>()
-        for line in input.lines.raw {
+        for line in input().lines.raw {
             let m = r.firstMatch(in: line)!
             let p1 = m[1]!
             let p2 = m[3]!
@@ -52,7 +36,7 @@ class Day17: Day {
         case water = "~"
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         let clay = clayPositions
         let (min, max) = Position.extremes(of: clay)
         let hRange = max.x - min.x + 3

@@ -21,8 +21,8 @@ class Day3: Day {
         }
     }
     
-    override func run() -> (String, String) {
-        let words = input.lines.csvWords
+    func run() async throws -> (String, String) {
+        let words = input().lines.csvWords
         
         var current = XY.zero
         let line1 = words[0].map { word -> Segment in
@@ -65,7 +65,7 @@ class Day3: Day {
     }
     
     func run_orig() -> (String, String) {
-        let lines: Array<Array<LinePart>> = input.lines.csvWords.map { words in
+        let lines: Array<Array<LinePart>> = input().lines.csvWords.map { words in
             return words.compactMap { word -> LinePart? in
                 guard let h = Heading(character: word.characters[0]) else { return nil }
                 return LinePart(direction: h, length: Int(word.raw.dropFirst())!)

@@ -12,7 +12,6 @@ let package = Package(
         .executable(name: "advent", targets: ["advent"]),
         .library(name: "AOC", targets: ["AOC"]),
         .library(name: "AOCCore", targets: ["AOCCore"]),
-        .library(name: "Core2", targets: ["Core2"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -37,11 +36,6 @@ let package = Package(
         .target(name: "AOC2015", dependencies: ["AOCCore"], exclude: inputFiles(for: 2015)),
         
         .target(name: "AOCCore", dependencies: [
-            .product(name: "Algorithms", package: "swift-algorithms"),
-            .product(name: "Collections", package: "swift-collections")
-        ]),
-        
-        .target(name: "Core2", dependencies: [
             .product(name: "Algorithms", package: "swift-algorithms"),
             .product(name: "Collections", package: "swift-collections")
         ]),

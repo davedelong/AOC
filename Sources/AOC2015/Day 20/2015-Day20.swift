@@ -8,10 +8,10 @@
 
 class Day20: Day {
     
-    @objc override init() { super.init(rawInput: "34000000") }
+    static var rawInput: String? { "34000000" }
     
-    override func part1() -> String {
-        let target = input.integer!
+    func part1() async throws -> String {
+        let target = input().integer!
         var scores = Dictionary<Int, Int>()
         for elfNumber in 1 ..< (target/10) {
             let houses = stride(from: elfNumber, to: target/10, by: elfNumber)
@@ -24,8 +24,8 @@ class Day20: Day {
         return "\(house)"
     }
     
-    override func part2() -> String {
-        let target = input.integer!
+    func part2() async throws -> String {
+        let target = input().integer!
         var scores = Dictionary<Int, Int>()
         for elfNumber in 1 ..< (target/11) {
             let houses = stride(from: elfNumber, to: target/11, by: elfNumber)

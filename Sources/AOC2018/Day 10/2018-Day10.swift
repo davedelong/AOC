@@ -21,7 +21,7 @@ class Day10: Day {
     lazy var data: Array<(Position, Position)> = {
         // position=<-41981,  21153> velocity=< 4, -2>
         let r = Regex(#"position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>"#)
-        return input.lines.raw.map { l -> (Position, Position) in
+        return input().lines.raw.map { l -> (Position, Position) in
             let m = r.firstMatch(in: l)!
             return (Position(x: m.int(1)!, y: m.int(2)!), Position(x: m.int(3)!, y: m.int(4)!))
         }
@@ -161,7 +161,7 @@ class Day10: Day {
         Swift.print(row)
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var d = data
         var (minY, maxY) = d.lazy.map({ $0.0.y }).extremes()
         var iterationCount = 0

@@ -9,8 +9,8 @@
 class Day2: Day {
     let r: Regex = #"(\d+)-(\d+) (.): (.+)"#
 
-    override func run() -> (String, String) {
-        let lines = input.rawLines.map { r.firstMatch(in: $0)! }
+    func run() async throws -> (Int, Int) {
+        let lines = input().lines.raw.map { r.firstMatch(in: $0)! }
         
         var p1 = 0
         var p2 = 0
@@ -27,6 +27,6 @@ class Day2: Day {
             if (pw[l-1] == c || pw[u-1] == c) && pw[l-1] != pw[u-1] { p2 += 1 }
         }
         
-        return ("\(p1)", "\(p2)")
+        return (p1, p2)
     }
 }

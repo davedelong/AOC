@@ -10,8 +10,8 @@ import AOCCore
 
 class Day9: Day {
 
-    override func run() -> (String, String) {
-        let intChars = input.lines.digits
+    func run() async throws -> (Int, Int) {
+        let intChars = input().lines.digits
         let matrix = Matrix(intChars)
         
         var lowSum = 0
@@ -54,7 +54,7 @@ class Day9: Day {
         
         let sortedSizes = basinSizes.sorted(by: >)
         let part2 = sortedSizes.prefix(3).product
-        return ("\(part1)", "\(part2)")
+        return (part1, part2)
     }
 
 }

@@ -11,7 +11,7 @@ class Day25: Day {
     typealias Constellation = Set<Point4>
     
     lazy var points: Set<Point4> = {
-        return Set(input.lines.raw.map { Point4($0) })
+        return Set(input().lines.raw.map { Point4($0) })
     }()
     
     private func constellation(including point: Point4, all remaining: inout Set<Point4>) -> Constellation {
@@ -29,7 +29,7 @@ class Day25: Day {
         return constellation
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var all = points
         
         var constellations = Array<Constellation>()
@@ -41,7 +41,7 @@ class Day25: Day {
         return "\(constellations.count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return ""
     }
     

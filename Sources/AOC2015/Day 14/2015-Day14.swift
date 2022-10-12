@@ -23,14 +23,14 @@ class Day14: Day {
     
     lazy var reindeer: Dictionary<String, Reindeer> = {
         let r = Regex(#"(.+?) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds\."#)
-        let tuples = input.lines.raw.map { l -> (String, Reindeer) in
+        let tuples = input().lines.raw.map { l -> (String, Reindeer) in
             let m = r.firstMatch(in: l)!
             return (m[1]!, Reindeer(velocity: m.int(2)!, travelTime: m.int(3)!, restTime: m.int(4)!))
         }
         return Dictionary(uniqueKeysWithValues: tuples)
     }()
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var state = Dictionary<String, ReindeerState>()
         
         for (name, r) in reindeer {

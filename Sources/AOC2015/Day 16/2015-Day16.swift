@@ -11,7 +11,7 @@ class Day16: Day {
     lazy var sues: Array<Dictionary<String, Int>> = {
         let r = Regex(#"Sue (\d+): (.+)"#)
         let attrs = Regex(#"([a-z]+): (\d+)"#)
-        return input.lines.raw.map { l -> Dictionary<String, Int> in
+        return input().lines.raw.map { l -> Dictionary<String, Int> in
             let m = r.firstMatch(in: l)!
             var info = Dictionary<String, Int>()
             info["sue"] = m.int(1)!
@@ -24,7 +24,7 @@ class Day16: Day {
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let match = [
             "children": 3,
             "cats": 7,
@@ -55,7 +55,7 @@ class Day16: Day {
         return "\(sue)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let match = [
             "children": 3...3,
             "cats": 8...Int.max,

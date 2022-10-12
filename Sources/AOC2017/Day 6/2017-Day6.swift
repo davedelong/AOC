@@ -8,6 +8,8 @@
 
 class Day6: Day {
     
+    static var rawInput: String? { "2 8 8 5 4 2 3 1 5 5 1 2 15 13 5 14" }
+    
     struct Seen: Hashable {
         static func ==(lhs: Seen, rhs: Seen) -> Bool { return lhs.array == rhs.array }
         let array: Array<Int>
@@ -29,10 +31,8 @@ class Day6: Day {
         }
     }
     
-    @objc override init() { super.init(rawInput: "2 8 8 5 4 2 3 1 5 5 1 2 15 13 5 14") }
-    
-    override func part1() -> String {
-        var current = Seen(input.words.integers)
+    func part1() async throws -> String {
+        var current = Seen(input().words.integers)
         var seen = Set<Seen>()
         
         repeat {
@@ -43,8 +43,8 @@ class Day6: Day {
         return "\(seen.count)"
     }
     
-    override func part2() -> String {
-        var current = Seen(input.words.integers)
+    func part2() async throws -> String {
+        var current = Seen(input().words.integers)
         var seen = Dictionary<Seen, Int>()
         
         repeat {

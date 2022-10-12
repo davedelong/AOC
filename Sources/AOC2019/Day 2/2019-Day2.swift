@@ -9,7 +9,7 @@
 class Day2: Day {
     
     private func intcode(noun: Int, verb: Int) -> Int {
-        var memory = input.integers
+        var memory = input().integers
         memory[1] = noun
         memory[2] = verb
         let code = Intcode(memory: memory)
@@ -17,12 +17,12 @@ class Day2: Day {
         return code.memory[0]
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let answer = intcode(noun: 12, verb: 2)
         return "\(answer)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         for noun in 0 ..< 100 {
             for verb in 0 ..< 100 {
                 let answer = intcode(noun: noun, verb: verb)

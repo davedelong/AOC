@@ -7,20 +7,13 @@
 //
 
 class Day15: Day {
-    
-    override init() {
-        super.init(rawInput: "8,11,0,19,1,2")
-    }
+    static var rawInput: String? { "8,11,0,19,1,2" }
 
-    override func run() -> (String, String) {
-        return super.run()
-    }
-
-    override func part1() -> String {
+    func part1() async throws -> String {
         return "\(run(times: 2020))"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         return "\(run(times: 30_000_000))"
     }
     
@@ -30,7 +23,7 @@ class Day15: Day {
         var turn = 0
         
         var lastNumberSpoken = 0
-        for int in input.integers {
+        for int in input().integers {
             turn += 1
             turnForNumber[int] = P(turn, nil)
             lastNumberSpoken = int

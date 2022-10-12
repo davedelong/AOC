@@ -9,18 +9,10 @@
 class Day3: Day {
     
     lazy var headings: Array<Heading> = {
-        return input.characters.compactMap { char -> Heading? in
-            switch char {
-                case "^": return .north
-                case "<": return .west
-                case ">": return .east
-                case "v": return .south
-                default: return nil
-            }
-        }
+        return input().characters.compactMap { Heading(character: $0) }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var presentCount = CountedSet<Position>()
         
         var current = Position(x: 0, y: 0)
@@ -31,7 +23,7 @@ class Day3: Day {
         return "\(presentCount.count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var presentCount = [
             Position(x: 0, y: 0): 2
         ]

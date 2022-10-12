@@ -8,8 +8,8 @@
 
 class Day5: Day {
 
-    override func run() -> (String, String) {
-        let passes = input.lines.characters
+    func run() async throws -> (Int, Int) {
+        let passes = input().lines.characters
         
         let filledSeats = Set(passes.map { pass -> Int in
             var row = 0 ..< 128
@@ -32,7 +32,7 @@ class Day5: Day {
         
         let mySeat = emptySeats.first(where: { filledSeats.contains($0-1) && filledSeats.contains($0+1) })!
         
-        return ("\(largest)", "\(mySeat)")
+        return (largest, mySeat)
     }
 
 }

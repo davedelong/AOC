@@ -8,8 +8,8 @@
 
 class Day9: Day {
 
-    override func run() -> (String, String) {
-        let source = input.raw
+    func run() async throws -> (String, String) {
+        let source = input().raw
         var pt1 = 0
         var pt2 = 0
 

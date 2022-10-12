@@ -17,30 +17,13 @@ fileprivate class Op {
 
 class Day7: Day {
     
-    @objc override init() {
-//            super.init(rawInput: """
-//Step C must be finished before step A can begin.
-//Step C must be finished before step F can begin.
-//Step A must be finished before step B can begin.
-//Step A must be finished before step D can begin.
-//Step B must be finished before step E can begin.
-//Step D must be finished before step E can begin.
-//Step F must be finished before step E can begin.
-//"""
-//                ))
-        
-        
-        super.init()
-        
-    }
-    
     private func operations() -> Array<Op> {
         
         let r = Regex(#"Step ([A-Z]) must be finished before step ([A-Z]) can begin\."#)
         
         var operations = Dictionary<String, Op>()
         
-        for line in input.lines.raw {
+        for line in input().lines.raw {
             let match = r.firstMatch(in: line)!
             let dName = match[1]!
             let oName = match[2]!
@@ -57,7 +40,7 @@ class Day7: Day {
         return Array(operations.values).sorted { $0.name < $1.name }
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var remaining = operations()
         var final = ""
         while remaining.isNotEmpty {
@@ -70,7 +53,7 @@ class Day7: Day {
         return final
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var tick = 0
         
         var workers: Array<(Op?, UInt8)> = [

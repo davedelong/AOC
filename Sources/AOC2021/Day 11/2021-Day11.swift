@@ -10,12 +10,8 @@ import AOCCore
 
 class Day11: Day {
 
-    override func run() -> (String, String) {
-        return super.run()
-    }
-
-    override func part1() -> String {
-        var octopodes = Matrix(input.lines.digits)
+    func part1() async throws -> Int {
+        var octopodes = Matrix(input().lines.digits)
         var total = 0
         for _ in 0 ..< 100 {
             let (o, t) = step(octopodes: octopodes)
@@ -23,12 +19,12 @@ class Day11: Day {
             total += t
         }
         
-        return "\(total)"
+        return total
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         
-        var octopodes = Matrix(input.lines.digits)
+        var octopodes = Matrix(input().lines.digits)
         
         var step = 0
         // keep iterating as long as there's any octopus that's not zero
@@ -38,7 +34,7 @@ class Day11: Day {
             step += 1
         }
         
-        return "\(step)"
+        return step
     }
 
     private func step(octopodes: Matrix<Int>) -> (Matrix<Int>, Int) {

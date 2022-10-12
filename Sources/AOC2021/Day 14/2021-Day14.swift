@@ -12,21 +12,21 @@ class Day14: Day {
 
     let r: Regex = #"(..) -> (.)"#
     lazy var rules: Dictionary<String, String> = {
-        let pairs = input.rawLines.compactMap { l -> (String, String)? in
+        let pairs = input().lines.raw.compactMap { l -> (String, String)? in
             guard let m = r.firstMatch(in: l) else { return nil }
             return (m[1]!, m[2]!)
         }
         return Dictionary(uniqueKeysWithValues: pairs)
     }()
     
-    lazy var source: String = { input.rawLines[0] }()
+    lazy var source: String = { input().lines.raw[0] }()
 
-    override func part1() -> String {
-        return "\(runInput(times: 10))"
+    func part1() async throws -> Int {
+        return runInput(times: 10)
     }
 
-    override func part2() -> String {
-        return "\(runInput(times: 40))"
+    func part2() async throws -> Int {
+        return runInput(times: 40)
     }
     
     private func runInput(times: Int) -> Int {

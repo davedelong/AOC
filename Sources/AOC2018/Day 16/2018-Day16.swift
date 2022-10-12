@@ -94,8 +94,8 @@ class Day16: Day {
     
     lazy var changes: Array<Change> = {
         let r = Regex(#"Before:\s+\[(\d+), (\d+), (\d+), (\d+)\]\n(\d+) (\d+) (\d+) (\d+)\nAfter:\s+\[(\d+), (\d+), (\d+), (\d+)\]"#)
-        let pieces = input.raw.components(separatedBy: "\n\n")
-        let matches = r.matches(in: input.raw)
+        let pieces = input().raw.components(separatedBy: "\n\n")
+        let matches = r.matches(in: input().raw)
         return matches.map { m -> Change in
             return Change(before: [m.int(1)!, m.int(2)!, m.int(3)!, m.int(4)!],
                           instructions: [ m.int(5)!, m.int(6)!, m.int(7)!, m.int(8)!],
@@ -103,7 +103,7 @@ class Day16: Day {
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var countAtLeast3 = 0
         
         for change in changes {
@@ -114,7 +114,7 @@ class Day16: Day {
         return "\(countAtLeast3)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var possibilities = Dictionary<Int, Set<Opcode>>()
         
         for change in changes {
@@ -148,7 +148,7 @@ class Day16: Day {
             }
         }
         
-        let rawInstructions = input.raw.components(separatedBy: "\n\n\n\n")[1]
+        let rawInstructions = input().raw.components(separatedBy: "\n\n\n\n")[1]
         let instructions = Input(rawInstructions)
         
         var registers = [0, 0, 0, 0]

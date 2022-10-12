@@ -31,13 +31,13 @@ class Day23: Day {
     
     lazy var bots: Array<Nanobot> = {
         let r = Regex(#"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)"#)
-        return input.lines.raw.map { line -> Nanobot in
+        return input().lines.raw.map { line -> Nanobot in
             let m = r.firstMatch(in: line)!
             return Nanobot(x: m.int(1)!, y: m.int(2)!, z: m.int(3)!, r: m.int(4)!)
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let sortedBots = bots.sorted { $0.r > $1.r }
         let largestRadius = sortedBots[0]
         
@@ -45,7 +45,7 @@ class Day23: Day {
         return "\(count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var (minX, maxX) = bots.map { $0.x }.extremes()
         var (minY, maxY) = bots.map { $0.y }.extremes()
         var (minZ, maxZ) = bots.map { $0.z }.extremes()

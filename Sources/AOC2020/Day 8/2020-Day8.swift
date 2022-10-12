@@ -21,7 +21,7 @@ class Day8: Day {
     
     private lazy var instructions: Array<Instruction> = {
         let r: Regex = #"(jmp|acc|nop) ([-+]?\d+)"#
-        return input.rawLines.map { line -> Instruction in
+        return input().lines.raw.map { line -> Instruction in
             let match = r.firstMatch(in: line)!
             switch match[1]! {
                 case "jmp": return .jmp(match[int: 2]!)
@@ -31,12 +31,12 @@ class Day8: Day {
         }
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let (ans, _) = run(instructions)
-        return "\(ans)"
+        return ans
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         var nextIndex = 0
         var p2 = 0
         while nextIndex < instructions.count {
@@ -59,7 +59,7 @@ class Day8: Day {
                 
             }
         }
-        return "\(p2)"
+        return p2
     }
     
     private func run(_ instructions: Array<Instruction>) -> (Int, Bool) {

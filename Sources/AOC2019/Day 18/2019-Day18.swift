@@ -27,7 +27,7 @@ class Day18: Day {
         
         init(nodes: Array<GridNode<Maze>>) {
             self.nodes = nodes
-            self.doors = Set(nodes.compactMap { $0.value?.door })
+            self.doors = Set(nodes.compactMap(\.value?.door))
         }
     }
     
@@ -94,7 +94,7 @@ class Day18: Day {
         
         var start: XY = .zero
         
-        for (y, row) in input.lines.enumerated() {
+        for (y, row) in input().lines.enumerated() {
             for (x, char) in row.characters.enumerated() {
                 let m: Maze
                 let xy = XY(x: x, y: y)
@@ -119,7 +119,7 @@ class Day18: Day {
         return (start, maze)
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let (startXY, maze) = parseMaze()
         let g = maze.convertToGridGraph({ return $0 != .wall })
         
@@ -129,7 +129,7 @@ class Day18: Day {
         
         var state = State()
         state.remainingKeys = remainingKeys
-        state.lockedDoors = Set(maze.values.compactMap { $0.door })
+        state.lockedDoors = Set(maze.values.compactMap(\.door))
         
         for (key, startXY) in state.remainingKeys {
             for (otherKey, endXY) in state.remainingKeys {
@@ -200,7 +200,7 @@ class Day18: Day {
         return stepCount + c
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var (startXY, maze) = parseMaze()
         
         /**

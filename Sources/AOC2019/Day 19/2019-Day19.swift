@@ -8,13 +8,13 @@
 
 class Day19: Day {
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         
         var count = 0
         for x in 0 ..< 50 {
             for y in 0 ..< 50 {
                 var localInput = [x, y]
-                let i = Intcode(memory: input.integers)
+                let i = Intcode(memory: input().integers)
                 i.input = { localInput.removeFirst() }
                 i.output = { count += $0 }
                 i.runWithHandlers()
@@ -24,7 +24,7 @@ class Day19: Day {
         return "\(count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         /**
           The beam looks like this:
          
@@ -78,7 +78,7 @@ class Day19: Day {
             var foundEdge = false
             while foundEdge == false {
                 var localInput = [currentX, y]
-                let i = Intcode(memory: input.integers)
+                let i = Intcode(memory: input().integers)
                 i.input = { return localInput.removeFirst() }
                 i.runWithHandlers()
                 if i.io! == 1 {
@@ -102,7 +102,7 @@ class Day19: Day {
             // loop until we either found an edge or we've gone past a 45° angle
             while foundEdge == false && currentY <= x {
                 var localInput = [x, currentY]
-                let i = Intcode(memory: input.integers)
+                let i = Intcode(memory: input().integers)
                 i.input = { return localInput.removeFirst() }
                 i.runWithHandlers()
                 if i.io! == 1 {

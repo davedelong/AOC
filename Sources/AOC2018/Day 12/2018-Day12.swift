@@ -19,31 +19,9 @@ func get(_ index: Int) -> Element? {
 
 class Day12: Day {
     
-    @objc override init() {
-//            super.init(rawInput: """
-//...## => #
-//..#.. => #
-//.#... => #
-//.#.#. => #
-//.#.## => #
-//.##.. => #
-//.#### => #
-//#.#.# => #
-//#.### => #
-//##.#. => #
-//##.## => #
-//###.. => #
-//###.# => #
-//####. => #
-//"""))
-//
-        
-        super.init()
-    }
-    
     lazy var fAndR: Dictionary<String, Character> = {
         let r = Regex(#"([\.#]{5}) => ([\.#])"#)
-        let pieces = input.lines.raw.map { l -> (String, Character) in
+        let pieces = input().lines.raw.map { l -> (String, Character) in
             let m = r.firstMatch(in: l)!
             return (m[1]!, m[2]!.first!)
         }
@@ -89,7 +67,7 @@ class Day12: Day {
         return onPots
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         andrew()
         
         let initial = "####..##.##..##..#..###..#....#.######..###########.#...#.##..####.###.#.###.###..#.####..#.#..##..#"
@@ -97,7 +75,7 @@ class Day12: Day {
         return "\(answer)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
         let initial = "####..##.##..##..#..###..#....#.######..###########.#...#.##..####.###.#.###.###..#.####..#.#..##..#"
         let answer = run(input: initial, generations: 50_000_000_000)
@@ -150,7 +128,7 @@ class Day12: Day {
     private func andrew() {
         
         let initialInput = "####..##.##..##..#..###..#....#.######..###########.#...#.##..####.###.#.###.###..#.####..#.#..##..#"
-        let input = self.input.lines.raw
+        let input = self.input().lines.raw
         
         func desc(of pots: [Bool]) -> String {
             return pots.map { $0 ? "#" : "." }.joined()

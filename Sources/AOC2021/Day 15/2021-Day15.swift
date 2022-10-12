@@ -19,8 +19,8 @@ class Day15: Day {
      I'm kind of sick of writing path finding code. So here we are.
      */
 
-    override func part1() -> String {
-        var graph = GridGraph(input.lines.digits)
+    func part1() async throws -> Int {
+        var graph = GridGraph(input().lines.digits)
         graph.defaultTravelCost = 0
         for p in Array(graph.rect) {
             let value = graph[p]!
@@ -29,11 +29,11 @@ class Day15: Day {
         
         let cost = Int(graph.cost(from: .zero, to: Position(x: graph.width - 1, y: graph.height - 1))!)
         
-        return "\(cost)"
+        return cost
     }
 
-    override func part2() -> String {
-        let digits = input.lines.digits
+    func part2() async throws -> Int {
+        let digits = input().lines.digits
         let width = digits[0].count * 5
         let height = digits.count * 5
         var g = GridGraph<Int>(width: width, height: height)
@@ -57,7 +57,7 @@ class Day15: Day {
         
         let cost = Int(g.cost(from: .zero, to: Position(x: g.width - 1, y: g.height - 1))!)
         
-        return "\(cost)"
+        return cost
     }
 
 }

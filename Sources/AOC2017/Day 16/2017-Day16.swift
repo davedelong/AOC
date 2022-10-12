@@ -10,7 +10,7 @@ class Day16: Day {
 
     let start = Array("abcdefghijklmnop").map { String($0) }
     lazy var commands: Array<String> = {
-        return input.raw.components(separatedBy: ",")
+        return input().raw.components(separatedBy: ",")
     }()
 
     func twist(_ input: Array<String>) -> Array<String> {
@@ -31,12 +31,12 @@ class Day16: Day {
         return list
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let p1 = twist(start)
         return p1.joined()
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         var results = Array<String>()
 
         var list = start

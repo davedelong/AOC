@@ -8,21 +8,9 @@
 
 class Day13: Day {
     
-    @objc override init() {
-//            super.init(rawInput: """
-///->-\\
-//|   |  /----\\
-//| /-+--+-\\  |
-//| | |  | v  |
-//\\-+-/  \\-+--/
-//\\------/
-//"""))
-        super.init()
-    }
-    
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         
-        let track = input.lines.characters
+        let track = input().lines.characters
         
         var cartHeadings = Dictionary<Position, (Heading, Int)>()
         for (y, line) in track.enumerated() {

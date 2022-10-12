@@ -32,8 +32,8 @@ class Day16: Day {
         }
     }
     
-    override func part1() -> String {
-        var n = input.characters.map { Int("\($0)")! }
+    func part1() async throws -> String {
+        var n = input().integers
         var o = Array(repeating: 0, count: n.count)
         for _ in 1 ... 100 {
             runPhase(n, output: &o)
@@ -43,8 +43,8 @@ class Day16: Day {
         return firstEight
     }
     
-    override func part2() -> String {
-        let initial = input.characters.map { Int("\($0)")! }
+    func part2() async throws -> String {
+        let initial = input().integers
         let offset = Int(digits: initial[0..<7])
         
         var n = Array<Int>()

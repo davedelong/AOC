@@ -18,8 +18,8 @@ class Day11: Day {
         var isOccupied: Bool { self == .occupied }
     }
     
-    override func part1() -> String {
-        let area = input.lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
+    func part1() async throws -> Int {
+        let area = input().lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
         var grid = Matrix(area)
         var keepGoing = true
         while keepGoing {
@@ -30,7 +30,7 @@ class Day11: Day {
         
         let occupied = grid.count(where: \.isOccupied)
         
-        return "\(occupied)"
+        return occupied
     }
     
     private func seatPeople_p1(_ grid: Matrix<Feature>) -> Matrix<Feature> {
@@ -54,8 +54,8 @@ class Day11: Day {
         return copy
     }
 
-    override func part2() -> String {
-        let area = input.lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
+    func part2() async throws -> Int {
+        let area = input().lines.characters.map { $0.compactMap(Feature.init(rawValue:)) }
         var grid = Matrix(area)
         var keepGoing = true
         while keepGoing {
@@ -65,7 +65,7 @@ class Day11: Day {
         }
         
         let occupied = grid.count(where:\.isOccupied)
-        return "\(occupied)"
+        return occupied
     }
     
     private func seatPeople_p2(_ grid: Matrix<Feature>) -> Matrix<Feature> {

@@ -10,17 +10,14 @@ import AOCCore
 
 class Day17: Day {
     
+    static var rawInput: String? { "target area: x=70..96, y=-179..-124" }
+    
     lazy var targetArea: PointRect = {
-        let ints = input.integers
+        let ints = input().integers
         return PointRect(xRange: ints[0] ... ints[1], yRange: ints[2] ... ints[3])
     }()
-    
-    override init() {
-        super.init(rawInput: "target area: x=70..96, y=-179..-124")
-        // super.init(rawInput: "target area: x=20..30, y=-10..-5")
-    }
 
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         // observe: the x velocity proceeds as triangular numbers:
         // p = vᵪ + vᵪ-1 + vᵪ-2 + vᵪ-3 ...
         // therefore in order to even *enter* the target area, we have to start with a high enough x velocity
@@ -58,7 +55,7 @@ class Day17: Day {
             }
         }
         
-        return (maxY.description, entranceCount.description)
+        return (maxY, entranceCount)
     }
     
     // returns the maximum Y height of the probe

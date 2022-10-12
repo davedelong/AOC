@@ -161,20 +161,20 @@ class Day14: Day {
         }
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         testCases()
         
-        let p1 = oreNeeded(for: input.lines.raw)
+        let p1 = oreNeeded(for: input().lines.raw)
         return ("\(p1)", "")
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         
         
         return #function
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
     

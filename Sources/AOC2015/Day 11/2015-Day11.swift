@@ -8,7 +8,7 @@
 
 class Day11: Day {
     
-    @objc override init() { super.init(rawInput: "hepxcrrq") }
+    static var rawInput: String? { "hepxcrrq" }
     
     private let illegals = Set("iol")
     private let pairs = Regex(#"(.)\1.*(.)\2"#)
@@ -43,15 +43,15 @@ class Day11: Day {
         return String(bytes: utf8.reversed(), encoding: .utf8)!
     }
     
-    override func part1() -> String {
-        var current = input.raw
+    func part1() async throws -> String {
+        var current = input().raw
         while isValid(current) == false {
             current = increment(current)
         }
         return current
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var current = increment("hepxxyzz")
         while isValid(current) == false {
             current = increment(current)

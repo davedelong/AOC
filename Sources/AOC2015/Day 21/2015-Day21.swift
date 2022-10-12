@@ -189,7 +189,7 @@ Defense +3   80     0       3
         }
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var inventories = InventoryIterator()
         
         var minCost = Int.max
@@ -202,7 +202,7 @@ Defense +3   80     0       3
         return "\(minCost)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var inventories = InventoryIterator()
         
         var maxCost = 0

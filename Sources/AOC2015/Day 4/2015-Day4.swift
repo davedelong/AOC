@@ -10,12 +10,12 @@ import CommonCrypto
 
 class Day4: Day {
     
-    @objc override init() { super.init(rawInput: "ckczppom") }
+    static let rawInput: String? = "ckczppom"
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var int = 1
         while true {
-            let s = "\(input.raw)\(int)"
+            let s = "\(input().raw)\(int)"
             let buffer = s.md5()
             if buffer[0] == 0 && buffer[1] == 0 && buffer[2] < 16 { return "\(int)" }
             int += 1
@@ -23,12 +23,12 @@ class Day4: Day {
         fatalError("unreachable")
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         // we don't need to test 1-117946, because that happened in part 1
         // and anything that would've resulted in 6 zeroes would've satisfied part 1
         var int = 117947
         while true {
-            let s = "\(input.raw)\(int)"
+            let s = "\(input().raw)\(int)"
             let buffer = s.md5()
             if buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0 { return "\(int)" }
             int += 1

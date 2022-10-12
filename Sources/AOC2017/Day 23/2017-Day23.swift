@@ -90,14 +90,14 @@ class Day23: Day {
         }
     }
     
-    override func part1() -> String {
-        let instructions = input.rawLineWords.map { Instruction($0) }
+    func part1() async throws -> String {
+        let instructions = input().lines.words.raw.map { Instruction($0) }
         let p = Program(instructions: instructions)
         while p.step() == .ok { }
         return "\(p.mulCount)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         func isComposite(_ i: Int) -> Bool {
             for d in 2 ... Int(sqrt(Double(i))) {
                 if i % d == 0 { return true }

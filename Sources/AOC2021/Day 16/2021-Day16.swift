@@ -49,7 +49,7 @@ class Day16: Day {
         }
     }
     
-    lazy var bits = input.characters.flatMap { Int("\($0)", radix: 16)!.bits.suffix(4) }
+    lazy var bits = input().characters.flatMap { Int("\($0)", radix: 16)!.bits.suffix(4) }
     
     lazy var rootPacket: Packet = {
         var slice = bits[...]
@@ -95,12 +95,12 @@ class Day16: Day {
     }
     
     
-    override func part1() -> String {
-        return "\(rootPacket.versionSum)"
+    func part1() async throws -> Int {
+        return rootPacket.versionSum
     }
 
-    override func part2() -> String {
-        return "\(rootPacket.evaluate)"
+    func part2() async throws -> Int {
+        return rootPacket.evaluate
     }
 
 }

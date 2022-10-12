@@ -16,7 +16,7 @@ class Day2: Day {
     
     var commands: Array<Command> {
         let r: Regex = #"(forward|down|up) (\d+)"#
-        return input.lines.raw.map { str in
+        return input().lines.raw.map { str in
             let match = r.firstMatch(in: str)!
             let dir = match[1]!
             let val = match[int: 2]!
@@ -30,7 +30,7 @@ class Day2: Day {
         }
     }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         var h = 0
         var d = 0
         for command in commands {
@@ -41,10 +41,10 @@ class Day2: Day {
             }
             d = max(d, 0)
         }
-        return "\(h * d)"
+        return h * d
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         var h = 0
         var d = 0
         var a = 0
@@ -58,7 +58,7 @@ class Day2: Day {
             }
             d = max(d, 0)
         }
-        return "\(h * d)"
+        return h * d
     }
 
 }

@@ -99,7 +99,7 @@ class Day20: Day {
     }
     
     lazy var tiles: Array<Tile> = {
-        input.raw.split(on: "\n\n").map { chunk -> Tile in
+        input().raw.split(on: "\n\n").map { chunk -> Tile in
             let lines = chunk.split(on: "\n")
             let id = Array(integersIn: lines[0])[0]
             
@@ -195,7 +195,7 @@ class Day20: Day {
         return grid
     }
 
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         
         let corners = self.findCorners()
         

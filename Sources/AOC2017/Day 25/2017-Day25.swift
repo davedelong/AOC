@@ -29,9 +29,7 @@ class Day25: Day {
     var iterations: Int = 0
     var states = Dictionary<String, TuringState>()
     
-    @objc override init() {
-        super.init()
-        
+    init() {
         let begin = Regex(#"Begin in state ([A-Z])\."#)
         let steps = Regex(#"Perform a diagnostic checksum after (\d+) steps\."#)
         
@@ -40,7 +38,7 @@ class Day25: Day {
         let move = Regex(#"\s*- Move one slot to the (left|right)\."#)
         let state = Regex(#"\s*- Continue with state ([A-Z])\."#)
         
-        var sections = input.raw.components(separatedBy: "\n\n")
+        var sections = input().raw.components(separatedBy: "\n\n")
         
         let metaInfo = sections.removeFirst()
         let metaLines = metaInfo.components(separatedBy: .newlines)
@@ -67,7 +65,7 @@ class Day25: Day {
         
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var state = State.A
@@ -146,7 +144,7 @@ class Day25: Day {
         return "\(checksum)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var tape = Dictionary<Int, Int>()
         var cursor = 0
         var current = startingState

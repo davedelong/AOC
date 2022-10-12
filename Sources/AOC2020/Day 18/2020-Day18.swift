@@ -88,12 +88,12 @@ class Day18: Day {
         return pieces[0].left!
     }
 
-    override func part1() -> String {
-        let expressions = input.rawLines.map(parse(_:)).map(\.evaluated)
-        return "\(expressions.sum)"
+    func part1() async throws -> Int {
+        let expressions = input().lines.raw.map(parse(_:)).map(\.evaluated)
+        return expressions.sum
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         
         let operators = OperatorSet()
         let cMul = MathParser.Operator(function: "•", arity: .binary, associativity: .left, tokens: ["•"])
@@ -106,7 +106,7 @@ class Day18: Day {
         var config = Configuration()
         config.operatorSet = operators
         
-        let expressions = input.rawLines.map { line -> MathParser.Expression in
+        let expressions = input().lines.raw.map { line -> MathParser.Expression in
             let final = line
                 .replacingOccurrences(of: "+", with: "#")
                 .replacingOccurrences(of: "*", with: "•")
@@ -136,7 +136,7 @@ class Day18: Day {
             return Int(value)
         }
         
-        return "\(evald.sum)"
+        return evald.sum
     }
 
 }

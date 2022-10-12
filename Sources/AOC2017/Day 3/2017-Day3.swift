@@ -8,10 +8,10 @@
 
 class Day3: Day {
     
-    @objc override init() { super.init(rawInput: "277678") }
+    static var rawInput: String? { "277678" }
     
-    override func part1() -> String {
-        let integer = input.integer!
+    func part1() async throws -> String {
+        let integer = input().integer!
         
         let squareRootOfInput = sqrt(Double(integer))
         let roundedUp = Int(ceil(squareRootOfInput))
@@ -31,8 +31,8 @@ class Day3: Day {
         return "\(totalDistance)"
     }
     
-    override func part2() -> String {
-        let target = input.integer!
+    func part2() async throws -> String {
+        let target = input().integer!
         
         var grid = [
             Position(x: 0, y: 0): 1

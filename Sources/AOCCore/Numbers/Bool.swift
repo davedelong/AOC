@@ -10,6 +10,9 @@ import Foundation
 public typealias Bit = Bool
 
 extension Bool {
+    public static var yes: Bool { true }
+    public static var no: Bool { false }
+    
     public static var on: Bool { true }
     public static var off: Bool { false }
     
@@ -18,9 +21,22 @@ extension Bool {
     
     public func toggled() -> Bool { negated }
     
-    public init(_ character: Character) {
-        self = trueBitChars.contains(character)
+    public init?(_ character: Character) {
+        if trueBitChars.contains(character) {
+            self = true
+        } else if falseBitChars.contains(character) {
+            self = false
+        } else {
+            return nil
+        }
     }
 }
 
-private let trueBitChars = Set("1Tt+y")
+extension Character {
+    
+    public var bitValue: Bit? { Bit(self) }
+    
+}
+
+private let trueBitChars = Set("1Tt+Yy")
+private let falseBitChars = Set("0Ff-Nn")

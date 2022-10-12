@@ -70,7 +70,7 @@ Chocolate: capacity 0, durability 0, flavor -2, texture 2, calories 8
 //            Ingredient(name: "Cinnamon", capacity: 2, durability: 3, flavor: -2, texture: -1, calories: 3)
     ]
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var bestScore = 0
         var bestScoreWith500Calories = 0
         

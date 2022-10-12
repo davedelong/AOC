@@ -8,13 +8,13 @@
 
 class Day1: Day {
     
-    override func part1() -> String {
-        let sum = input.lines.integers.sum
+    func part1() async throws -> String {
+        let sum = input().lines.integers.sum
         return "\(sum)"
     }
     
-    override func part2() -> String {
-        let integers = input.lines.integers
+    func part2() async throws -> String {
+        let integers = input().lines.integers
         
         var frequency = 0
         var seen = Set([frequency])

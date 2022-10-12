@@ -89,21 +89,21 @@ class Day19: Day {
     }
     
     lazy var boundRegister: Int = {
-        return input.lines[0].words[1].integer!
+        return input().lines[0].words[1].integer!
     }()
     
     lazy var instructions: Array<Instruction> = {
         let codes = Opcode.all.keyedBy { $0.name }
         
         let r = Regex(#"(.+?) (\d+) (\d+) (\d+)"#)
-        return input.lines.raw.compactMap { line -> Instruction? in
+        return input().lines.raw.compactMap { line -> Instruction? in
             guard let m = r.firstMatch(in: line) else { return nil }
             guard let code = codes[m[1]!] else { return nil }
             return Instruction(opcode: code, arguments: [m.int(2)!, m.int(3)!, m.int(4)!])
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var registers = [0, 0, 0, 0, 0, 0]
         var pc = 0
         
@@ -117,7 +117,7 @@ class Day19: Day {
         return "\(registers[0])"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var answer = 0
         let target = 10551355
         for i in 1 ... target {

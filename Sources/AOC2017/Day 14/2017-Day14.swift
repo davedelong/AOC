@@ -7,11 +7,9 @@
 //
 
 class Day14: Day {
-
-    let day14Input = "jxqlasbh"
-    var disk = Array<Array<Bool>>()
     
-    @objc override init() { super.init() }
+    static var rawInput: String? { "jxqlasbh" }
+    var disk = Array<Array<Bool>>()
 
     func knotHash(_ lengthsInput: String) -> String {
         var list = Array(0..<256)
@@ -35,9 +33,9 @@ class Day14: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    override func part1() -> String {
+    func part1() async throws -> String {
         for i in 0 ..< 128 {
-            let input = "\(day14Input)-\(i)"
+            let input = "\(input().raw)-\(i)"
             let hash = knotHash(input)
             let row = hash.flatMap { c -> Array<Bool> in
                 let int = Int(String(c), radix: 16)!
@@ -55,7 +53,7 @@ class Day14: Day {
         return "\(used)"
     }
         
-    override func part2() -> String {
+    func part2() async throws -> String {
         var unvisited = Array<Position>()
         for r in 0 ..< 128 {
             for c in 0 ..< 128 {

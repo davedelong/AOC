@@ -8,15 +8,13 @@
 
 class Day25: Day {
     
-    override init() {
-        super.init(rawInput: "17773298\n15530095")
-    }
+    static var rawInput: String? { "17773298\n15530095" }
 
-    override func part1() -> String {
+    func part1() async throws -> String {
 //        let input = Input("5764801\n17807724")
         
-        let pk1 = input.integers[0]
-        let pk2 = input.integers[1]
+        let pk1 = input().integers[0]
+        let pk2 = input().integers[1]
         
         var loop1: Int?
         var loop2: Int?
@@ -49,7 +47,7 @@ class Day25: Day {
         return i
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return ""
     }
 }

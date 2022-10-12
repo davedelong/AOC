@@ -17,22 +17,22 @@ class Day5: Day {
     
     var vents: Array<Vent> {
         let r: Regex = #"(\d+),(\d+) -> (\d+),(\d+)"#
-        return input.lines.raw.map { line in
+        return input().lines.raw.map { line in
             let m = r.firstMatch(in: line)!
             return Vent(start: Position(x: m[int: 1]!, y: m[int: 2]!),
                         end: Position(x: m[int: 3]!, y: m[int: 4]!))
         }
     }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let orthoVents = vents.filter { $0.start.x == $0.end.x || $0.start.y == $0.end.y }
         let total = self.countOverlaps(orthoVents)
-        return "\(total)"
+        return total
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         let total = self.countOverlaps(self.vents)
-        return "\(total)"
+        return total
     }
     
     private func countOverlaps(_ vents: Array<Vent>) -> Int {

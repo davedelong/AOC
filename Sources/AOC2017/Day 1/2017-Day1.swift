@@ -18,12 +18,12 @@ class Day1: Day {
         return "\(sum)"
     }
     
-    override func part1() -> String {
-        return checksum(input.characters.integers, offset: 1)
+    func part1() async throws -> String {
+        return checksum(input().characters.integers, offset: 1)
     }
     
-    override func part2() -> String {
-        let integers = input.characters.integers
+    func part2() async throws -> String {
+        let integers = input().characters.integers
         return checksum(integers, offset: integers.count / 2)
     }
     

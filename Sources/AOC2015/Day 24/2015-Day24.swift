@@ -8,12 +8,12 @@
 
 class Day24: Day {
 
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         return ("", "")
     }
     
-    override func part1() -> String {
-        let weights = input.integers
+    func part1() async throws -> String {
+        let weights = input().integers
         let totalWeight = weights.sum
         let groupWeight = totalWeight / 3
         
@@ -23,7 +23,7 @@ class Day24: Day {
         return #function
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
 

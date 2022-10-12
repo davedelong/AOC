@@ -8,13 +8,9 @@
 
 class Day13: Day {
 
-    override func run() -> (String, String) {
-        return super.run()
-    }
-
-    override func part1() -> String {
-        let timestamp = input.lines[0].integer!
-        let buses = input.lines[1].integers
+    func part1() async throws -> String {
+        let timestamp = input().lines[0].integer!
+        let buses = input().lines[1].integers
         
         var bus = 0
         var wait = Int.max
@@ -55,7 +51,7 @@ class Day13: Day {
         
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         /*
          x+0 % 17 == 0      => x+17 % 17    => x+816 % 17
          x+7 % 41 == 0      => x+48 % 41    => x+816 % 41
@@ -100,7 +96,7 @@ class Day13: Day {
             xWithOffset += stride
         }
         
-        let pairs = input.lines[1].csvWords.enumerated().compactMap { (index, word) -> (Int, Int)? in
+        let pairs = input().lines[1].csvWords.enumerated().compactMap { (index, word) -> (Int, Int)? in
             guard let int = word.integer else { return nil }
             return (index, int)
         }

@@ -8,8 +8,8 @@
 
 class Day5: Day {
     
-    override func part1() -> String {
-        var integers = input.lines.integers
+    func part1() async throws -> String {
+        var integers = input().lines.integers
         var stepCount = 0
         var index = 0
         while index < integers.count {
@@ -21,8 +21,8 @@ class Day5: Day {
         return "\(stepCount)"
     }
     
-    override func part2() -> String {
-        var integers = input.lines.integers
+    func part2() async throws -> String {
+        var integers = input().lines.integers
         var stepCount = 0
         var index = 0
         while index < integers.count {

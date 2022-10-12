@@ -8,7 +8,7 @@
 
 class Day10: Day {
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         
         // this is all about angles
         // asteroids are "hidden" or occluded if the have the same "angle" from the station as another, closer asteroid
@@ -17,7 +17,7 @@ class Day10: Day {
         // and the second asteroid
         
         var y = 0
-        var asteroids: Array<XY> = input.lines.characters.flatMap { p -> [XY] in
+        var asteroids: Array<XY> = input().lines.characters.flatMap { p -> [XY] in
             let a = p.enumerated().compactMap { (idx, char) -> XY? in
                 guard char == "#" else { return nil }
                 return XY(x: idx, y: y)

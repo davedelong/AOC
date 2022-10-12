@@ -8,7 +8,7 @@
 
 class Day10: Day {
     
-    @objc override init() { super.init(rawInput: "157,222,1,2,177,254,0,228,159,140,249,187,255,51,76,30") }
+    static var rawInput: String? { "157,222,1,2,177,254,0,228,159,140,249,187,255,51,76,30" }
 
     func twist(input: Array<Int>, lengths: Array<Int>, iterations: Int = 1) -> Array<Int> {
         var list = input
@@ -35,14 +35,14 @@ class Day10: Day {
         return hashPieces.map { String(format:"%02x", $0) }.reduce("", +)
     }
 
-    override func part1() -> String {
-        let part1Input = input.raw.components(separatedBy: ",").map { Int($0)! }
+    func part1() async throws -> String {
+        let part1Input = input().raw.components(separatedBy: ",").map { Int($0)! }
         let part1Result = twist(input: Array(0..<256), lengths: part1Input)
         return "\(part1Result[0] * part1Result[1])"
     }
 
-    override func part2() -> String {
-        let part2Input = input.raw.unicodeScalars.map { Int($0.value) }
+    func part2() async throws -> String {
+        let part2Input = input().raw.unicodeScalars.map { Int($0.value) }
         let p2Lengths = part2Input + [17, 31, 73, 47, 23]
         let result = twist(input: Array(0..<256), lengths: p2Lengths, iterations: 64)
         return hash(result)

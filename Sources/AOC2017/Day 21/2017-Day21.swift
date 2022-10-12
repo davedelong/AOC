@@ -17,9 +17,8 @@ class Day21: Day {
         [.on,  .on,  .on]
     ])
 
-    @objc override init() {
-        super.init()
-        let rawRules = input.lines.raw
+    init() {
+        let rawRules = input().lines.raw
         for rawRule in rawRules {
             let pieces = rawRule.components(separatedBy: " => ")
             let rawCause = pieces[0].split(separator: "/")
@@ -61,13 +60,13 @@ class Day21: Day {
         return current
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let part1 = apply(times: 5)
         let pixelsOn1 = part1.count(where: { $0 == .on })
         return "\(pixelsOn1)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         let part2 = apply(times: 18)
         let pixelsOn2 = part2.count(where: { $0 == .on })
         return "\(pixelsOn2)"

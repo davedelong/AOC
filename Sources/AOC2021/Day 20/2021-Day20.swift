@@ -11,18 +11,18 @@ import AOCCore
 class Day20: Day {
 
     lazy var lookup: Array<Bool> = {
-        input.lines[0].characters.map { $0 == "#" }
+        input().lines[0].characters.map { $0 == "#" }
     }()
     
     lazy var loadedImage: XYGrid<Bool> = {
-        let lines = input.lines.dropFirst(2)
+        let lines = input().lines.dropFirst(2)
         let bits = lines.map { l -> Array<Bit> in
             l.characters.map { $0 == "#" }
         }
         return XYGrid(data: bits)
     }()
 
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         
         var p1 = 0
         
@@ -36,7 +36,7 @@ class Day20: Day {
         
         let p2 = current.values.count(of: true)
         
-        return (p1.description, p2.description)
+        return (p1, p2)
     }
     
     func enhance(_ grid: XYGrid<Bit>, infiniteValue: Bit) -> XYGrid<Bit> {

@@ -8,12 +8,8 @@
 
 class Day21: Day {
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
-        let i = Intcode(memory: input.integers)
+    func part1() async throws -> String {
+        let i = Intcode(memory: input().integers)
         
         // if (A == false || B == false || c == false) && D == true { jump }
         // else walk
@@ -34,8 +30,8 @@ WALK
         return "\(i.io!)"
     }
     
-    override func part2() -> String {
-        let i = Intcode(memory: input.integers)
+    func part2() async throws -> String {
+        let i = Intcode(memory: input().integers)
         
         // if (A == false || B == false || c == false) && D == true { jump }
         // else run

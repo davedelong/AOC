@@ -202,8 +202,8 @@ class Day23: Day {
         return b
     }()
     
-    override func part1() -> String {
-        return minCost(for: part1Burrow).description
+    func part1() async throws -> Int {
+        return minCost(for: part1Burrow)
         // absolute minimum:
         //14 + 100 + 1100 + 17000 = 18214
         
@@ -259,11 +259,11 @@ class Day23: Day {
          d =8+9
          =20 + (18 * 10) + 1100 + 17000 = 18300
          */
-        return "18300"
+        return 18300
     }
     
-    override func part2() -> String {
-        return minCost(for: part2Burrow).description
+    func part2() async throws -> Int {
+        return minCost(for: part2Burrow)
     }
     
     private func minCost(for burrow: Burrow) -> Int {
@@ -300,9 +300,9 @@ class Day23: Day {
         return c
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         // i got part 1 by doing it by hand
         // part 2 used someone else's code
-        return ("18300", "50190")
+        return (18300, 50190)
     }
 }

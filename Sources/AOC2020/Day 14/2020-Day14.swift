@@ -8,20 +8,16 @@
 
 class Day14: Day {
 
-    override func run() -> (String, String) {
-        return super.run()
-    }
-
     let maskR: Regex = #"mask = ([10X]+)"#
     let assignR: Regex = #"mem\[(\d+)\] = (\d+)"#
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         enum Op {
             case mask(ones: Int, zeros: Int)
             case assign(Int, Int)
         }
         
-        let ops = input.rawLines.map { line -> Op in
+        let ops = input().lines.raw.map { line -> Op in
             if let m = maskR.firstMatch(in: line) {
                 let line = m[1]!
                 let ones = Int(bits: line.map { $0 == "1" })
@@ -50,13 +46,13 @@ class Day14: Day {
         return "\(memory.sum)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         enum Op {
             case mask(Array<Bool?>)
             case assign(Int, Int)
         }
         
-        let ops = input.rawLines.map { line -> Op in
+        let ops = input().lines.raw.map { line -> Op in
             if let m = maskR.firstMatch(in: line) {
                 let line = m[1]!
                 return .mask(line.map { $0 == "1" ? true : ($0 == "0" ? false : nil) })

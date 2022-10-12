@@ -70,7 +70,7 @@ class Day19: Day {
     lazy var parsedScanners: Array<Scanner> = {
         var final = Array<Scanner>()
         
-        for line in input.lines {
+        for line in input().lines {
             if line.raw.hasPrefix("---") {
                 let number = line.integers[0]
                 final.append(Scanner(scannerNumber: number, beacons: []))
@@ -86,7 +86,7 @@ class Day19: Day {
         return final
     }()
 
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         var scanners = parsedScanners
         var scannerLocations = Set<Point3>()
         
@@ -127,9 +127,9 @@ eachExtreme: for knownBeacon in world.beacons {
             }
         }
         
-        let p1 = world.beacons.count.description
+        let p1 = world.beacons.count
         
-        let p2 = scannerLocations.permutations(ofCount: 2).map { $0[0].manhattanDistance(to: $0[1]) }.max()!.description
+        let p2 = scannerLocations.permutations(ofCount: 2).map { $0[0].manhattanDistance(to: $0[1]) }.max()!
         
         return (p1, p2)
     }

@@ -8,16 +8,14 @@
 
 class Day13: Day {
 
-    var firewall = Dictionary<Int, Int>()
-    
-    @objc override init() {
-        super.init()
-        for line in input.lines.raw {
+    lazy var firewall: Dictionary<Int, Int> = {
+        var f = Dictionary<Int, Int>()
+        for line in input().lines.raw {
             let p = line.components(separatedBy: ": ")
-            firewall[Int(p[0])!] = Int(p[1])!
+            f[Int(p[0])!] = Int(p[1])!
         }
-    }
-
+        return f
+    }()
 
     func score(for delay: Int) -> (Int, Int) {
         var collisions = 0
@@ -33,11 +31,11 @@ class Day13: Day {
         return (collisions, score)
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         return "\(score(for: 0).1)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         for delay in 1 ..< Int.max {
             let s = score(for: delay)
             if s.0 == 0 {

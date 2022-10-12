@@ -11,13 +11,13 @@ import AOCCore
 class Day13: Day {
 
     let r1: Regex = #"(\d+),(\d+)"#
-    lazy var coordinates: Array<Position> = input.rawLines.compactMap {
+    lazy var coordinates: Array<Position> = input().lines.raw.compactMap {
         guard let match = r1.firstMatch(in: $0) else { return nil }
         return Position(x: match[int: 1]!, y: match[int: 2]!)
     }
     
     let r2: Regex = #"fold along (x|y)=(\d+)"#
-    lazy var folds: Array<(String, Int)> = input.rawLines.compactMap {
+    lazy var folds: Array<(String, Int)> = input().lines.raw.compactMap {
         guard let match = r2.firstMatch(in: $0) else { return nil }
         return (match[1]!, match[int: 2]!)
     }
@@ -30,12 +30,12 @@ class Day13: Day {
         return grid
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let after1Fold = foldGrid(initialGrid, axis: folds[0].0, line: folds[0].1)
-        return "\(after1Fold.values.count(of: true))"
+        return after1Fold.values.count(of: true)
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         var grid = initialGrid
         for fold in folds {
             grid = foldGrid(grid, axis: fold.0, line: fold.1)

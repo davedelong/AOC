@@ -11,7 +11,7 @@ class Day19: Day {
     private let source = "CRnCaCaCaSiRnBPTiMgArSiRnSiRnMgArSiRnCaFArTiTiBSiThFYCaFArCaCaSiThCaPBSiThSiThCaCaPTiRnPBSiThRnFArArCaCaSiThCaSiThSiRnMgArCaPTiBPRnFArSiThCaSiRnFArBCaSiRnCaPRnFArPMgYCaFArCaPTiTiTiBPBSiThCaPTiBPBSiRnFArBPBSiRnCaFArBPRnSiRnFArRnSiRnBFArCaFArCaCaCaSiThSiThCaCaPBPTiTiRnFArCaPTiBSiAlArPBCaCaCaCaCaSiRnMgArCaSiThFArThCaSiThCaSiRnCaFYCaSiRnFYFArFArCaSiRnFYFArCaSiRnBPMgArSiThPRnFArCaSiRnFArTiRnSiRnFYFArCaSiRnBFArCaSiRnTiMgArSiThCaSiThCaFArPRnFArSiRnFArTiTiTiTiBCaCaSiRnCaCaFYFArSiThCaPTiBPTiBCaSiThSiRnMgArCaF"
     
     lazy var rules: Array<(String, String)> = {
-        let words = input.lines.words.raw
+        let words = input().lines.words.raw
         var rules = Array<(String, String)>()
         for w in words {
             rules.append((w[0], w[2]))
@@ -19,7 +19,7 @@ class Day19: Day {
         return rules
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var seen = Set<String>()
         
         for (find, replace) in rules {
@@ -33,7 +33,7 @@ class Day19: Day {
         return "\(seen.count)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         // https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/
         
         // result = count(tokens) - count("Rn" or "Ar") - 2*count("Y") - 1

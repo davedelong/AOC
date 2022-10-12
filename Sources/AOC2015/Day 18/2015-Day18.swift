@@ -22,8 +22,8 @@ class Day18: Day {
         return around.filter { 0 <= $0.0 && $0.0 < inside.0 && 0 <= $0.1 && $0.1 < inside.1 }
     }
     
-    override func part1() -> String {
-        var current = Matrix(input.lines.characters.map { $0.map { $0 == "#" ? Bit.on : Bit.off }})
+    func part1() async throws -> String {
+        var current = Matrix(input().lines.characters.map { $0.map { $0 == "#" ? Bit.on : Bit.off }})
         
         let rows = current.rowCount
         let cols = current.colCount
@@ -56,8 +56,8 @@ class Day18: Day {
         return "\(lightsOn)"
     }
     
-    override func part2() -> String {
-        var current = Matrix(input.lines.characters.map { $0.map { $0 == "#" ? Bit.on : Bit.off }})
+    func part2() async throws -> String {
+        var current = Matrix(input().lines.characters.map { $0.map { $0 == "#" ? Bit.on : Bit.off }})
         
         let rows = current.rowCount
         let cols = current.colCount

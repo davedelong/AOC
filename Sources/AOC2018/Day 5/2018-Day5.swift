@@ -26,13 +26,13 @@ class Day5: Day {
         return final
     }
     
-    override func part1() -> String {
-        let characters = reduce(input.characters)
+    func part1() async throws -> String {
+        let characters = reduce(input().characters)
         return "\(characters.count)"
     }
     
-    override func part2() -> String {
-        let source = input.characters
+    func part2() async throws -> String {
+        let source = input().characters
         let lengths = Character.alphabet.map { reduce(source, skipping: [$0, $0.uppercased]).count }
         let shortest = lengths.min()!
         return "\(shortest)"

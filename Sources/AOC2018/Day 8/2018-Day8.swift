@@ -31,8 +31,8 @@ class Day8: Day {
         return Node(children: children, metadata: metadata)
     }
     
-    override func run() -> (String, String) {
-        var integers = input.words.integers.makeIterator()
+    func run() async throws -> (String, String) {
+        var integers = input().words.integers.makeIterator()
         let tree = parse(&integers)
         return ("\(tree.metadataSum)", "\(tree.value)")
     }

@@ -12,8 +12,8 @@ class Day25: Day {
     
     lazy var startGrid: XYGrid<Heading> = {
         var g = XYGrid<Heading>()
-        for y in 0 ..< input.lines.count {
-            let row = input.lines[y]
+        for y in 0 ..< input().lines.count {
+            let row = input().lines[y]
             for x in 0 ..< row.characters.count {
                 if let h = Heading(character: row.characters[x]) {
                     g[x, y] = h
@@ -23,7 +23,7 @@ class Day25: Day {
         return g
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         var g = startGrid
         let r = g.span
         var turns = 0
@@ -40,10 +40,10 @@ class Day25: Day {
 //            })
         }
         
-        return turns.description
+        return turns
     }
 
-    override func part2() -> String { return "" }
+    func part2() async throws -> String { return "" }
     
     private func tickGrid(_ grid: XYGrid<Heading>, rect: PointRect) -> (XYGrid<Heading>, Int) {
         let (right, down) = grid.partition(by: { $0.value.y == 0 })

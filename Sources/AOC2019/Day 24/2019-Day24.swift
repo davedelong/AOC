@@ -13,13 +13,9 @@ class Day24: Day {
         case empty
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
     private func parseInput() -> XYGrid<Life> {
         var g = XYGrid<Life>()
-        for (y, line) in input.lines.enumerated() {
+        for (y, line) in input().lines.enumerated() {
             for (x, char) in line.raw.enumerated() {
                 g[XY(x: x, y: y)] = char == "#" ? .bug : .empty
             }
@@ -53,7 +49,7 @@ class Day24: Day {
         return final
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var current = parseInput()
         
         var seen = Set<XYGrid<Life>>()
@@ -80,7 +76,7 @@ class Day24: Day {
         return "\(biodiversity)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
     

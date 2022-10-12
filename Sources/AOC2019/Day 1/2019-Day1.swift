@@ -19,12 +19,12 @@ private func allFuel(for mass: Int) -> Array<Int> {
 
 class Day1: Day {
     
-    override func run() -> (String, String) {
-        let modules = input.lines.integers
+    func run() async throws -> (String, String) {
+        let modules = input().lines.integers
         
         let fuels = modules.map { allFuel(for: $0) }
         
-        let p1 = fuels.compactMap { $0.first }.sum
+        let p1 = fuels.compactMap(\.first).sum
         let p2 = fuels.map(\.sum).sum
         return ("\(p1)", "\(p2)")
     }

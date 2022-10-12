@@ -8,13 +8,13 @@
 
 class Day5: Day {
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let vowels: Set<Character> = Set("aeiou")
         let illegals: Array<(Character, Character)> = [
             ("a", "b"), ("c", "d"), ("p", "q"), ("x", "y")
         ]
         
-        let niceCount = input.lines.characters.count { line -> Bool in
+        let niceCount = input().lines.characters.count { line -> Bool in
             var vowelCount = 0
             var hasDoubled = false
             var previous: Character?
@@ -36,10 +36,10 @@ class Day5: Day {
         return "\(niceCount)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let rule1 = Regex(#"(..).*\1"#) // a pair of characters repeated in the string
         let rule2 = Regex(#"(.).\1"#) // a character repeated w/ a single character in between
-        let niceCount = input.lines.raw.count { line -> Bool in
+        let niceCount = input().lines.raw.count { line -> Bool in
             return rule1.matches(line) && rule2.matches(line)
         }
         return "\(niceCount)"

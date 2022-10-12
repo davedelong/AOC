@@ -24,7 +24,7 @@ class Day4: Day {
         return (true, true)
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         
         var p1Count = 0
         var p2Count = 0

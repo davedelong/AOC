@@ -48,14 +48,11 @@ class Day11: Day {
         return final
     }
     
-    var directions = Array<Direction>()
-    
-    @objc override init() {
-        super.init()
-        directions = input.raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
-    }
+    lazy var directions: Array<Direction> = {
+        input().raw.components(separatedBy: ",").map { Direction(rawValue: $0)! }
+    }()
 
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         var finalDirections = Dictionary<Direction, Int>()
         var latestDistance = 0
         var furthestAway = 0

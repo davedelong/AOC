@@ -11,17 +11,13 @@ import AOCCore
 typealias Bingo = Matrix<Int>
 
 class Day4: Day {
-
-    override func run() -> (String, String) {
-        return super.run()
-    }
     
     lazy var numbers: Array<Int> = {
-        input.lines[0].integers
+        input().lines[0].integers
     }()
     
     lazy var boards: Array<Bingo> = {
-        let lines = input.lines.dropFirst().chunks(of: 6)
+        let lines = input().lines.dropFirst().chunks(of: 6)
         return lines.map { lines in
             let boardLines = lines.dropFirst()
             let ints = boardLines.map(\.integers)
@@ -29,7 +25,7 @@ class Day4: Day {
         }
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let b = boards.map { $0.copy() }
         
         for n in numbers {
@@ -41,14 +37,14 @@ class Day4: Day {
                     board.replaceAll(-1, with: 0)
                     let sum = board.data.map(\.sum).sum
                     let final = sum * n
-                    return "\(final)"
+                    return final
                 }
             }
         }
         fatalError()
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         var longestGame = 0
         var lastBoardScore = 0
         
@@ -71,7 +67,7 @@ class Day4: Day {
             }
         }
         
-        return "\(lastBoardScore)"
+        return lastBoardScore
     }
 
 }

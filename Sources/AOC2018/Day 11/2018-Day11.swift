@@ -8,14 +8,14 @@
 
 class Day11: Day {
     
-    @objc override init() { super.init(rawInput: "5468") }
+    static var rawInput: String? { "5468" }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         return approach1()
     }
     
     private func approach2() -> (String, String) {
-        let serialNumber = input.integer!
+        let serialNumber = input().integer!
         let matrix = Matrix<Int>(rows: 300, columns: 300, value: 0)
         
         for x in 0 ..< 300 {
@@ -78,7 +78,7 @@ class Day11: Day {
     }
     
     private func approach1() -> (String, String) {
-        let gridSerialNumber = input.integer!
+        let gridSerialNumber = input().integer!
         
         var grid = Dictionary<Position, Int>()
         let positions = Position.all(in: 1...300, 1...300)

@@ -15,7 +15,7 @@ class Day12: Day {
     }
     
     lazy var instructions: Array<Instruction> = {
-        return input.rawLines.map { line -> Instruction in
+        return input().lines.raw.map { line -> Instruction in
             let i = line.first!
             let int = Int(line.dropFirst())!
             
@@ -28,7 +28,7 @@ class Day12: Day {
         }
     }()
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         var p = Position.zero
         var h = Heading.east
         
@@ -44,10 +44,10 @@ class Day12: Day {
         }
         
         let d = p.manhattanDistance(to: .zero)
-        return "\(d)"
+        return d
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         var p = Position.zero
         var w = Vector2(x: 10, y: 1)
         
@@ -69,7 +69,7 @@ class Day12: Day {
         }
         
         let d = p.manhattanDistance(to: .zero)
-        return "\(d)"
+        return d
     }
 
 }

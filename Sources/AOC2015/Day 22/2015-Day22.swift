@@ -146,11 +146,11 @@ class Day22: Day {
         
     }
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         return ("", "")
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let initial = Turn(player: Player(hitPoints: 50, mana: 500, armor: 0, shieldTime: 0, rechargeTime: 0),
                            boss: Boss(hitPoints: 58, damage: 9, poisonTime: 0),
                            playersTurn: true)
@@ -166,7 +166,7 @@ class Day22: Day {
         return "\(leastCost)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         return #function
     }
 

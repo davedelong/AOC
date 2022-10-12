@@ -9,7 +9,7 @@
 extension Array where Element == Int {
     init<S: StringProtocol>(integersIn string: S) {
         let matches = Regex.integers.matches(in: string)
-        let ints = matches.compactMap { $0[int: 1] }
+        let ints = matches.compactMap { $0.int(1) }
         self = ints
     }
 }
@@ -24,7 +24,7 @@ class Day19: Day {
     
     lazy var rawRules: Dictionary<Int, Rule> = {
         var rawRules = Dictionary<Int, Rule>()
-        for line in input.rawLines {
+        for line in input().lines.raw {
             if line.isEmpty { break }
             let number = line.prefix(upTo: ":")!
             let int = Int(number)!
@@ -80,25 +80,25 @@ class Day19: Day {
         }
     }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let r = "^" + self.buildRegexPattern(0, part2: false) + "$"
         let regex = try! Regex(pattern: r)
-        let inputs = input.raw.split(on: "\n\n")[1].split(on: "\n")
+        let inputs = input().raw.split(on: "\n\n")[1].split(on: "\n")
         
         let count = inputs.count(where: { regex.matches($0) })
-        return "\(count)"
+        return count
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         rawRules[8] = .either([42], [42, 8])
         rawRules[11] = .either([42, 31], [42, 11, 31])
         
         let r = "^" + self.buildRegexPattern(0, part2: true) + "$"
         let regex = try! Regex(pattern: r)
-        let inputs = input.raw.split(on: "\n\n")[1].split(on: "\n")
+        let inputs = input().raw.split(on: "\n\n")[1].split(on: "\n")
         
         let count = inputs.count(where: { regex.matches($0) })
-        return "\(count)"
+        return count
     }
 
 }

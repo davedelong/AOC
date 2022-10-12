@@ -10,7 +10,7 @@ import AOCCore
 
 class Day21: Day {
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         
         let board = CircularList.Node(values: 1...10)
         /*
@@ -48,10 +48,10 @@ class Day21: Day {
         }
         
         let loserScore = min(p1Score, p2Score)
-        return (loserScore * rollCount).description
+        return (loserScore * rollCount)
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         
         struct GameState: Hashable {
             var p1: Int
@@ -104,7 +104,7 @@ class Day21: Day {
         }
         
         let (p1Wins, p2Wins) = countWins(.init(p1: 1, p2: 3, s1: 0, s2: 0))
-        return max(p1Wins, p2Wins).description
+        return max(p1Wins, p2Wins)
     }
 
 }

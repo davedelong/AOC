@@ -15,7 +15,7 @@ class Day7: Day {
     
     lazy var commands: Array<Command> = {
         let r = Regex(#"(NOT (.+?)|(\d+)|(.+?) (AND|OR|LSHIFT|RSHIFT) (.+?)|(.+?)) -> (.+)"#)
-        return input.lines.raw.map { l -> Command in
+        return input().lines.raw.map { l -> Command in
             let m = r.firstMatch(in: l)!
             let dst = m[8]!
             
@@ -63,7 +63,7 @@ class Day7: Day {
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var registers = Registers()
         var index = 0
         while registers["a"] == nil {
@@ -75,7 +75,7 @@ class Day7: Day {
         return "\(value)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var registers = Registers()
         var index = 0
         while registers["a"] == nil {

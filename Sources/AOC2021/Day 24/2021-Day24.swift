@@ -18,7 +18,7 @@ class Day24: Day {
     }
 
     lazy var instructions: Array<Instruction> = {
-        return input.lines.rawWords.map { w -> Instruction in
+        return input().lines.words.raw.map { w -> Instruction in
             switch w[0] {
                 case "inp": return .input(w[1])
                 case "add": return .add(w[1], w[2])
@@ -31,20 +31,20 @@ class Day24: Day {
         }
     }()
     
-    override func run() -> (String, String) {
-        return ("92969593497992", "81514171161381")
+    func run() async throws -> (Int, Int) {
+        return (92969593497992, 81514171161381)
     }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         var i = 99_999_999_999_999
         while i > 0 {
-            if checkInput(i) { return i.description }
+            if checkInput(i) { return i }
             i -= 1
         }
         fatalError()
         let v = checkInput(13579246899999)
         print(v)
-        return #function
+        return 0
     }
     
     func blah(inputs i: Array<Int>) {
@@ -408,8 +408,8 @@ class Day24: Day {
         return variables["z"] == 0
     }
 
-    override func part2() -> String {
-        return #function
+    func part2() async throws -> Int {
+        return 0
     }
 
 }

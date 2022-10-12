@@ -16,7 +16,7 @@ class Day22: Day {
     }
     
     lazy var instructions: Array<Instruction> = {
-        return input.lines.map { l -> Instruction in
+        return input().lines.map { l -> Instruction in
             let on = l.raw.hasPrefix("on")
             let ints = l.integers
             return Instruction(shouldBeOn: on,
@@ -24,14 +24,14 @@ class Day22: Day {
         }
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> Int {
 //        return "589411"
         let space = PointSpan3([-50 ... 50, -50 ... 50, -50 ... 50])
-        return runInstructions(limitedTo: space).description
+        return runInstructions(limitedTo: space)
     }
     
-    override func part2() -> String {
-        return runInstructions(limitedTo: nil).description
+    func part2() async throws -> Int {
+        return runInstructions(limitedTo: nil)
     }
     
     func runInstructions(limitedTo space: PointSpan3?) -> Int {

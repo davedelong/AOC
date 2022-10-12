@@ -8,8 +8,8 @@
 
 class Day17: Day {
     
-    override func run() -> (String, String) {
-        let containers = input.lines.integers
+    func run() async throws -> (String, String) {
+        let containers = input().lines.integers
         
         var matching = 0
         var numberOfContainersNeeded = Int.max

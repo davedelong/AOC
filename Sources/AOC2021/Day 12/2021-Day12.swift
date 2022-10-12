@@ -16,7 +16,7 @@ class Day12: Day {
     
     lazy var caveSystem: Graph<CaveID, CaveID> = {
         var g = Graph<CaveID, CaveID>()
-        for line in input.rawLines {
+        for line in input().lines.raw {
             let pieces = line.split(on: "-")
             let c1 = CaveID(id: String(pieces[0]))
             let c2 = CaveID(id: String(pieces[1]))
@@ -32,16 +32,16 @@ class Day12: Day {
     var startCave: CaveID { CaveID(id: "start") }
     var endCave: CaveID { CaveID(id: "end") }
 
-    override func part1() -> String {
+    func part1() async throws -> Int {
         let paths = self.computePaths(from: startCave, to: endCave)
-        return "\(paths.count)"
+        return paths.count
     }
 
-    override func part2() -> String {
+    func part2() async throws -> Int {
         let paths = self.computePaths(from: startCave, to: endCave, smallCaveCount: 2)
         
         let uniqued = Set(paths)
-        return "\(uniqued.count)"
+        return uniqued.count
     }
     
     typealias CavePath = Array<CaveID>

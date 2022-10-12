@@ -10,24 +10,20 @@ class Day17: Day {
     typealias Active = Void
     typealias Space<P: PointProtocol> = Dictionary<P, Active>
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
     let testInput = Input("""
 .#.
 ..#
 ###
 """)
 
-    override func part1() -> String {
-        let p1 = runInput(input, for: Point3.self)
-        return "\(p1)"
+    func part1() async throws -> Int {
+        let p1 = runInput(input(), for: Point3.self)
+        return p1
     }
 
-    override func part2() -> String {
-        let p2 = runInput(input, for: Point4.self)
-        return "\(p2)"
+    func part2() async throws -> Int {
+        let p2 = runInput(input(), for: Point4.self)
+        return p2
     }
     
     func runInput<P: PointProtocol>(_ input: Input, for dimension: P.Type) -> Int {

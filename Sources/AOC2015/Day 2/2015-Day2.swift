@@ -29,7 +29,7 @@ class Day2: Day {
     
     lazy var boxes: Array<Box> = {
         let regex = Regex(#"(\d+)x(\d+)x(\d+)"#)
-        let lines = input.lines.raw
+        let lines = input().lines.raw
         
         var boxes = Array<Box>()
         for line in lines {
@@ -39,12 +39,12 @@ class Day2: Day {
         return boxes
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let totalSurfaceArea = boxes.map { $0.surfaceArea }.sum
         return "\(totalSurfaceArea)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let totalRibbonLength = boxes.map { $0.ribbonLength }.sum
         return "\(totalRibbonLength)"
     }

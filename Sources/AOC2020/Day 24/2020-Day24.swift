@@ -55,7 +55,7 @@ class Day24: Day {
     }
     
     lazy var instructions: Array<Array<HexHeading>> = {
-        return input.lines.map { line -> Array<HexHeading> in
+        return input().lines.map { line -> Array<HexHeading> in
             var f = Array<HexHeading>()
             var previous: Character?
             for c in line.characters {
@@ -75,7 +75,7 @@ class Day24: Day {
         }
     }()
 
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         
         var grid = Dictionary<Point2, Tile>()
         for list in instructions {
@@ -90,7 +90,7 @@ class Day24: Day {
         }
         let p2 = grid.values.count(of: .black)
         
-        return ("\(p1)", "\(p2)")
+        return (p1, p2)
     }
     
     func flipGrid(_ grid: Dictionary<Point2, Tile>) -> Dictionary<Point2, Tile> {

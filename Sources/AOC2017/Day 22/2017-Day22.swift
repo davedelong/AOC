@@ -29,7 +29,7 @@ class Day22: Day {
     
     func resetGrid() {
         grid.removeAll()
-        let rawGrid = input.lines.raw
+        let rawGrid = input().lines.raw
         
         for (y, line) in rawGrid.enumerated() {
             for (x, char) in line.enumerated() {
@@ -67,14 +67,14 @@ class Day22: Day {
         return infections
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let inf = countInfections(iterations: 10_000, infector: { $0.flip() }, mover: {
             $0 == .infected ? $1.turnRight() : $1.turnLeft()
         })
         return "\(inf)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         let inf = countInfections(iterations: 10_000_000, infector: { $0.rotate() }, mover: {
             switch $0 {
                 case .clean: return $1.turnLeft()

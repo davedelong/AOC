@@ -87,7 +87,7 @@ class Day24: Day {
         
         let r = Regex(#"(\d+) units each with (\d+) hit points( \((.+?)\))? with an attack that does (\d+) (.+?) damage at initiative (\d+)"#)
         
-        for line in input.lines.raw {
+        for line in input().lines.raw {
             if line == "Immune System:" {
                 currentKind = .immuneSystem
                 currentOrder = groups.count { $0.kind == currentKind } + 1
@@ -255,12 +255,12 @@ class Day24: Day {
         return (kind, units)
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let (_, remainingUnits) = runSystem()!
         return "\(remainingUnits)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var boost = 1
         while true {
             if let (winner, remaining) = runSystem(boost) {

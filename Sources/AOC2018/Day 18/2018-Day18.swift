@@ -18,7 +18,7 @@ class Day18: Day {
     
     lazy var acreage: Grid = {
         var final = Grid()
-        for (y, line) in input.lines.enumerated() {
+        for (y, line) in input().lines.enumerated() {
             for (x, c) in line.characters.enumerated() {
                 final[Position(x: x, y: y)] = AcreContents(rawValue: c)!
             }
@@ -61,7 +61,7 @@ class Day18: Day {
         return new
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         var current = acreage
         for _ in 0 ..< 10 {
             current = tick(current)
@@ -73,7 +73,7 @@ class Day18: Day {
         return "\(trees * lumber)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         var current = acreage
         var seen = Dictionary<Grid, Int>()
         seen[current] = 0

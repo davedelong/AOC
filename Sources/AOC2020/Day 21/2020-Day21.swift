@@ -8,11 +8,11 @@
 
 class Day21: Day {
 
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, String) {
         var ingredientCounts = CountedSet<String>()
         var allergenTable = Dictionary<String, Set<String>>()
         
-        for line in input.rawLines {
+        for line in input().lines.raw {
             let parts = line.split(on: "(contains ")
             let ingredients = parts[0].split(on: \.isWhitespace).map(String.init).filter(\.isNotEmpty)
             let allergens = Set(parts[1].dropLast().split(on: ", ").map(String.init).filter(\.isNotEmpty))
@@ -58,7 +58,7 @@ class Day21: Day {
         let ingredients = sortedKeys.compactMap { allergenTable[$0]?.first }
         let p2 = ingredients.joined(separator: ",")
         
-        return ("\(p1)", p2)
+        return (p1, p2)
     }
 
 }

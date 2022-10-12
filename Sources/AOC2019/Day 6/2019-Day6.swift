@@ -8,8 +8,8 @@
 
 class Day6: Day {
     
-    override func run() -> (String, String) {
-        let lines = input.lines.words(separatedBy: ")")
+    func run() async throws -> (String, String) {
+        let lines = input().lines.words(separatedBy: ")")
         
         var nodes = Dictionary<String, Node<String>>()
         for pieces in lines {

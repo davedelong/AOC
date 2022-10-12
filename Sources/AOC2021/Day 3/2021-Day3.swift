@@ -8,8 +8,8 @@
 
 class Day3: Day {
 
-    override func part1() -> String {
-        let bits = input.lines.bits
+    func part1() async throws -> Int {
+        let bits = input().lines.bits
         
         var gamma = Array<Bool>()
         var epsilon = Array<Bool>()
@@ -21,11 +21,11 @@ class Day3: Day {
         
         let g = Int(bits: gamma)
         let e = Int(bits: epsilon)
-        return "\(g * e)"
+        return g * e
     }
 
-    override func part2() -> String {
-        let bits = input.lines.bits
+    func part2() async throws -> Int {
+        let bits = input().lines.bits
         
         var o2Remaining = bits
         var co2Remaining = bits
@@ -46,7 +46,7 @@ class Day3: Day {
         }
         let o = Int(bits: o2Remaining[0])
         let c = Int(bits: co2Remaining[0])
-        return "\(o * c)"
+        return o * c
     }
 
 }

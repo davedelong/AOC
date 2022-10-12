@@ -8,9 +8,9 @@
 
 class Day8: Day {
     
-    override func run() -> (String, String) {
+    func run() async throws -> (String, String) {
         let numberOfPixels = 25 * 6
-        let rawData = input.characters.compactMap { Int("\($0)") }
+        let rawData = input().characters.integers
         let layers = rawData.chunks(of: numberOfPixels).map { Array($0) }
         
         let layersWithZeroCounts = layers.map { pixels -> (Array<Int>, Int) in

@@ -20,7 +20,7 @@ class Day4: Day {
         
         var currentGuard = 0
         var fallsAsleep: Int?
-        for line in input.lines.raw {
+        for line in input().lines.raw {
             let match = regex.firstMatch(in: line)!
             let minute = match.int(1)!
             
@@ -43,7 +43,7 @@ class Day4: Day {
         return shifts
     }()
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let guardSleepTime = shifts.map { ($0, $1.sum) }
         let mostTimeSpentSleeping = guardSleepTime.map { $0.1 }.max()!
         
@@ -62,7 +62,7 @@ class Day4: Day {
         return "\(guardID * minute)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         
         var maxTimesAsleepSoFar = 0
         var resultSoFar = 0

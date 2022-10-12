@@ -8,13 +8,11 @@
 
 class Day23: Day {
     
-    override init() {
-        super.init(rawInput: "598162734")
-    }
+    static var rawInput: String? { "598162734" }
 
-    override func part1() -> String {
+    func part1() async throws -> String {
 //        let input = Input("389125467")
-        let list = LinkedList<Int>(input.characters.integers)
+        let list = LinkedList<Int>(input().characters.integers)
         
         for _ in 0 ..< 100 {
             let a = list.remove(at: 1)
@@ -48,9 +46,9 @@ class Day23: Day {
         return "\(order)"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
 //        let input = Input("389125467")
-        let ints = input.characters.integers
+        let ints = input().characters.integers
         let first = CircularList.Node(ints[0])
         
         var next = first

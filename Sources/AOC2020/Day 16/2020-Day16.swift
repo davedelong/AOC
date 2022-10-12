@@ -24,7 +24,7 @@ class Day16: Day {
     }
     
     lazy var fields: Array<Field> = {
-        return input.rawLines.compactMap { line -> Field? in
+        return input().lines.raw.compactMap { line -> Field? in
             guard let m = field.firstMatch(in: line) else { return nil }
             return Field(name: m[1]!,
                          ranges: [
@@ -35,14 +35,14 @@ class Day16: Day {
     }()
     
     lazy var tickets: Array<Ticket> = {
-        input.lines.dropFirst(22).compactMap { line -> Ticket? in
+        input().lines.dropFirst(22).compactMap { line -> Ticket? in
             let ints = line.integers
             guard ints.count == 20 else { return nil }
             return Ticket(values: ints)
         }
     }()
     
-    override func run() -> (String, String) {
+    func run() async throws -> (Int, Int) {
         var invalidValues = Array<Int>()
         var valid = Array<Ticket>()
         
@@ -102,7 +102,7 @@ class Day16: Day {
         
         let myValues = mapping.keys.map { tickets[0].values[$0] }
         
-        return ("\(invalidValues.sum)", "\(myValues.product)")
+        return (invalidValues.sum, myValues.product)
     }
 
 }

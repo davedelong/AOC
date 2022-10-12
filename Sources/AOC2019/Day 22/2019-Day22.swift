@@ -21,10 +21,6 @@ class Day22: Day {
         }
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
     private func parse() -> Array<Instruction> {
         /*
          cut 3334
@@ -45,7 +41,7 @@ class Day22: Day {
          */
         let r = Regex(#"((cut (-?\d+))|(deal (into new stack|with increment (\d+))))"#)
         var instructions = Array<Instruction>()
-        for line in input.lines {
+        for line in input().lines {
             let match = r.firstMatch(in: line.raw)!
             if let cut = match.int(3) {
                 instructions.append(.cut(cut))
@@ -103,7 +99,7 @@ class Day22: Day {
         return d
     }
     
-    override func part1() -> String {
+    func part1() async throws -> String {
         let i = parse()
         
         let deck = Array(0 ... 10006)
@@ -113,7 +109,7 @@ class Day22: Day {
         return "\(pos)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         let instructions = parse()
         
         

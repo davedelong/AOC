@@ -22,12 +22,8 @@ class Day17: Day {
         }
     }
     
-    override func run() -> (String, String) {
-        return super.run()
-    }
-    
-    override func part1() -> String {
-        let i = Intcode(memory: input.integers)
+    func part1() async throws -> String {
+        let i = Intcode(memory: input().integers)
         var g = XYGrid<State>()
         
         var x = 0
@@ -66,7 +62,7 @@ class Day17: Day {
         return "\(parameters.sum)"
     }
     
-    override func part2() -> String {
+    func part2() async throws -> String {
         
         
         // I computed this by drawing out the grid above,
@@ -82,7 +78,7 @@ class Day17: Day {
         var instructions = movement + a + b + c + video
         var dust = 0
         
-        let i = Intcode(memory: input.integers)
+        let i = Intcode(memory: input().integers)
         i.memory[0] = 2
         i.input = { return Int(instructions.removeFirst().asciiValue!) }
         i.output = { dust = $0 }

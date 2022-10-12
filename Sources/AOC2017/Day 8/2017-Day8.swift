@@ -23,8 +23,8 @@ class Day8: Day {
         }
     }
 
-    override func run() -> (String, String) {
-        let lines = input.lines.raw
+    func run() async throws -> (String, String) {
+        let lines = input().lines.raw
         var registers = Registers()
         var intermediateMax = Int.min
 

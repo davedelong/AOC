@@ -10,22 +10,22 @@ import Algorithms
 
 class Day1: Day {
 
-    override func part1() -> String {
-        let increases = input.lines.integers
+    func part1() async throws -> Int {
+        let increases = input().lines.integers
             .adjacentPairs()
             .count { $1 > $0 }
         
-        return "\(increases)"
+        return increases
     }
 
-    override func part2() -> String {
-        let increases = input.lines.integers
+    func part2() async throws -> Int {
+        let increases = input().lines.integers
             .windows(ofCount: 3)
             .map(\.sum)
             .adjacentPairs()
             .count { $1 > $0 }
         
-        return "\(increases)"
+        return increases
     }
 
 }

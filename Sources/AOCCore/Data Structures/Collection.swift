@@ -131,6 +131,10 @@ public extension Collection {
         return Array(zip(self, dropFirst()))
     }
     
+    func map<T>(as type: T.Type) -> Array<T> where T: RawRepresentable, T.RawValue == Element {
+        return compactMap { T(rawValue: $0) }
+    }
+    
 }
 
 public extension Sequence where Element: Numeric {

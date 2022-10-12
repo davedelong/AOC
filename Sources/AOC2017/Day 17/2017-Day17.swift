@@ -9,10 +9,8 @@
 class Day17: Day {
 
     let integer = 314
-    
-    @objc override init() { super.init() }
 
-    override func part1() -> String {
+    func part1() async throws -> String {
         var buffer = [0]
 
         var position = 0
@@ -24,7 +22,7 @@ class Day17: Day {
         return "\(buffer[position + 1])"
     }
 
-    override func part2() -> String {
+    func part2() async throws -> String {
         var position = 0
         var latest = 0
 
