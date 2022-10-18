@@ -25,8 +25,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .executableTarget(name: "advent", dependencies: ["AOC"]),
         
-        .target(name: "AOC", dependencies: ["AOCCore", "AOC2021", "AOC2020", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
+        .target(name: "AOC", dependencies: ["AOCCore", "AOC2022", "AOC2021", "AOC2020", "AOC2019", "AOC2018", "AOC2017", "AOC2016", "AOC2015"]),
         
+        .target(name: "AOC2022", dependencies: ["AOCCore"], exclude: inputFiles(for: 2022)),
         .target(name: "AOC2021", dependencies: ["AOCCore"], exclude: inputFiles(for: 2021)),
         .target(name: "AOC2020", dependencies: ["AOCCore", .product(name: "MathParser", package: "DDMathParser")], exclude: inputFiles(for: 2020)),
         .target(name: "AOC2019", dependencies: ["AOCCore"], exclude: inputFiles(for: 2019)),

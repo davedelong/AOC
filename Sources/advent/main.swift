@@ -5,12 +5,12 @@
 //  Created by Dave DeLong on 9/24/19.
 //
 
-import AOC2020
+import AOC
 
-let d = Day.day(for: Date())
+let d = AOC2022.day(1)
 
 let d1 = Date()
-let (p1, p2) = d.run()
+let (p1, p2) = try await d.run()
 let d2 = Date()
 print("Executing \(type(of: d))")
 print("Part 1: \(p1)")
