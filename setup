@@ -30,6 +30,39 @@ let mainContents = """
 import Foundation
 
 @_exported import AOCCore
+
+public struct AOC\(year): Year {
+    
+    public static let days: Array<any Day> = [
+        Day1(),
+        Day2(),
+        Day3(),
+        Day4(),
+        Day5(),
+        Day6(),
+        Day7(),
+        Day8(),
+        Day9(),
+        Day10(),
+        Day11(),
+        Day12(),
+        Day13(),
+        Day14(),
+        Day15(),
+        Day16(),
+        Day17(),
+        Day18(),
+        Day19(),
+        Day20(),
+        Day21(),
+        Day22(),
+        Day23(),
+        Day24(),
+        Day25(),
+    ]
+    
+}
+
 """
 mainContents >> yearFolder.appendingPathComponent("AOC\(year).swift")
 
@@ -47,10 +80,8 @@ for day in 1 ... 25 {
     //
 
     class Day\(day): Day {
-    
-        func run() async throws -> (String, String) {
-            return super.run()
-        }
+        
+        static var rawInput: String? { nil }
     
         func part1() async throws -> String {
             return #function
@@ -58,6 +89,12 @@ for day in 1 ... 25 {
     
         func part2() async throws -> String {
             return #function
+        }
+    
+        func run() async throws -> (String, String) {
+            let p1 = try await part1()
+            let p2 = try await part2()
+            return (p1, p2)
         }
     
     }
@@ -87,9 +124,9 @@ for day in 1 ... 25 {
     let testContents = """
     
     
-        func testDay\(day)() {
+        func testDay\(day)() async throws {
             let d = Day\(day)()
-            let (p1, p2) = d.run()
+            let (p1, p2) = try await d.run()
 
             XCTAssertEqual(p1, "")
             XCTAssertEqual(p2, "")

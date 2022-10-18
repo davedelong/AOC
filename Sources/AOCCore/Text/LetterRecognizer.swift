@@ -7,74 +7,67 @@
 
 import Foundation
 
-// missing: I, M, Q, S, T, V, W
-private let alphabet = "ABCDEFGHJKLNOPRUXYZ"
-private let letters = """
- ##  ###   ##  ###  #### ####  ##  #  #   ## #  # #    #  #  ##  ###  ###  #  # #  # #   # ####
-#  # #  # #  # #  # #    #    #  # #  #    # # #  #    ## # #  # #  # #  # #  # #  # #   #    #
-#  # ###  #    #  # ###  ###  #    ####    # ##   #    ## # #  # #  # #  # #  #  ##   # #    #
-#### #  # #    #  # #    #    # ## #  #    # # #  #    # ## #  # ###  ###  #  #  ##    #    #
-#  # #  # #  # #  # #    #    #  # #  # #  # # #  #    # ## #  # #    # #  #  # #  #   #   #
-#  # ###   ##  ###  #### #     ### #  #  ##  #  # #### #  #  ##  #    #  #  ##  #  #   #   ####
-"""
-
-fileprivate let letterDefinitions: Dictionary<String, String> = {
-    var final = Dictionary<String, String>()
-
-    let defs = chunk(input: letters)
-    for (definition, character) in zip(defs, alphabet) {
-        final[definition] = String(character)
-    }
-    return final
-}()
-
-fileprivate func chunk(input: String, trimming: Int = 0) -> Array<String> {
-    let lines = input.components(separatedBy: .newlines)
-    
-    var final = Array<String>()
-    
-    for lineGroup in lines.chunks(of: 6) { // letters are 6 lines tall
-        var remaining = lineGroup.map { $0.dropFirst(trimming) }
-        while remaining.allSatisfy({ $0.isNotEmpty }) {
-            let fragments = remaining.map { $0.prefix(5) } // letters are five characters wide
-            remaining = remaining.map { $0.dropFirst(5) } // letters are followed by a space
-            let character = fragments.joined(separator: "\n")
-            final.append(character)
-        }
-    }
-    
-    return final
-}
-
 public func RecognizeLetters(from input: String) -> String {
+    let splits = input.split(on: "\n")
+    let maxLength = splits.map(\.count).max()!
+    
+    let lines = splits.map { $0.padding(toLength: maxLength, with: " ") }
+    
     var recognized = ""
-    for trimLength in 0 ..< 5 {
-        let chunks = chunk(input: input, trimming: trimLength)
+    var candidates = Array<Letter>()
+    
+    for i in 0 ..< maxLength {
+        let inputSlice = lines.map { $0[offset: i] }
         
-        let letters = chunks.compactMap { letterDefinitions[$0] }
-        if letters.isNotEmpty {
-            recognized = letters.joined()
-            break
+        if inputSlice.allSatisfy(\.isWhitespace) {
+            // it's blank...
+            if let match = candidates.first {
+                recognized.append(match.character)
+                candidates = []
+            }
+        } else {
+            if candidates.isEmpty {
+                candidates = Letter.all
+            }
+            candidates = candidates.compactMap { l -> Letter? in
+                var copy = l
+                let letterSlice = copy.pattern.mutatingMap { $0.removeFirst() }
+                if letterSlice == inputSlice {
+                    return copy
+                } else {
+                    return nil
+                }
+            }
         }
     }
+    
+    if let match = candidates.first {
+        recognized.append(match.character)
+    }
+    
     return recognized
     
 }
 
 struct Letter {
     let character: Character
-    let pattern: String
+    var pattern: Array<Array<Character>>
     
     let height: Int
     let width: Int
     
     init(character: Character, pattern: String) {
         self.character = character
-        self.pattern = pattern
         
         let lines = pattern.split(separator: "\n")
+        let width = lines.map(\.count).max()!
+        
+        self.width = width
         self.height = lines.count
-        self.width = lines.map(\.count).max()!
+        
+        self.pattern = lines.map { line in
+            return Array(line.padding(toLength: width, withPad: " ", startingAt: 0))
+        }
     }
 }
 

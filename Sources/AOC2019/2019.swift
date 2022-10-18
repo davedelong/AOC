@@ -9,9 +9,9 @@ import Foundation
 
 @_exported import AOCCore
 
-struct AOC2019: Year {
+public struct AOC2019: Year {
     
-    let days: Array<any Day> = [
+    public static let days: Array<any Day> = [
         Day1(),
         Day2(),
         Day3(),

@@ -430,6 +430,27 @@ public extension MutableCollection {
             index = self.index(after: index)
         }
     }
+    
+    mutating func mutatingForEach(_ action: (inout Element) -> Void) {
+        self.mapInPlace { e in
+            var copy = e
+            action(&copy)
+            return copy
+        }
+    }
+    
+    mutating func mutatingMap<C>(_ action: (inout Element) -> C) -> Array<C> {
+        var index = startIndex
+        var result = Array<C>()
+        while index != endIndex {
+            var copy = self[index]
+            result.append(action(&copy))
+            self[index] = copy
+            
+            index = self.index(after: index)
+        }
+        return result
+    }
 }
 
 

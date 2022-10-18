@@ -12,9 +12,9 @@ public protocol Day {
     
     static var rawInput: String? { get }
     
-    mutating func part1() async throws -> Part1Result
-    mutating func part2() async throws -> Part2Result
-    mutating func run() async throws -> (Part1Result, Part2Result)
+    func part1() async throws -> Part1Result
+    func part2() async throws -> Part2Result
+    func run() async throws -> (Part1Result, Part2Result)
 }
 
 extension Day {
@@ -28,15 +28,15 @@ extension Day {
         }
     }
     
-    public mutating func part1() async throws -> Part1Result {
+    public func part1() async throws -> Part1Result {
         fatalError("Implement \(#function)")
     }
     
-    public mutating func part2() async throws -> Part2Result {
+    public func part2() async throws -> Part2Result {
         fatalError("Implement \(#function)")
     }
     
-    public mutating func run() async throws -> (Part1Result, Part2Result) {
+    public func run() async throws -> (Part1Result, Part2Result) {
         let p1 = try await part1()
         let p2 = try await part2()
         return (p1, p2)

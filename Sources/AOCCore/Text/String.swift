@@ -10,6 +10,10 @@ import Foundation
 
 public extension String {
     
+    init(repeating string: String, count: Int) {
+        self = Array(repeating: string, count: count).joined()
+    }
+    
     func locate(_ substring: String) -> Array<Range<String.Index>> {
         
         var indices = Array<Range<String.Index>>()
@@ -39,6 +43,31 @@ public extension String {
     
     func trimmed() -> String {
         String(self.trimming(\.isWhitespaceOrNewline))
+    }
+    
+    subscript(offset count: Int) -> Character {
+        let idx = self.index(self.startIndex, offsetBy: count)
+        return self[idx]
+    }
+    
+}
+
+public extension StringProtocol {
+    
+    func padding(toLength length: Int, with pad: String) -> String {
+        let myLength = self.count
+        let missingLength = length - myLength
+        if missingLength <= 0 { return String(self) }
+        
+        let repetitions = Int(ceil(Double(missingLength) / Double(pad.count)))
+        
+        var padding = String(repeating: pad, count: repetitions)
+        let extra = padding.count - missingLength
+        if extra > 0 {
+            padding.removeLast(extra)
+        }
+        
+        return String(self) + padding
     }
     
 }

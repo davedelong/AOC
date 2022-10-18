@@ -9,16 +9,16 @@
 import AOCCore
 
 class Day21: Day {
-
+    
     func part1() async throws -> Int {
         
-        let board = CircularList.Node(values: 1...10)
+        let board = CircularList(1...10)
         /*
          Player 1 starting position: 1
          Player 2 starting position: 3
          */
-        var p1 = board.find(value: 1)!
-        var p2 = board.find(value: 3)!
+        var p1 = board.nextIndex(of: 1)!
+        var p2 = board.nextIndex(of: 3)!
         
         var p1Score = 0
         var p2Score = 0
@@ -36,14 +36,14 @@ class Day21: Day {
             
             // p1 turn
             turnCount += 1
-            p1 = p1.cw(roll())
-            p1Score += p1.value
+            p1 = board.index(p1, offsetBy: roll())
+            p1Score += board[p1]
             if p1Score >= 1000 { break }
             
             // p2 turn
             turnCount += 1
-            p2 = p2.cw(roll())
-            p2Score += p2.value
+            p2 = board.index(p2, offsetBy: roll())
+            p2Score += board[p2]
             if p2Score >= 1000 { break }
         }
         

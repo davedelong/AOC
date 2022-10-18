@@ -11,7 +11,7 @@ class Day14: Day {
     let maskR: Regex = #"mask = ([10X]+)"#
     let assignR: Regex = #"mem\[(\d+)\] = (\d+)"#
     
-    func part1() async throws -> String {
+    func part1() async throws -> Int {
         enum Op {
             case mask(ones: Int, zeros: Int)
             case assign(Int, Int)
@@ -43,10 +43,10 @@ class Day14: Day {
             }
         }
         
-        return "\(memory.sum)"
+        return memory.sum
     }
 
-    func part2() async throws -> String {
+    func part2() async throws -> Int {
         enum Op {
             case mask(Array<Bool?>)
             case assign(Int, Int)
@@ -77,7 +77,7 @@ class Day14: Day {
             }
         }
         
-        return "\(memory.sum)"
+        return memory.sum
     }
 
     func applyMask(input: Int, mask: Array<Bool?>) -> Array<Int> {

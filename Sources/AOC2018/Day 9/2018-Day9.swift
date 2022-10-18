@@ -12,7 +12,7 @@ class Day9: Day {
         var scores = Array(repeating: 0, count: players)
         var currentPlayer = 0
         
-        var currentMarble = CircularList.Node(0)
+        var currentMarble = CircularList_Old.Node(0)
         for marbleScore in 1...lastMarbleScore {
             if marbleScore % 23 == 0 {
                 scores[currentPlayer] += marbleScore
