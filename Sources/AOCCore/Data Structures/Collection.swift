@@ -12,6 +12,12 @@ public extension Collection {
     
     var isNotEmpty: Bool { return isEmpty == false }
     
+    var second: Element? {
+        var i = makeIterator()
+        _ = i.next()
+        return i.next()
+    }
+    
     func removingFirst(while matches: (Element) -> Bool) -> SubSequence {
         var index = startIndex
         while index < endIndex && matches(self[index]) {
@@ -324,6 +330,19 @@ public extension Collection where Element: Collection {
     func flatten() -> Array<Element.Element> {
         flatMap { $0 }
     }
+    
+}
+
+public extension Collection where Element: RandomAccessCollection {
+    
+    // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
+    func transposed() -> Array<[Element.Element]> {
+        guard let firstRow = self.first else { return [] }
+        return firstRow.indices.map { index in
+            self.map { $0[index] }
+        }
+    }
+    
 }
 
 public extension BidirectionalCollection {
@@ -339,6 +358,30 @@ public extension BidirectionalCollection {
     func trimming(_ matches: (Element) -> Bool) -> SubSequence {
         return removingFirst(while: matches).removingLast(while: matches)
     }
+    
+    func isPalindrome(using isEqual: (Element, Element) -> Bool) -> Bool {
+        if self.count < 2 { return true }
+        
+        var leading = self.startIndex
+        var trailing = self.index(before: self.endIndex)
+        
+        while leading <= trailing {
+            let l = self[leading]
+            let t = self[trailing]
+            if isEqual(l, t) == false { return false }
+            
+            self.formIndex(after: &leading)
+            self.formIndex(before: &trailing)
+        }
+        
+        return true
+    }
+}
+
+public extension BidirectionalCollection where Element: Equatable {
+    
+    func isPalindrome() -> Bool { self.isPalindrome(using: ==) }
+    
 }
 
 public enum RoundingDirection {

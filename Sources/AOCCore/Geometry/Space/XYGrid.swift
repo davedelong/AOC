@@ -99,6 +99,14 @@ extension Space where P == Point2 {
     }
 }
 
+extension Space: ExpressibleByArrayLiteral where P == Point2 {
+    
+    public init(arrayLiteral elements: Array<T>...) {
+        self.init(data: elements)
+    }
+    
+}
+
 extension Space where P == Point2, T == Bool {
     
     public func render() -> String {

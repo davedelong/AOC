@@ -14,50 +14,50 @@ class Test2016: XCTestCase {
     func testDay1() async throws {
         let (p1, p2) = try await Day1().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 278)
+        XCTAssertEqual(p2, 161)
     }
     
     func testDay2() async throws {
         let (p1, p2) = try await Day2().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "24862")
+        XCTAssertEqual(p2, "46C91")
     }
     
     func testDay3() async throws {
         let (p1, p2) = try await Day3().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 862)
+        XCTAssertEqual(p2, 1577)
     }
     
     func testDay4() async throws {
         let (p1, p2) = try await Day4().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 185371)
+        XCTAssertEqual(p2, 984)
     }
     
     func testDay5() async throws {
         let (p1, p2) = try await Day5().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "f77a0e6e")
+        XCTAssertEqual(p2, "999828ec")
     }
     
     func testDay6() async throws {
         let (p1, p2) = try await Day6().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, "dzqckwsd")
+        XCTAssertEqual(p2, "lragovly")
     }
     
     func testDay7() async throws {
         let (p1, p2) = try await Day7().run()
         
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 118)
+        XCTAssertEqual(p2, 260)
     }
     
     func testDay8() async throws {

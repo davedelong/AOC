@@ -9,11 +9,27 @@
 class Day6: Day {
     
     func part1() async throws -> String {
-        return #function
+        let characters = input().lines.characters
+        
+        let columns = characters.transposed()
+        let letters = columns.map { col in
+            let freqs = col.countElements()
+            return freqs.mostCommon()!
+        }
+        
+        return String(letters)
     }
     
     func part2() async throws -> String {
-        return #function
+        let characters = input().lines.characters
+        
+        let columns = characters.transposed()
+        let letters = columns.map { col in
+            let freqs = col.countElements()
+            return freqs.leastCommon()!
+        }
+        
+        return String(letters)
     }
 
 }
