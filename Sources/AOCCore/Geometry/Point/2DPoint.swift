@@ -20,8 +20,15 @@ public struct Point2: PointProtocol {
     public var x: Int
     public var y: Int
     
-    public var row: Int { y }
-    public var col: Int { x }
+    public var row: Int {
+        get { y }
+        set { y = newValue }
+    }
+    
+    public var col: Int {
+        get { x }
+        set { x = newValue }
+    }
     
     public init(x: Int, y: Int) {
         self.x = x; self.y = y

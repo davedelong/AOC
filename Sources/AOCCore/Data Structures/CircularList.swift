@@ -348,6 +348,8 @@ private class _CircularStorage<T> {
         
         let moveNext = (distance >= 0)
         var magnitude = distance.magnitude
+        if magnitude > nodes.count { magnitude %= UInt(nodes.count) }
+        
         var current = index
         while magnitude > 0 {
             if moveNext {

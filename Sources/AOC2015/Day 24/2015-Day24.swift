@@ -8,23 +8,29 @@
 
 class Day24: Day {
 
-    func run() async throws -> (String, String) {
-        return ("", "")
-    }
+//    func run() async throws -> (String, String) {
+//        return ("", "")
+//    }
     
-    func part1() async throws -> String {
+    func part1() async throws -> Int { frontTrunkQE(for: 3) }
+    
+    func part2() async throws -> Int { frontTrunkQE(for: 4) }
+    
+    func frontTrunkQE(for partitionCount: Int) -> Int {
         let weights = input().integers
         let totalWeight = weights.sum
-        let groupWeight = totalWeight / 3
+        let groupWeight = totalWeight / partitionCount
         
-        let possibilities = weights.combinations().filter({ $0.sum == groupWeight })
-        print(possibilities)
+        var properCombos = Array<[Int]>()
+        for packageCount in 1 ..< weights.count {
+            let combos = weights.combinations(ofCount: packageCount)
+            
+            properCombos = combos.filter { $0.sum == groupWeight }
+            if properCombos.isNotEmpty { break }
+        }
         
-        return #function
-    }
-    
-    func part2() async throws -> String {
-        return #function
+        let qes = properCombos.map(\.product)
+        return qes.min()!
     }
 
 }

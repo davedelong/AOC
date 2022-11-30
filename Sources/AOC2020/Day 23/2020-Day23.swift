@@ -49,7 +49,7 @@ class Day23: Day {
     func part2() async throws -> String {
 //        let input = Input("389125467")
         let ints = input().characters.integers
-        let first = CircularList.Node(ints[0])
+        let first = CircularList_Old.Node(ints[0])
         
         var next = first
         var nodes = [first.value: first]
