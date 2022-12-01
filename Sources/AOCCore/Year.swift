@@ -17,7 +17,8 @@ public protocol Year {
 extension Year {
     
     public static func today() -> any Day {
-        let c = Calendar(identifier: .gregorian)
+        var c = Calendar(identifier: .gregorian)
+        c.timeZone = TimeZone(identifier: "America/New_York")!
         let dc = c.dateComponents([.month, .day], from: Date())
         guard dc.month == 12 else { return InvalidDay(number: 0) }
         guard let day = dc.day else { return InvalidDay(number: 0) }

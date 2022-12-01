@@ -30,8 +30,43 @@ class Day9: Day {
         return final.count
     }
     
-    func part2() async throws -> String {
-        return #function
+    indirect enum Expansion {
+        case raw(Int)
+        case repeated([Expansion], Int)
+        
+        var totalLength: Int {
+            switch self {
+                case .raw(let count): return count
+                case .repeated(let inners, let count): return inners.map(\.totalLength).sum * count
+            }
+        }
+    }
+    
+    func part2() async throws -> Int {
+        let roots = parse(input().raw)
+        return roots.map(\.totalLength).sum
     }
 
+    private func parse<S: StringProtocol>(_ string: S) -> [Expansion] {
+        var s = Scanner(data: string)
+        
+        var final = Array<Expansion>()
+        while s.isAtEnd == false {
+            let regular = s.scanUpTo("(")
+            if regular.isNotEmpty { final.append(.raw(regular.count)) }
+            
+            if s.tryScan("(") {
+                let length = s.scanInt()!
+                s.scan("x")
+                let repetitions = s.scanInt()!
+                s.scan(")")
+                
+                let next = s.scan(count: length)
+                let inners = parse(next)
+                final.append(.repeated(inners, repetitions))
+            }
+        }
+        
+        return final
+    }
 }
