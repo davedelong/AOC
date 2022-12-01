@@ -28,6 +28,13 @@ public protocol StringInput {
     func words(separatedBy: String) -> Array<Word>
 }
 
+extension StringInput {
+    
+    public var isEmpty: Bool { raw.isEmpty }
+    public var isNotEmpty: Bool { raw.isNotEmpty }
+    
+}
+
 public final class Input: StringInput {
     
     private static let dayNumber = Regex(#"[dD]ay ?(\d{1,2})"#)
