@@ -102,6 +102,10 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
         }
     }
     
+    public func count(of value: T) -> Int {
+        return self.count(where: { $0 == value })
+    }
+    
     public func diagonal(positive: Bool) -> Array<T> {
         let start = Position(row: positive ? rowCount - 1 : 0, column: 0)
         let heading = Vector2(row: positive ? -1 : 1, column: 1)
@@ -168,6 +172,35 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             p += vector
         }
         return nil
+    }
+    
+    private func shiftRow(_ row: Int, steps: Int) {
+        let r = data[row]
+        data[row] = r.shift(steps)
+    }
+    
+    private func shiftCol(_ col: Int, steps: Int) {
+        let c = data.map { $0[col] }
+        let shifted = c.shift(steps)
+        for (row, value) in zip(data.indices, shifted) {
+            data[row][col] = value
+        }
+    }
+    
+    public func rightShiftRow(_ row: Int, steps: Int = 1) {
+        self.shiftRow(row, steps: steps)
+    }
+    
+    public func leftShiftRow(_ row: Int, steps: Int = 1) {
+        self.shiftRow(row, steps: -steps)
+    }
+    
+    public func downShiftColumn(_ col: Int, steps: Int = 1) {
+        self.shiftCol(col, steps: steps)
+    }
+    
+    public func upShiftColumn(_ col: Int, steps: Int = 1) {
+        self.shiftCol(col, steps: -steps)
     }
     
     public func rotateCW() -> Matrix<T> {
@@ -334,6 +367,29 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     public func contains(where element: (T) -> Bool) -> Bool {
         return data.contains { $0.contains(where: element) }
     }
+    
+    public func draw(using renderer: (T) -> String) {
+        print(render(using: renderer))
+    }
+    
+    public func render(using renderer: (T) -> String) -> String {
+        return data.map {
+            $0.map(renderer).joined()
+        }.joined(separator: "\n")
+    }
+}
+
+
+extension Matrix where T == Bool {
+    
+    public func render() -> String {
+        return self.render(using: { $0 == true ? "⬛️" : "⬜️" })
+    }
+    
+    public func draw() {
+        print(render())
+    }
+    
 }
 
 //extension Matrix: Collection {

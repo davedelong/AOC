@@ -29,14 +29,32 @@ public func RecognizeLetters(from input: String) -> String {
             if candidates.isEmpty {
                 candidates = Letter.all
             }
-            candidates = candidates.compactMap { l -> Letter? in
-                var copy = l
-                let letterSlice = copy.pattern.mutatingMap { $0.removeFirst() }
-                if letterSlice == inputSlice {
-                    return copy
+            
+            var remainingCandidates = Array<Letter>()
+            var foundExactMatch = false
+            
+            for c in candidates {
+                // candidate is empty; ignore it
+                if c.pattern.allSatisfy(\.isEmpty) { continue }
+                
+                var copy = c
+                let slice = copy.pattern.mutatingMap { $0.removeFirst() }
+                if slice != inputSlice { continue }
+                
+                // it's a match
+                if copy.pattern.allSatisfy(\.isEmpty) {
+                    // it's an *exact* match
+                    recognized.append(copy.character)
+                    foundExactMatch = true
                 } else {
-                    return nil
+                    remainingCandidates.append(copy)
                 }
+            }
+            
+            if foundExactMatch {
+                candidates = []
+            } else {
+                candidates = remainingCandidates
             }
         }
     }

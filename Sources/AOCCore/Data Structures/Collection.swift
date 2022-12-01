@@ -141,6 +141,11 @@ public extension Collection {
         return compactMap { T(rawValue: $0) }
     }
     
+    func first(_ k: Int) -> SubSequence {
+        let idx = self.index(self.startIndex, offsetBy: k)
+        return self[startIndex ..< idx]
+    }
+    
 }
 
 public extension Sequence where Element: Numeric {
@@ -347,6 +352,12 @@ public extension Collection where Element: RandomAccessCollection {
 
 public extension BidirectionalCollection {
     
+    func last(_ k: Int) -> SubSequence {
+        let endIndex = self.endIndex
+        let start = self.index(endIndex, offsetBy: -k)
+        return self[start ..< endIndex]
+    }
+    
     func removingLast(while matches: (Element) -> Bool) -> SubSequence {
         var index = self.index(before: endIndex)
         while index >= startIndex && matches(self[index]) {
@@ -446,6 +457,19 @@ public extension Array {
         return removeFirst()
     }
     
+    func shift(_ amount: Int) -> Array<Element> {
+        let shiftRight = (amount >= 0)
+        let shiftAmount = Int(amount.magnitude).quotientAndRemainder(dividingBy: self.count).remainder
+        
+        if shiftAmount == 0 { return self }
+        
+        if shiftRight {
+            return Array(self.last(shiftAmount)) + Array(self.dropLast(shiftAmount))
+        } else {
+            return Array(self.dropFirst(shiftAmount)) + Array(self.first(shiftAmount))
+        }
+        
+    }
 }
 
 extension ArraySlice {

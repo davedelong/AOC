@@ -8,12 +8,52 @@
 
 class Day8: Day {
     
-    func part1() async throws -> String {
-        return #function
+    enum Instruction {
+        case rect(PointSpan2)
+        case rotateRow(Int, Int)
+        case rotateColumn(Int, Int)
     }
     
-    func part2() async throws -> String {
-        return #function
+    lazy var instructions: Array<Instruction> = {
+        let rect = Regex(#"rect (\d+)x(\d+)"#)
+        let row = Regex(#"rotate row y=(\d+) by (\d+)"#)
+        let col = Regex(#"rotate column x=(\d+) by (\d+)"#)
+        
+        return input().lines.raw.compactMap { r in
+            if let m = rect.firstMatch(in: r) {
+                return .rect(.init(origin: .zero, width: m[int: 1]!, height: m[int: 2]!))
+            } else if let m = row.firstMatch(in: r) {
+                return .rotateRow(m[int: 1]!, m[int: 2]!)
+            } else if let m = col.firstMatch(in: r) {
+                return .rotateColumn(m[int: 1]!, m[int: 2]!)
+            } else {
+                return nil
+            }
+        }
+    }()
+    
+    func run() async throws -> (Int, String) {
+        let m = Matrix<Bit>(rows: 6, columns: 50, value: .off)
+        
+        for instruction in instructions {
+            switch instruction {
+                case .rect(let s):
+                    for p in s { m[p] = .on }
+                    
+                case .rotateRow(let row, let steps):
+                    m.rightShiftRow(row, steps: steps)
+                    
+                case .rotateColumn(let col, let steps):
+                    m.downShiftColumn(col, steps: steps)
+            }
+        }
+        
+        let p1 = m.count(of: .on)
+        m.draw()
+        let rendered = m.render(using: { $0 ? "#" : " " })
+        let p2 = RecognizeLetters(from: rendered)
+        
+        return (p1, p2)
     }
 
 }
