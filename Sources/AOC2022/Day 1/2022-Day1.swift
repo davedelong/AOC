@@ -10,17 +10,26 @@ class Day1: Day {
     
     static var rawInput: String? { nil }
 
-    func part1() async throws -> String {
-        return #function
-    }
-
-    func part2() async throws -> String {
-        return #function
-    }
-
-    func run() async throws -> (String, String) {
-        let p1 = try await part1()
-        let p2 = try await part2()
+    func run() async throws -> (Int, Int) {
+        let lines = input().lines
+        
+        var elves = Array<Int>()
+        var currentTotal = 0
+        for line in lines {
+            if line.raw.isEmpty {
+                elves.append(currentTotal)
+                currentTotal = 0
+            } else {
+                currentTotal += line.integer!
+            }
+        }
+        
+        if currentTotal > 0 { elves.append(currentTotal) }
+        
+        let sorted = elves.sorted(by: >)
+        let p1 = sorted[0]
+        let p2 = sorted[0] + sorted[1] + sorted[2]
+        
         return (p1, p2)
     }
 
