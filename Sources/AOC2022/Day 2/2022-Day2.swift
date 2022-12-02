@@ -17,14 +17,12 @@ class Day2: Day {
     }
 
     func part2() async throws -> Int {
-        var score = 0
-        for line in input().lines.characters {
+        return input().lines.characters.map { line -> Int in
             let opponent = RPS(line[0])!
             let result = RPS.Result(line[2])!
             let myChoice = opponent.pieceForTheir(result)
-            score += roundScore(them: opponent, me: myChoice)
-        }
-        return score
+            return roundScore(them: opponent, me: myChoice)
+        }.sum
     }
     
     private func roundScore(_ pair: (RPS, RPS)) -> Int {
