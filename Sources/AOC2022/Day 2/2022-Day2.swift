@@ -7,46 +7,10 @@
 //
 
 class Day2: Day {
-    
-    static var rawInput: String? { nil }
-    
-    enum RPS: Int {
-        case rock = 1
-        case paper = 2
-        case scissors = 3
-        
-        init?(character: Character) {
-            if character == "A" || character == "X" {
-                self = .rock
-            } else if character == "B" || character == "Y" {
-                self = .paper
-            } else if character == "C" || character == "Z" {
-                self = .scissors
-            } else {
-                return nil
-            }
-        }
-        
-        var winningCounterpart: RPS {
-            switch self {
-                case .rock: return .paper
-                case .paper: return .scissors
-                case .scissors: return .rock
-            }
-        }
-        
-        var losingCounterpart: RPS {
-            switch self {
-                case .rock: return .scissors
-                case .paper: return .rock
-                case .scissors: return .paper
-            }
-        }
-    }
 
     func part1() async throws -> Int {
         let pairs = input().lines.characters.map { chars in
-            return (RPS(character: chars[0])!, RPS(character: chars[2])!)
+            return (RPS(chars[0])!, RPS(chars[2])!)
         }
         
         return pairs.map(roundScore(_:)).sum
@@ -55,16 +19,9 @@ class Day2: Day {
     func part2() async throws -> Int {
         var score = 0
         for line in input().lines.characters {
-            let opponent = RPS(character: line[0])!
-            
-            let myChoice: RPS
-            switch line[2] {
-                case "X": myChoice = opponent.losingCounterpart
-                case "Y": myChoice = opponent
-                case "Z": myChoice = opponent.winningCounterpart
-                default: fatalError()
-            }
-            
+            let opponent = RPS(line[0])!
+            let result = RPS.Result(line[2])!
+            let myChoice = opponent.pieceForTheir(result)
             score += roundScore(them: opponent, me: myChoice)
         }
         return score
@@ -75,27 +32,31 @@ class Day2: Day {
     }
     
     private func roundScore(them: RPS, me: RPS) -> Int {
-        var round = me.rawValue
-        switch (them, me) {
-            case (.rock, .rock): round += 3
-            case (.rock, .paper): round += 6
-            case (.rock, .scissors): round += 0
-                
-            case (.paper, .rock): round += 0
-            case (.paper, .paper): round += 3
-            case (.paper, .scissors): round += 6
-        
-            case (.scissors, .rock): round += 6
-            case (.scissors, .paper): round += 0
-            case (.scissors, .scissors): round += 3
-        }
+        var round = me.pieceValue
+        if me.ties(them) { round += 3 }
+        if me.beats(them) { round += 6 }
         return round
     }
 
-    func run() async throws -> (Int, Int) {
-        let p1 = try await part1()
-        let p2 = try await part2()
-        return (p1, p2)
-    }
+}
 
+extension RPS.Result {
+    init?(_ character: Character) {
+        switch character {
+            case "X": self = .loss
+            case "Y": self = .tie
+            case "Z": self = .win
+            default: return nil
+        }
+    }
+}
+
+extension RPS {
+    fileprivate var pieceValue: Int {
+        switch self {
+            case .rock: return 1
+            case .paper: return 2
+            case .scissors: return 3
+        }
+    }
 }
