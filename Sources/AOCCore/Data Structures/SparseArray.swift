@@ -7,17 +7,24 @@
 
 import Foundation
 
-public struct Sparse<Element>: Collection {
+public typealias Sparse<T> = SparseArray<T>
+
+public struct SparseArray<Element>: Collection {
     public func index(after i: Int) -> Int { return i + 1 }
     
     public let startIndex = 0
-    public var endIndex: Int { return maxIndex }
+    public var endIndex: Int { count }
     
     private var data = Dictionary<Int, Element>()
     private let `default`: Element
     private var maxIndex: Int
     
     public var count: Int { return maxIndex + 1 }
+    
+    public init(default: Element) {
+        self.default = `default`
+        self.maxIndex = -1
+    }
     
     public init<C: Collection>(_ collection: C, default: Element) where C.Element == Element {
         self.default = `default`
