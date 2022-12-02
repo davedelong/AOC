@@ -72,9 +72,17 @@ public final class Input: StringInput {
         return .init("")
     }
     
-    private convenience init(file: String) { self.init(try! String(contentsOfFile: file)) }
-    public init(_ raw: String) { self.raw = raw.trimmingCharacters(in: .newlines) }
+    private init(file: String) {
+        self.url = URL(fileURLWithPath: file)
+        self.raw = (try! String(contentsOfFile: file)).trimmingCharacters(in: .newlines)
+    }
     
+    public init(_ raw: String) {
+        self.raw = raw.trimmingCharacters(in: .newlines)
+        self.url = nil
+    }
+    
+    public let url: URL?
     public let raw: String
     public lazy var integer: Int? = { Int(raw) }()
     public lazy var characters: Array<Character> = { Array(raw) }()
