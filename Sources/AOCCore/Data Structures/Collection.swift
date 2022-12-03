@@ -12,10 +12,30 @@ public extension Collection {
     
     var isNotEmpty: Bool { return isEmpty == false }
     
+    var secondIndex: Index? {
+        let idx = self.index(startIndex, offsetBy: 1, limitedBy: self.endIndex)
+        if idx == endIndex { return nil }
+        return idx
+    }
+    
     var second: Element? {
-        var i = makeIterator()
-        _ = i.next()
-        return i.next()
+        guard let s = self.secondIndex else { return nil }
+        return self[s]
+    }
+    
+    func divide(into count: Int) -> Array<SubSequence> {
+        let (sliceLength, _) = self.count.quotientAndRemainder(dividingBy: count)
+        
+        return (0 ..< count).map { slice -> SubSequence in
+            let start = self.index(startIndex, offsetBy: slice * sliceLength)
+            if slice < count - 1 {
+                let end = self.index(start, offsetBy: sliceLength)
+                return self[start ..< end]
+            } else {
+                return self[start...]
+            }
+        }
+        
     }
     
     func removingFirst(while matches: (Element) -> Bool) -> SubSequence {
@@ -144,6 +164,11 @@ public extension Collection {
     func first(_ k: Int) -> SubSequence {
         let idx = self.index(self.startIndex, offsetBy: k)
         return self[startIndex ..< idx]
+    }
+ 
+    subscript(offset value: Int) -> Element {
+        let i = self.index(self.startIndex, offsetBy: value)
+        return self[i]
     }
     
 }
@@ -338,6 +363,26 @@ public extension Collection where Element: Collection {
     
 }
 
+public extension Collection where Element: Collection, Element.Element: Hashable {
+    
+    var commonElements: Set<Element.Element> {
+        if self.isEmpty { return [] }
+        
+        var set = Set(self.first!)        
+        for remaining in self.dropFirst() {
+            // this extra Set() call here is necessary because of this:
+            // https://github.com/apple/swift/pull/59422
+            //
+            // This was discovered in Swift 5.7
+            set.formIntersection(Set(remaining))
+            
+            if set.isEmpty { break }
+        }
+        return set
+    }
+    
+}
+
 public extension Collection where Element: RandomAccessCollection {
     
     // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
@@ -405,11 +450,6 @@ public extension RandomAccessCollection {
     func at(_ index: Index) -> Element? {
         if index < startIndex || index >= endIndex { return nil }
         return self[index]
-    }
-    
-    
-    func chunks(of size: Int) -> ChunkedCollection<Self> {
-        return ChunkedCollection(self, size: size)
     }
     
     func median(rounding direction: RoundingDirection = .down) -> Element {
@@ -517,34 +557,5 @@ public extension MutableCollection {
             index = self.index(after: index)
         }
         return result
-    }
-}
-
-
-public struct ChunkedCollection<Base: Collection>: Collection {
-    private let base: Base
-    private let chunkSize: Int
-    
-    public init(_ base: Base, size: Int) {
-        self.base = base
-        chunkSize = size
-    }
-    
-    public typealias Index = Base.Index
-    
-    public var startIndex: Index {
-        return base.startIndex
-    }
-    
-    public var endIndex: Index {
-        return base.endIndex
-    }
-    
-    public func index(after index: Index) -> Index {
-        return base.index(index, offsetBy: chunkSize, limitedBy: base.endIndex) ?? base.endIndex
-    }
-    
-    public subscript(index: Index) -> Base.SubSequence {
-        return base[index..<self.index(after: index)]
     }
 }

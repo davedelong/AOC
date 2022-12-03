@@ -23,7 +23,7 @@ class Day3: Day {
         
         var validCount = 0
         for column in transposed {
-            for triple in column.chunks(of: 3) {
+            for triple in column.chunks(ofCount: 3) {
                 let hypotenuse = triple.max()!
                 let sumOfOtherSides = triple.sum - hypotenuse
                 if sumOfOtherSides > hypotenuse { validCount += 1 }

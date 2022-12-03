@@ -17,7 +17,7 @@ class Day4: Day {
     }()
     
     lazy var boards: Array<Bingo> = {
-        let lines = input().lines.dropFirst().chunks(of: 6)
+        let lines = input().lines.dropFirst().chunks(ofCount: 6)
         return lines.map { lines in
             let boardLines = lines.dropFirst()
             let ints = boardLines.map(\.integers)

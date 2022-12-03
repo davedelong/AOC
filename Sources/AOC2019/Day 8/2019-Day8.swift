@@ -11,7 +11,7 @@ class Day8: Day {
     func run() async throws -> (String, String) {
         let numberOfPixels = 25 * 6
         let rawData = input().characters.integers
-        let layers = rawData.chunks(of: numberOfPixels).map { Array($0) }
+        let layers = rawData.chunks(ofCount: numberOfPixels).map { Array($0) }
         
         let layersWithZeroCounts = layers.map { pixels -> (Array<Int>, Int) in
             return (pixels, pixels.count(where: { $0 == 0 }))
@@ -39,9 +39,9 @@ class Day8: Day {
         }
         
         let joined = Array(resolvedPixels.joined())
-                        .chunks(of: 25)             // break up the buffer into lines
-                        .map { String($0) }         // turn each line into a string
-                        .joined(separator: "\n")    // join the strings
+                        .chunks(ofCount: 25)             // break up the buffer into lines
+                        .map { String($0) }              // turn each line into a string
+                        .joined(separator: "\n")         // join the strings
         let p2 = RecognizeLetters(from: joined)
         return (p1, p2)
     }

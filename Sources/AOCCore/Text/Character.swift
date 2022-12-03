@@ -31,4 +31,15 @@ public extension Character {
         return uppercased == self
     }
     
+    var alphabeticIndex: Int? {
+        guard self.isASCII && self.isLetter else { return nil }
+        let lower = self.lowercased
+        guard let ascii = lower.asciiValue else { return nil }
+        return Int(ascii - 97)
+    }
+    
+    var alphabeticOrdinal: Int? {
+        guard let index = self.alphabeticIndex else { return nil }
+        return index + 1
+    }
 }
