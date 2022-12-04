@@ -9,16 +9,32 @@
 class Day4: Day {
     
     static var rawInput: String? { nil }
-
-    func part1() async throws -> String {
-        return #function
+    
+    let r = Regex(#"(\d+)-(\d+),(\d+)-(\d+)"#)
+    
+    func part1() async throws -> Int {
+        return input().lines.raw.filter { line in
+            guard let m = r.firstMatch(in: line) else { return false }
+            
+            let r1 = m[int: 1]! ... m[int: 2]!
+            let r2 = m[int: 3]! ... m[int: 4]!
+            
+            return (r1.lowerBound <= r2.lowerBound && r1.upperBound >= r2.upperBound) || (r2.lowerBound <= r1.lowerBound && r2.upperBound >= r1.upperBound)
+        }.count
+    }
+    
+    func part2() async throws -> Int {
+        return input().lines.raw.filter { line in
+            guard let m = r.firstMatch(in: line) else { return false }
+            
+            let r1 = m[int: 1]! ... m[int: 2]!
+            let r2 = m[int: 3]! ... m[int: 4]!
+            
+            return Set(r1).intersects(Set(r2))
+        }.count
     }
 
-    func part2() async throws -> String {
-        return #function
-    }
-
-    func run() async throws -> (String, String) {
+    func run() async throws -> (Int, Int) {
         let p1 = try await part1()
         let p2 = try await part2()
         return (p1, p2)
