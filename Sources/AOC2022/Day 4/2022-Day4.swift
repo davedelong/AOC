@@ -8,8 +8,6 @@
 
 class Day4: Day {
     
-    static var rawInput: String? { nil }
-    
     let r = Regex(#"(\d+)-(\d+),(\d+)-(\d+)"#)
     
     func part1() async throws -> Int {
@@ -19,7 +17,7 @@ class Day4: Day {
             let r1 = m[int: 1]! ... m[int: 2]!
             let r2 = m[int: 3]! ... m[int: 4]!
             
-            return (r1.lowerBound <= r2.lowerBound && r1.upperBound >= r2.upperBound) || (r2.lowerBound <= r1.lowerBound && r2.upperBound >= r1.upperBound)
+            return r1.fullyContains(r2) || r2.fullyContains(r1)
         }.count
     }
     
@@ -29,15 +27,9 @@ class Day4: Day {
             
             let r1 = m[int: 1]! ... m[int: 2]!
             let r2 = m[int: 3]! ... m[int: 4]!
-            
-            return Set(r1).intersects(Set(r2))
+            let r = r1.relation(to: r2)
+            return !r.isDisjoint
         }.count
-    }
-
-    func run() async throws -> (Int, Int) {
-        let p1 = try await part1()
-        let p2 = try await part2()
-        return (p1, p2)
     }
 
 }
