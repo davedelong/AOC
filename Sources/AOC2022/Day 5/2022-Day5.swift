@@ -10,41 +10,30 @@ class Day5: Day {
     typealias Part1 = String
     typealias Part2 = String
     
-    static var rawInput: String? { nil }
-    
-    var startingCrates: Array<[Character]> = [
-        Array("TFVZCWSQ"),
-        Array("BRQ"),
-        Array("SMPQTZB"),
-        Array("HQRFVD"),
-        Array("PTSBDLGJ"),
-        Array("ZTRW"),
-        Array("JRFSNMQH"),
-        Array("WHFNR"),
-        Array("BRPQTZJ"),
-    ]
-
-//    var startingCrates: Array<[Character]> = [
-//        Array("NZ"), Array("DCM"), Array("P")
-//    ]
+    lazy var startingState: Array<[Character]> = {
+        let crateLines = input().lines.raw.split(on: \.isEmpty).first!
+        
+        // make sure the lines are all the same length
+        let longestLine = crateLines.max(of: \.count)
+        let padded = crateLines.map { $0.padding(toLength: longestLine, with: " ")}
+        
+        return stride(from: 1, to: longestLine, by: 4).map { offset in
+            padded.map { $0[offset: offset] }.filter(\.isLetter)
+        }
+    }()
     
     lazy var instructions: Array<(Int, Int, Int)> = {
         let r = Regex(#"move (\d+) from (\d+) to (\d+)"#)
         return input().lines.raw.compactMap { l in
             guard let m = r.firstMatch(in: l) else { return nil }
+            // subtract one because the instructions are 1-indexed, but arrays are 0-indexed
             return (m[int: 1]!, m[int: 2]! - 1, m[int: 3]! - 1)
         }
     }()
-    
-    func run() async throws -> (Part1, Part2) {
-        let p1 = try await part1()
-        let p2 = try await part2()
-        return (p1, p2)
-    }
 
     func part1() async throws -> Part1 {
         
-        var stacks = startingCrates
+        var stacks = startingState
         for (number, source, dest) in instructions {
             let stack = stacks[source]
             
@@ -61,7 +50,7 @@ class Day5: Day {
 
     func part2() async throws -> Part2 {
         
-        var stacks = startingCrates
+        var stacks = startingState
         for (number, source, dest) in instructions {
             let stack = stacks[source]
             
