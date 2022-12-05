@@ -7,14 +7,14 @@
 //
 
 public protocol Day {
-    associatedtype Part1Result: CustomStringConvertible = String
-    associatedtype Part2Result: CustomStringConvertible = String
+    associatedtype Part1: CustomStringConvertible = String
+    associatedtype Part2: CustomStringConvertible = String
     
     static var rawInput: String? { get }
     
-    func part1() async throws -> Part1Result
-    func part2() async throws -> Part2Result
-    func run() async throws -> (Part1Result, Part2Result)
+    func part1() async throws -> Part1
+    func part2() async throws -> Part2
+    func run() async throws -> (Part1, Part2)
 }
 
 extension Day {
@@ -28,15 +28,15 @@ extension Day {
         }
     }
     
-    public func part1() async throws -> Part1Result {
+    public func part1() async throws -> Part1 {
         fatalError("Implement \(#function)")
     }
     
-    public func part2() async throws -> Part2Result {
+    public func part2() async throws -> Part2 {
         fatalError("Implement \(#function)")
     }
     
-    public func run() async throws -> (Part1Result, Part2Result) {
+    public func run() async throws -> (Part1, Part2) {
         let p1 = try await part1()
         let p2 = try await part2()
         return (p1, p2)
