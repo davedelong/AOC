@@ -16,7 +16,7 @@ class Day10: Day {
         var data = input().characters
         
         for i in 1 ... 50 {
-            let subSequences = data.consecutivelyEqualSubsequences()
+            let subSequences = data.consecutivelyEqualSubsequences
             data = subSequences.flatMap { s -> Array<Character> in
                 return Array("\(s.count)\(s.first!)")
             }

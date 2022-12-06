@@ -257,7 +257,7 @@ public extension Sequence {
 
 public extension Collection where Element: Comparable {
     
-    func extremes() -> (Element, Element) {
+    var extremes: (Element, Element) {
         var minElement = self[startIndex]
         var maxElement = self[startIndex]
         
@@ -269,8 +269,8 @@ public extension Collection where Element: Comparable {
         return (minElement, maxElement)
     }
     
-    func range() -> ClosedRange<Element> {
-        let (min, max) = extremes()
+    var range: ClosedRange<Element> {
+        let (min, max) = extremes
         return min...max
     }
     
@@ -282,7 +282,7 @@ public extension Collection where Element: Equatable {
         return self.count(where: { $0 == element })
     }
     
-    func consecutivelyEqualSubsequences() -> Array<SubSequence> {
+    var consecutivelyEqualSubsequences: Array<SubSequence> {
         guard isNotEmpty else { return [] }
         
         var rangeStart = startIndex
@@ -366,7 +366,7 @@ public extension Collection where Element: Hashable {
 
 public extension Collection where Element: Collection {
     
-    func flatten() -> Array<Element.Element> {
+    var flattened: Array<Element.Element> {
         flatMap { $0 }
     }
     
@@ -395,7 +395,7 @@ public extension Collection where Element: Collection, Element.Element: Hashable
 public extension Collection where Element: RandomAccessCollection {
     
     // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
-    func transposed() -> Array<[Element.Element]> {
+    var transposed: Array<[Element.Element]> {
         guard let firstRow = self.first else { return [] }
         return firstRow.indices.map { index in
             self.map { $0[index] }
@@ -445,7 +445,7 @@ public extension BidirectionalCollection {
 
 public extension BidirectionalCollection where Element: Equatable {
     
-    func isPalindrome() -> Bool { self.isPalindrome(using: ==) }
+    var isPalindrome: Bool { self.isPalindrome(using: ==) }
     
 }
 

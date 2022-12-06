@@ -28,7 +28,7 @@ class Day9: Day {
                 let slice = ints[i ... j]
                 let sum = slice.sum
                 if sum == p1 {
-                    let (low, high) = slice.extremes()
+                    let (low, high) = slice.extremes
                     p2 = low + high
                     break
                 }

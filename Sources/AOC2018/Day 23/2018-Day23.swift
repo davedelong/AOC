@@ -46,9 +46,9 @@ class Day23: Day {
     }
     
     func part2() async throws -> String {
-        var (minX, maxX) = bots.map { $0.x }.extremes()
-        var (minY, maxY) = bots.map { $0.y }.extremes()
-        var (minZ, maxZ) = bots.map { $0.z }.extremes()
+        var (minX, maxX) = bots.map { $0.x }.extremes
+        var (minY, maxY) = bots.map { $0.y }.extremes
+        var (minZ, maxZ) = bots.map { $0.z }.extremes
         
         func md(_ x: Int, _ y: Int, _ z: Int) -> Int {
             return abs(x) + abs(y) + abs(z)

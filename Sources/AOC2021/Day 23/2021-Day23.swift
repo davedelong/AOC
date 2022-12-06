@@ -56,7 +56,7 @@ class Day23: Day {
                 (1...roomCount).map { Position(x: 4, y: $0) },
                 (1...roomCount).map { Position(x: 6, y: $0) },
                 (1...roomCount).map { Position(x: 8, y: $0) },
-            ].flatten())
+            ].flattened)
         }
         
         func steps(from s: Position, to e: Position) -> Int? {

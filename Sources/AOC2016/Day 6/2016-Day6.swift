@@ -11,7 +11,7 @@ class Day6: Day {
     func part1() async throws -> String {
         let characters = input().lines.characters
         
-        let columns = characters.transposed()
+        let columns = characters.transposed
         let letters = columns.map { col in
             let freqs = col.countElements()
             return freqs.mostCommon()!
@@ -23,7 +23,7 @@ class Day6: Day {
     func part2() async throws -> String {
         let characters = input().lines.characters
         
-        let columns = characters.transposed()
+        let columns = characters.transposed
         let letters = columns.map { col in
             let freqs = col.countElements()
             return freqs.leastCommon()!

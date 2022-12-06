@@ -123,8 +123,8 @@ class Day13: Day {
     
     private func draw(grid: Dictionary<XY, Tile>) {
         guard grid.isNotEmpty else { return }
-        let xRange = grid.keys.map { $0.x }.range()
-        let yRange = grid.keys.map { $0.y }.range()
+        let xRange = grid.keys.map { $0.x }.range
+        let yRange = grid.keys.map { $0.y }.range
         
         // the code generates a 40x21 grid
         guard xRange.count == 40 else { return }
@@ -168,8 +168,8 @@ class Day13: Day {
     
     private func drawFrame(_ grid: Dictionary<XY, Tile>) -> NSImage? {
         guard grid.isNotEmpty else { return nil }
-        let xRange = grid.keys.map { $0.x }.range()
-        let yRange = grid.keys.map { $0.y }.range()
+        let xRange = grid.keys.map { $0.x }.range
+        let yRange = grid.keys.map { $0.y }.range
         
         // the code generates a 40x21 grid
         guard xRange.count == 40 else { return nil }

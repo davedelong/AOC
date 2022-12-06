@@ -19,7 +19,7 @@ class Day3: Day {
     
     func part2() async throws -> Int {
         let ints = input().lines.map(\.integers)
-        let transposed = ints.transposed()
+        let transposed = ints.transposed
         
         var validCount = 0
         for column in transposed {

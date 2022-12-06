@@ -163,11 +163,11 @@ class Day10: Day {
     
     func run() async throws -> (String, String) {
         var d = data
-        var (minY, maxY) = d.lazy.map({ $0.0.y }).extremes()
+        var (minY, maxY) = d.lazy.map({ $0.0.y }).extremes
         var iterationCount = 0
         while maxY - minY > 10 {
             d = increment(d)
-            (minY, maxY) = d.lazy.map({ $0.0.y }).extremes()
+            (minY, maxY) = d.lazy.map({ $0.0.y }).extremes
             iterationCount += 1
         }
         

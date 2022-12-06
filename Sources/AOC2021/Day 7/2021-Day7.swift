@@ -11,7 +11,7 @@ class Day7: Day {
 
     func part1() async throws -> Int {
         let positions = input().integers
-        let range = positions.range()
+        let range = positions.range
         
         func cost(to position: Int) -> Int {
             return positions.sum { abs($0 - position) }
@@ -23,7 +23,7 @@ class Day7: Day {
 
     func part2() async throws -> Int {
         let positions = input().integers
-        let range = positions.range()
+        let range = positions.range
         
         func cost(to position: Int) -> Int {
             return positions.sum { triangular(abs($0 - position)) }

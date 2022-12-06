@@ -36,8 +36,8 @@ extension Space where P == Point2 {
     public func render(using renderer: (T?) -> String) -> String {
         var final = String()
         
-        let xRange = grid.keys.map(\.x).range()
-        let yRange = grid.keys.map(\.y).range()
+        let xRange = grid.keys.map(\.x).range
+        let yRange = grid.keys.map(\.y).range
         
         for y in yRange {
             for x in xRange {
@@ -53,8 +53,8 @@ extension Space where P == Point2 {
     
     public func convertToGridGraph(_ canEnterPosition: (T) -> Bool) -> GKGridGraph<GridNode<T>> {
         
-        let xRange = grid.keys.map { $0.x }.range()
-        let yRange = grid.keys.map { $0.y }.range()
+        let xRange = grid.keys.map { $0.x }.range
+        let yRange = grid.keys.map { $0.y }.range
         
         let g: GKGridGraph<GridNode<T>> = GKGridGraph(fromGridStartingAt: vector_int2(x: Int32(xRange.lowerBound), y: Int32(yRange.lowerBound)),
                                                       width: Int32(xRange.count),
@@ -80,8 +80,8 @@ extension Space where P == Point2 {
     public func convertToNestedArray() -> Array<Array<T?>> {
         var final = Array<Array<T?>>()
         
-        let xRange = grid.keys.map { $0.x }.range()
-        let yRange = grid.keys.map { $0.y }.range()
+        let xRange = grid.keys.map { $0.x }.range
+        let yRange = grid.keys.map { $0.y }.range
         
         for y in yRange {
             var row = Array<T?>()

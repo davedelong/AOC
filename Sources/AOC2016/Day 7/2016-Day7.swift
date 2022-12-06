@@ -20,7 +20,7 @@ class Day7: Day {
         var supportsTLS: Bool {
             func containsABBA(_ string: String) -> Bool {
                 for window in string.windows(ofCount: 4) {
-                    if window.isPalindrome() && window.first! != window.second! { return true }
+                    if window.isPalindrome && window.first! != window.second! { return true }
                 }
                 return false
             }
@@ -37,7 +37,7 @@ class Day7: Day {
             
             func ABAs(_ string: String) -> Array<ABA> {
                 return string.windows(ofCount: 3).compactMap { w -> ABA? in
-                    guard w.isPalindrome() else { return nil }
+                    guard w.isPalindrome else { return nil }
                     guard w.first != w.second else { return nil }
                     return ABA(a: w.first!, b: w.second!)
                 }

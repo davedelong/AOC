@@ -56,8 +56,8 @@ class Day11: Day {
     func part2() async throws -> String {
         let panels = paint(initialPanelColor: .white)
         
-        let yRange = panels.keys.map { $0.y }.range()
-        let xRange = panels.keys.map { $0.x }.range()
+        let yRange = panels.keys.map { $0.y }.range
+        let xRange = panels.keys.map { $0.x }.range
         
         var painted = ""
         

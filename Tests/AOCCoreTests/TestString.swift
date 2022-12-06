@@ -30,14 +30,14 @@ class TestStrings: XCTestCase {
     }
     
     func testPalindrome() {
-        XCTAssertTrue("".isPalindrome())
-        XCTAssertTrue("a".isPalindrome())
-        XCTAssertTrue("aa".isPalindrome())
-        XCTAssertTrue("aaa".isPalindrome())
-        XCTAssertTrue("aa_aa".isPalindrome())
+        XCTAssertTrue("".isPalindrome)
+        XCTAssertTrue("a".isPalindrome)
+        XCTAssertTrue("aa".isPalindrome)
+        XCTAssertTrue("aaa".isPalindrome)
+        XCTAssertTrue("aa_aa".isPalindrome)
         
-        XCTAssertTrue("abaaba".isPalindrome())
+        XCTAssertTrue("abaaba".isPalindrome)
         
-        XCTAssertFalse("abcbc".isPalindrome())
+        XCTAssertFalse("abcbc".isPalindrome)
     }
 }
