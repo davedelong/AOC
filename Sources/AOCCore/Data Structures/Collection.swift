@@ -342,7 +342,12 @@ public extension Collection where Element: Equatable {
 public extension Collection where Element: Hashable {
     
     var allUnique: Bool {
-        return Set(self).count == self.count
+        var seen = Set<Element>()
+        for item in self {
+            if seen.contains(item) { return false }
+            seen.insert(item)
+        }
+        return true
     }
     
     func countElements() -> CountedSet<Element> {
