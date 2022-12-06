@@ -13,13 +13,11 @@ class Day6: Day {
     static var rawInput: String? { nil }
 
     func part1() async throws -> Part1 {
-        let chunk = input().characters.windows(ofCount: 4).first(where: \.allUnique)!
-        return chunk.endIndex
+        return input().characters.windows(ofCount: 4).first(where: \.allUnique)!.endIndex
     }
 
     func part2() async throws -> Part2 {
-        let chunk = input().characters.windows(ofCount: 14).first(where: \.allUnique)!
-        return chunk.endIndex
+        return input().characters.windows(ofCount: 14).first(where: \.allUnique)!.endIndex
     }
 
 }
