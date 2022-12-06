@@ -7,18 +7,20 @@
 //
 
 class Day22: Day {
+    typealias Part1 = String
+    typealias Part2 = String
     
     static var rawInput: String? { nil }
 
-    func part1() async throws -> String {
+    func part1() async throws -> Part1 {
         return #function
     }
 
-    func part2() async throws -> String {
+    func part2() async throws -> Part2 {
         return #function
     }
 
-    func run() async throws -> (String, String) {
+    func run() async throws -> (Part1, Part2) {
         let p1 = try await part1()
         let p2 = try await part2()
         return (p1, p2)

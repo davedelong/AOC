@@ -7,21 +7,29 @@
 //
 
 class Day6: Day {
+    typealias Part1 = Int
+    typealias Part2 = Int
     
     static var rawInput: String? { nil }
 
-    func part1() async throws -> String {
-        return #function
+    func part1() async throws -> Part1 {
+        for w in input().characters.windows(ofCount: 4) {
+            if Set(w).count == 4 {
+                return w.startIndex + w.count
+            }
+        }
+        
+        fatalError()
     }
 
-    func part2() async throws -> String {
-        return #function
-    }
-
-    func run() async throws -> (String, String) {
-        let p1 = try await part1()
-        let p2 = try await part2()
-        return (p1, p2)
+    func part2() async throws -> Part2 {
+        for w in input().characters.windows(ofCount: 14) {
+            if Set(w).count == 14 {
+                return w.startIndex + w.count
+            }
+        }
+        
+        fatalError()
     }
 
 }
