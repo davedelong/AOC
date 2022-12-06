@@ -14,12 +14,12 @@ class Day6: Day {
 
     func part1() async throws -> Part1 {
         let chunk = input().characters.windows(ofCount: 4).first(where: \.allUnique)!
-        return chunk.startIndex + chunk.count
+        return chunk.endIndex
     }
 
     func part2() async throws -> Part2 {
         let chunk = input().characters.windows(ofCount: 14).first(where: \.allUnique)!
-        return chunk.startIndex + chunk.count
+        return chunk.endIndex
     }
 
 }
