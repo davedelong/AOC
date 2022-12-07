@@ -68,4 +68,16 @@ public class Node<T>: Hashable, CustomStringConvertible {
         return c
     }
     
+    public func collectAll(where matches: (Node<T>) -> Bool) -> Array<Node<T>> {
+        var final = Array<Node<T>>()
+        
+        func collect(from node: Node<T>) {
+            if matches(node) { final.append(node) }
+            for child in node.children { collect(from: child) }
+        }
+        
+        collect(from: self)
+        
+        return final
+    }
 }

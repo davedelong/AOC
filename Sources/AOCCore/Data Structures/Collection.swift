@@ -506,6 +506,15 @@ public extension Array {
         return removeFirst()
     }
     
+    mutating func popFirst(_ k: Int) -> Array<Element> {
+        guard k > 0 else { return [] }
+        let idx = self.index(self.startIndex, offsetBy: k, limitedBy: self.endIndex) ?? self.endIndex
+        
+        let popped = Array(self[self.startIndex ..< idx])
+        self.removeFirst(k)
+        return popped
+    }
+    
     func shift(_ amount: Int) -> Array<Element> {
         let shiftRight = (amount >= 0)
         let shiftAmount = Int(amount.magnitude).quotientAndRemainder(dividingBy: self.count).remainder
