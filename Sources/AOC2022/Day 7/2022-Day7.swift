@@ -59,12 +59,7 @@ class Day7: Day {
         let directories = root.collectAll(where: \.isDirectory)
         let p1 = directories.filter { $0.size <= 100000 }.sum(of: \.size)
         
-        let usedSpace = root.size
-        let totalSpace = 70000000
-        let unusedSpace = totalSpace - usedSpace
-        
-        let neededSpace = 30000000 - unusedSpace
-        
+        let neededSpace = 30000000 - (70000000 - root.size)
         let p2 = directories.filter { $0.size >= neededSpace }.min(of: \.size)
         
         return (p1, p2)
