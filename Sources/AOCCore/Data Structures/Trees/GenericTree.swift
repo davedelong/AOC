@@ -8,7 +8,7 @@
 import Foundation
 
 @dynamicMemberLookup
-public class Node<T>: Hashable, CustomStringConvertible {
+public final class Node<T>: Hashable, CustomStringConvertible, TreeNode {
     public static func ==(lhs: Node<T>, rhs: Node<T>) -> Bool { return lhs.id == rhs.id }
     
     private lazy var id: ObjectIdentifier = { ObjectIdentifier(self) }()
@@ -17,11 +17,25 @@ public class Node<T>: Hashable, CustomStringConvertible {
     
     public private(set) weak var parent: Node<T>?
     
-    public private(set) var children: Set<Node<T>>
+    public private(set) var children: Array<Node<T>>
     
     public var numberOfParents: Int { return numberOfParents(to: nil) }
     
     public var description: String { return "Node<\(T.self)>(value: \(value))" }
+    
+    public var treeDescription: String {
+        return self.treeDescription(using: \.description)
+    }
+    
+    public func treeDescription(using describer: (Node<T>) -> String) -> String {
+        var lines = Array<String>()
+        self.traverse(in: PreOrderTraversal(), visitor: { node, level in
+            let symbol = node.isLeaf ? "-" : "+"
+            lines.append(String(repeating: "  ", count: level) + symbol + " " + describer(node))
+            return .continue
+        })
+        return lines.joined(separator: "\n")
+    }
     
     public init(value: T) {
         self.value = value
@@ -35,25 +49,26 @@ public class Node<T>: Hashable, CustomStringConvertible {
     public func addChild(_ node: Node<T>) {
         node.removeFromParent()
         node.parent = self
-        children.insert(node)
+        children.append(node)
+    }
+    
+    public func removeChild(_ node: Node<T>) {
+        assert(node.parent === self)
+        children.removeAll(where: { $0 === node })
+        node.parent = nil
     }
     
     public func removeFromParent() {
-        parent?.children.remove(self)
-        self.parent = nil
+        parent?.removeChild(self)
     }
     
-    public func allParents() -> UnfoldSequence<Node<T>, Node<T>> {
-        let s = sequence(state: self, next: { state -> Node<T>? in
-            if let p = state.parent { state = p }
-            return state.parent
-        })
-        return s
+    public var allParents: UnfoldSequence<Node<T>, (Node<T>?, Bool)> {
+        return sequence(first: self, next: \.parent)
     }
     
     public func firstParentInCommon(with other: Node<T>) -> Node<T>? {
-        let myParents = Set(allParents())
-        for potentialAncestor in other.allParents() {
+        let myParents = Set(allParents)
+        for potentialAncestor in other.allParents {
             if myParents.contains(potentialAncestor) { return potentialAncestor }
         }
         return nil
@@ -67,19 +82,6 @@ public class Node<T>: Hashable, CustomStringConvertible {
             p = p?.parent
         }
         return c
-    }
-    
-    public func collectAll(where matches: (Node<T>) -> Bool) -> Array<Node<T>> {
-        var final = Array<Node<T>>()
-        
-        func collect(from node: Node<T>) {
-            if matches(node) { final.append(node) }
-            for child in node.children { collect(from: child) }
-        }
-        
-        collect(from: self)
-        
-        return final
     }
 
     public subscript<V>(dynamicMember keyPath: KeyPath<T, V>) -> V {

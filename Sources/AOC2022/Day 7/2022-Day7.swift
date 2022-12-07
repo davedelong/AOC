@@ -56,7 +56,7 @@ class Day7: Day {
             }
         }
         
-        let directories = root.collectAll(where: \.isDirectory)
+        let directories = root.flattened.filter(\.isDirectory)
         let p1 = directories.filter { $0.size <= 100000 }.sum(of: \.size)
         
         let neededSpace = 30000000 - (70000000 - root.size)
