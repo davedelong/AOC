@@ -7,6 +7,7 @@
 
 import Foundation
 
+@dynamicMemberLookup
 public class Node<T>: Hashable, CustomStringConvertible {
     public static func ==(lhs: Node<T>, rhs: Node<T>) -> Bool { return lhs.id == rhs.id }
     
@@ -79,5 +80,9 @@ public class Node<T>: Hashable, CustomStringConvertible {
         collect(from: self)
         
         return final
+    }
+
+    public subscript<V>(dynamicMember keyPath: KeyPath<T, V>) -> V {
+        return value[keyPath: keyPath]
     }
 }

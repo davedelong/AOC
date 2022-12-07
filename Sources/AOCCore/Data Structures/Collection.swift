@@ -212,6 +212,19 @@ public extension Sequence {
         return f
     }
     
+    func min<N: Comparable>(by element: (Element) -> N) -> Element {
+        var final: (value: N, element: Element)?
+        for i in self {
+            let v = element(i)
+            if let f = final {
+                if v < f.value { final = (value: v, element: i) }
+            } else {
+                final = (value: v, element: i)
+            }
+        }
+        return final!.element
+    }
+    
     func min<N: Comparable>(of element: (Element) -> N) -> N {
         var final: N?
         for i in self {
@@ -223,6 +236,19 @@ public extension Sequence {
             }
         }
         return final!
+    }
+    
+    func max<N: Comparable>(by element: (Element) -> N) -> Element {
+        var final: (value: N, element: Element)?
+        for i in self {
+            let v = element(i)
+            if let f = final {
+                if f.value > v { final = (value: v, element: i) }
+            } else {
+                final = (value: v, element: i)
+            }
+        }
+        return final!.element
     }
     
     func max<N: Comparable>(of element: (Element) -> N) -> N {

@@ -16,6 +16,11 @@ class Day7: Day {
         case folder(String)
         case file(String, Int)
         
+        var isDirectory: Bool {
+            if case .folder = self { return true }
+            return false
+        }
+        
         var name: String {
             switch self {
                 case .folder(let n): return n
@@ -39,7 +44,7 @@ class Day7: Day {
                     current = current.children.first(where: { $0.value.name == String(folder) })!
                 }
             } else if line.hasPrefix("$ ls") {
-                // starting to list
+                // starting to list; ignore
             } else if line.hasPrefix("dir ") {
                 let name = line.dropFirst(4)
                 current.addChild(.init(value: .folder(String(name))))
@@ -60,7 +65,7 @@ class Day7: Day {
         
         let neededSpace = 30000000 - unusedSpace
         
-        let p2 = directories.filter { $0.size >= neededSpace }.min(by: { $0.size < $1.size })!.size
+        let p2 = directories.filter { $0.size >= neededSpace }.min(of: \.size)
         
         return (p1, p2)
     }
@@ -68,11 +73,6 @@ class Day7: Day {
 }
 
 extension Node where T == Day7.Entry {
-    
-    var isDirectory: Bool {
-        if case .folder = value { return true }
-        return false
-    }
     
     var size: Int {
         switch value {
