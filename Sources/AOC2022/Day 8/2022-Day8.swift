@@ -9,19 +9,6 @@
 class Day8: Day {
     typealias Part1 = Int
     typealias Part2 = Int
-    
-    static var rawInput: String? { nil }
-    
-    enum Tree: Hashable {
-        case unvisited(Int)
-        case visible(Int)
-        case invisible(Int)
-        
-        var isVisible: Bool {
-            if case .visible = self { return true }
-            return false
-        }
-    }
 
     func run() async throws -> (Part1, Part2) {
         let trees = Matrix(input().lines.map(\.digits))
@@ -66,12 +53,7 @@ class Day8: Day {
                 count += 1
             }
             let visible = Heading.cardinalHeadings.map { visibleTrees(pos, along: $0) }
-//            print("VISIBLE @ ", pos, ":", visible, "(Score: \(visible.product))")
-            let score = visible.product
-            if score > maxScore {
-//                print("NEW MAX", score, "AT", pos, ":", score)
-                maxScore = max(maxScore, score)
-            }
+            maxScore = max(maxScore, visible.product)
         }
         
         return (count, maxScore)
