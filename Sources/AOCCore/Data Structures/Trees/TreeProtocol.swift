@@ -77,6 +77,28 @@ public extension TreeNode {
         return flatten(in: PreOrderTraversal())
     }
     
+    var preOrder: Array<Self> { flatten(in: PreOrderTraversal()) }
+    
+    var postOrder: Array<Self> { flatten(in: PostOrderTraversal()) }
+    
+    var breadthFirstOrder: Array<Self> { flatten(in: BreadthFirstTreeTraversal()) }
+    
+    func treeDescription(using describer: (Self) -> String) -> String {
+        var lines = Array<String>()
+        self.traverse(in: PreOrderTraversal(), visitor: { node, level in
+            let symbol = node.isLeaf ? "-" : "+"
+            lines.append(String(repeating: "  ", count: level) + symbol + " " + describer(node))
+            return .continue
+        })
+        return lines.joined(separator: "\n")
+    }
+    
+}
+
+extension TreeNode where Self: CustomStringConvertible {
+    
+    public var treeDescription: String { self.treeDescription(using: \.description) }
+    
 }
 
 public extension Collection where Element: TreeNode {

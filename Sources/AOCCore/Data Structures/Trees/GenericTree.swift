@@ -23,20 +23,6 @@ public final class Node<T>: Hashable, CustomStringConvertible, TreeNode {
     
     public var description: String { return "Node<\(T.self)>(value: \(value))" }
     
-    public var treeDescription: String {
-        return self.treeDescription(using: \.description)
-    }
-    
-    public func treeDescription(using describer: (Node<T>) -> String) -> String {
-        var lines = Array<String>()
-        self.traverse(in: PreOrderTraversal(), visitor: { node, level in
-            let symbol = node.isLeaf ? "-" : "+"
-            lines.append(String(repeating: "  ", count: level) + symbol + " " + describer(node))
-            return .continue
-        })
-        return lines.joined(separator: "\n")
-    }
-    
     public init(value: T) {
         self.value = value
         self.children = []

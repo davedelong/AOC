@@ -26,4 +26,6 @@ public extension BinaryTreeNode {
         return []
     }
     
+    var inOrder: Array<Self> { flatten(in: InOrderTraversal()) }
+    
 }
