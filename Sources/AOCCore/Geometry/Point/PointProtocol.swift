@@ -165,11 +165,20 @@ public extension PointProtocol {
         return closest
     }
     
+    @available(*, deprecated, message: "This is backwards")
     func vector(to other: Self) -> Vector {
         if other == self { return .zero }
         assert(Vector.numberOfComponents == Self.numberOfComponents)
         
         let deltas = zip(components, other.components).map(-)
+        return Vector(deltas)
+    }
+    
+    func vector(towards other: Self) -> Vector {
+        if other == self { return .zero }
+        assert(Vector.numberOfComponents == Self.numberOfComponents)
+        
+        let deltas = zip(other.components, components).map(-)
         return Vector(deltas)
     }
     

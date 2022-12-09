@@ -99,6 +99,13 @@ public extension VectorProtocol {
         }
         self.init(ints)
     }
+    
+    func unit() -> Self {
+        return Self(components.map {
+            if $0 == 0 { return $0 }
+            return $0 / Int($0.magnitude)
+        })
+    }
 }
 
 public struct Vector2: VectorProtocol {

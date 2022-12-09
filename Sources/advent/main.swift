@@ -7,7 +7,7 @@
 
 import AOC
 
-let d = AOC2022.day(1)
+let d = AOC2022.today()
 
 let d1 = Date()
 let (p1, p2) = try await d.run()
