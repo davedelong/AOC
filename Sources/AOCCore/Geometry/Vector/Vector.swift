@@ -86,10 +86,7 @@ public extension VectorProtocol {
         return components.count(where: { $0 != 0 }) <= 1
     }
     
-    func manhattanDistance(to other: Self) -> Int {
-        let pairs = zip(components, other.components)
-        return pairs.reduce(0) { $0 + abs($1.0 - $1.1) }
-    }
+    var manhattanDistance: Int { Int(components.map(\.magnitude).sum) }
     
     init(_ source: String) {
         let matches = Regex.integers.matches(in: source)
