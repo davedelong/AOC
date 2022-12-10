@@ -12,16 +12,22 @@ public struct Point3: PointProtocol {
     public typealias Span = PointSpan3
     public static let numberOfComponents = 3
     
-    public var components: Array<Int> { [x, y, z] }
+    public var components: Array<Int> {
+        get { [x, y, z] }
+        set {
+            Self.assertComponents(newValue)
+            x = newValue[0]
+            y = newValue[1]
+            z = newValue[2]
+        }
+    }
     
-    public let x: Int
-    public let y: Int
-    public let z: Int
+    public var x: Int
+    public var y: Int
+    public var z: Int
     
     public init(_ components: Array<Int>) {
-        guard components.count == Point3.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point3.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.init(x: components[0], y: components[1], z: components[2])
     }
     

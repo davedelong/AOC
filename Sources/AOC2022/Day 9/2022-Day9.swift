@@ -30,7 +30,7 @@ class Day9: Day {
                 for (p, n) in rope.indices.adjacentPairs() {
                     let v = rope[n].vector(towards: rope[p])
                     if v.manhattanDistance > (v.isOrthogonal ? 1 : 2) {
-                        rope[n] = rope[n].move(v.unit())
+                        rope[n] = rope[n].move(v.signum)
                     }
                 }
                 

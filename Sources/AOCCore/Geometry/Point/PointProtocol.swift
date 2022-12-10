@@ -14,7 +14,7 @@ public protocol PointProtocol: Hashable, CustomStringConvertible {
     
     static var numberOfComponents: Int { get }
     
-    var components: Array<Int> { get }
+    var components: Array<Int> { get set }
     init(_ components: Array<Int>)
 }
 
@@ -163,6 +163,10 @@ public extension PointProtocol {
         }
         
         return closest
+    }
+    
+    func unitVector(to other: Self) -> Vector {
+        return self.vector(towards: other).unit()
     }
     
     @available(*, deprecated, message: "This is backwards")

@@ -86,7 +86,7 @@ public extension VectorProtocol {
         return components.count(where: { $0 != 0 }) <= 1
     }
     
-    var manhattanDistance: Int { Int(components.map(\.magnitude).sum) }
+    var manhattanDistance: Int { Int(components.sum(of: \.magnitude)) }
     
     init(_ source: String) {
         let matches = Regex.integers.matches(in: source)
@@ -103,6 +103,10 @@ public extension VectorProtocol {
             return $0 / Int($0.magnitude)
         })
     }
+    
+    var signum: Self {
+        return Self(components.map { $0.signum() })
+    }
 }
 
 public struct Vector2: VectorProtocol {
@@ -111,7 +115,7 @@ public struct Vector2: VectorProtocol {
     public static let adjacents: Array<Vector2> = [
         Vector2(x: -1, y: -1), Vector2(x: 0, y: -1), Vector2(x: 1, y: -1),
         Vector2(x: -1, y: 0),                        Vector2(x: 1, y: 0),
-        Vector2(x: -1, y: 1), Vector2(x: 0, y: 1), Vector2(x: 1, y: 1),
+        Vector2(x: -1, y: 1),  Vector2(x: 0, y: 1),  Vector2(x: 1, y: 1),
     ]
     
     public var components: Array<Int> {

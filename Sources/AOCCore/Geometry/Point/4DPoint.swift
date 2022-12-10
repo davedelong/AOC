@@ -12,17 +12,34 @@ public struct Point4: PointProtocol {
     public typealias Span = PointSpan4
     public static let numberOfComponents = 4
     
-    public var components: Array<Int>
+    public var components: Array<Int> {
+        get { [x, y, z, t] }
+        set {
+            Self.assertComponents(newValue)
+            x = newValue[0]
+            y = newValue[1]
+            z = newValue[2]
+            t = newValue[3]
+        }
+    }
     
-    public var x: Int { return components[0] }
-    public var y: Int { return components[1] }
-    public var z: Int { return components[2] }
-    public var t: Int { return components[3] }
+    public var x: Int
+    public var y: Int
+    public var z: Int
+    public var t: Int
     
     public init(_ components: Array<Int>) {
         Self.assertComponents(components)
-        self.components = components
+        self.x = components[0]
+        self.y = components[1]
+        self.z = components[2]
+        self.t = components[3]
     }
     
-    public init(x: Int, y: Int, z: Int, t: Int) { self.init([x, y, z, t]) }
+    public init(x: Int, y: Int, z: Int, t: Int) {
+        self.x = x
+        self.y = y
+        self.z = z
+        self.t = t
+    }
 }

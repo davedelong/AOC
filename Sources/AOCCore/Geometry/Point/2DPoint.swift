@@ -15,7 +15,14 @@ public struct Point2: PointProtocol {
     public typealias Span = PointSpan2
     public static let numberOfComponents = 2
     
-    public var components: Array<Int> { [x, y] }
+    public var components: Array<Int> {
+        get { [x, y] }
+        set {
+            Self.assertComponents(newValue)
+            x = newValue[0]
+            y = newValue[1]
+        }
+    }
     
     public var x: Int
     public var y: Int
@@ -35,9 +42,7 @@ public struct Point2: PointProtocol {
     }
     
     public init(_ components: Array<Int>) {
-        guard components.count == Point2.numberOfComponents else {
-            fatalError("Invalid components provided to \(#function). Expected \(Point2.numberOfComponents), but got \(components.count)")
-        }
+        Self.assertComponents(components)
         self.init(x: components[0], y: components[1])
     }
     
@@ -67,13 +72,6 @@ public extension Point2 {
     
     func polarAngle(to other: Position) -> Double {
         return atan2(Double(other.y - self.y), Double(other.x - self.x))
-    }
-    
-    func unitVector(to other: Position) -> Vector2 {
-        var v = self.vector(to: other)
-        if v.x != 0 { v.x /= abs(v.x) }
-        if v.y != 0 { v.y /= abs(v.y) }
-        return v
     }
     
 }
