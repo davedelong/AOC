@@ -377,6 +377,10 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
             $0.map(renderer).joined()
         }.joined(separator: "\n")
     }
+    
+    public func recognizeLetters(isLetterCharacter: (T) -> Bool) -> String {
+        return RecognizeLetters(in: data, isLetterCharacter: isLetterCharacter)
+    }
 }
 
 
@@ -388,6 +392,10 @@ extension Matrix where T == Bool {
     
     public func draw() {
         print(render())
+    }
+    
+    public func recognizeLetters() -> String {
+        return RecognizeLetters(in: data)
     }
     
 }

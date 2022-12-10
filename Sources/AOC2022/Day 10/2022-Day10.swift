@@ -60,9 +60,8 @@ class Day10: Day {
             }
         }
         
-        let str = screen.render(using: { $0 ? "#" : " " })
-        
-        return RecognizeLetters(from: str)
+        screen.draw()        
+        return screen.recognizeLetters()
     }
 
 }

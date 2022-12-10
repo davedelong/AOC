@@ -30,6 +30,9 @@ extension Bool {
             return nil
         }
     }
+    
+    public var isTrue: Bool { self == true }
+    public var isFalse: Bool { self == false }
 }
 
 extension Character {

@@ -43,8 +43,7 @@ class Day13: Day {
         
         grid.draw()
         
-        let string = grid.render(using: { $0 == true ? "#" : " " })
-        return RecognizeLetters(from: string)
+        return grid.recognizeLetters()
     }
 
     func foldGrid(_ grid: XYGrid<Bool>, axis: String, line: Int) -> XYGrid<Bool> {

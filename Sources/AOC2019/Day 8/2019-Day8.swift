@@ -26,7 +26,7 @@ class Day8: Day {
         let p1 = "\(numberOfOnes * numberOfTwos)"
         
         
-        var resolvedPixels = Array<String>(repeating: " ", count: numberOfPixels)
+        var resolvedPixels = Array<Bool>(repeating: false, count: numberOfPixels)
         
         for p in 0 ..< numberOfPixels {
             var pixelValue = 0
@@ -35,14 +35,11 @@ class Day8: Day {
                 pixelValue = layer[p]
                 break
             }
-            resolvedPixels[p] = pixelValue == 0 ? " " : "#"
+            resolvedPixels[p] = pixelValue != 0
         }
         
-        let joined = Array(resolvedPixels.joined())
-                        .chunks(ofCount: 25)             // break up the buffer into lines
-                        .map { String($0) }              // turn each line into a string
-                        .joined(separator: "\n")         // join the strings
-        let p2 = RecognizeLetters(from: joined)
+        let lines = resolvedPixels.chunks(ofCount: 25)
+        let p2 = lines.recognizeLetters()
         return (p1, p2)
     }
     

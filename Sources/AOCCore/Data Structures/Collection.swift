@@ -112,6 +112,10 @@ public extension Collection {
         return contains(where: satisfy)
     }
     
+    func anySatisfy(_ satisfy: (Element) -> Bool) -> Bool {
+        return contains(where: satisfy)
+    }
+    
     func pairs() -> Array<Pair<Element>> {
         var p = Array<Pair<Element>>()
         var i = makeIterator()
@@ -169,6 +173,12 @@ public extension Collection {
     subscript(offset value: Int) -> Element {
         let i = self.index(self.startIndex, offsetBy: value)
         return self[i]
+    }
+    
+    func padded(toLength: Int, with element: Element) -> Array<Element> {
+        let neededLength = toLength - self.count
+        if neededLength <= 0 { return Array(self) }
+        return Array(self) + Array(repeating: element, count: neededLength)
     }
     
 }
@@ -394,6 +404,18 @@ public extension Collection where Element: Collection {
     
     var flattened: Array<Element.Element> {
         flatMap { $0 }
+    }
+    
+    func recognizeLetters(isLetterCharacter: (Element.Element) -> Bool) -> String {
+        return RecognizeLetters(in: self, isLetterCharacter: isLetterCharacter)
+    }
+    
+}
+
+public extension Collection where Element: Collection, Element.Element == Bool {
+    
+    func recognizeLetters() -> String {
+        return RecognizeLetters(in: self)
     }
     
 }

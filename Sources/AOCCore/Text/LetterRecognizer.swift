@@ -7,19 +7,43 @@
 
 import Foundation
 
-public func RecognizeLetters(from input: String) -> String {
+public func RecognizeLetters(from input: String, letterCharacter: Character = "#") -> String {
+    return RecognizeLetters(from: input, isLetterCharacter: { $0 == letterCharacter })
+}
+
+public func RecognizeLetters(from input: String, isLetterCharacter: (Character) -> Bool) -> String {
     let splits = input.split(on: "\n")
     let maxLength = splits.map(\.count).max()!
     
-    let lines = splits.map { $0.padding(toLength: maxLength, with: " ") }
+    let lines = splits.map {
+        $0.padding(toLength: maxLength, with: " ").map(isLetterCharacter)
+    }
+    return RecognizeLetters(in: lines)
+}
+
+public func RecognizeLetters<C: Collection>(in collection: C, isLetterCharacter: (C.Element.Element) -> Bool) -> String where C.Element: Collection {
+    let linesOfBools = collection.map { $0.map(isLetterCharacter) }
+    return RecognizeLetters(in: linesOfBools)
+}
+
+public func RecognizeLetters<C: Collection>(in collection: C) -> String where C.Element: Collection, C.Element.Element == Bool {
+    let maxWidth = collection.max(of: \.count)
+    let lines = collection.map { $0.padded(toLength: maxWidth, with: false) }
     
+    let blanksRemoved = lines.filter { $0.anySatisfy(\.isTrue) }
+    
+    let scannedLines = blanksRemoved.chunks(ofCount: Letter.letterHeight).map { scanLetters(in: $0) }
+    return scannedLines.joined(separator: "\n")
+}
+
+private func scanLetters(in lines: ArraySlice<[Bool]>) -> String {
     var recognized = ""
     var candidates = Array<Letter>()
     
-    for i in 0 ..< maxLength {
+    for i in 0 ..< lines[0].count {
         let inputSlice = lines.map { $0[offset: i] }
         
-        if inputSlice.allSatisfy(\.isWhitespace) {
+        if inputSlice.allSatisfy(\.isFalse) {
             // it's blank...
             if let match = candidates.first {
                 recognized.append(match.character)
@@ -64,12 +88,11 @@ public func RecognizeLetters(from input: String) -> String {
     }
     
     return recognized
-    
 }
 
-struct Letter {
+private struct Letter {
     let character: Character
-    var pattern: Array<Array<Character>>
+    var pattern: Array<Array<Bool>>
     
     let height: Int
     let width: Int
@@ -84,7 +107,7 @@ struct Letter {
         self.height = lines.count
         
         self.pattern = lines.map { line in
-            return Array(line.padding(toLength: width, withPad: " ", startingAt: 0))
+            return (line.map { $0 == "#" }).padded(toLength: width, with: false)
         }
     }
 }
@@ -92,6 +115,7 @@ struct Letter {
 extension Letter {
     // missing: I, M, Q, S, T, V, W
     static let all = [a, b, c, d, e, f, g, h, j, k, l, n, o, p, r, u, x, y, z]
+    static let letterHeight = all.max(of: \.height)
     
     static let a = Letter(character: "A", pattern: """
  ##

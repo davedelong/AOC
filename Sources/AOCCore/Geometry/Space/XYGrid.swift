@@ -97,6 +97,13 @@ extension Space where P == Point2 {
     public func forEach(_ element: (Position, T) -> Void) {
         grid.forEach(element)
     }
+    
+    public func recognizeLetters(isLetterCharacter: (T) -> Bool) -> String {
+        return RecognizeLetters(in: self.convertToNestedArray(), isLetterCharacter: {
+            guard let element = $0 else { return false }
+            return isLetterCharacter(element)
+        })
+    }
 }
 
 extension Space: ExpressibleByArrayLiteral where P == Point2 {
@@ -115,6 +122,10 @@ extension Space where P == Point2, T == Bool {
     
     public func draw() {
         print(render())
+    }
+    
+    public func recognizeLetters() -> String {
+        return RecognizeLetters(in: self.convertToNestedArray(), isLetterCharacter: { $0 == true })
     }
     
 }

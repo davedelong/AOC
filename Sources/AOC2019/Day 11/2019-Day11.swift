@@ -13,11 +13,12 @@ class Day11: Day {
         case white = 1
     }
     
-    private func paint(initialPanelColor: Color) -> Dictionary<XY, Color> {
+    private func paint(initialPanelColor: Color) -> Space<Point2, Color> {
         let intcode = Intcode(memory: input().integers)
         
-        var panels = Dictionary<XY, Color>()
-        var currentHeading = Heading.north
+//        var panels = Dictionary<XY, Color>()
+        var panels = Space<Point2, Color>()
+        var currentHeading = Heading.south
         var currentPosition = XY.zero
         panels[currentPosition] = initialPanelColor
         
@@ -35,9 +36,9 @@ class Day11: Day {
                     panels[currentPosition] = Color(rawValue: intcode.io!)!
                 } else {
                     if intcode.io! == 0 {
-                        currentHeading = currentHeading.turnLeft()
-                    } else {
                         currentHeading = currentHeading.turnRight()
+                    } else {
+                        currentHeading = currentHeading.turnLeft()
                     }
                     currentPosition = currentPosition.move(currentHeading)
                 }
@@ -55,24 +56,10 @@ class Day11: Day {
     
     func part2() async throws -> String {
         let panels = paint(initialPanelColor: .white)
-        
-        let yRange = panels.keys.map { $0.y }.range
-        let xRange = panels.keys.map { $0.x }.range
-        
-        var painted = ""
-        
-        for y in yRange {
-            for x in xRange {
-                let color = panels[XY(x: x, y: y)] ?? .black
-                let char = (color == .white) ? "#" : " "
-                painted.append(char)
-            }
-            painted.append("\n")
-        }
-        
-        let recognized = RecognizeLetters(from: painted)
-        
-        return recognized
+        panels.draw(using: {
+            $0 == .white ? "#" : "."
+        })
+        return panels.recognizeLetters(isLetterCharacter: { $0 == .white })
     }
     
 }
