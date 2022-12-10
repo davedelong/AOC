@@ -59,8 +59,7 @@ class Day10: Day {
                 cycle += 1
             }
         }
-        
-        screen.draw()        
+           
         return screen.recognizeLetters()
     }
 

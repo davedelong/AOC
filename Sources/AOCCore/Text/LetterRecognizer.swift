@@ -30,6 +30,13 @@ public func RecognizeLetters<C: Collection>(in collection: C) -> String where C.
     let maxWidth = collection.max(of: \.count)
     let lines = collection.map { $0.padded(toLength: maxWidth, with: false) }
     
+    lines.forEach { line in
+        for char in line {
+            print(char ? "⬛️" : "⬜️", separator: "", terminator: "")
+        }
+        print("")
+    }
+    
     let blanksRemoved = lines.filter { $0.anySatisfy(\.isTrue) }
     
     let scannedLines = blanksRemoved.chunks(ofCount: Letter.letterHeight).map { scanLetters(in: $0) }

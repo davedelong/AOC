@@ -39,10 +39,7 @@ class Day13: Day {
         var grid = initialGrid
         for fold in folds {
             grid = foldGrid(grid, axis: fold.0, line: fold.1)
-        }
-        
-        grid.draw()
-        
+        }        
         return grid.recognizeLetters()
     }
 

@@ -49,8 +49,6 @@ class Day8: Day {
         }
         
         let p1 = m.count(of: .on)
-        m.draw()
-        let rendered = m.render(using: { $0 ? "#" : " " })
         let p2 = m.recognizeLetters()
         
         return (p1, p2)
