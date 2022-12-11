@@ -31,9 +31,7 @@ public func RecognizeLetters<C: Collection>(in collection: C) -> String where C.
     let lines = collection.map { $0.padded(toLength: maxWidth, with: false) }
     
     lines.forEach { line in
-        for char in line {
-            print(char ? "⬛️" : "⬜️", separator: "", terminator: "")
-        }
+        line.forEach { print($0 ? "⬛️" : "⬜️", separator: "", terminator: "") }
         print("")
     }
     
