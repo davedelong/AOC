@@ -138,6 +138,24 @@ public struct GridGraph<Value: Equatable> {
         }
     }
     
+    public mutating func disconnect(_ position: Position, from neighbor: Position, bidirectional: Bool = true) {
+        guard position.manhattanDistance(to: neighbor) == 1 else { return }
+        mutate { s, g in
+            let n = g.node(atGridPosition: position.graphPosition)!
+            let o = g.node(atGridPosition: neighbor.graphPosition)!
+            n.removeConnections(to: [o], bidirectional: bidirectional)
+        }
+    }
+    
+    public mutating func connect(_ position: Position, to neighbor: Position, bidirectional: Bool = true) {
+        guard position.manhattanDistance(to: neighbor) == 1 else { return }
+        mutate { s, g in
+            let n = g.node(atGridPosition: position.graphPosition)!
+            let o = g.node(atGridPosition: neighbor.graphPosition)!
+            n.addConnections(to: [o], bidirectional: bidirectional)
+        }
+    }
+    
     public func connections(from position: Position) -> Set<Position> {
         guard let node = graph.node(atGridPosition: position.graphPosition) else { return [] }
         return Set((node.connectedNodes as! Array<Node>).map(\.position))
