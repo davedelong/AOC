@@ -36,34 +36,3 @@ extension Year {
 private struct InvalidDay: Day {
     let number: Int
 }
-
-public class Year_OLD {
-
-    private let year: Int
-    
-    public init(_ year: Int) {
-        self.year = year
-    }
-    
-    public func day(_ day: Int) -> Day_OLD {
-        guard let dayClass = objc_getClass("AOC\(year).Day\(day)") else {
-            return Bad()
-        }
-        guard let dayType = dayClass as? NSObject.Type else {
-            return Bad()
-        }
-        
-        let instance = dayType.init()
-        
-        guard let day = instance as? Day_OLD else {
-            return Bad()
-        }
-        
-        return day
-    }
-    
-    public func allDays() -> Array<Day_OLD> {
-        return (1...25).map { day($0) }
-    }
-    
-}

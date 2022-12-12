@@ -8,6 +8,8 @@
 
 import Foundation
 
+public var authenticationToken: String?
+
 extension CharacterSet {
     public static var comma = CharacterSet(charactersIn: ",")
 }
@@ -37,6 +39,7 @@ extension StringInput {
 
 public final class Input: StringInput {
     
+    private static let yearNumber = Regex(#"AOC(\d{4})"#)
     private static let dayNumber = Regex(#"[dD]ay ?(\d{1,2})"#)
     
     private static var inputs = Dictionary<String, Input>()
@@ -45,6 +48,8 @@ public final class Input: StringInput {
         if let e = inputs[caller.description] { return e }
         
         var path = caller.description.split(separator: "/")
+        
+        let year = path.compactMap { yearNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
         let day = path.compactMap { dayNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
         
         if path.last?.hasSuffix(".swift") == true { path.removeLast() }
@@ -53,10 +58,31 @@ public final class Input: StringInput {
         path.append("input.txt")
         
         let inputTxtPath = "/" + path.joined(separator: "/")
-        if let str = try? String(contentsOfFile: inputTxtPath) {
+        if FileManager.default.fileExists(atPath: inputTxtPath), let str = (try? String(contentsOfFile: inputTxtPath))?.trimmed(), str.isEmpty == false {
             let input = Input(str)
             inputs[caller.description] = input
             return input
+        }
+        
+        // input file does not exist or it's blank; try falling back
+        
+        // try to download it
+        if let token = authenticationToken,
+           let url = URL(string: "https://adventofcode.com/\(year)/day/\(day)/input"),
+           let cookie = HTTPCookie(properties: [.path: "/", .name: "session", .domain: "adventofcode.com", .value: token]) {
+            
+            URLSession.shared.configuration.httpCookieStorage?.setCookie(cookie)
+            
+            do {
+                let str = try String(contentsOf: url)
+                try str.write(toFile: inputTxtPath, atomically: true, encoding: .utf8)
+                
+                let input = Input(str)
+                inputs[caller.description] = input
+                return input
+            } catch {
+                print("Error: \(error)")
+            }
         }
         
         // pop input.txt
