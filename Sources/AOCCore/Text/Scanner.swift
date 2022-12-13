@@ -133,6 +133,13 @@ extension Scanner where C.Element: Equatable {
 
 extension Scanner where C.Element == Character {
     
+    public mutating func tryScanInt() -> Int? {
+        let start = current
+        if let int = scanInt() { return int }
+        current = start
+        return nil
+    }
+    
     public mutating func scanInt() -> Int? {
         let digits = self.scan(while: \.isNumber)
         return Int(String(digits))

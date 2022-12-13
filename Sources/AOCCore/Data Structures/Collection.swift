@@ -116,11 +116,11 @@ public extension Collection {
         return contains(where: satisfy)
     }
     
-    func pairs() -> Array<Pair<Element>> {
-        var p = Array<Pair<Element>>()
+    func pairs() -> Array<(Element, Element)> {
+        var p = Array<(Element, Element)>()
         var i = makeIterator()
         while let a = i.next(), let b = i.next() {
-            p.append(Pair(a, b))
+            p.append((a, b))
         }
         return p
     }
@@ -461,6 +461,7 @@ public extension BidirectionalCollection {
     }
     
     func removingLast(while matches: (Element) -> Bool) -> SubSequence {
+        if self.isEmpty { return self[...] }
         var index = self.index(before: endIndex)
         while index >= startIndex && matches(self[index]) {
             index = self.index(before: index)
