@@ -111,8 +111,8 @@ public extension PointProtocol {
         lhs = lhs * rhs
     }
     
-    init(_ source: String) {
-        let matches = Regex.integers.matches(in: source)
+    init<S: StringProtocol>(_ source: S) {
+        let matches = Regex.integers.matches(in: source.description)
         let ints = matches.compactMap { match -> Int? in
             guard let piece = match[1] else { return nil }
             return Int(piece)
