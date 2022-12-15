@@ -42,7 +42,7 @@ class Day14: Day {
         let span = cave.span
         
         var count = 0
-        while dropSand(into: &cave, floor: span.maxY) {
+        while dropSand(into: &cave, floor: span.maxY, canFallForever: true) {
             count += 1
         }
         
@@ -58,7 +58,7 @@ class Day14: Day {
         let s = Point2(x: 500, y: 0)
         
         var count = 0
-        while cave[s] == nil && dropSand2(into: &cave, floor: span.maxY + 2) {
+        while cave[s] == nil && dropSand(into: &cave, floor: span.maxY + 2, canFallForever: false) {
             count += 1
         }
         
@@ -73,9 +73,16 @@ class Day14: Day {
         return (p1, p2)
     }
     
-    private func dropSand(into cave: inout XYGrid<Cave>, floor: Int) -> Bool {
+    private func dropSand(into cave: inout XYGrid<Cave>, floor: Int, canFallForever: Bool) -> Bool {
         var s = Point2(x: 500, y: 0)
         var keepFalling = true
+        
+        let fallsForever: (Point2) -> Bool
+        if canFallForever {
+            fallsForever = { $0.y >= floor }
+        } else {
+            fallsForever = { _ in return false }
+        }
         
         while keepFalling {
             while cave[s] == nil && s.y <= floor {
@@ -86,11 +93,11 @@ class Day14: Day {
             let dl = s.move(.up).move(.left)
             let dr = s.move(.up).move(.right)
             
-            if s.y >= floor { return false }
+            if fallsForever(s) { return false }
             
-            if cave[dl] == nil {
+            if cave[dl] == nil && dl.y <= floor {
                 s = dl
-            } else if cave[dr] == nil {
+            } else if cave[dr] == nil && dl.y <= floor {
                 s = dr
             } else {
                 cave[s] = .sand
@@ -112,7 +119,6 @@ class Day14: Day {
             }
             
             s = s.move(.down)
-            
             let dl = s.move(.up).move(.left)
             let dr = s.move(.up).move(.right)
             

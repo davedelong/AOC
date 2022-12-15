@@ -13,13 +13,13 @@ public typealias Heading = Vector2
 public extension Vector2 {
     static var cardinalHeadings: Array<Self> { [up, down, left, right] }
     
+    static let up = Vector2(x: 0, y: 1)
+    static let down = Vector2(x: 0, y: -1)
+    static let left = Vector2(x: -1, y: 0)
+    static let right = Vector2(x: 1, y: 0)
+    
     static var top: Vector2 { up }
     static var bottom: Vector2 { down }
-    
-    static var up: Vector2 { Vector2(x: 0, y: 1) }
-    static var down: Vector2 { Vector2(x: 0, y: -1) }
-    static var left: Vector2 { Vector2(x: -1, y: 0) }
-    static var right: Vector2 { Vector2(x: 1, y: 0) }
     
     static var north: Vector2 { up }
     static var south: Vector2 { down }

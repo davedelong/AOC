@@ -16,6 +16,8 @@ public protocol PointProtocol: Hashable, CustomStringConvertible {
     
     var components: Array<Int> { get set }
     init(_ components: Array<Int>)
+    
+    func apply(_ vector: Vector) -> Self
 }
 
 public extension PointProtocol {

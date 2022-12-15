@@ -47,6 +47,10 @@ public struct Point2: PointProtocol {
     }
     
     public init(row: Int, column: Int) { self.init(x: column, y: row) }
+    
+    public func apply(_ vector: Vector) -> Self {
+        return Point2(x: x + vector.x, y: y + vector.y)
+    }
 }
 
 public extension Point2 {
