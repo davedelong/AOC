@@ -181,6 +181,14 @@ public extension Collection {
         return Array(self) + Array(repeating: element, count: neededLength)
     }
     
+    func sorted<C: Comparable>(using value: (Element) -> C) -> Array<Element> {
+        return self.sorted(by: { l, r in
+            let lValue = value(l)
+            let rValue = value(r)
+            return lValue < rValue
+        })
+    }
+    
 }
 
 public extension Sequence where Element: Numeric {
@@ -309,7 +317,6 @@ public extension Collection where Element: Comparable {
         let (min, max) = extremes
         return min...max
     }
-    
 }
 
 public extension Collection where Element: Equatable {

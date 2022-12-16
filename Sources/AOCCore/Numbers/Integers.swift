@@ -78,6 +78,17 @@ public extension Int {
         let div = ceil(d / q)
         return Int(div)
     }
+    
+    
+    mutating func toggleBit(_ bit: Int) {
+        let mask = 1 << bit
+        if self & mask == 0 {
+            // it's off; turn it on
+            self |= mask
+        } else {
+            self &= ~mask
+        }
+    }
 }
 
 public func lcm<I: FixedWidthInteger>(_ values: I ...) -> I {

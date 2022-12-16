@@ -22,7 +22,10 @@ public struct Graph<ID: Hashable, Value: Equatable> {
     private var box: RefBox<GKGraph>
     private var graph: GKGraph { box.object }
     private var nodesByID = Dictionary<ID, Node>()
+    
+    private var _defaultEntranceCost: Float = 0
     private var _defaultTravelCost: Float = 1
+    private var _defaultExitCost: Float = 0
     
     @discardableResult
     private mutating func mutate<T>(_ mutation: (inout Self, GKGraph) -> T) -> T {
@@ -69,12 +72,32 @@ public struct Graph<ID: Hashable, Value: Equatable> {
     public var ids: Set<ID> { Set(nodesByID.keys) }
     public var values: Array<Value> { nodesByID.values.map(\.value) }
     
+    public var defaultEntranceCost: Float {
+        get { _defaultEntranceCost }
+        set {
+            mutate { s, _ in
+                s._defaultEntranceCost = newValue
+                s.nodesByID.values.forEach { $0.defaultEntranceCost = newValue }
+            }
+        }
+    }
+    
     public var defaultTravelCost: Float {
         get { _defaultTravelCost }
         set {
             mutate { s, _ in
                 s._defaultTravelCost = newValue
                 s.nodesByID.values.forEach { $0.defaultTravelCost = newValue }
+            }
+        }
+    }
+    
+    public var defaultExitCost: Float {
+        get { _defaultExitCost }
+        set {
+            mutate { s, _ in
+                s._defaultExitCost = newValue
+                s.nodesByID.values.forEach { $0.defaultExitCost = newValue }
             }
         }
     }
@@ -98,6 +121,8 @@ public struct Graph<ID: Hashable, Value: Equatable> {
                     case (.some(let v), .none):
                         let newNode = Node(id: id, value: v)
                         newNode.defaultTravelCost = s._defaultTravelCost
+                        newNode.defaultEntranceCost = s._defaultEntranceCost
+                        newNode.defaultExitCost = s._defaultExitCost
                         g.add([newNode])
                         s.nodesByID[id] = newNode
                         
@@ -132,6 +157,8 @@ public struct Graph<ID: Hashable, Value: Equatable> {
             let newValue = missing()
             let newNode = Node(id: id, value: newValue)
             newNode.defaultTravelCost = s._defaultTravelCost
+            newNode.defaultEntranceCost = s._defaultEntranceCost
+            newNode.defaultExitCost = s._defaultExitCost
             s.nodesByID[id] = newNode
             g.add([newNode])
             return newValue
@@ -283,11 +310,13 @@ internal class _GKNode<ID: Hashable, V: Equatable>: GKGraphNode {
     let id: ID
     var value: V
     
-    var entranceCost: Float = 0
+    var entranceCost: Float?
     var travelCosts: Dictionary<ID, Float> = [:]
-    var exitCost: Float = 0
+    var exitCost: Float?
     
+    var defaultEntranceCost: Float = 0
     var defaultTravelCost: Float = 1
+    var defaultExitCost: Float = 0
     
     required init(id: ID, value: V) {
         self.id = id
@@ -310,7 +339,9 @@ internal class _GKNode<ID: Hashable, V: Equatable>: GKGraphNode {
         // the cost to leave this node plus...
         // the cost to travel to the other node plus...
         // the cost to enter the other node
+        let exit = exitCost ?? defaultExitCost
         let travelCost = travelCosts[destination.id] ?? defaultTravelCost
-        return exitCost + travelCost + destination.entranceCost
+        let enter = destination.entranceCost ?? destination.defaultEntranceCost
+        return exit + travelCost + enter
     }
 }
