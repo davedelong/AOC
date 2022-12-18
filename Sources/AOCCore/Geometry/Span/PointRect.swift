@@ -39,6 +39,25 @@ extension SpanProtocol {
     public func intersects(_ other: Self) -> Bool {
         return zip(ranges, other.ranges).allSatisfy { $0.overlap(with: $1) != nil }
     }
+    
+    public func extend(_ int: Int) -> Self {
+        if int <= 0 { return self }
+        
+        return Self(ranges.map { r -> ClosedRange<Int> in
+            return (r.lowerBound - int) ... (r.upperBound + int)
+        })
+    }
+    
+    public func corners() -> Array<Point> {
+        let pieces = ranges.map { [$0.lowerBound, $0.upperBound] }
+        let comboCount = 1 << Self.numberOfComponents
+        
+        return (0 ..< comboCount).map { iteration in
+            let bits = iteration.bits.suffix(Self.numberOfComponents)
+            let p = zip(pieces, bits).map { $0[$1 ? 0 : 1] }
+            return Point(p)
+        }
+    }
 }
 
 extension SpanProtocol {

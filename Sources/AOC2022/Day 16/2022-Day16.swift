@@ -18,7 +18,6 @@ class Day16: Day {
         let r = Regex(#"([A-Z]{2})"#)
         
         var g = Graph<String, Valve>()
-//        g.defaultEntranceCost = 1
         g.defaultTravelCost = 1
         
         for line in input().lines {
@@ -42,7 +41,7 @@ class Day16: Day {
     struct Option {
         let start: String
         let end: String
-        var travelTime: Float
+        var travelTime: Int
         var pressure: Int
     }
     
@@ -55,7 +54,7 @@ class Day16: Day {
                 var option = Option(start: node, end: other, travelTime: 0, pressure: p)
                 if node != other {
                     let path = g.path(from: node, to: other)
-                    option.travelTime = g.cost(of: path)!
+                    option.travelTime = Int(g.cost(of: path)!)
                 }
                 if option.travelTime > 0 && option.pressure > 0 {
                     options.append(option)
@@ -69,25 +68,26 @@ class Day16: Day {
     func part1() async throws -> Part1 {
         return 1828
         
+        let maxTime = 30
         let options = parseOptions()
         
-        let all = self.findOptions(from: "AA", options: options, timeRemaining: 30)
+        let all = self.findOptions(from: "AA", options: options, timeRemaining: maxTime)
         print("All:", all.count)
         let lookup = Dictionary(uniqueKeysWithValues: options.map {
             (Pair($0.start, $0.end), $0)
         })
         
         let viable = all.filter { path in
-            let time = path.adjacentPairs().sum(of: { (s, e) -> Float in
+            let time = path.adjacentPairs().sum(of: { (s, e) -> Int in
                 let opt = lookup[Pair(s, e)]!
                 return opt.travelTime + 1
             })
-            return time <= 30
+            return time <= maxTime
         }
         print("VIABLE", viable.count)
         
         let pressures = viable.map({ path in
-            var remaining: Float = 30
+            var remaining = maxTime
             let pressure = path.adjacentPairs().sum(of: { (s, e) -> Int in
                 let opt = lookup[Pair(s, e)]!
                 remaining -= (opt.travelTime + 1)
@@ -102,12 +102,12 @@ class Day16: Day {
     }
     
     func part2() async throws -> Part2 {
-        let maxTime: Float = 26
+        let maxTime = 26
         
         let options = parseOptions()
-        let all = Set((1 ... Int(maxTime)).flatMap { t -> [Path] in
+        let all = Set((1 ... maxTime).flatMap { t -> [Path] in
             print("Testing time \(t)")
-            return self.findOptions(from: "AA", options: options, timeRemaining: Float(t))
+            return self.findOptions(from: "AA", options: options, timeRemaining: t)
         })
         print("ALL", all.count)
         
@@ -116,7 +116,7 @@ class Day16: Day {
         })
         
         let viable = Array(all.filter { path in
-            let time = path.adjacentPairs().sum(of: { (s, e) -> Float in
+            let time = path.adjacentPairs().sum(of: { (s, e) -> Int in
                 let opt = lookup[Pair(s, e)]!
                 return opt.travelTime + 1
             })
@@ -126,7 +126,7 @@ class Day16: Day {
         // for part 2, we need to find two sets of paths that don't intersect
         
         func pressure(of path: Path) -> Int {
-            var remaining: Float = maxTime
+            var remaining = maxTime
             return path.adjacentPairs().sum(of: { (s, e) -> Int in
                 let opt = lookup[Pair(s, e)]!
                 remaining -= (opt.travelTime + 1)
@@ -175,7 +175,7 @@ class Day16: Day {
     }
 
     typealias Path = [String]
-    func findOptions(from current: String, options: Array<Option>, timeRemaining: Float) -> [Path] {
+    func findOptions(from current: String, options: Array<Option>, timeRemaining: Int) -> [Path] {
         let potentials = options.filter { $0.start == current }
         if potentials.isEmpty {
             return [[current]]

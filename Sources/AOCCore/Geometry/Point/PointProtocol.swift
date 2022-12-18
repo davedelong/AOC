@@ -132,6 +132,10 @@ public extension PointProtocol {
         return vectors.map { self.apply($0) }
     }
     
+    static func orthogonalVectors() -> Array<Vector> {
+        return Vector.adjacents(orthogonalOnly: true, includingSelf: false)
+    }
+    
     func orthogonalNeighbors() -> Array<Self> {
         let vectors = Vector.adjacents(orthogonalOnly: true, includingSelf: false)
         return vectors.map { self.apply($0) }

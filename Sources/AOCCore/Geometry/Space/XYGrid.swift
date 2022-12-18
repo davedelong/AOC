@@ -33,13 +33,15 @@ extension Space where P == Point2 {
         print(render(using: renderer))
     }
     
-    public func render(using renderer: (T?) -> String) -> String {
+    public func render(inverted: Bool = false, using renderer: (T?) -> String) -> String {
         var final = String()
         
         let xRange = grid.keys.map(\.x).range
         let yRange = grid.keys.map(\.y).range
         
-        for y in yRange {
+        let yArray = inverted ? yRange.reversed() : Array(yRange)
+        
+        for y in yArray {
             for x in xRange {
                 let p = P(x: x, y: y)
                 let s = renderer(grid[p])
@@ -104,6 +106,16 @@ extension Space where P == Point2 {
             return isLetterCharacter(element)
         })
     }
+    
+    public func row(_ y: Int) -> Array<T?> {
+        let xRange = grid.keys.map(\.x).range
+        return xRange.map { self[$0, y] }
+    }
+    
+    public func row(_ y: Int, default: T) -> Array<T> {
+        let xRange = grid.keys.map(\.x).range
+        return xRange.map { self[$0, y] ?? `default` }
+    }
 }
 
 extension Space: ExpressibleByArrayLiteral where P == Point2 {
@@ -116,12 +128,12 @@ extension Space: ExpressibleByArrayLiteral where P == Point2 {
 
 extension Space where P == Point2, T == Bool {
     
-    public func render() -> String {
-        return self.render(using: { $0 == true ? "⬛️" : "⬜️" })
+    public func render(inverted: Bool = false) -> String {
+        return self.render(inverted: inverted, using: { $0 == true ? "⬛️" : "⬜️" })
     }
     
-    public func draw() {
-        print(render())
+    public func draw(inverted: Bool = false) {
+        print(render(inverted: inverted))
     }
     
     public func recognizeLetters() -> String {

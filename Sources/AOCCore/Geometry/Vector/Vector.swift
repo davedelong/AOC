@@ -107,6 +107,10 @@ public extension VectorProtocol {
     var signum: Self {
         return Self(components.map { $0.signum() })
     }
+    
+    func opposing() -> Self {
+        return Self(components.map { -$0 })
+    }
 }
 
 public struct Vector2: VectorProtocol {
