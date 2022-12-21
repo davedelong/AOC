@@ -29,7 +29,7 @@ let package = Package(
         
         .target(name: "AOC2022", dependencies: ["AOCCore"], exclude: inputFiles(for: 2022)),
         .target(name: "AOC2021", dependencies: ["AOCCore"], exclude: inputFiles(for: 2021)),
-        .target(name: "AOC2020", dependencies: ["AOCCore", .product(name: "MathParser", package: "DDMathParser")], exclude: inputFiles(for: 2020)),
+        .target(name: "AOC2020", dependencies: ["AOCCore"], exclude: inputFiles(for: 2020)),
         .target(name: "AOC2019", dependencies: ["AOCCore"], exclude: inputFiles(for: 2019)),
         .target(name: "AOC2018", dependencies: ["AOCCore"], exclude: inputFiles(for: 2018)),
         .target(name: "AOC2017", dependencies: ["AOCCore"], exclude: inputFiles(for: 2017)),
@@ -38,7 +38,8 @@ let package = Package(
         
         .target(name: "AOCCore", dependencies: [
             .product(name: "Algorithms", package: "swift-algorithms"),
-            .product(name: "Collections", package: "swift-collections")
+            .product(name: "Collections", package: "swift-collections"),
+            .product(name: "MathParser", package: "DDMathParser")
         ]),
         
         .testTarget(name: "AOCTests", dependencies: ["AOC"]),

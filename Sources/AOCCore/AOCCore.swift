@@ -8,3 +8,4 @@
 @_exported import Foundation
 @_exported import GameplayKit
 @_exported import Algorithms
+@_exported import MathParser

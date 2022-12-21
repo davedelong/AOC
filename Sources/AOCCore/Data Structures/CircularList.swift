@@ -249,9 +249,21 @@ extension CircularList {
         return _storage.remove(at: index.idx)
     }
     
+    public mutating func moveValue(at index: Index, before i: Index) {
+        if !isKnownUniquelyReferenced(&_storage) { _storage = _storage.duplicate() }
+        _storage.move(from: index.idx, before: i.idx)
+    }
+    
+    public mutating func moveValue(at index: Index, after i: Index) {
+        if !isKnownUniquelyReferenced(&_storage) { _storage = _storage.duplicate() }
+        _storage.move(from: index.idx, after: i.idx)
+    }
+    
     public mutating func removeAllValues() {
         _storage = _CircularStorage()
     }
+    
+    public func dumpStorage() { _storage.dump() }
 }
 
 public struct CircularListIterator<Element>: IteratorProtocol {
@@ -274,7 +286,6 @@ public struct CircularListIterator<Element>: IteratorProtocol {
         }
         return nil
     }
-    
 }
 
 extension CircularListIterator: Equatable where Element: Equatable {
@@ -324,6 +335,10 @@ private class _CircularStorage<T> {
         return copy
     }
     
+    func dump() {
+        print(nodes)
+    }
+    
     private func makeNextIndex() -> Index {
         defer { nextIndex += 1 }
         if startIndex == Int.max { startIndex = nextIndex }
@@ -364,6 +379,8 @@ private class _CircularStorage<T> {
     
     @discardableResult
     func set(_ value: T, at idx: Index) -> T {
+        defer { assertLinkIntegrity() }
+        
         // if the storage is empty, assume this is the first thing,
         // and all indices should be after this one
         if nodes.isEmpty {
@@ -381,6 +398,8 @@ private class _CircularStorage<T> {
     
     @discardableResult
     func add(_ value: T, after index: Index?) -> Index {
+        defer { assertLinkIntegrity() }
+        
         if nodes.isEmpty {
             if let idx = index { fatalError("Unknown index \(idx)") }
             let thisIndex = makeNextIndex()
@@ -403,6 +422,8 @@ private class _CircularStorage<T> {
     
     @discardableResult
     func remove(at index: Index) -> T {
+        defer { assertLinkIntegrity() }
+        
         guard let dead = nodes.removeValue(forKey: index) else {
             fatalError("Unknown index \(index)")
         }
@@ -418,6 +439,93 @@ private class _CircularStorage<T> {
         if nodes.isEmpty { startIndex = Int.max }
         
         return dead.value
+    }
+    
+    func move(from src: Index, before dest: Index) {
+        defer { assertLinkIntegrity() }
+        
+        guard let srcNode = nodes[src] else { fatalError("Unknown index \(src)") }
+        guard let destNode = nodes[dest] else { fatalError("Unknown index \(dest)") }
+        
+        if src == dest {
+            // move the node "one left"
+            // FROM: a -> b -> SRC -> d
+            // TO: a -> SRC -> b -> d
+            
+            let b = srcNode.prev
+            let c = src
+            let d = srcNode.next
+            let a = nodes[b]!.prev
+            
+            nodes[a]?.next = c
+            nodes[c]?.prev = a
+            nodes[c]?.next = b
+            nodes[b]?.prev = c
+            nodes[b]?.next = d
+            nodes[d]?.prev = b
+            
+        } else {
+            // unlink the source node
+            let beforeSrc = srcNode.prev
+            let afterSrc = srcNode.next
+            nodes[beforeSrc]?.next = afterSrc
+            nodes[afterSrc]?.prev = beforeSrc
+            
+            
+            let beforeDest = destNode.prev
+            nodes[beforeDest]?.next = src
+            nodes[src]?.prev = beforeDest
+            
+            nodes[src]?.next = dest
+            nodes[dest]?.prev = src
+        }
+    }
+    
+    func move(from src: Index, after dest: Index) {
+        defer { assertLinkIntegrity() }
+        
+        guard let srcNode = nodes[src] else { fatalError("Unknown index \(src)") }
+        guard let destNode = nodes[dest] else { fatalError("Unknown index \(dest)") }
+        
+        if src == dest {
+            // move the node "one right"
+            // FROM: a -> b -> c -> d
+            // TO: a -> c -> b -> d
+            let a = srcNode.prev
+            let b = src
+            let c = srcNode.next
+            let d = nodes[c]!.next
+            
+            nodes[a]?.next = c
+            nodes[c]?.prev = a
+            nodes[c]?.next = b
+            nodes[b]?.prev = c
+            nodes[b]?.next = d
+            nodes[d]?.prev = b
+        } else {
+            // unlink the source node
+            let beforeSrc = srcNode.prev
+            let afterSrc = srcNode.next
+            nodes[beforeSrc]?.next = afterSrc
+            nodes[afterSrc]?.prev = beforeSrc
+            
+            
+            let afterDest = destNode.next
+            nodes[afterDest]?.prev = src
+            nodes[src]?.next = afterDest
+            
+            nodes[src]?.prev = dest
+            nodes[dest]?.next = src
+        }
+    }
+    
+    private func assertLinkIntegrity() {
+        return
+        let prevLinks = Set(nodes.values.map(\.prev))
+        let nextLinks = Set(nodes.values.map(\.next))
+        
+        assert(prevLinks.count == nodes.count)
+        assert(nextLinks.count == nodes.count)
     }
     
 }
