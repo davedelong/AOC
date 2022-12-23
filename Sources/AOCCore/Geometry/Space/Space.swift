@@ -19,6 +19,10 @@ public struct Space<P: PointProtocol, T> {
         set { grid[key] = newValue }
     }
     
+    public subscript(key: P, default missing: @autoclosure () -> T) -> T {
+        self[key] ?? missing()
+    }
+    
     public var span: P.Span {
         let (l, u) = P.extremes(of: grid.keys)
         let ranges = zip(l.components, u.components).map { $0 ... $1 }

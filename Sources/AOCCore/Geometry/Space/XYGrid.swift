@@ -26,6 +26,11 @@ extension Space where P == Point2 {
         set { self[Point2(x: x, y: y)] = newValue }
     }
     
+    public subscript(x: Int, _ y: Int, default missing: @autoclosure () -> T) -> T {
+        get { self[Point2(x: x, y: y)] ?? missing() }
+        set { self[Point2(x: x, y: y)] = newValue }
+    }
+    
     public var positions: Dictionary<P, T>.Keys { return grid.keys }
     public var values: Dictionary<P, T>.Values { return grid.values }
     

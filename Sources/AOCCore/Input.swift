@@ -58,7 +58,7 @@ public final class Input: StringInput {
         path.append("input.txt")
         
         let inputTxtPath = "/" + path.joined(separator: "/")
-        if FileManager.default.fileExists(atPath: inputTxtPath), let str = (try? String(contentsOfFile: inputTxtPath))?.trimmed(), str.isEmpty == false {
+        if FileManager.default.fileExists(atPath: inputTxtPath), let str = (try? String(contentsOfFile: inputTxtPath)), str.isEmpty == false {
             let input = Input(str)
             inputs[caller.description] = input
             return input
