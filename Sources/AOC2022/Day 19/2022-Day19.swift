@@ -10,9 +10,38 @@ class Day19: Day {
     typealias Part1 = String
     typealias Part2 = String
     
+    enum Cost {
+        case ore(Int)
+        case clay(Int)
+        case obsidian(Int)
+    }
+    
+    struct Blueprint {
+        let id: Int
+        let ore: [Cost]
+        let clay: [Cost]
+        let obsidian: [Cost]
+        let geode: [Cost]
+    }
+    
     static var rawInput: String? { nil }
+    
+    func parseBlueprints() -> Array<Blueprint> {
+        let r = Regex(#"Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian."#)
+        
+        return input().lines.raw.compactMap { line -> Blueprint? in
+            guard let m = r.firstMatch(in: line) else { return nil }
+            return Blueprint(id: m[int: 1]!,
+                             ore: [.ore(m[int: 2]!)],
+                             clay: [.ore(m[int: 3]!)],
+                             obsidian: [.ore(m[int: 4]!), .clay(m[int: 5]!)],
+                             geode: [.ore(m[int: 6]!), .obsidian(m[int: 7]!)])
+        }
+        
+    }
 
     func part1() async throws -> Part1 {
+        _ = input()
         return #function
     }
 

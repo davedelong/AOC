@@ -13,6 +13,7 @@ class Day24: Day {
     static var rawInput: String? { nil }
 
     func part1() async throws -> Part1 {
+        _ = input()
         return #function
     }
 
