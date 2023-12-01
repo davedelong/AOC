@@ -15,11 +15,11 @@ class Day2: Day {
     }
     
     var commands: Array<Command> {
-        let r: Regex = #"(forward|down|up) (\d+)"#
+        let r = /(forward|down|up) (\d+)/
         return input().lines.raw.map { str in
-            let match = r.firstMatch(in: str)!
-            let dir = match[1]!
-            let val = match[int: 2]!
+            let match = try! r.firstMatch(in: str)
+            let dir = match!.1
+            let val = match!.2.int!
             
             switch dir {
                 case "forward": return .forward(val)

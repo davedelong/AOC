@@ -28,7 +28,7 @@ extension SpanProtocol {
         return zip(ranges, p.components).allSatisfy { $0.contains($1) }
     }
     
-    public var numberOfPoints: Int { ranges.map(\.count).product }
+    public var numberOfPoints: Int { ranges.map(\.count).product! }
     
     public func intersection(with other: Self) -> Self? {
         let intersections = zip(ranges, other.ranges).compactMap { $0.overlap(with: $1) }

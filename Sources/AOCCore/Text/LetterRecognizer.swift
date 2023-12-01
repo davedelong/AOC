@@ -12,7 +12,7 @@ public func RecognizeLetters(from input: String, letterCharacter: Character = "#
 }
 
 public func RecognizeLetters(from input: String, isLetterCharacter: (Character) -> Bool) -> String {
-    let splits = input.split(on: "\n")
+    let splits = input.split(separator: .newline)
     let maxLength = splits.map(\.count).max()!
     
     let lines = splits.map {
@@ -27,8 +27,8 @@ public func RecognizeLetters<C: Collection>(in collection: C, isLetterCharacter:
 }
 
 public func RecognizeLetters<C: Collection>(in collection: C) -> String where C.Element: Collection, C.Element.Element == Bool {
-    let maxWidth = collection.max(of: \.count)
-    let lines = collection.map { $0.padded(toLength: maxWidth, with: false) }
+    let maxWidth = collection.max(of: \.count)!
+    let lines = collection.map { $0.paddingSuffix(toLength: maxWidth, with: false) }
     
     lines.forEach { line in
         line.forEach { print($0 ? "⬛️" : "⬜️", separator: "", terminator: "") }
@@ -46,7 +46,7 @@ private func scanLetters(in lines: ArraySlice<[Bool]>) -> String {
     var candidates = Array<Letter>()
     
     for i in 0 ..< lines[0].count {
-        let inputSlice = lines.map { $0[offset: i] }
+        let inputSlice = lines.compactMap { $0[offset: i] }
         
         if inputSlice.allSatisfy(\.isFalse) {
             // it's blank...
@@ -112,7 +112,7 @@ private struct Letter {
         self.height = lines.count
         
         self.pattern = lines.map { line in
-            return (line.map { $0 == "#" }).padded(toLength: width, with: false)
+            return (line.map { $0 == "#" }).paddingSuffix(toLength: width, with: false)
         }
     }
 }
@@ -120,7 +120,7 @@ private struct Letter {
 extension Letter {
     // missing: I, M, Q, S, T, V, W
     static let all = [a, b, c, d, e, f, g, h, j, k, l, n, o, p, r, u, x, y, z]
-    static let letterHeight = all.max(of: \.height)
+    static let letterHeight = all.max(of: \.height)!
     
     static let a = Letter(character: "A", pattern: """
  ##

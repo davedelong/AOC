@@ -86,14 +86,11 @@ public extension VectorProtocol {
         return components.count(where: { $0 != 0 }) <= 1
     }
     
-    var manhattanDistance: Int { Int(components.sum(of: \.magnitude)) }
+    var manhattanDistance: Int { Int(components.sum(of: \.magnitude)!) }
     
     init(_ source: String) {
         let matches = Regex.integers.matches(in: source)
-        let ints = matches.compactMap { match -> Int? in
-            guard let piece = match[1] else { return nil }
-            return Int(piece)
-        }
+        let ints = matches.compactMap { $0.1.int }
         self.init(ints)
     }
     

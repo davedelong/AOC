@@ -17,7 +17,7 @@ class Day12: Day {
     lazy var caveSystem: Graph<CaveID, CaveID> = {
         var g = Graph<CaveID, CaveID>()
         for line in input().lines.raw {
-            let pieces = line.split(on: "-")
+            let pieces = line.split(separator: .hyphen)
             let c1 = CaveID(id: String(pieces[0]))
             let c2 = CaveID(id: String(pieces[1]))
             
@@ -49,7 +49,7 @@ class Day12: Day {
         var caves = Set(caveSystem.values)
         caves.remove(start)
         
-        var counts = CountedSet<CaveID>(counting: caves)
+        var counts = CountedSet<CaveID>(caves)
         for cave in caves {
             if cave.isLarge { counts[cave] = Int.max }
         }

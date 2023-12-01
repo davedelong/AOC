@@ -10,21 +10,30 @@
       }
     },
     {
-      "identity" : "swift-algorithms",
+      "identity" : "extendedswift",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:apple/swift-algorithms.git",
+      "location" : "git@github.com:davedelong/ExtendedSwift.git",
       "state" : {
-        "revision" : "b14b7f4c528c942f121c8b860b9410b2bf57825e",
-        "version" : "1.0.0"
+        "branch" : "main",
+        "revision" : "fac44e5a25100f8b38820839119d34cc22799c2b"
       }
     },
     {
-      "identity" : "swift-collections",
+      "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:apple/swift-collections.git",
+      "location" : "https://github.com/apple/swift-algorithms.git",
       "state" : {
-        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
-        "version" : "1.0.2"
+        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "532d8b529501fb73a2455b179e0bbb6d49b652ed",
+        "version" : "1.5.3"
       }
     },
     {

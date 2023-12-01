@@ -17,16 +17,16 @@ class Day13: Day {
         return parsePacket(&s)
     }
     
-    private func parsePacket(_ line: inout Scanner<String>) -> Packet? {
-        if line.tryScan("[") {
+    private func parsePacket(_ line: inout ExtendedSwift.Scanner<String>) -> Packet? {
+        if let didScan = try? line.scan("["), didScan == true {
             var list = Array<Packet>()
             while let packet = parsePacket(&line) {
                 list.append(packet)
-                line.tryScan(",")
+                _ = try? line.scan(",")
             }
-            line.scan("]")
+            try! line.scan("]")
             return .list(list)
-        } else if let int = line.tryScanInt() {
+        } else if let int = try? line.scanInt() {
             return .integer(int)
         } else {
             return nil
@@ -38,9 +38,9 @@ class Day13: Day {
     }()
 
     func part1() async throws -> Part1 {
-        return packets.pairs().enumerated().sum(of: { (i, p) in
+        return Array(packets.pairs().enumerated()).sum(of: { (i, p) in
             return p.0 < p.1 ? i + 1 : 0
-        })
+        })!
     }
 
     func part2() async throws -> Part2 {

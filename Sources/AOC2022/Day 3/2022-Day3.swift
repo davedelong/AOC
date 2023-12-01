@@ -12,14 +12,14 @@ class Day3: Day {
         return input().lines.raw.map { line -> Int in
             let common = line.divide(into: 2).commonElements.first!
             return common.alphabeticOrdinal! + (common.isUppercase ? 26 : 0)
-        }.sum
+        }.sum!
     }
 
     func part2() async throws -> Int {
         return input().lines.raw.chunks(ofCount: 3).map { lines -> Int in
             let common = lines.commonElements.first!
             return common.alphabeticOrdinal! + (common.isUppercase ? 26 : 0)
-        }.sum
+        }.sum!
     }
 
 }

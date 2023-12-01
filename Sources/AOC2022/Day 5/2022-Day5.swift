@@ -15,7 +15,7 @@ class Day5: Day {
         
         // make sure the lines are all the same length
         let longestLine = crateLines.max(of: \.count)
-        let padded = crateLines.map { $0.padding(toLength: longestLine, with: " ")}
+        let padded = crateLines.map { $0.paddingSuffix(toLength: longestLine, with: " ")}
         
         return stride(from: 1, to: longestLine, by: 4).map { offset in
             padded.map { $0[offset: offset] }.filter(\.isLetter)
@@ -23,11 +23,11 @@ class Day5: Day {
     }()
     
     lazy var instructions: Array<(Int, Int, Int)> = {
-        let r = Regex(#"move (\d+) from (\d+) to (\d+)"#)
+        let r = /move (\d+) from (\d+) to (\d+)/
         return input().lines.raw.compactMap { l in
-            guard let m = r.firstMatch(in: l) else { return nil }
+            guard let m = try? r.firstMatch(in: l) else { return nil }
             // subtract one because the instructions are 1-indexed, but arrays are 0-indexed
-            return (m[int: 1]!, m[int: 2]! - 1, m[int: 3]! - 1)
+            return (m.1.int!, m.2.int! - 1, m.3.int! - 1)
         }
     }()
 

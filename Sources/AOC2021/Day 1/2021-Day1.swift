@@ -21,7 +21,7 @@ class Day1: Day {
     func part2() async throws -> Int {
         let increases = input().lines.integers
             .windows(ofCount: 3)
-            .map(\.sum)
+            .map(\.sum.unwrapped)
             .adjacentPairs()
             .count { $1 > $0 }
         

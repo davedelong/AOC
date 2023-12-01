@@ -49,7 +49,7 @@ public struct SparseArray<Element>: Collection {
 extension Sparse where Element: Numeric {
     
     public var sum: Element {
-        return data.values.sum
+        return data.values.sum!
     }
     
 }

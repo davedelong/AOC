@@ -16,10 +16,7 @@ extension Bool {
     public static var on: Bool { true }
     public static var off: Bool { false }
     
-    public var negated: Bool { !self }
     public var not: Bool { !self }
-    
-    public func toggled() -> Bool { negated }
     
     public init?(_ character: Character) {
         if trueBitChars.contains(character) {
@@ -30,9 +27,6 @@ extension Bool {
             return nil
         }
     }
-    
-    public var isTrue: Bool { self == true }
-    public var isFalse: Bool { self == false }
 }
 
 extension Character {

@@ -17,8 +17,6 @@ public extension Character {
         self.init(scalar)
     }
     
-    var isWhitespaceOrNewline: Bool { isWhitespace || isNewline }
-    
     var uppercased: Character {
         return uppercased().first!
     }

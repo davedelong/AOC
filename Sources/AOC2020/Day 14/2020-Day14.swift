@@ -8,8 +8,8 @@
 
 class Day14: Day {
 
-    let maskR: Regex = #"mask = ([10X]+)"#
-    let assignR: Regex = #"mem\[(\d+)\] = (\d+)"#
+    let maskR = /mask = ([10X]+)/
+    let assignR = /mem\[(\d+)\] = (\d+)/
     
     func part1() async throws -> Int {
         enum Op {
@@ -18,13 +18,13 @@ class Day14: Day {
         }
         
         let ops = input().lines.raw.map { line -> Op in
-            if let m = maskR.firstMatch(in: line) {
-                let line = m[1]!
+            if let m = try? maskR.firstMatch(in: line) {
+                let line = m.1
                 let ones = Int(bits: line.map { $0 == "1" })
                 let zeros = Int(bits: line.map { $0 == "0" })
                 return .mask(ones: ones, zeros: zeros)
-            } else if let m = assignR.firstMatch(in: line) {
-                return .assign(m[int: 1]!, m[int: 2]!)
+            } else if let m = try? assignR.firstMatch(in: line) {
+                return .assign(m.1.int!, m.2.int!)
             } else {
                 fatalError()
             }
@@ -53,11 +53,11 @@ class Day14: Day {
         }
         
         let ops = input().lines.raw.map { line -> Op in
-            if let m = maskR.firstMatch(in: line) {
-                let line = m[1]!
+            if let m = try? maskR.firstMatch(in: line) {
+                let line = m.1
                 return .mask(line.map { $0 == "1" ? true : ($0 == "0" ? false : nil) })
-            } else if let m = assignR.firstMatch(in: line) {
-                return .assign(m[int: 1]!, m[int: 2]!)
+            } else if let m = try? assignR.firstMatch(in: line) {
+                return .assign(m.1.int!, m.2.int!)
             } else {
                 fatalError()
             }
@@ -99,7 +99,7 @@ class Day14: Day {
             copy[i] = false
             answer.append(contentsOf: recursivelyTwiddle(copy))
         } else {
-            answer.append(Int(bits: bits.compacted))
+            answer.append(Int(bits: bits.compacted()))
         }
         return answer
     }

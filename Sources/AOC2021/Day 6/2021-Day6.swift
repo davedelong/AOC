@@ -23,18 +23,19 @@ class Day6: Day {
         
         for _ in 0 ..< days {
             var newFish = CountedSet<Int>()
-            for (day, count) in fish {
+            for day in fish {
+                let count = fish.count(for: day)
                 var daysLeft = day-1
                 if daysLeft < 0 {
                     daysLeft = 6
-                    newFish[8, default: 0] += count
+                    newFish.insert(8, times: count)
                 }
-                newFish[daysLeft, default: 0] += count
+                newFish.insert(daysLeft, times: count)
             }
             fish = newFish
         }
         
-        return fish.values.sum
+        return fish.count
     }
 
 }

@@ -8,7 +8,7 @@
 
 class Day4: Day {
     
-    let r = Regex(#"(\d+)-(\d+),(\d+)-(\d+)"#)
+    let r = /(\d+)-(\d+),(\d+)-(\d+)/
     
     func part1() async throws -> Int {
         return input().lines.raw.filter { line in

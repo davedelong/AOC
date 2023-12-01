@@ -115,10 +115,7 @@ public extension PointProtocol {
     
     init<S: StringProtocol>(_ source: S) {
         let matches = Regex.integers.matches(in: source.description)
-        let ints = matches.compactMap { match -> Int? in
-            guard let piece = match[1] else { return nil }
-            return Int(piece)
-        }
+        let ints = matches.compactMap { $0.1.int }
         self.init(ints)
     }
     

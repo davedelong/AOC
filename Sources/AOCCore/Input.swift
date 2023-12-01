@@ -10,10 +10,6 @@ import Foundation
 
 public var authenticationToken: String?
 
-extension CharacterSet {
-    public static var comma = CharacterSet(charactersIn: ",")
-}
-
 public protocol StringInput {
     init(_ raw: String)
     var raw: String { get }
@@ -39,8 +35,8 @@ extension StringInput {
 
 public final class Input: StringInput {
     
-    private static let yearNumber = Regex(#"AOC(\d{4})"#)
-    private static let dayNumber = Regex(#"[dD]ay ?(\d{1,2})"#)
+    private static let yearNumber = /AOC(\d{4})/
+    private static let dayNumber = /[dD]ay ?(\d{1,2})/
     
     private static var inputs = Dictionary<String, Input>()
     
@@ -49,8 +45,8 @@ public final class Input: StringInput {
         
         var path = caller.description.split(separator: "/")
         
-        let year = path.compactMap { yearNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
-        let day = path.compactMap { dayNumber.firstMatch(in: $0)?.int(1) }.first ?? 0
+        let year = path.compactMap { try? yearNumber.firstMatch(in: $0)?.1.int }.first ?? 0
+        let day = path.compactMap { try? dayNumber.firstMatch(in: $0)?.1.int }.first ?? 0
         
         if path.last?.hasSuffix(".swift") == true { path.removeLast() }
         
@@ -121,7 +117,7 @@ public final class Input: StringInput {
     public lazy var csvWords: Array<Word> = { return self.words(separatedBy: .comma) }()
     public lazy var integers: Array<Int> = {
         let matches = Regex.integers.matches(in: raw)
-        return matches.compactMap { $0.int(1) }
+        return matches.compactMap { $0.1.int }
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {
@@ -149,7 +145,7 @@ public final class Line: StringInput {
     
     public lazy var integers: Array<Int> = {
         let matches = Regex.integers.matches(in: raw)
-        return matches.compactMap { $0.int(1) }
+        return matches.compactMap { $0.1.int }
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {

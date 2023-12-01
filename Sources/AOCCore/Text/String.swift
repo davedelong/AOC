@@ -42,7 +42,7 @@ public extension String {
     }
     
     func trimmed() -> String {
-        String(self.trimming(\.isWhitespaceOrNewline))
+        String(self.trimming(while: \.isWhitespaceOrNewline))
     }
     
     subscript(offset count: Int) -> Character {
@@ -53,6 +53,8 @@ public extension String {
 }
 
 public extension StringProtocol {
+    
+    var int: Int? { Int(self) }
     
     func padding(toLength length: Int, with pad: String) -> String {
         let myLength = self.count

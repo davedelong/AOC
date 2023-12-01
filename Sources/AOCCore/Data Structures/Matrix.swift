@@ -154,7 +154,7 @@ public class Matrix<T: Hashable>: Hashable, CustomStringConvertible {
     }
     
     public func at(_ position: Position) -> T? {
-        return data.at(position.row)?.at(position.col)
+        return data[at: position.row]?[at: position.col]
     }
     
     public func get(_ row: Int, col: Int) -> T {

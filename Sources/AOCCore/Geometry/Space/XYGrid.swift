@@ -41,8 +41,8 @@ extension Space where P == Point2 {
     public func render(inverted: Bool = false, using renderer: (T?) -> String) -> String {
         var final = String()
         
-        let xRange = grid.keys.map(\.x).range
-        let yRange = grid.keys.map(\.y).range
+        let xRange = grid.keys.map(\.x).range!
+        let yRange = grid.keys.map(\.y).range!
         
         let yArray = inverted ? yRange.reversed() : Array(yRange)
         
@@ -60,8 +60,8 @@ extension Space where P == Point2 {
     
     public func convertToGridGraph(_ canEnterPosition: (T) -> Bool) -> GKGridGraph<GridNode<T>> {
         
-        let xRange = grid.keys.map { $0.x }.range
-        let yRange = grid.keys.map { $0.y }.range
+        let xRange = grid.keys.map { $0.x }.range!
+        let yRange = grid.keys.map { $0.y }.range!
         
         let g: GKGridGraph<GridNode<T>> = GKGridGraph(fromGridStartingAt: vector_int2(x: Int32(xRange.lowerBound), y: Int32(yRange.lowerBound)),
                                                       width: Int32(xRange.count),
@@ -87,8 +87,8 @@ extension Space where P == Point2 {
     public func convertToNestedArray() -> Array<Array<T?>> {
         var final = Array<Array<T?>>()
         
-        let xRange = grid.keys.map { $0.x }.range
-        let yRange = grid.keys.map { $0.y }.range
+        let xRange = grid.keys.map { $0.x }.range!
+        let yRange = grid.keys.map { $0.y }.range!
         
         for y in yRange {
             var row = Array<T?>()
@@ -113,12 +113,12 @@ extension Space where P == Point2 {
     }
     
     public func row(_ y: Int) -> Array<T?> {
-        let xRange = grid.keys.map(\.x).range
+        let xRange = grid.keys.map(\.x).range!
         return xRange.map { self[$0, y] }
     }
     
     public func row(_ y: Int, default: T) -> Array<T> {
-        let xRange = grid.keys.map(\.x).range
+        let xRange = grid.keys.map(\.x).range!
         return xRange.map { self[$0, y] ?? `default` }
     }
 }

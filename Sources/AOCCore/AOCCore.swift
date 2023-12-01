@@ -9,3 +9,4 @@
 @_exported import GameplayKit
 @_exported import Algorithms
 @_exported import MathParser
+@_exported import ExtendedSwift
