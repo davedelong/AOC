@@ -6,14 +6,14 @@
 //  Copyright © 2023 Dave DeLong. All rights reserved.
 //
 
-class Day2: Day {
+struct Day2: Day {
     typealias Part1 = Int
     typealias Part2 = Int
     
     static var rawInput: String? { nil }
     
     
-    lazy var games: Array<Game> = {
+    var games: Array<Game> {
         let gameID = /^Game (\d+):/
         let color = /(\d+) (red|green|blue)/
         
@@ -32,7 +32,7 @@ class Day2: Day {
             }
             return Game(id: id, rounds: rounds)
         }
-    }()
+    }
 
     func run() async throws -> (Part1, Part2) {
         let p1 = try await part1()

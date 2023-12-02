@@ -6,7 +6,7 @@
 //  Copyright © 2023 Dave DeLong. All rights reserved.
 //
 
-class Day1: Day {
+struct Day1: Day {
     typealias Part1 = Int
     typealias Part2 = Int
     
@@ -42,7 +42,6 @@ class Day1: Day {
         ]
         
         return input().lines.map { line in
-            let orig = line.raw
             var raw = line.raw
             
             let firstDigit = raw.firstIndex(where: \.isASCIIDigit)

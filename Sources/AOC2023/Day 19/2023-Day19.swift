@@ -6,7 +6,7 @@
 //  Copyright © 2023 Dave DeLong. All rights reserved.
 //
 
-class Day19: Day {
+struct Day19: Day {
     typealias Part1 = String
     typealias Part2 = String
     
