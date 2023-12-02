@@ -41,10 +41,6 @@ public extension String {
         return String(self[after...])
     }
     
-    func trimmed() -> String {
-        String(self.trimming(while: \.isWhitespaceOrNewline))
-    }
-    
     subscript(offset count: Int) -> Character {
         let idx = self.index(self.startIndex, offsetBy: count)
         return self[idx]

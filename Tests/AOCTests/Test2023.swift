@@ -23,8 +23,8 @@ class Test2023: XCTestCase {
         let d = Day2()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 2476)
+        XCTAssertEqual(p2, 54911)
     }
 
     func testDay3() async throws {

@@ -81,7 +81,7 @@ class Day11: Day {
                 }
             } else {
                 // empty && there are no occupied seats adjacent to it, the seat becomes occupied.
-                if around.allSatisfy(\.isOccupied.not) {
+                if around.allSatisfy(\.isOccupied.negated) {
                     copy[p] = .occupied
                 }
             }

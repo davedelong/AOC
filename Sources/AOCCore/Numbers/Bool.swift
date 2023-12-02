@@ -16,8 +16,6 @@ extension Bool {
     public static var on: Bool { true }
     public static var off: Bool { false }
     
-    public var not: Bool { !self }
-    
     public init?(_ character: Character) {
         if trueBitChars.contains(character) {
             self = true

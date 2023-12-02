@@ -12,11 +12,6 @@ public extension Character {
     
     static let alphabet = Array("abcdefghijklmnopqrstuvwxyz")
     
-    init?(ascii: Int) {
-        guard let scalar = Unicode.Scalar(ascii) else { return nil }
-        self.init(scalar)
-    }
-    
     var uppercased: Character {
         return uppercased().first!
     }
