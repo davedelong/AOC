@@ -9,6 +9,8 @@ import Foundation
 
 extension Regex where Output == (Substring, Substring) {
     
+    public static var positiveIntegers: Self { /(\d+)/ } 
+    
     public static var integers: Self { /(-?\d+)/ } 
     
 }

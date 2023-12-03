@@ -55,7 +55,7 @@ struct Day1: Day {
             
             let lastDigit = raw.lastIndex(where: \.isASCIIDigit)
             
-            if let m = try? digit.lastMatch(in: raw, allowOverlaps: true) {
+            if let m = try? digit.lastMatch(in: raw) {
                 if lastDigit == nil || m.1.startIndex > lastDigit! {
                     let new = replace[String(m.1)]!
                     raw.replaceSubrange(m.1.indexRange, with: new)
