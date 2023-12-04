@@ -92,6 +92,8 @@ public class LinkedList<Element>: Sequence, ExpressibleByArrayLiteral {
         node.prev = tail
         tail = node
         if head == nil { head = node }
+        count += 1
+        mutationCounter += 1
     }
     
     public func insert(_ value: Element, at index: Int) {

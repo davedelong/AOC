@@ -7,8 +7,8 @@
 //
 
 struct Day4: Day {
-    typealias Part1 = String
-    typealias Part2 = String
+    typealias Part1 = Int
+    typealias Part2 = Int
     
     static var rawInput: String? { nil }
 
@@ -19,11 +19,56 @@ struct Day4: Day {
     }
 
     func part1() async throws -> Part1 {
-        return #function
+        return input().lines.raw.map { raw -> Int in
+            let pieces = raw.split(separator: ":")[1].split(separator: "|")
+            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1.int.unwrapped))
+            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1.int.unwrapped))
+            
+            let intersection = cardNumbers.intersection(winning)
+            let totalNumberOfMatches = intersection.count
+            
+            if totalNumberOfMatches == 0 { return 0 }
+            let total = Int(pow(2, Double(totalNumberOfMatches - 1)))
+            
+            return total
+        }.sum!
     }
 
     func part2() async throws -> Part2 {
-        return #function
+        let cards = input().lines.raw.map { raw -> Card in
+            let pieces = raw.split(separator: ":")[1].split(separator: "|")
+            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1.int.unwrapped))
+            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1.int.unwrapped))
+            return Card(winning: winning, numbers: cardNumbers)
+        }
+        
+        var totals = CountedSet<Int>()
+        let remaining = LinkedList(Array(cards.enumerated()))
+        
+        while let (index, card) = remaining.popFirst() {
+            totals.insert(index)
+            
+            let count = card.winningNumbers.count
+            if count > 0 {
+                let cardsToAdd = (index + 1 ... index + count).map { ($0, cards[$0]) }
+                remaining.append(contentsOf: cardsToAdd)
+            }
+        }
+        
+        return totals.count
     }
 
+}
+
+private struct Card {
+    let winning: CountedSet<Int>
+    let numbers: CountedSet<Int>
+    
+    let winningNumbers: CountedSet<Int>
+    
+    init(winning: CountedSet<Int>, numbers: CountedSet<Int>) {
+        self.winning = winning
+        self.numbers = numbers
+        self.winningNumbers = winning.intersection(numbers)
+    }
 }
