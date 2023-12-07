@@ -14,11 +14,11 @@ class Day5: Day {
         let crateLines = input().lines.raw.split(on: \.isEmpty).first!
         
         // make sure the lines are all the same length
-        let longestLine = crateLines.max(of: \.count)
+        let longestLine = crateLines.max(of: \.count)!
         let padded = crateLines.map { $0.paddingSuffix(toLength: longestLine, with: " ")}
         
         return stride(from: 1, to: longestLine, by: 4).map { offset in
-            padded.map { $0[offset: offset] }.filter(\.isLetter)
+            padded.map { $0[offset: offset]! }.filter(\.isLetter)
         }
     }()
     

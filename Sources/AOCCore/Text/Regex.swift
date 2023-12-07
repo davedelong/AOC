@@ -6,11 +6,25 @@
 //
 
 import Foundation
+import RegexBuilder
 
-extension Regex where Output == (Substring, Substring) {
+extension Regex where Output == (Substring, Int) {
     
-    public static var positiveIntegers: Self { /(\d+)/ } 
+    public static var positiveIntegers: Self {
+        Regex {
+            Capture {
+                OneOrMore(.digit)
+            } transform: { Int($0)! }
+        }
+    }
     
-    public static var integers: Self { /(-?\d+)/ } 
+    public static var integers: Self {
+        Regex {
+            Capture {
+                Optionally { "-" }
+                OneOrMore(.digit)
+            } transform: { Int($0)! }
+        }
+    }
     
 }

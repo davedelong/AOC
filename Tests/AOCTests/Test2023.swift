@@ -31,40 +31,40 @@ class Test2023: XCTestCase {
         let d = Day3()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, 20855)
-        XCTAssertEqual(p2, 5489600)
+        XCTAssertEqual(p1, 556057)
+        XCTAssertEqual(p2, 82824352)
     }
 
     func testDay4() async throws {
         let d = Day4()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 20855)
+        XCTAssertEqual(p2, 5489600)
     }
 
     func testDay5() async throws {
         let d = Day5()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 261668924)
+        XCTAssertEqual(p2, 0)
     }
 
     func testDay6() async throws {
         let d = Day6()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 2374848)
+        XCTAssertEqual(p2, 39132886)
     }
 
     func testDay7() async throws {
         let d = Day7()
         let (p1, p2) = try await d.run()
 
-        XCTAssertEqual(p1, "")
-        XCTAssertEqual(p2, "")
+        XCTAssertEqual(p1, 250120186)
+        XCTAssertEqual(p2, 250665248)
     }
 
     func testDay8() async throws {

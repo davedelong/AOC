@@ -21,8 +21,8 @@ struct Day4: Day {
     func part1() async throws -> Part1 {
         return input().lines.raw.map { raw -> Int in
             let pieces = raw.split(separator: ":")[1].split(separator: "|")
-            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1.int.unwrapped))
-            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1.int.unwrapped))
+            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1))
+            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1))
             
             let intersection = cardNumbers.intersection(winning)
             let totalNumberOfMatches = intersection.count
@@ -37,8 +37,8 @@ struct Day4: Day {
     func part2() async throws -> Part2 {
         let cards = input().lines.raw.map { raw -> Card in
             let pieces = raw.split(separator: ":")[1].split(separator: "|")
-            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1.int.unwrapped))
-            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1.int.unwrapped))
+            let winning = CountedSet(try! Regex.integers.allMatches(in: pieces[0]).map(\.1))
+            let cardNumbers = CountedSet(try! Regex.integers.allMatches(in: pieces[1]).map(\.1))
             return Card(winning: winning, numbers: cardNumbers)
         }
         

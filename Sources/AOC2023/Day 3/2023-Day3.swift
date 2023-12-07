@@ -21,7 +21,7 @@ struct Day3: Day {
         let partNumbers = input().lines.enumerated().flatMap { y, line -> Array<PartNumber> in
             let integers = try! Regex.positiveIntegers.allMatches(in: line.raw)
             return integers.compactMap { match -> PartNumber? in
-                guard let value = match.1.int else { return nil }
+                let value = match.1
                 let offset = line.raw.offset(of: match.0.startIndex)
                 let end = line.raw.offset(of: match.0.endIndex)
                 

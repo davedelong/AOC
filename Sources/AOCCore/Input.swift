@@ -117,7 +117,7 @@ public final class Input: StringInput {
     public lazy var csvWords: Array<Word> = { return self.words(separatedBy: .comma) }()
     public lazy var integers: Array<Int> = {
         let matches = Regex.integers.matches(in: raw)
-        return matches.compactMap { $0.1.int }
+        return matches.map { $0.1 }
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {
@@ -145,7 +145,7 @@ public final class Line: StringInput {
     
     public lazy var integers: Array<Int> = {
         let matches = Regex.integers.matches(in: raw)
-        return matches.compactMap { $0.1.int }
+        return matches.map { $0.1 }
     }()
     
     public func words(separatedBy: CharacterSet) -> Array<Word> {

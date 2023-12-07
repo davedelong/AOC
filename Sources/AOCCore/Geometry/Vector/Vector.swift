@@ -90,7 +90,7 @@ public extension VectorProtocol {
     
     init(_ source: String) {
         let matches = Regex.integers.matches(in: source)
-        let ints = matches.compactMap { $0.1.int }
+        let ints = matches.map(\.1)
         self.init(ints)
     }
     

@@ -7,8 +7,8 @@
 //
 
 struct Day6: Day {
-    typealias Part1 = String
-    typealias Part2 = String
+    typealias Part1 = Int
+    typealias Part2 = Int
     
     static var rawInput: String? { nil }
 
@@ -19,11 +19,37 @@ struct Day6: Day {
     }
 
     func part1() async throws -> Part1 {
-        return #function
+        let numbers = input().lines.map(\.integers)
+        let timeAndDistance = zip(numbers[0], numbers[1])
+        
+        var product = 1
+        for (time, distance) in timeAndDistance {
+            var isFurther = 0
+            for speed in 0 ..< time {
+                let timeToMove = time - speed
+                let thisDistance = timeToMove * speed
+                if thisDistance > distance { isFurther += 1 }
+            }
+            product *= isFurther
+        }
+        
+        return product
     }
 
     func part2() async throws -> Part2 {
-        return #function
+        let numbers = input().lines.characters.map { Int(String($0.filter(\.isASCIIDigit)))! }
+        
+        let distance = numbers[1]
+        let time = numbers[0]
+        
+        var isFurther = 0
+        for speed in 0 ..< time {
+            let timeToMove = time - speed
+            let thisDistance = timeToMove * speed
+            if thisDistance > distance { isFurther += 1 }
+        }
+        
+        return isFurther
     }
 
 }
